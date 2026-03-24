@@ -1,5 +1,15 @@
 @import "tailwindcss";
 
+/* Subtle background zoom for hero carousel (see HomeHero). */
+@keyframes hero-bg-zoom {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.04);
+  }
+}
+
 :root {
   --background: #faf9f6;
   --foreground: #0f1f14;

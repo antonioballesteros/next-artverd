@@ -34,24 +34,29 @@ export function HomeHero() {
       aria-labelledby="hero-heading"
     >
       <div className="absolute inset-0" aria-hidden>
-        {artverdHeroSlides.map((src, index) => (
-          <Image
-            key={src}
-            src={src}
-            alt=""
-            fill
-            priority={index === 0}
-            className={`object-cover motion-reduce:transition-none ${
-              index === activeIndex ? "z-10 opacity-100" : "z-0 opacity-0"
-            }`}
-            style={
-              reduceMotion
-                ? undefined
-                : { transition: `opacity ${FADE_MS}ms ease-in-out` }
-            }
-            sizes="100vw"
-          />
-        ))}
+        {artverdHeroSlides.map((src, index) => {
+          const isActive = index === activeIndex;
+          return (
+            <Image
+              key={src}
+              src={src}
+              alt=""
+              fill
+              priority={index === 0}
+              className={`object-cover motion-reduce:transition-none ${
+                isActive
+                  ? "z-10 opacity-100 motion-reduce:animate-none motion-reduce:scale-100 animate-[hero-bg-zoom_5.2s_ease-out_forwards]"
+                  : "z-0 scale-100 opacity-0 motion-reduce:animate-none"
+              }`}
+              style={
+                reduceMotion
+                  ? undefined
+                  : { transition: `opacity ${FADE_MS}ms ease-in-out` }
+              }
+              sizes="100vw"
+            />
+          );
+        })}
       </div>
       <div
         className="absolute inset-0 bg-linear-to-r from-emerald-950/92 via-emerald-900/78 to-emerald-800/35"

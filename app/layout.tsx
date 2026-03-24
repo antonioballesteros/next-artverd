@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { artverdLegacyImages } from "@/lib/artverdAssets";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 
@@ -20,9 +19,6 @@ export const metadata: Metadata = {
   },
   description:
     "Floristeria ArtVerd: rams, plantes i decoració a Terrassa. Passió per les flors des de l’any 2000. Lliuraments a domicili.",
-  icons: {
-    icon: artverdLegacyImages.siteFavicon,
-  },
 };
 
 export default function RootLayout({

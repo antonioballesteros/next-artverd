@@ -46,6 +46,10 @@ export function HomeHero() {
       <div className="absolute inset-0" aria-hidden>
         {artverdHeroSlides.map((src, index) => {
           const isActive = index === activeIndex;
+          const zoomIn = index % 2 === 0;
+          const activeZoomClass = zoomIn
+            ? "animate-[hero-bg-zoom-in_5.2s_ease-out_forwards]"
+            : "animate-[hero-bg-zoom-out_5.2s_ease-out_forwards]";
           return (
             <Image
               key={src}
@@ -55,7 +59,7 @@ export function HomeHero() {
               priority={index === 0}
               className={`object-cover motion-reduce:transition-none ${
                 isActive
-                  ? "z-10 animate-[hero-bg-zoom_5.2s_ease-out_forwards] opacity-100 motion-reduce:scale-100 motion-reduce:animate-none"
+                  ? `z-10 ${activeZoomClass} opacity-100 motion-reduce:scale-100 motion-reduce:animate-none`
                   : "z-0 scale-100 opacity-0 motion-reduce:animate-none"
               }`}
               style={

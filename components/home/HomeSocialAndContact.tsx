@@ -1,8 +1,9 @@
 import { artverdImages } from "@/lib/artverdAssets";
 import { Mail, MapPin, Phone } from "lucide-react";
 import Image from "next/image";
-import { HomeSubtitle } from "./HomeSubtitle";
 import { ScrollConvergePair } from "../ScrollConvergePair";
+import { HomeSubtitle } from "./HomeSubtitle";
+import { StoreGoogleMapEmbed } from "./StoreGoogleMapEmbed";
 
 interface SocialLink {
   href: string;
@@ -110,6 +111,7 @@ export function HomeSocialAndContact() {
         }
         once={false}
       />
+      <StoreGoogleMapEmbed />
     </section>
   );
 }

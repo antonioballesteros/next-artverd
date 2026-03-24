@@ -59,17 +59,17 @@ export function HomeHero() {
         })}
       </div>
       <div
-        className="absolute inset-0 bg-linear-to-r from-emerald-950/92 via-emerald-900/78 to-emerald-800/35"
+        className="absolute inset-0 z-1 bg-linear-to-r from-emerald-950/92 via-emerald-900/78 to-emerald-800/35"
         aria-hidden
       />
       <div className="relative z-10 mx-auto w-full max-w-6xl text-white">
         <h1
           id="hero-heading"
-          className="mt-3 max-w-3xl font-semibold text-4xl leading-tight tracking-tight drop-shadow-sm md:text-5xl"
+          className="mt-3 max-w-3xl font-semibold text-4xl leading-tight tracking-tight md:text-5xl [paint-order:stroke_fill] [-webkit-text-stroke:0.03em_rgb(15_31_20/0.35)] [text-shadow:0_0.06em_0.12em_rgb(0_0_0/0.45),0_0_0.45em_rgb(0_0_0/0.35),0_0_1em_rgb(0_0_0/0.2)]"
         >
           Passió per les flors, des de l’any 2000
         </h1>
-        <p className="mt-4 max-w-2xl text-lg text-emerald-50/95 md:text-xl">
+        <p className="mt-4 max-w-2xl text-lg text-emerald-50/95 md:text-xl [text-shadow:0_0.05em_0.1em_rgb(0_0_0/0.4),0_0_0.35em_rgb(0_0_0/0.28)]">
           Sempre queda perfum a les mans de qui regala flors ArtVerd.
         </p>
         <div className="mt-8 flex flex-wrap gap-3">

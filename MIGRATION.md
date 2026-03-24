@@ -14,6 +14,6 @@ Tracks public routes migrated from the legacy WordPress site to this App Router 
 
 | Next.js route | Legacy URL              | Status  | Notes                    |
 | ------------- | ----------------------- | ------- | ------------------------ |
-| `/`           | https://www.artverd.com/ | Pending | Home (example row)     |
+| `/`           | https://www.artverd.com/ | Migrated | Static home: hero, intro, product blocks, tallers, testimonial quotes, contact & social |
 
 When adding rows, keep legacy URLs as full `https://` links for easy checking.

@@ -1,12 +1,13 @@
 /**
  * Static image paths under /public/images/legacy (mirrored from the legacy WordPress site).
  */
-export const artverdLegacyImages = {
+export const artverdImages = {
+  gat: "/images/hero-sliders/gat.jpg",
+  nadal: "/images/hero-sliders/nadal.jpg",
+  roses: "/images/hero-sliders/roses.jpg",
+  tenda: "/images/hero-sliders/tenda.jpg",
+
   logo: "/images/legacy/logo.png",
-  heroPortada: "/images/legacy/hero-portada.jpg",
-  nadal: "/images/legacy/nadal.jpg",
-  gato: "/images/legacy/gato.jpg",
-  introTenda: "/images/legacy/intro-tenda.jpg",
   categoryRams: "/images/legacy/category-rams.webp",
   categoryPlantes: "/images/legacy/category-plantes.webp",
   categoryAccesoris: "/images/legacy/category-accesoris.webp",
@@ -22,11 +23,8 @@ export const artverdLegacyImages = {
 
 /** Full-viewport home hero background rotation (legacy marketing imagery). */
 export const artverdHeroSlides = [
-  artverdLegacyImages.heroPortada,
-  artverdLegacyImages.nadal,
-  artverdLegacyImages.gato,
-  artverdLegacyImages.introTenda,
-  artverdLegacyImages.workshopsRams,
-  artverdLegacyImages.bestSeller,
-  artverdLegacyImages.categoryEvents,
+  artverdImages.tenda,
+  artverdImages.roses,
+  artverdImages.gat,
+  artverdImages.nadal,
 ] as const;

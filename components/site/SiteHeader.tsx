@@ -1,6 +1,6 @@
 "use client";
 
-import { artverdLegacyImages } from "@/lib/artverdAssets";
+import { artverdImages } from "@/lib/artverdAssets";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
@@ -69,7 +69,7 @@ export function SiteHeader({
         <div className="flex min-w-0 items-center gap-6 md:gap-8 lg:gap-10">
           <Link href="/" className="flex shrink-0 items-center gap-2">
             <Image
-              src={artverdLegacyImages.logo}
+              src={artverdImages.logo}
               alt="ArtVerd"
               width={160}
               height={48}

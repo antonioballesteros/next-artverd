@@ -6,7 +6,7 @@ import {
   HomeSocialAndContact,
   HomeTestimonials,
   HomeWorkshops,
-} from "@/components/home/HomePageSections";
+} from "@/components/home";
 import { SiteFooter } from "@/components/site/SiteFooter";
 import { SiteHeader } from "@/components/site/SiteHeader";
 

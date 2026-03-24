@@ -1,0 +1,87 @@
+"use client";
+
+import { artverdHeroSlides } from "@/lib/artverdAssets";
+import Image from "next/image";
+import Link from "next/link";
+import { useEffect, useState } from "react";
+
+const SLIDE_INTERVAL_MS = 5500;
+const FADE_MS = 1000;
+
+export function HomeHero() {
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [reduceMotion, setReduceMotion] = useState(false);
+
+  useEffect(() => {
+    const media = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const update = () => setReduceMotion(media.matches);
+    update();
+    media.addEventListener("change", update);
+    return () => media.removeEventListener("change", update);
+  }, []);
+
+  useEffect(() => {
+    if (reduceMotion || artverdHeroSlides.length <= 1) return;
+    const id = window.setInterval(() => {
+      setActiveIndex((i) => (i + 1) % artverdHeroSlides.length);
+    }, SLIDE_INTERVAL_MS);
+    return () => window.clearInterval(id);
+  }, [reduceMotion]);
+
+  return (
+    <section
+      className="relative flex h-dvh min-h-dvh w-full items-center overflow-hidden px-4 pb-16 pt-20 md:pb-24 md:pt-24"
+      aria-labelledby="hero-heading"
+    >
+      <div className="absolute inset-0" aria-hidden>
+        {artverdHeroSlides.map((src, index) => (
+          <Image
+            key={src}
+            src={src}
+            alt=""
+            fill
+            priority={index === 0}
+            className={`object-cover motion-reduce:transition-none ${
+              index === activeIndex ? "z-10 opacity-100" : "z-0 opacity-0"
+            }`}
+            style={
+              reduceMotion
+                ? undefined
+                : { transition: `opacity ${FADE_MS}ms ease-in-out` }
+            }
+            sizes="100vw"
+          />
+        ))}
+      </div>
+      <div
+        className="absolute inset-0 bg-linear-to-r from-emerald-950/92 via-emerald-900/78 to-emerald-800/35"
+        aria-hidden
+      />
+      <div className="relative z-10 mx-auto w-full max-w-6xl text-white">
+        <h1
+          id="hero-heading"
+          className="mt-3 max-w-3xl font-semibold text-4xl leading-tight tracking-tight drop-shadow-sm md:text-5xl"
+        >
+          Passió per les flors, des de l’any 2000
+        </h1>
+        <p className="mt-4 max-w-2xl text-lg text-emerald-50/95 md:text-xl">
+          Sempre queda perfum a les mans de qui regala flors ArtVerd.
+        </p>
+        <div className="mt-8 flex flex-wrap gap-3">
+          <Link
+            href="/botiga"
+            className="inline-flex items-center justify-center rounded-full bg-white px-6 py-3 font-semibold text-emerald-900 shadow-sm transition hover:bg-emerald-50"
+          >
+            Coneix la botiga
+          </Link>
+          <Link
+            href="/contacte"
+            className="inline-flex items-center justify-center rounded-full border border-white/50 px-6 py-3 font-semibold text-white transition hover:bg-white/10"
+          >
+            Contacte
+          </Link>
+        </div>
+      </div>
+    </section>
+  );
+}

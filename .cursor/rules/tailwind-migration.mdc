@@ -1,0 +1,25 @@
+---
+description: Tailwind styling when migrating from legacy WordPress CSS; no legacy stylesheets as the base for new pages
+globs: "**/*.tsx"
+alwaysApply: false
+---
+
+# Styling: Tailwind (migration from legacy CSS)
+
+## Principle
+
+New or migrated pages and components are built with **Tailwind CSS** (this project uses Tailwind v4 via `@import "tailwindcss"` in `app/globals.css`).
+
+## What to avoid
+
+- Do not copy **WordPress themes, `style.css`, or legacy bundles** as the primary styling for a migrated page.
+- Do not add broad global CSS for a single page; prefer utilities and local component structure.
+
+## How to translate the old design
+
+- Map repeated rules to Tailwind classes; map one-off values (brand colors, spacing) to **`@theme` / CSS variables** in `app/globals.css` when they should be shared tokens.
+- Images and assets: place them under `public/` and reference them with stable paths; respect accessibility (`alt`, contrast, focus).
+
+## Consistency
+
+Reuse tokens and patterns already defined in `globals.css` and in existing components before introducing new palettes or typography per page.

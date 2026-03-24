@@ -1,0 +1,30 @@
+---
+description: WordPress → Next static, incremental migration; scope and out-of-scope items
+alwaysApply: true
+---
+
+# WordPress → Next migration (static phase)
+
+## Goal
+
+Replace the WordPress site with this Next.js project. In this phase, only **static pages and content** (HTML, SEO, layout)—no functional parity with the CMS or legacy business logic.
+
+## Out of scope (do not implement unless explicitly requested)
+
+- Database connectivity or data migration from WordPress
+- Product catalog, pricing, inventory, or real e-commerce
+- Cart, checkout, payments, or purchase sessions
+- Sign-up/login, profiles, private areas, or user management
+- Replicating WordPress plugins that depend on PHP, a database, or server-side logic
+
+If the legacy site had those features, limit work to **static UI** (copy, public images, layout) or clear links/placeholders **without** persistence or APIs.
+
+## Incremental strategy
+
+- Migrate **one page at a time**: new routes under `app/…/page.tsx` (or whatever routing pattern this Next version uses).
+- Extract repeated blocks into `components/` when it makes sense for the page being migrated.
+- Do not carry over or re-enable the WordPress theme/global CSS; new styling uses Tailwind (see the `tailwind-migration` rule).
+
+## Next.js in this repo
+
+Before using Next/React APIs, follow `AGENTS.md` and the guide under `node_modules/next/dist/docs/` (conventions and deprecations for this version).

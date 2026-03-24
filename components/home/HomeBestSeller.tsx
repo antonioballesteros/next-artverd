@@ -29,7 +29,7 @@ export function HomeBestSeller() {
             Els nostres productes best seller són els més venuts i apreciats
             pels nostres clients. Descobreix la nostra selecció de productes
             destacats i troba el que millor s’adapti a les teves necessitats. A
-            ArtVerd, t’oferim la millor qualitat i varietat de flors i plantes
+            Art Verd, t’oferim la millor qualitat i varietat de flors i plantes
             perquè el teu espai es converteixi en un lloc únic i especial.
           </p>
           <p className="mt-8">

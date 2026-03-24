@@ -1,24 +1,39 @@
 import { artverdImages } from "@/lib/artverdAssets";
+import { elsie } from "@/lib/fonts";
+import { Check } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
+interface IntroCheckListItemProps {
+  children: React.ReactNode;
+}
+
+function IntroCheckListItem({ children }: IntroCheckListItemProps) {
+  return (
+    <li className="flex gap-1">
+      <Check
+        className="mt-1.5 h-5 w-5 shrink-0 text-emerald-600"
+        aria-hidden
+        strokeWidth={2}
+      />
+      <span>{children}</span>
+    </li>
+  );
+}
+
 export function HomeIntro() {
   return (
-    <section
-      className="mx-auto max-w-6xl px-4 py-14 md:py-20"
-      aria-labelledby="intro-heading"
-    >
-      <div className="grid items-center gap-10 md:grid-cols-2 md:gap-14">
+    <section className="bg-emerald-50/50" aria-labelledby="intro-heading">
+      <h2
+        className={`${elsie.className} bg-background px-4 py-14 text-center text-2xl text-emerald-950 md:py-20 md:text-6xl`}
+      >
+        Floristeria Art Verd
+      </h2>
+      <div className="mx-auto grid max-w-6xl items-center gap-10 md:grid-cols-2 md:gap-14">
         <div>
-          <h2
-            id="intro-heading"
-            className="text-2xl font-semibold text-emerald-950 md:text-3xl"
-          >
-            Floristeria ArtVerd
-          </h2>
           <div className="mt-6 max-w-3xl space-y-4 text-base leading-relaxed text-emerald-900/90 md:text-lg">
             <p>
-              A la floristeria ArtVerd trobaràs rams, plantes i objectes de
+              A la floristeria Art Verd trobaràs rams, plantes i objectes de
               decoració per fer un regal únic i personalitzat, per cada ocasió.
               Sigui un ram de flors per un ésser estimat, per celebrar un
               naixement o un aniversari, o per organitzar el teu casament.
@@ -29,15 +44,15 @@ export function HomeIntro() {
               Mútua de Terrassa. Fem lliuraments a domicili.
             </p>
           </div>
-          <ul className="mt-8 max-w-2xl list-disc space-y-2 pl-5 text-emerald-900/90 md:text-lg">
-            <li>
+          <ul className="mt-8 max-w-2xl list-none space-y-3 text-emerald-900/90 md:text-lg">
+            <IntroCheckListItem>
               Àmplia varietat de plantes per cada racó, així com l’assessorament
               per tenir-ne cura.
-            </li>
-            <li>
+            </IntroCheckListItem>
+            <IntroCheckListItem>
               Accessoris per decorar la teva llar amb estil i personalitat.
-            </li>
-            <li>Events florals.</li>
+            </IntroCheckListItem>
+            <IntroCheckListItem>Events florals.</IntroCheckListItem>
           </ul>
           <p className="mt-8">
             <Link

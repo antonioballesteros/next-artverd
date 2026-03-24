@@ -11,6 +11,7 @@ alwaysApply: true
 - **React 19**: functional components and hooks only.
 - **TypeScript**: strict typing; avoid `any`. Define interfaces/types for props and data.
 - **Tailwind v4**: use Tailwind classes for styling; avoid CSS-in-JS or inline styles unless necessary.
+- **Icons**: use **lucide-react** (project dependency). Import named icons, e.g. `import { SquareCheck } from "lucide-react"`. Size and color with Tailwind (`className="h-5 w-5 text-emerald-600"`). For decorative icons beside visible text, set `aria-hidden` on the icon.
 
 ### Stack usage and structure
 

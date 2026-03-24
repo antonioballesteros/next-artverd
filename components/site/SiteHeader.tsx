@@ -70,7 +70,7 @@ export function SiteHeader({
           <Link href="/" className="flex shrink-0 items-center gap-2">
             <Image
               src={artverdImages.logo}
-              alt="ArtVerd"
+              alt="Art Verd"
               width={160}
               height={48}
               className={`h-10 w-auto md:h-12 ${!showSolidBar ? "drop-shadow-[0_2px_12px_rgba(0,0,0,0.55)]" : ""}`}

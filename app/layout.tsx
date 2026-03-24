@@ -4,11 +4,11 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   title: {
-    default: "ArtVerd · La teva floristeria a Terrassa",
-    template: "%s · ArtVerd",
+    default: "Art Verd · La teva floristeria a Terrassa",
+    template: "%s · Art Verd",
   },
   description:
-    "Floristeria ArtVerd: rams, plantes i decoració a Terrassa. Passió per les flors des de l’any 2000. Lliuraments a domicili.",
+    "Floristeria Art Verd: rams, plantes i decoració a Terrassa. Passió per les flors des de l’any 2000. Lliuraments a domicili.",
 };
 
 export default function RootLayout({

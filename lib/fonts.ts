@@ -16,7 +16,6 @@ export const elsie = Elsie({
   subsets: ["latin", "latin-ext"],
 });
 
-/** Readable script for the ArtVerd “signature” in the hero (softer than display scripts). */
 export const artverdSignature = Dancing_Script({
   weight: "600",
   subsets: ["latin", "latin-ext"],

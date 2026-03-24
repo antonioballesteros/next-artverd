@@ -1,47 +1,53 @@
 import { artverdImages } from "@/lib/artverdAssets";
+import { elsie } from "@/lib/fonts";
 import Image from "next/image";
 import Link from "next/link";
+import { ScrollConvergePair } from "../ScrollConvergePair";
 
 export function HomeBestSeller() {
   return (
-    <section
-      className="mx-auto max-w-6xl px-4 py-14 md:py-20"
-      aria-labelledby="bestseller-heading"
-    >
-      <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-14">
-        <div className="relative aspect-4/3 w-full overflow-hidden rounded-2xl border border-emerald-900/10 shadow-md lg:order-first">
-          <Image
-            src={artverdImages.bestSeller}
-            alt="Selecció de productes destacats i best seller"
-            fill
-            className="object-cover"
-            sizes="(max-width: 1024px) 100vw, 50vw"
-          />
-        </div>
-        <div className="lg:order-last">
-          <h2
-            id="bestseller-heading"
-            className="text-2xl font-semibold text-emerald-950 md:text-3xl"
-          >
-            Novetats · Best seller
-          </h2>
-          <p className="mt-6 max-w-3xl text-base leading-relaxed text-emerald-900/90 md:text-lg">
-            Els nostres productes best seller són els més venuts i apreciats
-            pels nostres clients. Descobreix la nostra selecció de productes
-            destacats i troba el que millor s’adapti a les teves necessitats. A
-            Art Verd, t’oferim la millor qualitat i varietat de flors i plantes
-            perquè el teu espai es converteixi en un lloc únic i especial.
-          </p>
-          <p className="mt-8">
-            <Link
-              href="/categoria/best-seller"
-              className="inline-flex rounded-full bg-emerald-800 px-6 py-3 font-semibold text-white transition hover:bg-emerald-900"
-            >
-              Botiga
-            </Link>
-          </p>
-        </div>
-      </div>
+    <section className="bg-emerald-50/50" aria-labelledby="bestseller-heading">
+      <h2
+        className={`${elsie.className} bg-background px-4 py-14 text-center text-2xl text-emerald-950 md:py-20 md:text-6xl`}
+      >
+        Novetats · Best seller
+      </h2>
+      <ScrollConvergePair
+        className="mx-auto grid max-w-6xl items-center gap-10 md:grid-cols-2 md:gap-14"
+        left={
+          <div className="relative aspect-4/3 w-full overflow-hidden rounded-2xl border border-emerald-900/10 shadow-lg">
+            <Image
+              src={artverdImages.bestSeller}
+              alt="Selecció de productes destacats i best seller"
+              fill
+              className="object-cover"
+              sizes="(max-width: 1024px) 100vw, 50vw"
+            />
+          </div>
+        }
+        right={
+          <div>
+            <p className="mt-6 max-w-3xl text-base leading-relaxed text-emerald-900/90 md:text-lg">
+              Els nostres productes best seller són els més venuts i apreciats
+              pels nostres clients. Descobreix la nostra selecció de productes
+              destacats i troba el que millor s’adapti a les teves necessitats.
+              A Art Verd, t’oferim la millor qualitat i varietat de flors i
+              plantes perquè el teu espai es converteixi en un lloc únic i
+              especial.
+            </p>
+
+            <div className="mt-8 flex flex-wrap gap-3">
+              <Link
+                href="/botiga/best-seller/"
+                className="inline-flex items-center justify-center rounded-full bg-white px-6 py-3 font-semibold text-emerald-900 shadow-sm transition hover:bg-emerald-50"
+              >
+                Best Seller
+              </Link>
+            </div>
+          </div>
+        }
+        once={false}
+      />
     </section>
   );
 }

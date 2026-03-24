@@ -54,14 +54,20 @@ export function HomeIntro() {
             </IntroCheckListItem>
             <IntroCheckListItem>Events florals.</IntroCheckListItem>
           </ul>
-          <p className="mt-8">
+          <div className="mt-8 flex flex-wrap gap-3">
             <Link
               href="/botiga"
-              className="inline-flex font-semibold text-emerald-800 underline decoration-emerald-300 decoration-2 underline-offset-4 hover:text-emerald-950"
+              className="inline-flex items-center justify-center rounded-full bg-white px-6 py-3 font-semibold text-emerald-900 shadow-sm transition hover:bg-emerald-50"
             >
               Coneix la botiga
             </Link>
-          </p>
+            <Link
+              href="/contacte"
+              className="inline-flex items-center justify-center rounded-full bg-white px-6 py-3 font-semibold text-emerald-900 shadow-sm transition hover:bg-emerald-50"
+            >
+              Contacte
+            </Link>
+          </div>
         </div>
         <div className="relative aspect-4/3 w-full overflow-hidden rounded-2xl border border-emerald-900/10 shadow-lg">
           <Image

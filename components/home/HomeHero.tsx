@@ -120,20 +120,6 @@ export function HomeHero() {
             Art Verd
           </p>
         </div>
-        <div className="mt-8 flex flex-wrap gap-3">
-          <Link
-            href="/botiga"
-            className="inline-flex items-center justify-center rounded-full bg-white px-6 py-3 font-semibold text-emerald-900 shadow-sm transition hover:bg-emerald-50"
-          >
-            Coneix la botiga
-          </Link>
-          <Link
-            href="/contacte"
-            className="inline-flex items-center justify-center rounded-full border border-white/50 px-6 py-3 font-semibold text-white transition hover:bg-white/10"
-          >
-            Contacte
-          </Link>
-        </div>
       </div>
     </section>
   );

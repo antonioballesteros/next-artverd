@@ -40,7 +40,7 @@ export function HomeHero() {
 
   return (
     <section
-      className="relative flex h-dvh min-h-dvh w-full items-center overflow-hidden px-4 pb-16 pt-20 md:pb-24 md:pt-24"
+      className="relative flex h-dvh min-h-dvh w-full items-center overflow-hidden px-4 pt-20 pb-16 md:pt-24 md:pb-24"
       aria-labelledby="hero-heading"
     >
       <div className="absolute inset-0" aria-hidden>
@@ -55,7 +55,7 @@ export function HomeHero() {
               priority={index === 0}
               className={`object-cover motion-reduce:transition-none ${
                 isActive
-                  ? "z-10 opacity-100 motion-reduce:animate-none motion-reduce:scale-100 animate-[hero-bg-zoom_5.2s_ease-out_forwards]"
+                  ? "z-10 animate-[hero-bg-zoom_5.2s_ease-out_forwards] opacity-100 motion-reduce:scale-100 motion-reduce:animate-none"
                   : "z-0 scale-100 opacity-0 motion-reduce:animate-none"
               }`}
               style={
@@ -75,20 +75,20 @@ export function HomeHero() {
       <div className="relative z-10 mx-auto w-full max-w-6xl text-white">
         <div className="relative mx-auto mt-3 w-full max-w-3xl px-6 md:px-12">
           <span
-            className="pointer-events-none absolute left-0 top-1/2 z-0 -translate-y-1/2 font-serif text-6xl leading-none text-white/25 select-none md:text-8xl"
+            className="pointer-events-none absolute top-1/2 left-0 z-0 -translate-y-1/2 font-serif text-6xl leading-none text-white/25 select-none md:text-8xl"
             aria-hidden
           >
             «
           </span>
           <span
-            className="pointer-events-none absolute right-0 top-1/2 z-0 -translate-y-1/2 font-serif text-6xl leading-none text-white/25 select-none md:text-8xl"
+            className="pointer-events-none absolute top-1/2 right-0 z-0 -translate-y-1/2 font-serif text-6xl leading-none text-white/25 select-none md:text-8xl"
             aria-hidden
           >
             »
           </span>
           <h1
             id="hero-heading"
-            className={`${elsie.className} relative z-10 mx-auto grid max-w-2xl grid-cols-1 font-normal text-4xl leading-snug tracking-wide italic md:max-w-3xl md:text-5xl [paint-order:stroke_fill] [-webkit-text-stroke:0.02em_rgb(15_31_20/0.28)] [text-shadow:0_0.06em_0.12em_rgb(0_0_0/0.45),0_0_0.45em_rgb(0_0_0/0.35),0_0_1em_rgb(0_0_0/0.2)]`}
+            className={`${elsie.className} relative z-10 mx-auto grid max-w-2xl grid-cols-1 text-4xl leading-snug font-normal tracking-wide italic [-webkit-text-stroke:0.02em_rgb(15_31_20/0.28)] [paint-order:stroke_fill] [text-shadow:0_0.06em_0.12em_rgb(0_0_0/0.45),0_0_0.45em_rgb(0_0_0/0.35),0_0_1em_rgb(0_0_0/0.2)] md:max-w-3xl md:text-5xl`}
           >
             {HERO_HEADLINES.map((line, i) => {
               const isActive = headlineIndex === i;
@@ -111,7 +111,7 @@ export function HomeHero() {
             })}
           </h1>
           <p
-            className={`${artverdSignature.className} relative z-10 mt-8 text-right max-w-2xl border-t border-white/25 pt-5 text-3xl text-emerald-50/95 md:mt-9 md:max-w-3xl md:text-4xl [text-shadow:0_0.04em_0.1em_rgb(0_0_0/0.35)]`}
+            className={`${artverdSignature.className} relative z-10 mt-8 max-w-2xl border-t border-white/25 pt-5 text-right text-3xl text-emerald-50/95 [text-shadow:0_0.04em_0.1em_rgb(0_0_0/0.35)] md:mt-9 md:max-w-3xl md:text-4xl`}
           >
             Art Verd
           </p>

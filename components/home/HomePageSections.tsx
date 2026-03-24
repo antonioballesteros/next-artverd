@@ -14,7 +14,7 @@ export function HomeIntro() {
         <div>
           <h2
             id="intro-heading"
-            className="font-semibold text-2xl text-emerald-950 md:text-3xl"
+            className="text-2xl font-semibold text-emerald-950 md:text-3xl"
           >
             Floristeria ArtVerd
           </h2>
@@ -112,7 +112,7 @@ export function HomeProductCategories() {
       <div className="mx-auto max-w-6xl">
         <h2
           id="products-heading"
-          className="font-semibold text-2xl text-emerald-950 md:text-3xl"
+          className="text-2xl font-semibold text-emerald-950 md:text-3xl"
         >
           Els nostres productes
         </h2>
@@ -137,7 +137,7 @@ export function HomeProductCategories() {
                   />
                 </div>
                 <div className="flex flex-1 flex-col p-5">
-                  <span className="font-semibold text-emerald-950 text-lg group-hover:text-emerald-800">
+                  <span className="text-lg font-semibold text-emerald-950 group-hover:text-emerald-800">
                     {cat.title}
                   </span>
                   <span className="mt-2 text-sm text-emerald-900/75">
@@ -175,7 +175,7 @@ export function HomeBestSeller() {
         <div className="lg:order-last">
           <h2
             id="bestseller-heading"
-            className="font-semibold text-2xl text-emerald-950 md:text-3xl"
+            className="text-2xl font-semibold text-emerald-950 md:text-3xl"
           >
             Novetats · Best seller
           </h2>
@@ -211,7 +211,7 @@ export function HomeWorkshops() {
           <div>
             <h2
               id="workshops-heading"
-              className="font-semibold text-2xl text-emerald-950 md:text-3xl"
+              className="text-2xl font-semibold text-emerald-950 md:text-3xl"
             >
               Tallers florals
             </h2>
@@ -298,7 +298,7 @@ export function HomeTestimonials() {
       <div className="relative mx-auto max-w-6xl">
         <h2
           id="reviews-heading"
-          className="font-semibold text-2xl text-emerald-950 md:text-3xl"
+          className="text-2xl font-semibold text-emerald-950 md:text-3xl"
         >
           Els nostres clients opinen
         </h2>
@@ -312,7 +312,7 @@ export function HomeTestimonials() {
               key={t.author}
               className="rounded-2xl border border-emerald-900/10 bg-white p-6 shadow-sm"
             >
-              <p className="text-emerald-900/90 leading-relaxed">“{t.quote}”</p>
+              <p className="leading-relaxed text-emerald-900/90">“{t.quote}”</p>
               <p className="mt-4 font-semibold text-emerald-950">{t.author}</p>
             </li>
           ))}
@@ -352,7 +352,7 @@ export function HomeSocialAndContact() {
         <div>
           <h2
             id="social-heading"
-            className="font-semibold text-2xl text-emerald-950 md:text-3xl"
+            className="text-2xl font-semibold text-emerald-950 md:text-3xl"
           >
             Les nostres xarxes socials
           </h2>
@@ -382,7 +382,7 @@ export function HomeSocialAndContact() {
           </ul>
         </div>
         <div>
-          <h2 className="font-semibold text-2xl text-emerald-950 md:text-3xl">
+          <h2 className="text-2xl font-semibold text-emerald-950 md:text-3xl">
             Contacta amb nosaltres per les teves comandes
           </h2>
           <ul className="mt-6 space-y-3 text-emerald-900/90">

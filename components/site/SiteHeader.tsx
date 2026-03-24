@@ -65,7 +65,7 @@ export function SiteHeader({
 
   return (
     <header className={headerShell}>
-      <div className="flex w-full items-center gap-4 py-1 px-4 md:py-1 md:px-2">
+      <div className="flex w-full items-center gap-4 px-4 py-1 md:px-2 md:py-1">
         <div className="flex min-w-0 items-center gap-6 md:gap-8 lg:gap-10">
           <Link href="/" className="flex shrink-0 items-center gap-2">
             <Image
@@ -131,7 +131,7 @@ export function SiteHeader({
               <Link
                 key={item.href}
                 href={item.href}
-                className={`rounded-lg px-2 py-2 uppercase tracking-wide transition-colors ${
+                className={`rounded-lg px-2 py-2 tracking-wide uppercase transition-colors ${
                   item.href === currentPath
                     ? "bg-emerald-100/90 font-semibold text-emerald-700"
                     : "hover:bg-emerald-100/70 hover:text-emerald-700"

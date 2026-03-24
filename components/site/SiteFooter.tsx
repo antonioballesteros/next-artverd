@@ -20,7 +20,7 @@ export function SiteFooter() {
       <div className="relative mx-auto max-w-6xl px-4 py-10">
         <div className="flex flex-col gap-8 md:flex-row md:justify-between md:gap-12">
           <div>
-            <p className="font-semibold text-lg text-white">ArtVerd</p>
+            <p className="text-lg font-semibold text-white">ArtVerd</p>
             <p className="mt-2 max-w-sm text-sm text-emerald-100/90">
               La teva floristeria a Terrassa. Carrer Cardaire, 11 · 08221
               Terrassa (Barcelona)

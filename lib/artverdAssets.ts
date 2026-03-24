@@ -2,10 +2,10 @@
  * Static image paths under /public/images/legacy (mirrored from the legacy WordPress site).
  */
 export const artverdImages = {
-  gat: "/images/hero-sliders/gat.jpg",
-  nadal: "/images/hero-sliders/nadal.jpg",
-  roses: "/images/hero-sliders/roses.jpg",
-  tenda: "/images/hero-sliders/tenda.jpg",
+  gat: "/images/hero-sliders/gat.webp",
+  nadal: "/images/hero-sliders/nadal.webp",
+  roses: "/images/hero-sliders/roses.webp",
+  tenda: "/images/hero-sliders/tenda.webp",
 
   logo: "/images/legacy/logo.png",
   categoryRams: "/images/legacy/category-rams.webp",

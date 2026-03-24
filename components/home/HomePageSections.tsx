@@ -127,7 +127,7 @@ export function HomeProductCategories() {
                 href={cat.href}
                 className="group flex h-full flex-col overflow-hidden rounded-2xl border border-emerald-900/10 bg-white shadow-sm transition hover:-translate-y-0.5 hover:shadow-md"
               >
-                <div className="relative aspect-[4/3] w-full overflow-hidden">
+                <div className="relative aspect-4/3 w-full overflow-hidden">
                   <Image
                     src={cat.imageSrc}
                     alt={cat.imageAlt}
@@ -163,7 +163,7 @@ export function HomeBestSeller() {
       aria-labelledby="bestseller-heading"
     >
       <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-14">
-        <div className="relative aspect-[4/3] w-full overflow-hidden rounded-2xl border border-emerald-900/10 shadow-md lg:order-first">
+        <div className="relative aspect-4/3 w-full overflow-hidden rounded-2xl border border-emerald-900/10 shadow-md lg:order-first">
           <Image
             src={artverdImages.bestSeller}
             alt="Selecció de productes destacats i best seller"
@@ -232,7 +232,7 @@ export function HomeWorkshops() {
               </Link>
             </p>
           </div>
-          <div className="relative aspect-[4/3] w-full overflow-hidden rounded-2xl border border-emerald-900/10 shadow-md">
+          <div className="relative aspect-4/3 w-full overflow-hidden rounded-2xl border border-emerald-900/10 shadow-md">
             <Image
               src={artverdImages.workshopsRams}
               alt="Rams i arranjaments florals per als tallers"

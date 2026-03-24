@@ -31,14 +31,14 @@ export function HomeSocialAndContact() {
       <ScrollConvergePair
         className="mx-auto grid max-w-6xl items-start gap-10 md:grid-cols-2 md:gap-14"
         left={
-          <div className="text-center">
+          <div className="flex flex-col gap-2 text-center">
             <h3
               id="social-heading"
               className="text-2xl font-semibold text-emerald-950 md:text-3xl"
             >
               Les nostres xarxes socials
             </h3>
-            <ul className="mt-6 flex flex-wrap gap-4">
+            <ul className="mx-auto mt-6 flex flex-wrap gap-4">
               {SOCIAL_LINKS.map((s) => (
                 <li key={s.href}>
                   <a
@@ -65,11 +65,11 @@ export function HomeSocialAndContact() {
           </div>
         }
         right={
-          <div>
+          <div className="flex flex-col text-center">
             <h3 className="text-2xl font-semibold text-emerald-950 md:text-3xl">
               Contacta amb nosaltres per les teves comandes
             </h3>
-            <ul className="mt-6 flex gap-3 text-emerald-900/90">
+            <ul className="mx-auto mt-6 flex flex-wrap gap-3 text-emerald-900/90">
               <li className="flex gap-2 leading-relaxed">
                 <MapPin
                   className="mt-0.5 h-5 w-5 shrink-0 text-emerald-700"

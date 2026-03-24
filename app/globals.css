@@ -20,6 +20,8 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  /* Elsie — use `font-featured` on prominent headings (`--font-elsie` from layout). */
+  --font-featured: var(--font-elsie);
 }
 
 body {

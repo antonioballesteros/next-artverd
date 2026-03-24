@@ -1,5 +1,6 @@
 "use client";
 
+import { elsie } from "@/lib/fonts";
 import { artverdHeroSlides } from "@/lib/artverdAssets";
 import Image from "next/image";
 import Link from "next/link";
@@ -65,11 +66,13 @@ export function HomeHero() {
       <div className="relative z-10 mx-auto w-full max-w-6xl text-white">
         <h1
           id="hero-heading"
-          className="mt-3 max-w-3xl font-semibold text-4xl leading-tight tracking-tight md:text-5xl [paint-order:stroke_fill] [-webkit-text-stroke:0.03em_rgb(15_31_20/0.35)] [text-shadow:0_0.06em_0.12em_rgb(0_0_0/0.45),0_0_0.45em_rgb(0_0_0/0.35),0_0_1em_rgb(0_0_0/0.2)]"
+          className={`${elsie.className} mt-3 max-w-3xl font-black text-4xl leading-tight tracking-tight md:text-5xl [paint-order:stroke_fill] [-webkit-text-stroke:0.03em_rgb(15_31_20/0.35)] [text-shadow:0_0.06em_0.12em_rgb(0_0_0/0.45),0_0_0.45em_rgb(0_0_0/0.35),0_0_1em_rgb(0_0_0/0.2)]`}
         >
           Passió per les flors, des de l’any 2000
         </h1>
-        <p className="mt-4 max-w-2xl text-lg text-emerald-50/95 md:text-xl [text-shadow:0_0.05em_0.1em_rgb(0_0_0/0.4),0_0_0.35em_rgb(0_0_0/0.28)]">
+        <p
+          className={`${elsie.className} mt-4 max-w-2xl text-lg text-emerald-50/95 md:text-2xl [text-shadow:0_0.05em_0.1em_rgb(0_0_0/0.4),0_0_0.35em_rgb(0_0_0/0.28)]`}
+        >
           Sempre queda perfum a les mans de qui regala flors ArtVerd.
         </p>
         <div className="mt-8 flex flex-wrap gap-3">

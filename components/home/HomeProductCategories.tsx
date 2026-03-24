@@ -1,4 +1,5 @@
 import { artverdImages } from "@/lib/artverdAssets";
+import { elsie } from "@/lib/fonts";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -43,21 +44,14 @@ const PRODUCT_CATEGORIES: ProductCategory[] = [
 
 export function HomeProductCategories() {
   return (
-    <section
-      className="border-y border-emerald-900/10 bg-emerald-50/60 px-4 py-14 md:py-20"
-      aria-labelledby="products-heading"
-    >
+    <section className="bg-emerald-50/50" aria-labelledby="products-heading">
+      <h2
+        className={`${elsie.className} bg-background px-4 py-14 text-center text-2xl text-emerald-950 md:py-20 md:text-6xl`}
+      >
+        Els nostres productes
+      </h2>
+
       <div className="mx-auto max-w-6xl">
-        <h2
-          id="products-heading"
-          className="text-2xl font-semibold text-emerald-950 md:text-3xl"
-        >
-          Els nostres productes
-        </h2>
-        <p className="mt-2 max-w-2xl text-emerald-900/80">
-          Explora les línies principals de la botiga. Els enllaços es
-          completaran a mesura que migrem cada secció.
-        </p>
         <ul className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {PRODUCT_CATEGORIES.map((cat) => (
             <li key={cat.href}>

@@ -1,9 +1,9 @@
 import { ScrollConvergePair } from "@/components/ScrollConvergePair";
 import { artverdImages } from "@/lib/artverdAssets";
-import { elsie } from "@/lib/fonts";
 import { Check } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { HomeSubtitle } from "./HomeSubtitle";
 
 interface IntroCheckListItemProps {
   children: React.ReactNode;
@@ -25,11 +25,7 @@ function IntroCheckListItem({ children }: IntroCheckListItemProps) {
 export function HomeIntro() {
   return (
     <section className="bg-emerald-50/50" aria-labelledby="intro-heading">
-      <h2
-        className={`${elsie.className} bg-background px-4 py-14 text-center text-2xl text-emerald-950 md:py-20 md:text-6xl`}
-      >
-        Floristeria Art Verd
-      </h2>
+      <HomeSubtitle>Floristeria Art Verd</HomeSubtitle>
       <ScrollConvergePair
         className="mx-auto grid max-w-6xl items-center gap-10 md:grid-cols-2 md:gap-14"
         left={

@@ -1,4 +1,6 @@
 import { artverdImages } from "@/lib/artverdAssets";
+import { artverdSignature } from "@/lib/fonts";
+import { HomeSubtitle } from "./HomeSubtitle";
 
 interface Testimonial {
   quote: string;
@@ -14,7 +16,7 @@ const TESTIMONIALS: Testimonial[] = [
   {
     quote:
       "Una noia amb molt traça i molt bon gust. No és pas una floristeria convencional!",
-    author: "ramon grimalt",
+    author: "Ramon Grimalt",
   },
   {
     quote:
@@ -39,34 +41,26 @@ const TESTIMONIALS: Testimonial[] = [
 
 export function HomeTestimonials() {
   return (
-    <section
-      className="relative border-t border-emerald-900/10 bg-emerald-50/50 px-4 py-14 md:py-20"
-      aria-labelledby="reviews-heading"
-    >
+    <section className="bg-emerald-50/50" aria-labelledby="reviews-heading">
+      <HomeSubtitle>Els nostres clients opinen</HomeSubtitle>
       <div
         className="pointer-events-none absolute inset-0 bg-contain bg-center bg-no-repeat opacity-[0.06]"
         style={{ backgroundImage: `url(${artverdImages.flowerSectionBg})` }}
         aria-hidden
       />
       <div className="relative mx-auto max-w-6xl">
-        <h2
-          id="reviews-heading"
-          className="text-2xl font-semibold text-emerald-950 md:text-3xl"
-        >
-          Els nostres clients opinen
-        </h2>
-        <p className="mt-2 text-sm text-emerald-800/80">
-          Opinions recollides de ressenyes públiques sobre la botiga (contingut
-          estàtic en aquesta fase).
-        </p>
         <ul className="mt-10 grid gap-6 md:grid-cols-2">
           {TESTIMONIALS.map((t) => (
             <li
               key={t.author}
-              className="rounded-2xl border border-emerald-900/10 bg-white p-6 shadow-sm"
+              className="flex flex-col rounded-2xl border border-emerald-900/10 bg-white p-6 shadow-sm"
             >
               <p className="leading-relaxed text-emerald-900/90">“{t.quote}”</p>
-              <p className="mt-4 font-semibold text-emerald-950">{t.author}</p>
+              <p
+                className={`${artverdSignature.className} mt-auto text-right text-xl text-emerald-950`}
+              >
+                {t.author}
+              </p>
             </li>
           ))}
         </ul>

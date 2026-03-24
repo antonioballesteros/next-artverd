@@ -2,6 +2,7 @@ import { artverdImages } from "@/lib/artverdAssets";
 import { elsie } from "@/lib/fonts";
 import Image from "next/image";
 import Link from "next/link";
+import { HomeSubtitle } from "./HomeSubtitle";
 
 interface ProductCategory {
   href: string;
@@ -45,12 +46,7 @@ const PRODUCT_CATEGORIES: ProductCategory[] = [
 export function HomeProductCategories() {
   return (
     <section className="bg-emerald-50/50" aria-labelledby="products-heading">
-      <h2
-        className={`${elsie.className} bg-background px-4 py-14 text-center text-2xl text-emerald-950 md:py-20 md:text-6xl`}
-      >
-        Els nostres productes
-      </h2>
-
+      <HomeSubtitle>Els nostres productes</HomeSubtitle>
       <div className="mx-auto max-w-6xl">
         <ul className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {PRODUCT_CATEGORIES.map((cat) => (
@@ -65,7 +61,7 @@ export function HomeProductCategories() {
                     alt={cat.imageAlt}
                     fill
                     className="object-cover transition duration-300 group-hover:scale-105"
-                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                    sizes="(max-width: 768px) 100vw, 50vw"
                   />
                 </div>
                 <div className="flex flex-1 flex-col p-5">

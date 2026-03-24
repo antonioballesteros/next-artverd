@@ -3,7 +3,6 @@
 import { artverdSignature, elsie } from "@/lib/fonts";
 import { artverdHeroSlides } from "@/lib/artverdAssets";
 import Image from "next/image";
-import Link from "next/link";
 import { useEffect, useState } from "react";
 
 const SLIDE_INTERVAL_MS = 5500;
@@ -82,13 +81,13 @@ export function HomeHero() {
             className="pointer-events-none absolute top-1/2 left-0 z-0 -translate-y-1/2 font-serif text-6xl leading-none text-white/25 select-none md:text-8xl"
             aria-hidden
           >
-            «
+            “
           </span>
           <span
             className="pointer-events-none absolute top-1/2 right-0 z-0 -translate-y-1/2 font-serif text-6xl leading-none text-white/25 select-none md:text-8xl"
             aria-hidden
           >
-            »
+            ”
           </span>
           <h1
             id="hero-heading"

@@ -1,17 +1,13 @@
 import { artverdImages } from "@/lib/artverdAssets";
-import { elsie } from "@/lib/fonts";
 import Image from "next/image";
 import Link from "next/link";
 import { ScrollConvergePair } from "../ScrollConvergePair";
+import { HomeSubtitle } from "./HomeSubtitle";
 
 export function HomeBestSeller() {
   return (
     <section className="bg-emerald-50/50" aria-labelledby="bestseller-heading">
-      <h2
-        className={`${elsie.className} bg-background px-4 py-14 text-center text-2xl text-emerald-950 md:py-20 md:text-6xl`}
-      >
-        Novetats · Best seller
-      </h2>
+      <HomeSubtitle>Novetats · Best seller</HomeSubtitle>
       <ScrollConvergePair
         className="mx-auto grid max-w-6xl items-center gap-10 md:grid-cols-2 md:gap-14"
         left={
@@ -21,7 +17,7 @@ export function HomeBestSeller() {
               alt="Selecció de productes destacats i best seller"
               fill
               className="object-cover"
-              sizes="(max-width: 1024px) 100vw, 50vw"
+              sizes="(max-width: 768px) 100vw, 50vw"
             />
           </div>
         }

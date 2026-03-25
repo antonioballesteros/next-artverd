@@ -12,7 +12,7 @@ export function CasamentsIntro() {
           id="casaments-page-title"
           className={`${elsie.className} text-3xl font-normal tracking-wide text-emerald-950 md:text-5xl lg:text-6xl`}
         >
-          Casaments i events — ArtVerd
+          Casaments i events
         </h1>
         <p
           className={`${elsie.className} mx-auto mt-6 max-w-3xl text-base leading-relaxed text-emerald-900/90 md:text-lg`}

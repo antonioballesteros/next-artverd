@@ -13,12 +13,12 @@ Tracks public routes migrated from the legacy WordPress site to this App Router 
 | `/tallers` | https://www.artverd.com/tallers | Workshops landing; mirror legacy tallers. |
 | `/casaments-i-events` | https://www.artverd.com/casaments-i-events | Weddings & events; hero, alternating sections, icon row, CTA to contact. |
 | `/blog` | https://www.artverd.com/blog | Blog home page. |
+| `/blog/el-significat-del-color-de-les-roses` | https://www.artverd.com/2023/04/22/el-significat-del-color-de-les-roses/ | Blog page |
 
 ## Pending routes
 
 | Next.js route | Legacy URL | Notes |
 | ------------- | ---------- | ----- |
-| `/blog/el-significat-del-color-de-les-roses` | https://www.artverd.com/2023/04/22/el-significat-del-color-de-les-roses/ | Blog page |
 | `/blog/abril-el-mes-de-les-flors` | https://www.artverd.com/2023/04/17/abril-el-mes-de-les-flors/ | Blog page |
 | `/blog/perque-triar-art-verd-pels-teus-events-especials` | https://www.artverd.com/2023/04/17/por-que-elegir-flores-de-art-verd-para-tus-eventos-especiales/ | Blog page |
 

@@ -57,6 +57,41 @@
   }
 }
 
+/* Blog listing / article title underline. */
+@keyframes blog-title-line {
+  from {
+    opacity: 0;
+    transform: scaleX(0.35);
+  }
+  to {
+    opacity: 1;
+    transform: scaleX(1);
+  }
+}
+
+/* Blog article (legacy BeTheme-style entrances). */
+@keyframes blog-article-hero-in {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 1rem, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes blog-section-reveal {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 1.15rem, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
 :root {
   --background: #faf9f6;
   --foreground: #0f1f14;

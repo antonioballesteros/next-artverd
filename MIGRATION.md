@@ -10,12 +10,12 @@ Tracks public routes migrated from the legacy WordPress site to this App Router 
 | ------------- | ---------- | ----- |
 | `/` | https://www.artverd.com/ | Hero, intro, products, tallers, quotes, contact. |
 | `/floristeria` | https://www.artverd.com/floristeria | Florist page; content on legacy escuela-de-flores. |
+| `/tallers` | https://www.artverd.com/tallers | Workshops landing; mirror legacy tallers. |
 
 ## Pending routes
 
 | Next.js route | Legacy URL | Notes |
 | ------------- | ---------- | ----- |
-| `/tallers` | https://www.artverd.com/tallers | Workshops landing; mirror legacy tallers. |
 | `/casaments-i-events` | https://www.artverd.com/casaments-i-events | Weddings and events overview; static layout only. |
 | `/contacte` | https://www.artverd.com/contacte | Contact info and form; legacy slug is contact. |
 | `/politica-de-privacitat` | https://www.artverd.com/politica-de-privacidad | Privacy policy; source politica-de-privacidad. |

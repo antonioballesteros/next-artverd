@@ -10,11 +10,11 @@ import {
   EL_SIGNIFICAT_ROSES_TITLE,
 } from "@/lib/blog/elSignificatRosesContent";
 
-const LEGACY_PREV_POST = {
+const PREV_POST = {
   href: "/blog/perque-triar-artverd-pels-teus-events-especials",
   label: "¿Perqué triar Artverd pels teus events especials?",
 };
-const LEGACY_NEXT_POST = {
+const NEXT_POST = {
   href: "/blog/abril-el-mes-de-les-flors",
   label: "Abril el mes de les flors",
 };
@@ -29,10 +29,10 @@ export function ElSignificatRosesArticle() {
       />
 
       <BlogArticlePostNav
-        prevHref={LEGACY_PREV_POST.href}
-        prevLabel={LEGACY_PREV_POST.label}
-        nextHref={LEGACY_NEXT_POST.href}
-        nextLabel={LEGACY_NEXT_POST.label}
+        prevHref={PREV_POST.href}
+        prevLabel={PREV_POST.label}
+        nextHref={NEXT_POST.href}
+        nextLabel={NEXT_POST.label}
       />
 
       <article className="relative mx-auto max-w-3xl px-4 py-10 pb-6 md:px-6 md:py-14">

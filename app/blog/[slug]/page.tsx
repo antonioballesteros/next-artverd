@@ -1,4 +1,9 @@
+import { AbrilMesFlorsArticle } from "@/components/blog/articles/AbrilMesFlorsArticle";
 import { ElSignificatRosesArticle } from "@/components/blog/articles/ElSignificatRosesArticle";
+import {
+  ABRIL_MES_FLORS_DESCRIPTION,
+  ABRIL_MES_FLORS_TITLE,
+} from "@/lib/blog/abrilMesFlorsContent";
 import {
   EL_SIGNIFICAT_ROSES_DESCRIPTION,
   EL_SIGNIFICAT_ROSES_TITLE,
@@ -17,10 +22,15 @@ interface BlogPostPageProps {
 }
 
 const ARTICLE_BY_SLUG: Record<MigratedBlogSlug, ComponentType> = {
+  "abril-el-mes-de-les-flors": AbrilMesFlorsArticle,
   "el-significat-del-color-de-les-roses": ElSignificatRosesArticle,
 };
 
 const METADATA_BY_SLUG: Record<MigratedBlogSlug, Metadata> = {
+  "abril-el-mes-de-les-flors": {
+    title: ABRIL_MES_FLORS_TITLE,
+    description: ABRIL_MES_FLORS_DESCRIPTION,
+  },
   "el-significat-del-color-de-les-roses": {
     title: EL_SIGNIFICAT_ROSES_TITLE,
     description: EL_SIGNIFICAT_ROSES_DESCRIPTION,

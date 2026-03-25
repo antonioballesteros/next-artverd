@@ -1,5 +1,3 @@
-/** Static copy migrated from https://www.artverd.com/2023/04/22/el-significat-del-color-de-les-roses/ */
-
 export type RoseAccent =
   | "vermella"
   | "blanca"

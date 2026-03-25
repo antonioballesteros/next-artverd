@@ -1,6 +1,9 @@
 /** Blog posts that are fully migrated to this app (served under `/blog/[slug]`). */
 
-export const MIGRATED_BLOG_SLUGS = ["el-significat-del-color-de-les-roses"] as const;
+export const MIGRATED_BLOG_SLUGS = [
+  "abril-el-mes-de-les-flors",
+  "el-significat-del-color-de-les-roses",
+] as const;
 
 export type MigratedBlogSlug = (typeof MIGRATED_BLOG_SLUGS)[number];
 

@@ -27,3 +27,10 @@ export const artverdHeroSlides = [
   artverdImages.gat,
   artverdImages.nadal,
 ] as const;
+
+export const artverdDecorIcons = {
+  iconPlanta1: "/images/legacy/planta-1.png",
+  iconPlanta2: "/images/legacy/planta-2.png",
+  iconFlor: "/images/legacy/flor.png",
+  iconGirasol: "/images/legacy/girasol.png",
+} as const;

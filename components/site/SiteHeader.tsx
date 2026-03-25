@@ -10,7 +10,12 @@ import { useEffect, useState } from "react";
 const OVERLAY_SCROLL_PX = 24;
 
 /** Routes whose first section is a full-bleed hero; header uses overlay until scroll. */
-const OVERLAY_HEADER_PATHS = new Set<string>(["/", "/floristeria"]);
+const OVERLAY_HEADER_PATHS = new Set<string>([
+  "/",
+  "/floristeria",
+  "/tallers",
+  "/casaments-i-events",
+]);
 
 interface SiteHeaderProps {
   /** When omitted, the active nav item follows the current URL. */

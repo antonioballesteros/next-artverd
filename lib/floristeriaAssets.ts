@@ -3,10 +3,6 @@
  */
 export const floristeriaImages = {
   bouquetHero: "/images/legacy/ramo-flores-hermosas-espacio.jpg",
-  iconPlanta: "/images/legacy/planta.png",
-  iconFlor: "/images/legacy/flor.png",
-  iconPlantaAlt: "/images/legacy/planta-1.png",
-  iconGirasol: "/images/legacy/girasol.png",
   shopInterior: "/images/legacy/1686302695001.jpg",
 } as const;
 

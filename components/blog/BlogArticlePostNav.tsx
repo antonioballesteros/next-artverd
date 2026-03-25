@@ -3,7 +3,7 @@ import Link from "next/link";
 
 interface BlogArticlePostNavProps {
   prevHref?: string;
-  prevLabel: string;
+  prevLabel?: string;
   nextHref?: string;
   nextLabel?: string;
 }
@@ -20,7 +20,7 @@ export function BlogArticlePostNav({
       aria-label="Article navigation"
     >
       <div className="mx-auto flex max-w-3xl items-center justify-between gap-4 px-4 py-4 md:px-6">
-        {prevHref && (
+        {prevHref && prevLabel ? (
           <Link
             href={prevHref}
             className="group flex max-w-[min(100%,14rem)] items-center gap-2 text-sm font-medium text-emerald-800 transition-colors hover:text-emerald-950 md:max-w-xs md:text-base"
@@ -31,6 +31,8 @@ export function BlogArticlePostNav({
             />
             <span className="line-clamp-2">{prevLabel}</span>
           </Link>
+        ) : (
+          <span className="max-w-[min(100%,14rem)] md:max-w-xs" aria-hidden />
         )}
 
         <Link
@@ -41,17 +43,19 @@ export function BlogArticlePostNav({
           <LayoutGrid className="h-5 w-5" aria-hidden />
         </Link>
 
-        {nextHref && (
+        {nextHref && nextLabel ? (
           <Link
             href={nextHref}
             className="group flex max-w-[min(100%,14rem)] items-center gap-2 text-sm font-medium text-emerald-800 transition-colors hover:text-emerald-950 md:max-w-xs md:text-base"
           >
             <span className="line-clamp-2">{nextLabel}</span>
             <ChevronRight
-              className="h-5 w-5 shrink-0 transition-transform duration-300 ease-out group-hover:-translate-x-0.5 motion-reduce:group-hover:translate-x-0"
+              className="h-5 w-5 shrink-0 transition-transform duration-300 ease-out group-hover:translate-x-0.5 motion-reduce:group-hover:translate-x-0"
               aria-hidden
             />
           </Link>
+        ) : (
+          <span className="max-w-[min(100%,14rem)] md:max-w-xs" aria-hidden />
         )}
       </div>
     </nav>

@@ -12,7 +12,7 @@ export interface BlogPost {
 
 export const BLOG_POSTS: BlogPost[] = [
   {
-    slug: "perque-triar-artverd-pels-teus-events-especials",
+    slug: "perque-triar-art-verd-pels-teus-events-especials",
     title: "¿Perqué triar Artverd pels teus events especials?",
 
     excerpt:

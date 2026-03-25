@@ -1,6 +1,5 @@
-/** Blog posts that are fully migrated to this app (served under `/blog/[slug]`). */
-
 export const MIGRATED_BLOG_SLUGS = [
+  "perque-triar-art-verd-pels-teus-events-especials",
   "abril-el-mes-de-les-flors",
   "el-significat-del-color-de-les-roses",
 ] as const;

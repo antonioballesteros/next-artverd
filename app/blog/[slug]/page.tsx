@@ -1,9 +1,14 @@
 import { AbrilMesFlorsArticle } from "@/components/blog/articles/AbrilMesFlorsArticle";
 import { ElSignificatRosesArticle } from "@/components/blog/articles/ElSignificatRosesArticle";
+import { PerqueTriarArtverdArticle } from "@/components/blog/articles/PerqueTriarArtverdArticle";
 import {
   ABRIL_MES_FLORS_DESCRIPTION,
   ABRIL_MES_FLORS_TITLE,
 } from "@/lib/blog/abrilMesFlorsContent";
+import {
+  PERQUE_TRIAR_ARTVERD_DESCRIPTION,
+  PERQUE_TRIAR_ARTVERD_TITLE,
+} from "@/lib/blog/perqueTriarArtVerdContent";
 import {
   EL_SIGNIFICAT_ROSES_DESCRIPTION,
   EL_SIGNIFICAT_ROSES_TITLE,
@@ -22,11 +27,16 @@ interface BlogPostPageProps {
 }
 
 const ARTICLE_BY_SLUG: Record<MigratedBlogSlug, ComponentType> = {
+  "perque-triar-art-verd-pels-teus-events-especials": PerqueTriarArtverdArticle,
   "abril-el-mes-de-les-flors": AbrilMesFlorsArticle,
   "el-significat-del-color-de-les-roses": ElSignificatRosesArticle,
 };
 
 const METADATA_BY_SLUG: Record<MigratedBlogSlug, Metadata> = {
+  "perque-triar-art-verd-pels-teus-events-especials": {
+    title: PERQUE_TRIAR_ARTVERD_TITLE,
+    description: PERQUE_TRIAR_ARTVERD_DESCRIPTION,
+  },
   "abril-el-mes-de-les-flors": {
     title: ABRIL_MES_FLORS_TITLE,
     description: ABRIL_MES_FLORS_DESCRIPTION,

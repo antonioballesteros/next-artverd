@@ -7,7 +7,7 @@ export const artverdImages = {
   roses: "/images/hero-sliders/roses.webp",
   tenda: "/images/hero-sliders/tenda.webp",
 
-  logo: "/images/legacy/logo.png",
+  logo: "/images/legacy/logo.webp",
   categoryRams: "/images/legacy/category-rams.webp",
   categoryPlantes: "/images/legacy/category-plantes.webp",
   categoryAccesoris: "/images/legacy/category-accesoris.webp",
@@ -15,7 +15,6 @@ export const artverdImages = {
   bestSeller: "/images/legacy/best-seller.jpg",
   workshopsRams: "/images/legacy/workshops-rams.jpg",
   flowerSectionBg: "/images/legacy/flower-section-bg.png",
-  flowerFooterBg: "/images/legacy/flower-footer-bg.png",
   socialInstagram: "/images/legacy/social-instagram.png",
   socialFacebook: "/images/legacy/social-facebook.png",
   siteFavicon: "/images/legacy/site-favicon.png",

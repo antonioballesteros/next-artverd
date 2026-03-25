@@ -1,21 +1,12 @@
 "use client";
 
 import { artverdImages } from "@/lib/artverdAssets";
+import { SITE_NAV_ITEMS } from "@/lib/siteNav";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
 const OVERLAY_SCROLL_PX = 24;
-
-const NAV_ITEMS: { href: string; label: string }[] = [
-  { href: "/", label: "Inici" },
-  { href: "/floristeria", label: "Floristeria" },
-  { href: "/tallers", label: "Tallers" },
-  { href: "/casaments-i-events", label: "Casaments i events" },
-  { href: "/botiga", label: "Botiga online" },
-  { href: "/blog", label: "Blog" },
-  { href: "/contacte", label: "Contacte" },
-];
 
 interface SiteHeaderProps {
   currentPath?: string;
@@ -44,7 +35,7 @@ export function SiteHeader({
   const headerShell = isOverlay
     ? `fixed top-0 left-0 right-0 z-50 transition-[background-color,backdrop-filter,border-color] duration-300 ${
         showSolidBar
-          ? "bg-emerald-900 backdrop-blur-sm"
+          ? "bg-emerald-950 backdrop-blur-sm"
           : "border-b border-transparent bg-transparent"
       }`
     : "sticky top-0 z-50 border-b border-emerald-200/80 bg-emerald-50/95 backdrop-blur-sm";
@@ -82,7 +73,7 @@ export function SiteHeader({
             className={`hidden items-center gap-6 text-sm font-medium md:flex ${isOverlay ? "drop-shadow-sm" : ""}`}
             aria-label="Principal"
           >
-            {NAV_ITEMS.map((item) => (
+            {SITE_NAV_ITEMS.map((item) => (
               <Link
                 key={item.href}
                 href={item.href}
@@ -127,7 +118,7 @@ export function SiteHeader({
             className="flex flex-col gap-3 text-base font-medium text-emerald-950"
             aria-label="Principal mòbil"
           >
-            {NAV_ITEMS.map((item) => (
+            {SITE_NAV_ITEMS.map((item) => (
               <Link
                 key={item.href}
                 href={item.href}

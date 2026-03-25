@@ -4,32 +4,45 @@ import { artverdImages } from "@/lib/artverdAssets";
 import { SITE_NAV_ITEMS } from "@/lib/siteNav";
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 
 const OVERLAY_SCROLL_PX = 24;
 
+/** Routes whose first section is a full-bleed hero; header uses overlay until scroll. */
+const OVERLAY_HEADER_PATHS = new Set<string>(["/", "/floristeria"]);
+
 interface SiteHeaderProps {
+  /** When omitted, the active nav item follows the current URL. */
   currentPath?: string;
-  /** When set, the bar sits over the first viewport (e.g. full-bleed hero) and gains a solid background after scroll. */
+  /**
+   * When omitted, uses overlay on routes listed in OVERLAY_HEADER_PATHS, otherwise sticky default bar.
+   * When set, forces that behavior regardless of path.
+   */
   variant?: "default" | "overlay";
 }
 
-export function SiteHeader({
-  currentPath = "/",
-  variant = "default",
-}: SiteHeaderProps) {
+export function SiteHeader({ currentPath, variant }: SiteHeaderProps) {
+  const pathname = usePathname();
+  const resolvedPath = currentPath ?? pathname;
+  const resolvedVariant =
+    variant !== undefined
+      ? variant
+      : OVERLAY_HEADER_PATHS.has(pathname)
+        ? "overlay"
+        : "default";
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
-    if (variant !== "overlay") return;
+    if (resolvedVariant !== "overlay") return;
     const onScroll = () => setScrolled(window.scrollY > OVERLAY_SCROLL_PX);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
-  }, [variant]);
+  }, [resolvedVariant]);
 
-  const isOverlay = variant === "overlay";
+  const isOverlay = resolvedVariant === "overlay";
   const showSolidBar = !isOverlay || scrolled || menuOpen;
 
   const headerShell = isOverlay
@@ -78,7 +91,7 @@ export function SiteHeader({
                 key={item.href}
                 href={item.href}
                 className={
-                  item.href === currentPath ? navLinkActive : navLinkBase
+                  item.href === resolvedPath ? navLinkActive : navLinkBase
                 }
               >
                 {item.label}
@@ -123,7 +136,7 @@ export function SiteHeader({
                 key={item.href}
                 href={item.href}
                 className={`rounded-lg px-2 py-2 tracking-wide uppercase transition-colors ${
-                  item.href === currentPath
+                  item.href === resolvedPath
                     ? "bg-emerald-100/90 font-semibold text-emerald-700"
                     : "hover:bg-emerald-100/70 hover:text-emerald-700"
                 }`}

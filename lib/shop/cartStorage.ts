@@ -1,10 +1,12 @@
 /** localStorage payload for the static shop cart (no checkout). */
 
-export const CART_STORAGE_KEY = "artverd-shop-cart-v1";
+export const CART_STORAGE_KEY = "artverd-shop-cart-v2";
 
 export interface CartLine {
   slug: string;
   quantity: number;
+  /** Set when `ShopProduct.price.kind === "variants"` (same id as `ProductVariant.id`). */
+  variantId?: string;
 }
 
 export function parseCartLines(raw: string | null): CartLine[] {
@@ -18,7 +20,9 @@ export function parseCartLines(raw: string | null): CartLine[] {
         x !== null &&
         typeof (x as CartLine).slug === "string" &&
         typeof (x as CartLine).quantity === "number" &&
-        (x as CartLine).quantity > 0,
+        (x as CartLine).quantity > 0 &&
+        ((x as CartLine).variantId === undefined ||
+          typeof (x as CartLine).variantId === "string"),
     );
   } catch {
     return [];

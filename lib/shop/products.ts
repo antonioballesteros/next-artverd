@@ -1,7 +1,15 @@
+/** Single purchasable option when the legacy shop used a variable attribute (e.g. size). */
+export interface ProductVariant {
+  /** Stable id stored in the cart (ASCII). */
+  id: string;
+  label: string;
+  amountEur: number;
+}
+
 /** How the product is priced in the static catalog. */
 export type ProductPrice =
   | { kind: "fixed"; amountEur: number }
-  | { kind: "range"; minEur: number; maxEur: number };
+  | { kind: "variants"; options: ProductVariant[] };
 
 export interface ShopProduct {
   slug: string;
@@ -31,7 +39,14 @@ export const SHOP_PRODUCTS: ShopProduct[] = [
     description:
       "A la primavera apareix una nova naturalesa i nous colors. Flors seques acolorides i delicades. El ram inclou, entre d’altres, civada, blat, phalaris, limonium, statice, setarea, lagurus i delphinium; la composició pot variar segons la inspiració del moment. Conserva’l en lloc sec i sense humitat directa.",
     category: "Flors seques",
-    price: { kind: "range", minEur: 38, maxEur: 73 },
+    price: {
+      kind: "variants",
+      options: [
+        { id: "petit", label: "Petit", amountEur: 38 },
+        { id: "mitja", label: "Mitjà", amountEur: 48 },
+        { id: "gran", label: "Gran", amountEur: 68 },
+      ],
+    },
     imagePaths: ["/images/products/ram-de-flors-seques-de-primavera.jpg"],
   },
   {
@@ -40,7 +55,14 @@ export const SHOP_PRODUCTS: ShopProduct[] = [
     description:
       "Ram fresc per a tot tipus d’ocasions: aniversaris, felicitacions, detalls corporatius i celebracions.",
     category: "Rams",
-    price: { kind: "range", minEur: 38, maxEur: 73 },
+    price: {
+      kind: "variants",
+      options: [
+        { id: "petit", label: "Petit", amountEur: 38 },
+        { id: "mitja", label: "Mitjà", amountEur: 48 },
+        { id: "gran", label: "Gran", amountEur: 68 },
+      ],
+    },
     imagePaths: ["/images/products/ram.jpg"],
   },
   {
@@ -82,8 +104,23 @@ export function getAllProductSlugs(): string[] {
   return SHOP_PRODUCTS.map((p) => p.slug);
 }
 
-/** Unit price used for cart line totals (range products use the minimum). */
-export function getCartUnitPriceEur(price: ProductPrice): number {
+/** Resolves the unit price for a cart line; unknown or missing variant uses the cheapest option. */
+export function getLineUnitPriceEur(
+  price: ProductPrice,
+  variantId?: string
+): number {
   if (price.kind === "fixed") return price.amountEur;
-  return price.minEur;
+  const match = variantId
+    ? price.options.find((o) => o.id === variantId)
+    : undefined;
+  if (match) return match.amountEur;
+  return Math.min(...price.options.map((o) => o.amountEur));
+}
+
+export function getVariantLabel(
+  price: ProductPrice,
+  variantId?: string
+): string | undefined {
+  if (price.kind !== "variants") return undefined;
+  return price.options.find((o) => o.id === variantId)?.label;
 }

@@ -1,9 +1,8 @@
 import { AddToCartButton } from "@/components/shop/AddToCartButton";
+import { ProductImageGallery } from "@/components/shop/ProductImageGallery";
 import { formatProductPrice } from "@/lib/shop/priceLabel";
-import { formatEur } from "@/lib/shop/formatEur";
 import { getAllProductSlugs, getProductBySlug } from "@/lib/shop/products";
 import { elsie } from "@/lib/fonts";
-import Image from "next/image";
 import Link from "next/link";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
@@ -57,28 +56,11 @@ export default async function BotigaProductPage({
         </nav>
 
         <div className="mt-8 grid gap-10 lg:grid-cols-2 lg:items-start lg:gap-14">
-          <div className="space-y-4">
-            {product.imagePaths.map((src, index) => (
-              <div
-                key={src}
-                className={`relative w-full overflow-hidden rounded-2xl border border-emerald-200/80 bg-white shadow-sm ${
-                  index === 0 ? "aspect-square" : "aspect-4/3 max-h-80"
-                }`}
-              >
-                <Image
-                  src={src}
-                  alt={
-                    product.imagePaths.length > 1
-                      ? `${product.name} (${index + 1})`
-                      : product.name
-                  }
-                  fill
-                  className="object-cover"
-                  sizes="(max-width: 1024px) 100vw, 50vw"
-                  priority={index === 0}
-                />
-              </div>
-            ))}
+          <div>
+            <ProductImageGallery
+              productName={product.name}
+              imagePaths={product.imagePaths}
+            />
           </div>
 
           <div>
@@ -98,12 +80,6 @@ export default async function BotigaProductPage({
             <p className="mt-6 text-2xl font-semibold text-emerald-800">
               {priceLabel}
             </p>
-            {product.price.kind === "range" ? (
-              <p className="mt-2 text-sm text-emerald-800/80">
-                La cistella usa l’import mínim (
-                {formatEur(product.price.minEur)}) per calcular el total.
-              </p>
-            ) : null}
             <div className="mt-8 max-w-none text-base leading-relaxed text-emerald-900/95">
               <p>{product.description}</p>
             </div>

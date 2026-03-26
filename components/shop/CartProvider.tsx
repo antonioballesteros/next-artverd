@@ -6,7 +6,7 @@ import {
   serializeCartLines,
   type CartLine,
 } from "@/lib/shop/cartStorage";
-import { getCartUnitPriceEur, getProductBySlug } from "@/lib/shop/products";
+import { getLineUnitPriceEur, getProductBySlug } from "@/lib/shop/products";
 import {
   createContext,
   useCallback,
@@ -21,9 +21,9 @@ interface CartContextValue {
   lines: CartLine[];
   itemCount: number;
   totalEur: number;
-  addItem: (slug: string, quantity?: number) => void;
-  removeItem: (slug: string) => void;
-  setQuantity: (slug: string, quantity: number) => void;
+  addItem: (slug: string, quantity?: number, variantId?: string) => void;
+  removeItem: (slug: string, variantId?: string) => void;
+  setQuantity: (slug: string, quantity: number, variantId?: string) => void;
   clearCart: () => void;
 }
 
@@ -46,54 +46,83 @@ export function CartProvider({ children }: { children: ReactNode }) {
     return () => window.removeEventListener("storage", onStorage);
   }, []);
 
-  const addItem = useCallback(
-    (slug: string, quantity = 1) => {
-      if (!getProductBySlug(slug) || quantity < 1) return;
-      setLines((prev) => {
-        const idx = prev.findIndex((l) => l.slug === slug);
-        let next: CartLine[];
-        if (idx === -1) next = [...prev, { slug, quantity }];
-        else {
-          next = [...prev];
-          next[idx] = {
-            slug,
-            quantity: next[idx].quantity + quantity,
-          };
-        }
-        localStorage.setItem(CART_STORAGE_KEY, serializeCartLines(next));
-        return next;
-      });
-    },
-    [],
-  );
-
-  const removeItem = useCallback(
-    (slug: string) => {
-      setLines((prev) => {
-        const next = prev.filter((l) => l.slug !== slug);
-        localStorage.setItem(CART_STORAGE_KEY, serializeCartLines(next));
-        return next;
-      });
-    },
-    [],
-  );
-
-  const setQuantity = useCallback(
-    (slug: string, quantity: number) => {
-      if (quantity < 1) {
-        removeItem(slug);
+  const addItem = useCallback((slug: string, quantity = 1, variantId?: string) => {
+    const product = getProductBySlug(slug);
+    if (!product || quantity < 1) return;
+    if (product.price.kind === "variants") {
+      if (
+        !variantId ||
+        !product.price.options.some((o) => o.id === variantId)
+      ) {
         return;
       }
-      if (!getProductBySlug(slug)) return;
+    }
+    const lineVariant =
+      product.price.kind === "variants" ? variantId : undefined;
+    setLines((prev) => {
+      const idx = prev.findIndex(
+        (l) =>
+          l.slug === slug && (l.variantId ?? "") === (lineVariant ?? ""),
+      );
+      let next: CartLine[];
+      if (idx === -1) next = [...prev, { slug, quantity, variantId: lineVariant }];
+      else {
+        next = [...prev];
+        next[idx] = {
+          slug,
+          variantId: lineVariant,
+          quantity: next[idx].quantity + quantity,
+        };
+      }
+      localStorage.setItem(CART_STORAGE_KEY, serializeCartLines(next));
+      return next;
+    });
+  }, []);
+
+  const removeItem = useCallback((slug: string, variantId?: string) => {
+    setLines((prev) => {
+      const next = prev.filter(
+        (l) =>
+          !(
+            l.slug === slug &&
+            (l.variantId ?? "") === (variantId ?? "")
+          ),
+      );
+      localStorage.setItem(CART_STORAGE_KEY, serializeCartLines(next));
+      return next;
+    });
+  }, []);
+
+  const setQuantity = useCallback(
+    (slug: string, quantity: number, variantId?: string) => {
+      const product = getProductBySlug(slug);
+      if (!product) return;
+      const lineVariant =
+        product.price.kind === "variants" ? variantId : undefined;
+      if (quantity < 1) {
+        removeItem(slug, lineVariant);
+        return;
+      }
+      if (product.price.kind === "variants") {
+        if (
+          !variantId ||
+          !product.price.options.some((o) => o.id === variantId)
+        ) {
+          return;
+        }
+      }
       setLines((prev) => {
-        const idx = prev.findIndex((l) => l.slug === slug);
+        const idx = prev.findIndex(
+          (l) =>
+            l.slug === slug && (l.variantId ?? "") === (lineVariant ?? ""),
+        );
         if (idx === -1) {
-          const next = [...prev, { slug, quantity }];
+          const next = [...prev, { slug, quantity, variantId: lineVariant }];
           localStorage.setItem(CART_STORAGE_KEY, serializeCartLines(next));
           return next;
         }
         const next = [...prev];
-        next[idx] = { slug, quantity };
+        next[idx] = { slug, quantity, variantId: lineVariant };
         localStorage.setItem(CART_STORAGE_KEY, serializeCartLines(next));
         return next;
       });
@@ -113,7 +142,8 @@ export function CartProvider({ children }: { children: ReactNode }) {
       const product = getProductBySlug(line.slug);
       if (!product) continue;
       count += line.quantity;
-      total += getCartUnitPriceEur(product.price) * line.quantity;
+      total +=
+        getLineUnitPriceEur(product.price, line.variantId) * line.quantity;
     }
     return { itemCount: count, totalEur: total };
   }, [lines]);

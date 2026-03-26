@@ -2,8 +2,11 @@
 
 import { useCart } from "@/components/shop/CartProvider";
 import { formatEur } from "@/lib/shop/formatEur";
-import { formatProductPrice } from "@/lib/shop/priceLabel";
-import { getCartUnitPriceEur, getProductBySlug } from "@/lib/shop/products";
+import {
+  getLineUnitPriceEur,
+  getProductBySlug,
+  getVariantLabel,
+} from "@/lib/shop/products";
 import { elsie } from "@/lib/fonts";
 import Image from "next/image";
 import Link from "next/link";
@@ -54,13 +57,15 @@ export function CartPageClient() {
         {lines.map((line) => {
           const product = getProductBySlug(line.slug);
           if (!product) return null;
-          const unit = getCartUnitPriceEur(product.price);
+          const unit = getLineUnitPriceEur(product.price, line.variantId);
           const lineTotal = unit * line.quantity;
           const cover = product.imagePaths[0];
+          const variantLabel = getVariantLabel(product.price, line.variantId);
+          const lineKey = `${line.slug}:${line.variantId ?? ""}`;
 
           return (
             <li
-              key={line.slug}
+              key={lineKey}
               className="flex flex-col gap-4 py-6 sm:flex-row sm:items-center"
             >
               <div className="relative h-28 w-full shrink-0 overflow-hidden rounded-xl bg-emerald-50 sm:h-24 sm:w-24">
@@ -82,10 +87,13 @@ export function CartPageClient() {
                   {product.name}
                 </Link>
                 <p className="mt-1 text-sm text-emerald-800/80">
-                  {formatProductPrice(product.price)}
-                  {product.price.kind === "range"
-                    ? " (s’usa el mínim per a la cistella)"
-                    : ""}
+                  {product.price.kind === "variants" ? (
+                    <>
+                      {variantLabel ?? "Mida"} · {formatEur(unit)} / unitat
+                    </>
+                  ) : (
+                    <>{formatEur(unit)} / unitat</>
+                  )}
                 </p>
                 <div className="mt-3 flex flex-wrap items-center gap-3">
                   <label className="flex items-center gap-2 text-sm text-emerald-900">
@@ -98,14 +106,14 @@ export function CartPageClient() {
                       onChange={(e) => {
                         const n = Number.parseInt(e.target.value, 10);
                         if (Number.isNaN(n)) return;
-                        setQuantity(line.slug, n);
+                        setQuantity(line.slug, n, line.variantId);
                       }}
                       className="w-16 rounded border border-emerald-300 bg-white px-2 py-1 text-center text-emerald-950"
                     />
                   </label>
                   <button
                     type="button"
-                    onClick={() => removeItem(line.slug)}
+                    onClick={() => removeItem(line.slug, line.variantId)}
                     className="inline-flex items-center gap-1 rounded-lg px-2 py-1 text-sm font-medium text-red-700 transition hover:bg-red-50"
                   >
                     <Trash2 className="h-4 w-4" aria-hidden />
@@ -132,8 +140,7 @@ export function CartPageClient() {
           {formatEur(totalEur)}
         </p>
         <p className="max-w-md text-right text-sm text-emerald-800/75">
-          Els preus amb interval usen l’import mínim per calcular el total. La
-          compra online no està activa; aquesta cistella és només de referència.
+          La compra online no està activa; aquesta cistella és només de referència.
         </p>
         <Link
           href="/botiga"

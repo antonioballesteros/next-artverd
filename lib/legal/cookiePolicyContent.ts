@@ -4,6 +4,9 @@
  */
 export const COOKIE_POLICY_TITLE = "Política de galetes";
 
+export const COOKIE_POLICY_DESCRIPTION =
+  "Política de galetes d’Art Verd: tipus de galetes, finalitat, com gestionar-les al navegador i informació sobre el bàner de consentiment.";
+
 export type CookieSectionPart =
   | { kind: "p"; text: string }
   | { kind: "h3"; text: string }

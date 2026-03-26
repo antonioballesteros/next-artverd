@@ -4,6 +4,9 @@
  */
 export const LEGAL_NOTICE_TITLE = "Avís legal";
 
+export const LEGAL_NOTICE_DESCRIPTION =
+  "Avís legal d’Art Verd: dades del titular, condicions d’ús, continguts, enllaços, propietat intel·lectual i legislació aplicable.";
+
 export interface LegalNoticeSection {
   id: string;
   heading: string;

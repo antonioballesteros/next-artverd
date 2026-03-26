@@ -4,6 +4,9 @@
  */
 export const TERMS_AND_CONDITIONS_TITLE = "Termes i condicions";
 
+export const TERMS_AND_CONDITIONS_DESCRIPTION =
+  "Termes i condicions d’ús de la botiga Art Verd: compres en línia, llicències, cancel·lacions, reemborsaments, garanties i privacitat.";
+
 export type TermsSectionPart =
   | { kind: "p"; text: string }
   | { kind: "h3"; text: string }

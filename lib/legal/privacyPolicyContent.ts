@@ -4,6 +4,9 @@
  */
 export const PRIVACY_POLICY_TITLE = "Política de privacitat";
 
+export const PRIVACY_POLICY_DESCRIPTION =
+  "Política de privacitat d’Art Verd: tractament de dades personals, drets dels interessats i informació del responsable, ROSA MARIA MARTI ESCAYOL.";
+
 export const PRIVACY_POLICY_INTRO = [
   "El responsable l’informa sobre la seva política de privacitat respecte del tractament i protecció de les dades de caràcter personal dels usuaris que puguin ser recollides durant la navegació a través del lloc web:",
   "En aquest sentit, el responsable garanteix el compliment de la normativa vigent en matèria de protecció de dades personals, reflectida en la Llei Orgànica 3/2018, de 5 de desembre, de Protecció de Dades Personals i de Garantia de Drets Digitals (LOPDGDD). També compleix el Reglament (UE) 2016/679 del Parlament Europeu i del Consell de 27 d’abril de 2016 relatiu a la protecció de les persones físiques (RGPD).",

@@ -4,6 +4,9 @@
  */
 export const ACCESSIBILITY_POLICY_TITLE = "Política d’accessibilitat";
 
+export const ACCESSIBILITY_POLICY_DESCRIPTION =
+  "Política d’accessibilitat d’Art Verd: estàndards, navegació per teclat, mida del text, configuració tècnica i enllaços al W3C i la WAI.";
+
 export type AccessibilityPart =
   | { kind: "p"; text: string }
   | { kind: "h3"; text: string }

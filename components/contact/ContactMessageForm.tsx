@@ -1,7 +1,10 @@
 "use client";
 
-import { submitContactForm } from "@/app/contacte/actions";
+import { submitContactForm, type ContactFormState } from "@/app/contacte/actions";
+import { useActionState } from "react";
 import { useFormStatus } from "react-dom";
+
+const initialContactState: ContactFormState = { success: false };
 
 function ContactSubmitButton() {
   const { pending } = useFormStatus();
@@ -21,8 +24,29 @@ const fieldClass =
 const inputClass = `w-full rounded-full ${fieldClass}`;
 const textareaClass = `w-full min-h-36 resize-y rounded-3xl ${fieldClass}`;
 export function ContactMessageForm() {
+  const [state, formAction] = useActionState(
+    submitContactForm,
+    initialContactState,
+  );
+
   return (
-    <form action={submitContactForm} className="flex flex-col gap-6">
+    <form action={formAction} className="flex flex-col gap-6">
+      {state.error ? (
+        <p
+          className="rounded-2xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-900"
+          role="alert"
+        >
+          {state.error}
+        </p>
+      ) : null}
+      {state.success ? (
+        <p
+          className="rounded-2xl border border-[#67aa25]/40 bg-[#f4f9f0] px-4 py-3 text-sm text-[#0f1f14]"
+          role="status"
+        >
+          El missatge s&apos;ha enviat correctament.
+        </p>
+      ) : null}
       <div
         className="motion-safe:animate-[decorative-icon-zoom-in-up_0.85s_ease-out_both] motion-safe:opacity-0 motion-reduce:animate-none motion-reduce:opacity-100"
         style={{ animationDelay: "80ms", animationFillMode: "forwards" }}

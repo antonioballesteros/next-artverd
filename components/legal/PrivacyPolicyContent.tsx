@@ -32,11 +32,7 @@ function IdentitatSectionBody({ section }: { section: PrivacyPolicySection }) {
   );
 }
 
-function DefaultSectionBody({
-  section,
-}: {
-  section: PrivacyPolicySection;
-}) {
+function DefaultSectionBody({ section }: { section: PrivacyPolicySection }) {
   return (
     <>
       {section.paragraphs?.map((p) => (
@@ -75,7 +71,7 @@ function FinalitatSectionBody({ section }: { section: PrivacyPolicySection }) {
       <ul className="mt-4 list-disc space-y-2 pl-5 text-[0.98rem] leading-relaxed marker:text-emerald-600 md:text-base">
         <li>
           <Link
-            href="/avis-legal"
+            href="/legal/avis-legal"
             className="font-medium text-emerald-700 underline-offset-2 hover:text-emerald-800 hover:underline"
           >
             Avís legal
@@ -83,7 +79,7 @@ function FinalitatSectionBody({ section }: { section: PrivacyPolicySection }) {
         </li>
         <li>
           <Link
-            href="/politica-de-privacitat"
+            href="/legal/politica-de-privacitat"
             className="font-medium text-emerald-700 underline-offset-2 hover:text-emerald-800 hover:underline"
           >
             Política de privacitat
@@ -103,12 +99,13 @@ function FinalitatSectionBody({ section }: { section: PrivacyPolicySection }) {
           <li key={item.slice(0, 40)}>
             {idx === 2 ? (
               <>
-                Per analitzar la navegació dels usuaris. El responsable recull altres dades no
-                identificatives que s’obtenen mitjançant l’ús de galetes que es descarreguen a
-                l’ordinador de l’usuari quan navega pel lloc web; les característiques i la
-                finalitat estan detallades a la pàgina de{" "}
+                Per analitzar la navegació dels usuaris. El responsable recull
+                altres dades no identificatives que s’obtenen mitjançant l’ús de
+                galetes que es descarreguen a l’ordinador de l’usuari quan
+                navega pel lloc web; les característiques i la finalitat estan
+                detallades a la pàgina de{" "}
                 <Link
-                  href="/politica-de-cookies"
+                  href="/legal/politica-de-cookies"
                   className="font-medium text-emerald-700 underline-offset-2 hover:text-emerald-800 hover:underline"
                 >
                   política de galetes
@@ -137,10 +134,10 @@ function GaletesSectionBody({ section }: { section: PrivacyPolicySection }) {
         </p>
       ))}
       <p className="mt-4 text-[0.98rem] leading-relaxed text-emerald-950/90 md:text-base">
-        Pot consultar tota la informació relativa a la política de recollida i tractament de les
-        galetes a la pàgina de{" "}
+        Pot consultar tota la informació relativa a la política de recollida i
+        tractament de les galetes a la pàgina de{" "}
         <Link
-          href="/politica-de-cookies"
+          href="/legal/politica-de-cookies"
           className="font-medium text-emerald-700 underline-offset-2 hover:text-emerald-800 hover:underline"
         >
           política de galetes
@@ -163,7 +160,7 @@ function PrivacyPolicySectionBlock({
   return (
     <section
       id={section.id}
-      className="motion-safe:animate-[blog-section-reveal_0.65s_cubic-bezier(0.22,1,0.36,1)_forwards] motion-safe:opacity-0 motion-reduce:animate-none motion-reduce:opacity-100 scroll-mt-28"
+      className="scroll-mt-28 motion-safe:animate-[blog-section-reveal_0.65s_cubic-bezier(0.22,1,0.36,1)_forwards] motion-safe:opacity-0 motion-reduce:animate-none motion-reduce:opacity-100"
       style={{ animationDelay: `${delayMs}ms`, animationFillMode: "forwards" }}
       aria-labelledby={`heading-${section.id}`}
     >
@@ -215,7 +212,7 @@ export function PrivacyPolicyContent() {
           >
             {PRIVACY_POLICY_INTRO_CLOSING_BEFORE_LINK}
             <Link
-              href="/avis-legal"
+              href="/legal/avis-legal"
               className="font-medium text-emerald-700 underline-offset-2 hover:text-emerald-800 hover:underline"
             >
               avís legal
@@ -226,7 +223,11 @@ export function PrivacyPolicyContent() {
 
         <div className="mt-12 space-y-12 md:mt-14 md:space-y-14">
           {PRIVACY_POLICY_SECTIONS.map((section, index) => (
-            <PrivacyPolicySectionBlock key={section.id} section={section} index={index} />
+            <PrivacyPolicySectionBlock
+              key={section.id}
+              section={section}
+              index={index}
+            />
           ))}
         </div>
       </article>

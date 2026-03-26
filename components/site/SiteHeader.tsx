@@ -9,13 +9,22 @@ import { useEffect, useState } from "react";
 
 const OVERLAY_SCROLL_PX = 24;
 
-/** Routes whose first section is a full-bleed hero; header uses overlay until scroll. */
-const OVERLAY_HEADER_PATHS = new Set<string>([
+/** Path prefixes whose first section is a full-bleed hero; header uses overlay until scroll. */
+const OVERLAY_HEADER_PATHS = [
   "/",
   "/floristeria",
   "/tallers",
   "/casaments-i-events",
-]);
+  "/blog",
+  "/legal",
+] as const;
+
+function pathnameMatchesOverlayHeader(pathname: string): boolean {
+  return OVERLAY_HEADER_PATHS.some((prefix) => {
+    if (prefix === "/") return pathname === "/";
+    return pathname === prefix || pathname.startsWith(`${prefix}/`);
+  });
+}
 
 interface SiteHeaderProps {
   /** When omitted, the active nav item follows the current URL. */
@@ -33,7 +42,7 @@ export function SiteHeader({ currentPath, variant }: SiteHeaderProps) {
   const resolvedVariant =
     variant !== undefined
       ? variant
-      : OVERLAY_HEADER_PATHS.has(pathname)
+      : pathnameMatchesOverlayHeader(pathname)
         ? "overlay"
         : "default";
   const [menuOpen, setMenuOpen] = useState(false);

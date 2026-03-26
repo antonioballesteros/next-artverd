@@ -5,7 +5,7 @@
 export const PRIVACY_POLICY_TITLE = "Política de privacitat";
 
 export const PRIVACY_POLICY_DESCRIPTION =
-  "Política de privacitat d’Art Verd: tractament de dades personals, drets dels interessats i informació del responsable, ROSA MARIA MARTI ESCAYOL.";
+  "Política de privacitat d’Art Verd: tractament de dades personals, drets dels interessats i informació del responsable, Susana Fernandez Ballester.";
 
 export const PRIVACY_POLICY_INTRO = [
   "El responsable l’informa sobre la seva política de privacitat respecte del tractament i protecció de les dades de caràcter personal dels usuaris que puguin ser recollides durant la navegació a través del lloc web:",
@@ -17,7 +17,7 @@ export const PRIVACY_POLICY_INTRO_CLOSING_BEFORE_LINK =
   "L’ús del lloc web implica l’acceptació d’aquesta política de privacitat així com les condicions incloses a l’";
 
 export const PRIVACY_POLICY_FINALITAT_LEAD =
-  "Quan es connecta al lloc web per enviar un correu al responsable, subscriure’s al butlletí o facilitar informació de caràcter personal, el responsable del tractament és el titular. Aquesta informació pot incloure dades com l’adreça IP, nom i cognoms, adreça física, correu electrònic, número de telèfon i altra informació. En facilitar aquesta informació, dóna el seu consentiment perquè la seva informació sigui recollida, utilitzada, gestionada i emmagatzemada per ROSA MARIA MARTI ESCAYOL només com es descriu a les pàgines:";
+  "Quan es connecta al lloc web per enviar un correu al responsable, subscriure’s al butlletí o facilitar informació de caràcter personal, el responsable del tractament és el titular. Aquesta informació pot incloure dades com l’adreça IP, nom i cognoms, adreça física, correu electrònic, número de telèfon i altra informació. En facilitar aquesta informació, dóna el seu consentiment perquè la seva informació sigui recollida, utilitzada, gestionada i emmagatzemada per Susana Fernandez Ballester només com es descriu a les pàgines:";
 
 export interface PrivacyPolicySection {
   id: string;
@@ -33,8 +33,8 @@ export const PRIVACY_POLICY_SECTIONS: readonly PrivacyPolicySection[] = [
     id: "identitat",
     heading: "Identitat del responsable",
     listItems: [
-      "Responsable: ROSA MARIA MARTI ESCAYOL.",
-      "NIF: 39166313G",
+      "Responsable: Susana Fernandez Ballester.",
+      "NIF: 45462053T",
       "Domicili: Carrer del Cardaire, 11, 08221 Terrassa, Barcelona, Barcelona — Espanya.",
       "Correu electrònic: artverd@gmail.com",
       "Lloc web: https://www.artverd.com",
@@ -127,7 +127,9 @@ export const PRIVACY_POLICY_SECTIONS: readonly PrivacyPolicySection[] = [
   {
     id: "categories",
     heading: "Categories de dades personals",
-    paragraphs: ["Les categories de dades personals que tracta el responsable són:"],
+    paragraphs: [
+      "Les categories de dades personals que tracta el responsable són:",
+    ],
     listItems: [
       "Dades identificatives.",
       "No es tracten categories de dades especialment protegides.",

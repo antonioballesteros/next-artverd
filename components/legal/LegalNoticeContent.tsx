@@ -63,7 +63,7 @@ function CondicionsUsBody({ section }: { section: LegalNoticeSection }) {
       <ul className="mt-4 list-disc space-y-2 pl-5 text-[0.98rem] leading-relaxed marker:text-emerald-600 md:text-base">
         <li>
           <Link
-            href="/avis-legal"
+            href="/legal/avis-legal"
             className="font-medium text-emerald-700 underline-offset-2 hover:text-emerald-800 hover:underline"
           >
             Avís legal
@@ -71,7 +71,7 @@ function CondicionsUsBody({ section }: { section: LegalNoticeSection }) {
         </li>
         <li>
           <Link
-            href="/politica-de-privacitat"
+            href="/legal/politica-de-privacitat"
             className="font-medium text-emerald-700 underline-offset-2 hover:text-emerald-800 hover:underline"
           >
             Política de privacitat
@@ -79,7 +79,7 @@ function CondicionsUsBody({ section }: { section: LegalNoticeSection }) {
         </li>
         <li>
           <Link
-            href="/politica-de-cookies"
+            href="/legal/politica-de-cookies"
             className="font-medium text-emerald-700 underline-offset-2 hover:text-emerald-800 hover:underline"
           >
             Política de galetes
@@ -104,7 +104,7 @@ function TractamentDadesBody() {
       Pot consultar tota la informació relativa al tractament de dades personals que recull el
       titular a la pàgina de{" "}
       <Link
-        href="/politica-de-privacitat"
+        href="/legal/politica-de-privacitat"
         className="font-medium text-emerald-700 underline-offset-2 hover:text-emerald-800 hover:underline"
       >
         política de privacitat
@@ -120,7 +120,7 @@ function GaletesLegalBody() {
       Pot consultar tota la informació relativa a la política de recollida i tractament de les
       galetes a la pàgina de{" "}
       <Link
-        href="/politica-de-cookies"
+        href="/legal/politica-de-cookies"
         className="font-medium text-emerald-700 underline-offset-2 hover:text-emerald-800 hover:underline"
       >
         política de galetes

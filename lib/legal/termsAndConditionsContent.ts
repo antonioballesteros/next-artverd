@@ -48,7 +48,7 @@ export const TERMS_AND_CONDITIONS_SECTIONS: readonly TermsSection[] = [
     parts: [
       {
         kind: "p",
-        text: "Rosa Maria Marti Escayol, a través del seu lloc web, concedeix una llicència perquè els usuaris utilitzin els productes venuts en aquest lloc web d’acord amb els termes i condicions descrits en aquest document.",
+        text: "Susana Fernandez Ballester, a través del seu lloc web, concedeix una llicència perquè els usuaris utilitzin els productes venuts en aquest lloc web d’acord amb els termes i condicions descrits en aquest document.",
       },
     ],
   },
@@ -230,7 +230,7 @@ export const TERMS_AND_CONDITIONS_SECTIONS: readonly TermsSection[] = [
       },
       {
         kind: "p",
-        text: "Rosa Maria Marti Escayol es reserva els drets de canviar o modificar aquests termes sense previ avís.",
+        text: "Susana Fernandez Ballester es reserva els drets de canviar o modificar aquests termes sense previ avís.",
       },
       { kind: "privacy-link" },
     ],

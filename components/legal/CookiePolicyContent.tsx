@@ -97,7 +97,7 @@ function CookieSectionParts({
                     <li key={item.slice(0, 48)}>
                       Obtenir informació addicional a la pàgina de{" "}
                       <Link
-                        href="/politica-de-cookies"
+                        href="/legal/politica-de-cookies"
                         className="font-medium text-emerald-700 underline-offset-2 hover:text-emerald-800 hover:underline"
                       >
                         política de galetes
@@ -160,7 +160,7 @@ export function CookiePolicyContent() {
         >
           Aquesta política complementa la{" "}
           <Link
-            href="/politica-de-privacitat"
+            href="/legal/politica-de-privacitat"
             className="font-medium text-emerald-700 underline-offset-2 hover:text-emerald-800 hover:underline"
           >
             política de privacitat

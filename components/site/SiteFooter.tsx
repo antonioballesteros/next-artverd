@@ -4,11 +4,14 @@ import Image from "next/image";
 import Link from "next/link";
 
 const FOOTER_LINKS: { href: string; label: string }[] = [
-  { href: "/politica-de-privacitat", label: "Política de privacitat" },
-  { href: "/politica-de-cookies", label: "Política de cookies" },
-  { href: "/politica-d-accessibilitat", label: "Política d’accessibilitat" },
-  { href: "/avis-legal", label: "Avís legal" },
-  { href: "/termes-i-condicions", label: "Termes i condicions" },
+  { href: "/legal/politica-de-privacitat", label: "Política de privacitat" },
+  { href: "/legal/politica-de-cookies", label: "Política de cookies" },
+  {
+    href: "/legal/politica-d-accessibilitat",
+    label: "Política d’accessibilitat",
+  },
+  { href: "/legal/avis-legal", label: "Avís legal" },
+  { href: "/legal/termes-i-condicions", label: "Termes i condicions" },
 ];
 
 export function SiteFooter() {

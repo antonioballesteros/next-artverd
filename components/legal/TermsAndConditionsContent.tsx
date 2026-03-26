@@ -61,7 +61,7 @@ function TermsSectionParts({
             >
               Per al tractament de dades personals, consulti la pàgina de{" "}
               <Link
-                href="/politica-de-privacitat"
+                href="/legal/politica-de-privacitat"
                 className="font-medium text-emerald-700 underline-offset-2 hover:text-emerald-800 hover:underline"
               >
                 política de privacitat
@@ -89,7 +89,7 @@ function TermsSectionBlock({
   return (
     <section
       id={section.id}
-      className="motion-safe:animate-[blog-section-reveal_0.65s_cubic-bezier(0.22,1,0.36,1)_forwards] motion-safe:opacity-0 motion-reduce:animate-none motion-reduce:opacity-100 scroll-mt-28"
+      className="scroll-mt-28 motion-safe:animate-[blog-section-reveal_0.65s_cubic-bezier(0.22,1,0.36,1)_forwards] motion-safe:opacity-0 motion-reduce:animate-none motion-reduce:opacity-100"
       style={{ animationDelay: `${delayMs}ms`, animationFillMode: "forwards" }}
       aria-labelledby={`heading-${section.id}`}
     >
@@ -114,14 +114,14 @@ export function TermsAndConditionsContent() {
         >
           Aquests termes complementen l’
           <Link
-            href="/avis-legal"
+            href="/legal/avis-legal"
             className="font-medium text-emerald-700 underline-offset-2 hover:text-emerald-800 hover:underline"
           >
             avís legal
           </Link>{" "}
           i la{" "}
           <Link
-            href="/politica-de-privacitat"
+            href="/legal/politica-de-privacitat"
             className="font-medium text-emerald-700 underline-offset-2 hover:text-emerald-800 hover:underline"
           >
             política de privacitat
@@ -131,7 +131,11 @@ export function TermsAndConditionsContent() {
 
         <div className="mt-12 space-y-12 md:mt-14 md:space-y-14">
           {TERMS_AND_CONDITIONS_SECTIONS.map((section, index) => (
-            <TermsSectionBlock key={section.id} section={section} index={index} />
+            <TermsSectionBlock
+              key={section.id}
+              section={section}
+              index={index}
+            />
           ))}
         </div>
       </article>

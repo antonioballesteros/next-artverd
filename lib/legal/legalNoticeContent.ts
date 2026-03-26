@@ -19,8 +19,8 @@ export const LEGAL_NOTICE_IDENTIFICACIO_INTRO =
   "En compliment de l’article 10 de la Llei 34/2002, d’11 de juliol, de serveis de la societat de la informació i el comerç electrònic, el titular exposa les seves dades identificatives:";
 
 export const LEGAL_NOTICE_IDENTIFICACIO_LIST: readonly string[] = [
-  "Titular: ROSA MARIA MARTI ESCAYOL.",
-  "NIF: 39166313G",
+  "Titular: Susana Fernandez Ballester.",
+  "NIF: 45462053T",
   "Domicili: Carrer del Cardaire, 11, 08221 Terrassa, Barcelona, Barcelona — Espanya.",
   "Correu electrònic: artverd@gmail.com",
   "Lloc web: https://www.artverd.com",

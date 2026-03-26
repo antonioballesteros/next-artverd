@@ -21,13 +21,11 @@ Tracks public routes migrated from the legacy WordPress site to this App Router 
 | `/legal/politica-d-accessibilitat` | https://www.artverd.com/politica-de-accesibilidad | Accessibility statement; legacy politica-de-accesibilidad. |
 | `/legal/avis-legal` | https://www.artverd.com/avis-legal | Company legal notice; slug matches legacy. |
 | `/legal/termes-i-condicions` | https://www.artverd.com/terminos-y-condiciones | Terms; legacy terminos-y-condiciones URL. |
+| `/contacte` | https://www.artverd.com/contact/ | Contact form, details, map; Catalan route slug `contacte`. |
 
 ## Pending routes
 
-| Next.js route | Legacy URL | Notes |
-| ------------- | ---------- | ----- |
-| `/contacte` | https://www.artverd.com/contacte | Contact info and form; legacy slug is contact. |
-
+_(None.)_
 
 ## Next phase routes
 | Next.js route | Legacy URL | Notes |

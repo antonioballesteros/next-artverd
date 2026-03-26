@@ -15,6 +15,7 @@ export const artverdImages = {
   bestSeller: "/images/legacy/best-seller.jpg",
   workshopsRams: "/images/legacy/workshops-rams.jpg",
   flowerSectionBg: "/images/legacy/flower-section-bg.png",
+  flowerFooterBg: "/images/legacy/flower-footer-bg.png",
   socialInstagram: "/images/legacy/social-instagram.png",
   socialFacebook: "/images/legacy/social-facebook.png",
   siteFavicon: "/images/legacy/site-favicon.png",

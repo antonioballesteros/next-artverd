@@ -16,6 +16,7 @@ const OVERLAY_HEADER_PATHS = [
   "/tallers",
   "/casaments-i-events",
   "/blog",
+  "/contacte",
   "/legal",
 ] as const;
 

@@ -80,9 +80,10 @@ export function SiteHeader({ currentPath, variant }: SiteHeaderProps) {
             <Image
               src={artverdImages.logo}
               alt="Art Verd"
-              width={160}
-              height={48}
-              className={`h-10 w-auto md:h-12 ${!showSolidBar ? "drop-shadow-[0_2px_12px_rgba(0,0,0,0.55)]" : ""}`}
+              width={640}
+              height={296}
+              className={`h-10 shrink-0 md:h-12 ${!showSolidBar ? "drop-shadow-[0_2px_12px_rgba(0,0,0,0.55)]" : ""}`}
+              style={{ width: "auto" }}
               priority
             />
           </Link>

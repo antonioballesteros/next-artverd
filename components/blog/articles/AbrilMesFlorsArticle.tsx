@@ -11,11 +11,6 @@ import {
 } from "@/lib/blog/abrilMesFlorsContent";
 
 const PREV_POST = {
-  href: "/blog/perque-triar-art-verd-pels-teus-events-especials",
-  label: "¿Perqué triar Artverd pels teus events especials?",
-};
-
-const NEXT_POST = {
   href: "/blog/el-significat-del-color-de-les-roses",
   label: "El significat del color de les roses",
 };
@@ -28,8 +23,6 @@ export function AbrilMesFlorsArticle() {
       <BlogArticlePostNav
         prevHref={PREV_POST.href}
         prevLabel={PREV_POST.label}
-        nextHref={NEXT_POST.href}
-        nextLabel={NEXT_POST.label}
       />
 
       <article className="relative mx-auto max-w-3xl px-4 py-10 pb-6 md:px-6 md:py-14">

@@ -1,7 +1,7 @@
 export const MIGRATED_BLOG_SLUGS = [
   "perque-triar-art-verd-pels-teus-events-especials",
-  "abril-el-mes-de-les-flors",
   "el-significat-del-color-de-les-roses",
+  "abril-el-mes-de-les-flors",
 ] as const;
 
 export type MigratedBlogSlug = (typeof MIGRATED_BLOG_SLUGS)[number];

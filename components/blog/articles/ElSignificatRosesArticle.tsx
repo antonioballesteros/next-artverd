@@ -11,6 +11,10 @@ import {
 } from "@/lib/blog/elSignificatRosesContent";
 
 const PREV_POST = {
+  href: "/blog/perque-triar-art-verd-pels-teus-events-especials",
+  label: "¿Perqué triar Artverd pels teus events especials?",
+};
+const NEXT_POST = {
   href: "/blog/abril-el-mes-de-les-flors",
   label: "Abril el mes de les flors",
 };
@@ -24,7 +28,12 @@ export function ElSignificatRosesArticle() {
         imageAlt="Roses de diversos colors per Sant Jordi"
       />
 
-      <BlogArticlePostNav prevHref={PREV_POST.href} prevLabel={PREV_POST.label} />
+      <BlogArticlePostNav
+        prevHref={PREV_POST.href}
+        prevLabel={PREV_POST.label}
+        nextHref={NEXT_POST.href}
+        nextLabel={NEXT_POST.label}
+      />
 
       <article className="relative mx-auto max-w-3xl px-4 py-10 pb-6 md:px-6 md:py-14">
         <div className="space-y-5 text-[0.98rem] leading-relaxed text-black md:text-base">

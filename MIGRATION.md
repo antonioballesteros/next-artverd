@@ -22,16 +22,17 @@ Tracks public routes migrated from the legacy WordPress site to this App Router 
 | `/legal/avis-legal` | https://www.artverd.com/avis-legal | Company legal notice; slug matches legacy. |
 | `/legal/termes-i-condicions` | https://www.artverd.com/terminos-y-condiciones | Terms; legacy terminos-y-condiciones URL. |
 | `/contacte` | https://www.artverd.com/contact/ | Contact form, details, map; Catalan route slug `contacte`. |
+| `/botiga` | https://www.artverd.com/botiga | Shop intro static only; source legacy tienda. |
 
 ## Pending routes
-
+| Next.js route | Legacy URL | Notes |
+| ------------- | ---------- | ----- |
 _(None.)_
 
 ## Next phase routes
 | Next.js route | Legacy URL | Notes |
 | ------------- | ---------- | ----- |
-| `/botiga` | https://www.artverd.com/botiga | Shop intro static only; source legacy tienda. |
-
+_(None.)_
 
 
 When adding rows, keep legacy URLs as full `https://` links for easy checking.

@@ -72,7 +72,7 @@ export async function submitContactForm(
 
   const resend = new Resend(apiKey);
 
-  const result = await resend.emails.send(
+  const { error } = await resend.emails.send(
     {
       from,
       to: [to],
@@ -92,7 +92,7 @@ export async function submitContactForm(
     { idempotencyKey: `contact/${randomUUID()}` }
   );
 
-  if (result.error) {
+  if (error) {
     return {
       success: false,
       error: "No s'ha pogut enviar el missatge. Torna-ho a provar més tard.",

@@ -1,0 +1,42 @@
+---
+description: Resend Node.js SDK — correct setup and patterns for sending email
+alwaysApply: false
+---
+
+# Resend (Node.js SDK)
+
+Use these guardrails for any AI-generated advice or code that sends email with [Resend](https://resend.com/).
+
+## Setup
+
+- Human verifies domain at [resend.com/domains](https://resend.com/domains) and uses a verified `from` address in production (not `onboarding@resend.dev`).
+- API key only via `process.env.RESEND_API_KEY` — never hardcode keys.
+- Install: `npm install resend` (or the repo’s package manager).
+- Initialize: `import { Resend } from "resend"` then `new Resend(process.env.RESEND_API_KEY)`.
+
+## Sending
+
+- Always `await resend.emails.send(...)`.
+- Handle the **tuple-style** result: `const { data, error } = await ...` (or equivalent). Check `error`; do not rely on thrown errors for normal API failures.
+- Prefer **camelCase** SDK options: `replyTo`, `scheduledAt`, `idempotencyKey`, etc. — not snake_case.
+- Do **not** combine `template` with `html`, `text`, or `react`.
+- Import from **`resend`** only — not `@resend/node` or other package names.
+
+## Idempotency
+
+For retries, pass a unique `idempotencyKey` per logical send (max 256 chars; expires in 24h). Example pattern: `contact/<uuid>`. In current SDK typings, pass it as the **second** argument to `resend.emails.send(payload, { idempotencyKey: "..." })`.
+
+## React Email
+
+If using React Email with `react`, pass the component as a **function call** (e.g. `WelcomeEmail({ name: "John" })`), not JSX.
+
+## Testing
+
+Use Resend test addresses (e.g. `delivered@resend.dev`) for simulations, not arbitrary fake addresses.
+
+In this project, set `RESEND_TEST_MODE=true` (with `RESEND_API_KEY`) to send using Resend’s sandbox defaults: `from` falls back to `Art Verd <onboarding@resend.dev>` and `to` to `delivered@resend.dev` when `RESEND_FROM` / `CONTACT_INBOX_EMAIL` are unset. Turn off test mode and set real env vars before production.
+
+## Docs
+
+- [docs index for LLMs](https://resend.com/docs/llms.txt)
+- [full docs](https://resend.com/docs/llms-full.txt)

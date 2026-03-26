@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 export default function NotFound() {
   return (
     <section
-      className="relative flex min-h-[calc(100dvh-10rem)] flex-col justify-center overflow-hidden bg-[#134845] px-4 py-16 md:min-h-[calc(100dvh-12rem)] md:py-24"
+      className="relative flex min-h-[calc(100dvh-10rem)] flex-col justify-center overflow-hidden bg-emerald-900 px-4 py-16 md:min-h-[calc(100dvh-12rem)] md:py-24"
       aria-labelledby="not-found-title"
     >
       <div
@@ -24,7 +24,7 @@ export default function NotFound() {
         aria-hidden
       />
       <div
-        className="absolute inset-0 bg-linear-to-b from-[#134845]/88 via-emerald-950/82 to-[#134845]/90"
+        className="absolute inset-0 bg-linear-to-b from-emerald-900/88 via-emerald-950/82 to-emerald-900/90"
         aria-hidden
       />
       <div className="relative mx-auto flex w-full max-w-2xl flex-col items-center justify-center text-center">

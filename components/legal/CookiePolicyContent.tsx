@@ -75,7 +75,7 @@ function CookieSectionParts({
           return (
             <h3
               key={key}
-              className="mt-8 text-lg font-semibold tracking-tight text-[#134845] first:mt-4 md:text-xl"
+              className="mt-8 text-lg font-semibold tracking-tight text-emerald-900 first:mt-4 md:text-xl"
             >
               {part.text}
             </h3>
@@ -141,7 +141,7 @@ function CookiePolicySectionBlock({
     >
       <h2
         id={`heading-${section.id}`}
-        className={`${elsie.className} text-2xl font-normal tracking-tight text-[#134845] md:text-3xl`}
+        className={`${elsie.className} text-2xl font-normal tracking-tight text-emerald-900 md:text-3xl`}
       >
         {section.heading}
       </h2>

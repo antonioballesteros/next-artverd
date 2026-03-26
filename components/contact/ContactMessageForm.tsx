@@ -20,7 +20,7 @@ function ContactSubmitButton() {
 }
 
 const fieldClass =
-  "border border-[#ebebeb] bg-[rgba(244,249,240,1)] px-5 py-3 text-[#0f1f14] shadow-none outline-none transition placeholder:text-[#134845]/70 focus:border-[#d5e5ee] focus:text-[#63a71f]";
+  "border border-[#ebebeb] bg-[rgba(244,249,240,1)] px-5 py-3 text-[#0f1f14] shadow-none outline-none transition placeholder:text-emerald-900/70 focus:border-[#d5e5ee] focus:text-[#63a71f]";
 const inputClass = `w-full rounded-full ${fieldClass}`;
 const textareaClass = `w-full min-h-36 resize-y rounded-3xl ${fieldClass}`;
 export function ContactMessageForm() {
@@ -67,7 +67,7 @@ export function ContactMessageForm() {
       >
         <label
           htmlFor="contact-nom"
-          className="mb-2 block text-sm font-medium text-[#134845]"
+          className="mb-2 block text-sm font-medium text-emerald-900"
         >
           Nom <span className="text-[#67aa25]">*</span>
         </label>
@@ -86,7 +86,7 @@ export function ContactMessageForm() {
       >
         <label
           htmlFor="contact-correu"
-          className="mb-2 block text-sm font-medium text-[#134845]"
+          className="mb-2 block text-sm font-medium text-emerald-900"
         >
           Correu electrònic <span className="text-[#67aa25]">*</span>
         </label>
@@ -106,7 +106,7 @@ export function ContactMessageForm() {
       >
         <label
           htmlFor="contact-missatge"
-          className="mb-2 block text-sm font-medium text-[#134845]"
+          className="mb-2 block text-sm font-medium text-emerald-900"
         >
           Missatge <span className="text-[#67aa25]">*</span>
         </label>

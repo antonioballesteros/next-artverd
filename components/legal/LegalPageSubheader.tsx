@@ -12,7 +12,7 @@ export function LegalPageSubheader({
 }: LegalPageSubheaderProps) {
   return (
     <header
-      className="relative overflow-hidden bg-[#134845] pt-28 pb-14 md:pt-36 md:pb-20"
+      className="relative overflow-hidden bg-emerald-900 pt-28 pb-14 md:pt-36 md:pb-20"
       aria-labelledby={id}
     >
       <div
@@ -22,7 +22,7 @@ export function LegalPageSubheader({
         }}
         aria-hidden
       />
-      <div className="absolute inset-0 bg-[#134845]/78" aria-hidden />
+      <div className="absolute inset-0 bg-emerald-900/78" aria-hidden />
       <div className="relative mx-auto max-w-5xl px-4 text-center">
         <h1
           id={id}

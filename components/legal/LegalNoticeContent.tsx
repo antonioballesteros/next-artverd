@@ -19,7 +19,7 @@ function IdentificacioBlock({ animationIndex }: { animationIndex: number }) {
     >
       <h2
         id="heading-identificacio"
-        className={`${elsie.className} text-2xl font-normal tracking-tight text-[#134845] md:text-3xl`}
+        className={`${elsie.className} text-2xl font-normal tracking-tight text-emerald-900 md:text-3xl`}
       >
         Identificació i titularitat
       </h2>
@@ -178,7 +178,7 @@ function LegalNoticeSectionBlock({
     >
       <h2
         id={`heading-${section.id}`}
-        className={`${elsie.className} text-2xl font-normal tracking-tight text-[#134845] md:text-3xl`}
+        className={`${elsie.className} text-2xl font-normal tracking-tight text-emerald-900 md:text-3xl`}
       >
         {section.heading}
       </h2>

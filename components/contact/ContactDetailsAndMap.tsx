@@ -6,7 +6,7 @@ import { SocialLinksList } from "../social/SocialLinksList";
 export function ContactDetailsAndMap() {
   return (
     <section
-      className="bg-[#134845] pt-10 pb-16 md:pt-14 md:pb-20"
+      className="bg-emerald-900 pt-10 pb-16 md:pt-14 md:pb-20"
       aria-labelledby="contact-details-heading"
     >
       <h2 id="contact-details-heading" className="sr-only">

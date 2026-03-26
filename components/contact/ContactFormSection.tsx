@@ -20,7 +20,7 @@ export function ContactFormSection() {
             <div className="md:pr-4">
               <h2
                 id="contact-form-heading"
-                className={`${elsie.className} text-3xl font-normal text-[#134845] md:text-4xl`}
+                className={`${elsie.className} text-3xl font-normal text-emerald-900 md:text-4xl`}
               >
                 Envia&apos;ns un missatge
               </h2>

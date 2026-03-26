@@ -5,7 +5,7 @@ import { elsie } from "@/lib/fonts";
 export function ContactPageSubheader() {
   return (
     <header
-      className="relative overflow-hidden bg-[#134845] pt-32 pb-20 md:pt-44 md:pb-28 lg:pt-52 lg:pb-36"
+      className="relative overflow-hidden bg-emerald-900 pt-32 pb-20 md:pt-44 md:pb-28 lg:pt-52 lg:pb-36"
       aria-labelledby="contact-page-title"
     >
       <div
@@ -15,7 +15,7 @@ export function ContactPageSubheader() {
         }}
         aria-hidden
       />
-      <div className="absolute inset-0 bg-[#134845]/78" aria-hidden />
+      <div className="absolute inset-0 bg-emerald-900/78" aria-hidden />
       <div className="relative mx-auto max-w-5xl px-4 text-center">
         <h1
           id="contact-page-title"

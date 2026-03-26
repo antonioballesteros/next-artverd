@@ -6,7 +6,6 @@ import { Resend } from "resend";
 
 /** Resend sandbox: test-only sender (no verified domain required). */
 const RESEND_TEST_FROM = "Art Verd <onboarding@resend.dev>";
-/** Resend sandbox: simulates successful delivery to inbox. */
 const RESEND_TEST_TO = "delivered@resend.dev";
 
 function isResendTestMode(): boolean {
@@ -19,10 +18,24 @@ export type ContactFormState = {
   error?: string;
 };
 
+/** Name matches the hidden "website" field; if filled, treat as automated submission. */
+const SPAM_TRAP_FIELD = "website";
+/** Small delay before responding to trap hits (mild cost for automated abuse). */
+const SPAM_TRAP_RESPONSE_DELAY_MS = 200;
+
 export async function submitContactForm(
   _prevState: ContactFormState | undefined,
   formData: FormData
 ): Promise<ContactFormState> {
+  const spamTrap = String(formData.get(SPAM_TRAP_FIELD) ?? "").trim();
+  if (spamTrap.length > 0) {
+    await new Promise<void>((resolve) => {
+      setTimeout(resolve, SPAM_TRAP_RESPONSE_DELAY_MS);
+    });
+    // Likely bot: discard without sending email or revealing failure
+    return { success: true };
+  }
+
   const name = String(formData.get("nom") ?? "").trim();
   const email = String(formData.get("correu") ?? "").trim();
   const message = String(formData.get("missatge") ?? "").trim();
@@ -42,35 +55,20 @@ export async function submitContactForm(
   let from: string;
   let to: string;
 
-  console.log("isResendTestMode()", isResendTestMode());
-
-  console.log("process.env.RESEND_FROM", process.env.RESEND_FROM);
-  console.log(
-    "process.env.CONTACT_INBOX_EMAIL",
-    process.env.CONTACT_INBOX_EMAIL
-  );
-  console.log("RESEND_TEST_FROM", RESEND_TEST_FROM);
-  console.log("RESEND_TEST_TO", RESEND_TEST_TO);
-  console.log("apiKey", apiKey);
-  console.log("email", { name, email, message });
-
   if (isResendTestMode()) {
-    from = process.env.RESEND_FROM ?? RESEND_TEST_FROM;
-    to = process.env.CONTACT_INBOX_EMAIL ?? RESEND_TEST_TO;
+    from = RESEND_TEST_FROM;
+    to = RESEND_TEST_TO;
   } else {
-    const productionFrom = process.env.RESEND_FROM;
-    const productionTo = process.env.CONTACT_INBOX_EMAIL;
-    if (!productionFrom || !productionTo) {
-      return {
-        success: false,
-        error: "El servei de correu no està disponible en aquest moment.",
-      };
-    }
-    from = productionFrom;
-    to = productionTo;
+    from = process.env.RESEND_FROM ?? "";
+    to = process.env.RESEND_TO ?? "";
   }
 
-  console.log("from", { from, to, apiKey });
+  if (!from || !to) {
+    return {
+      success: false,
+      error: "El servei de correu no està disponible en aquest moment.",
+    };
+  }
 
   const resend = new Resend(apiKey);
 
@@ -95,7 +93,6 @@ export async function submitContactForm(
   );
 
   if (result.error) {
-    console.log("result.error", result);
     return {
       success: false,
       error: "No s'ha pogut enviar el missatge. Torna-ho a provar més tard.",

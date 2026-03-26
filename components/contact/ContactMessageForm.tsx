@@ -30,7 +30,21 @@ export function ContactMessageForm() {
   );
 
   return (
-    <form action={formAction} className="flex flex-col gap-6">
+    <form action={formAction} className="relative flex flex-col gap-6">
+      {/* Anti-spam trap field: must stay empty */}
+      <div
+        className="pointer-events-none absolute -left-[10000px] top-auto m-[-1px] h-px w-px overflow-hidden border-0 p-0 opacity-0"
+        aria-hidden="true"
+      >
+        <label htmlFor="contact-website">Website</label>
+        <input
+          id="contact-website"
+          name="website"
+          type="text"
+          tabIndex={-1}
+          autoComplete="off"
+        />
+      </div>
       {state.error ? (
         <p
           className="rounded-2xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-900"

@@ -11,6 +11,7 @@ export function BlogArticleShare({ shareTitle }: BlogArticleShareProps) {
   const [pageUrl, setPageUrl] = useState("");
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setPageUrl(window.location.href);
   }, []);
 
@@ -41,7 +42,7 @@ export function BlogArticleShare({ shareTitle }: BlogArticleShareProps) {
 
   return (
     <div className="mt-14 border-t border-emerald-100/90 pt-8">
-      <p className="text-xs font-semibold uppercase tracking-[0.2em] text-emerald-800/70">
+      <p className="text-xs font-semibold tracking-[0.2em] text-emerald-800/70 uppercase">
         Share
       </p>
       <ul className="mt-4 flex flex-wrap gap-2 motion-safe:animate-[blog-section-reveal_0.55s_ease-out_both] motion-reduce:animate-none">

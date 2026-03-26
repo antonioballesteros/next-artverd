@@ -1,5 +1,6 @@
 "use client";
 
+import { CartHeaderLink } from "@/components/shop/CartHeaderLink";
 import { artverdImages } from "@/lib/artverdAssets";
 import { SITE_NAV_ITEMS } from "@/lib/siteNav";
 import Image from "next/image";
@@ -116,26 +117,29 @@ export function SiteHeader({ currentPath, variant }: SiteHeaderProps) {
           </nav>
         </div>
 
-        <button
-          type="button"
-          className={`${menuButtonClass} ml-auto shrink-0`}
-          aria-expanded={menuOpen}
-          aria-controls="mobile-nav"
-          onClick={() => setMenuOpen((open) => !open)}
-        >
-          <span className="sr-only">
-            {menuOpen ? "Tancar menú" : "Obrir menú"}
-          </span>
-          {menuOpen ? (
-            <span className="text-lg leading-none" aria-hidden>
-              ✕
+        <div className="ml-auto flex shrink-0 items-center gap-1 md:gap-2">
+          <CartHeaderLink overlay={isOverlay} showSolidBar={showSolidBar} />
+          <button
+            type="button"
+            className={`${menuButtonClass} shrink-0`}
+            aria-expanded={menuOpen}
+            aria-controls="mobile-nav"
+            onClick={() => setMenuOpen((open) => !open)}
+          >
+            <span className="sr-only">
+              {menuOpen ? "Tancar menú" : "Obrir menú"}
             </span>
-          ) : (
-            <span className="text-lg leading-none" aria-hidden>
-              ☰
-            </span>
-          )}
-        </button>
+            {menuOpen ? (
+              <span className="text-lg leading-none" aria-hidden>
+                ✕
+              </span>
+            ) : (
+              <span className="text-lg leading-none" aria-hidden>
+                ☰
+              </span>
+            )}
+          </button>
+        </div>
       </div>
 
       {menuOpen ? (
@@ -161,6 +165,13 @@ export function SiteHeader({ currentPath, variant }: SiteHeaderProps) {
                 {item.label}
               </Link>
             ))}
+            <Link
+              href="/botiga/cesta"
+              className="rounded-lg px-2 py-2 tracking-wide text-emerald-800 uppercase transition-colors hover:bg-emerald-100/70 hover:text-emerald-700"
+              onClick={() => setMenuOpen(false)}
+            >
+              Cistella
+            </Link>
           </nav>
         </div>
       ) : null}

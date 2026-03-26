@@ -92,6 +92,16 @@
   }
 }
 
+/* Legal page subheader (legacy BeTheme #Subheader flower background). */
+@keyframes legal-subheader-bg {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.06);
+  }
+}
+
 :root {
   --background: #faf9f6;
   --foreground: #0f1f14;

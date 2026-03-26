@@ -1,0 +1,179 @@
+import {
+  COOKIE_POLICY_SECTIONS,
+  type CookiePolicySection,
+  type CookieSectionPart,
+} from "@/lib/legal/cookiePolicyContent";
+import { elsie } from "@/lib/fonts";
+import Link from "next/link";
+
+const BROWSER_HELP_LINKS: { label: string; href: string }[] = [
+  {
+    label: "Firefox",
+    href: "https://support.mozilla.org/ca/kb/galetes-informacio-que-llocs-web-guarden",
+  },
+  {
+    label: "Google Chrome",
+    href: "https://support.google.com/chrome/answer/95647?hl=ca",
+  },
+  {
+    label: "Internet Explorer",
+    href: "https://support.microsoft.com/windows/delete-and-manage-cookies-168dab11-0753-043d-7c16-ede5947fc64d",
+  },
+  {
+    label: "Microsoft Edge",
+    href: "https://support.microsoft.com/microsoft-edge/delete-cookies-in-microsoft-edge-63947406-40ac-c3b8-57b9-2a946a29ae09",
+  },
+  {
+    label: "Safari",
+    href: "https://support.apple.com/ca-es/guide/safari/sfri11471/mac",
+  },
+];
+
+function BrowserLinksList() {
+  return (
+    <ul className="mt-4 list-disc space-y-2 pl-5 text-[0.98rem] leading-relaxed text-emerald-950/90 marker:text-emerald-600 md:text-base">
+      {BROWSER_HELP_LINKS.map((item) => (
+        <li key={item.label}>
+          <a
+            href={item.href}
+            className="font-medium text-emerald-700 underline-offset-2 hover:text-emerald-800 hover:underline"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {item.label}
+          </a>
+        </li>
+      ))}
+    </ul>
+  );
+}
+
+function CookieSectionParts({
+  parts,
+  sectionId,
+}: {
+  parts: readonly CookieSectionPart[];
+  sectionId: string;
+}) {
+  return (
+    <>
+      {parts.map((part, i) => {
+        const key = `${sectionId}-${i}-${part.kind}`;
+
+        if (part.kind === "p") {
+          return (
+            <p
+              key={key}
+              className="mt-4 text-[0.98rem] leading-relaxed text-emerald-950/90 md:text-base"
+            >
+              {part.text}
+            </p>
+          );
+        }
+
+        if (part.kind === "h3") {
+          return (
+            <h3
+              key={key}
+              className="mt-8 text-lg font-semibold tracking-tight text-[#134845] first:mt-4 md:text-xl"
+            >
+              {part.text}
+            </h3>
+          );
+        }
+
+        if (part.kind === "ul") {
+          return (
+            <ul
+              key={key}
+              className="mt-4 list-disc space-y-2 pl-5 text-[0.98rem] leading-relaxed text-emerald-950/90 marker:text-emerald-600 md:text-base"
+            >
+              {part.items.map((item) => {
+                const cookiePolicyExtra =
+                  item.includes("addicional") && item.includes("política de galetes");
+
+                if (cookiePolicyExtra) {
+                  return (
+                    <li key={item.slice(0, 48)}>
+                      Obtenir informació addicional a la pàgina de{" "}
+                      <Link
+                        href="/politica-de-cookies"
+                        className="font-medium text-emerald-700 underline-offset-2 hover:text-emerald-800 hover:underline"
+                      >
+                        política de galetes
+                      </Link>
+                      .
+                    </li>
+                  );
+                }
+
+                return <li key={item.slice(0, 48)}>{item}</li>;
+              })}
+            </ul>
+          );
+        }
+
+        if (part.kind === "browser-links") {
+          return <BrowserLinksList key={key} />;
+        }
+
+        return null;
+      })}
+    </>
+  );
+}
+
+function CookiePolicySectionBlock({
+  section,
+  index,
+}: {
+  section: CookiePolicySection;
+  index: number;
+}) {
+  const delayMs = 80 + index * 45;
+
+  return (
+    <section
+      id={section.id}
+      className="motion-safe:animate-[blog-section-reveal_0.65s_cubic-bezier(0.22,1,0.36,1)_forwards] motion-safe:opacity-0 motion-reduce:animate-none motion-reduce:opacity-100 scroll-mt-28"
+      style={{ animationDelay: `${delayMs}ms`, animationFillMode: "forwards" }}
+      aria-labelledby={`heading-${section.id}`}
+    >
+      <h2
+        id={`heading-${section.id}`}
+        className={`${elsie.className} text-2xl font-normal tracking-tight text-[#134845] md:text-3xl`}
+      >
+        {section.heading}
+      </h2>
+      <CookieSectionParts parts={section.parts} sectionId={section.id} />
+    </section>
+  );
+}
+
+export function CookiePolicyContent() {
+  return (
+    <div className="bg-[#f3f3f3]">
+      <article className="relative mx-auto max-w-3xl px-4 py-10 md:px-6 md:py-14">
+        <p
+          className="text-[0.98rem] leading-relaxed text-emerald-950/90 motion-safe:animate-[blog-section-reveal_0.65s_ease-out_forwards] motion-safe:opacity-0 motion-reduce:animate-none motion-reduce:opacity-100 md:text-base"
+          style={{ animationDelay: "40ms", animationFillMode: "forwards" }}
+        >
+          Aquesta política complementa la{" "}
+          <Link
+            href="/politica-de-privacitat"
+            className="font-medium text-emerald-700 underline-offset-2 hover:text-emerald-800 hover:underline"
+          >
+            política de privacitat
+          </Link>{" "}
+          quant a l’ús de galetes i tecnologies similars.
+        </p>
+
+        <div className="mt-12 space-y-12 md:mt-14 md:space-y-14">
+          {COOKIE_POLICY_SECTIONS.map((section, index) => (
+            <CookiePolicySectionBlock key={section.id} section={section} index={index} />
+          ))}
+        </div>
+      </article>
+    </div>
+  );
+}

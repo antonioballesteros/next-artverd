@@ -33,7 +33,7 @@ export function BlogPageHeader({
           className={`${elsie.className} text-4xl font-normal tracking-wide text-emerald-950 md:text-6xl`}
         >
           {heading}
-        </h1>{" "}
+        </h1>
         <div
           className="mx-auto mt-6 h-px w-32 origin-center bg-emerald-400/90 motion-safe:animate-[blog-title-line_0.9s_ease-out_both] motion-reduce:opacity-100"
           aria-hidden

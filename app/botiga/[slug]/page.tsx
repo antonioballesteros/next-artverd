@@ -87,14 +87,8 @@ export default async function BotigaProductPage({
               <AddToCartButton product={product} />
             </div>
             <p className="mt-6 text-sm text-emerald-800/75">
-              Sense pagament en línia. Per reservar o demanar pressupost,{" "}
-              <Link
-                href="/contacte"
-                className="font-medium text-emerald-800 underline-offset-2 hover:underline"
-              >
-                contacta amb nosaltres
-              </Link>
-              .
+              Sense pagament en línia. La cistella serveix per a fer una
+              reserva.
             </p>
           </div>
         </div>

@@ -30,7 +30,7 @@ export function CartHeaderLink({
 
   return (
     <Link
-      href="/botiga/cesta"
+      href="/botiga/cistella"
       aria-label={ariaLabel}
       className={`inline-flex min-h-11 min-w-0 shrink-0 items-center gap-2.5 rounded-lg px-2 transition-colors focus-visible:ring-2 focus-visible:ring-emerald-500/40 focus-visible:outline-none ${textClass} ${className}`}
     >

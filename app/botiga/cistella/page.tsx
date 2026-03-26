@@ -7,6 +7,6 @@ export const metadata: Metadata = {
     "Revisa la teva cistella de referència: articles, quantitats i total estimat.",
 };
 
-export default function BotigaCestaPage() {
+export default function BotigaCistellaPage() {
   return <CartPageClient />;
 }

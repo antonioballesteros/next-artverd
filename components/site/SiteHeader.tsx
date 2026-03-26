@@ -166,7 +166,7 @@ export function SiteHeader({ currentPath, variant }: SiteHeaderProps) {
               </Link>
             ))}
             <Link
-              href="/botiga/cesta"
+              href="/botiga/cistella"
               className="rounded-lg px-2 py-2 tracking-wide text-emerald-800 uppercase transition-colors hover:bg-emerald-100/70 hover:text-emerald-700"
               onClick={() => setMenuOpen(false)}
             >

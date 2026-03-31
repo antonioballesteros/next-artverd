@@ -14,14 +14,14 @@ interface ProductCategory {
 
 const PRODUCT_CATEGORIES: ProductCategory[] = [
   {
-    href: "/categoria/rams",
+    href: "/botiga/ram",
     title: "Rams",
     description: "Rams i composicions per a cada moment.",
     imageSrc: artverdImages.categoryRams,
     imageAlt: "Rams i flors naturals",
   },
   {
-    href: "/categoria/plantes",
+    href: "/botiga/planta",
     title: "Plantes",
     description: "Verd per casa i assessorament.",
     imageSrc: artverdImages.categoryPlantes,

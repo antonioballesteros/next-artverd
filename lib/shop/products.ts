@@ -17,7 +17,7 @@ export interface ShopProduct {
   description: string;
   category: string;
   price: ProductPrice;
-  /** Public paths served from `/public`, e.g. `/images/products/x.jpg`. */
+  /** Public paths served from `/public`, e.g. `/images/products/x.webp`. */
   imagePaths: string[];
   soldOut?: boolean;
 }
@@ -31,7 +31,7 @@ export const SHOP_PRODUCTS: ShopProduct[] = [
       "Planta natural en test. Pregunta’ns per les varietats disponibles i les cures que necessita.",
     category: "Plantes",
     price: { kind: "fixed", amountEur: 35 },
-    imagePaths: ["/images/products/planta.jpg"],
+    imagePaths: ["/images/products/planta.webp"],
   },
   {
     slug: "ram-de-flors-seques-de-primavera",
@@ -47,7 +47,7 @@ export const SHOP_PRODUCTS: ShopProduct[] = [
         { id: "gran", label: "Gran", amountEur: 68 },
       ],
     },
-    imagePaths: ["/images/products/ram-de-flors-seques-de-primavera.jpg"],
+    imagePaths: ["/images/products/ram-de-flors-seques-de-primavera.webp"],
   },
   {
     slug: "ram",
@@ -81,7 +81,7 @@ export const SHOP_PRODUCTS: ShopProduct[] = [
         { id: "xl", label: "Xl", amountEur: 98 },
       ],
     },
-    imagePaths: ["/images/products/terrari.jpg"],
+    imagePaths: ["/images/products/terrari.webp"],
   },
   {
     slug: "taller-jardineria",
@@ -90,7 +90,7 @@ export const SHOP_PRODUCTS: ShopProduct[] = [
       "Taller pràctic per aprendre conceptes bàsics de jardineria i disseny d’espais verds. Consulta calendari i places a la botiga.",
     category: "Tallers",
     price: { kind: "fixed", amountEur: 50 },
-    imagePaths: ["/images/products/taller-jardineria.jpg"],
+    imagePaths: ["/images/products/taller-jardineria.webp"],
   },
   {
     slug: "taller-kokedama",
@@ -99,7 +99,7 @@ export const SHOP_PRODUCTS: ShopProduct[] = [
       "Taller per crear la teva pròpia kokedama: bola de musgo amb planta que pots penjar o exposar sobre ceràmica.",
     category: "Tallers",
     price: { kind: "fixed", amountEur: 50 },
-    imagePaths: ["/images/products/taller-kokedama.jpg"],
+    imagePaths: ["/images/products/taller-kokedama.webp"],
   },
   {
     slug: "os-de-peluix",

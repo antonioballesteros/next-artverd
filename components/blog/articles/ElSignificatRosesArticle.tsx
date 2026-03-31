@@ -24,7 +24,7 @@ export function ElSignificatRosesArticle() {
     <div className="bg-[#f3f3f3]">
       <BlogPageHeader
         title={EL_SIGNIFICAT_ROSES_TITLE}
-        imageSrc="/images/legacy/blog-el-color-de-les-roses.jpg"
+        imageSrc="/images/legacy/blog-el-color-de-les-roses.webp"
         imageAlt="Roses de diversos colors per Sant Jordi"
       />
 

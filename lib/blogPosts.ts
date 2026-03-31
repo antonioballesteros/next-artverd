@@ -17,7 +17,7 @@ export const BLOG_POSTS: BlogPost[] = [
 
     excerpt:
       "Les flors són un element essencial en qualsevol celebració: casaments, batejos, comunions, aniversaris i molt més. No només decoren els espais i aporten color i vida, sinó que creen un ambient acollidor i elegant.",
-    imageSrc: "/images/legacy/blog-triar-art-verd.jpg",
+    imageSrc: "/images/legacy/blog-triar-art-verd.webp",
     imageAlt: "Flors i decoració per a esdeveniments especials",
   },
   {
@@ -26,7 +26,7 @@ export const BLOG_POSTS: BlogPost[] = [
 
     excerpt:
       "Més enllà del tradicional color vermell tradicional, per Sant Jordi trobem roses blanques, grogues i fins i tot blaves. Els colors transmeten sensacions i tenen un significat propi.",
-    imageSrc: "/images/legacy/blog-el-color-de-les-roses.jpg",
+    imageSrc: "/images/legacy/blog-el-color-de-les-roses.webp",
     imageAlt: "Roses de colors per Sant Jordi",
   },
   {

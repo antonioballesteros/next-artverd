@@ -9,7 +9,7 @@ interface ProductCardProps {
 }
 
 export function ProductCard({ product }: ProductCardProps) {
-  const cover = product.imagePaths[0] ?? "/images/products/placeholder.jpg";
+  const cover = product.imagePaths[0] ?? "/images/products/placeholder.webp";
   const priceLabel = formatProductPrice(product.price);
 
   return (

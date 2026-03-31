@@ -53,7 +53,7 @@ export function PerqueTriarArtverdArticle() {
     <div className="bg-[#f3f3f3]">
       <BlogPageHeader
         title={PERQUE_TRIAR_ARTVERD_TITLE}
-        imageSrc="/images/legacy/blog-triar-art-verd.jpg"
+        imageSrc="/images/legacy/blog-triar-art-verd.webp"
         imageAlt="Flors i decoració per a esdeveniments especials"
       />
 

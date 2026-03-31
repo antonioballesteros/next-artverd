@@ -1,6 +1,6 @@
 /** localStorage payload for the static shop cart (no checkout). */
 
-export const CART_STORAGE_KEY = "artverd-shop-cart-v2";
+export const CART_STORAGE_KEY = "artverd-shop-cart";
 
 export interface CartLine {
   slug: string;
@@ -22,7 +22,7 @@ export function parseCartLines(raw: string | null): CartLine[] {
         typeof (x as CartLine).quantity === "number" &&
         (x as CartLine).quantity > 0 &&
         ((x as CartLine).variantId === undefined ||
-          typeof (x as CartLine).variantId === "string"),
+          typeof (x as CartLine).variantId === "string")
     );
   } catch {
     return [];

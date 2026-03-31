@@ -9,6 +9,4 @@ export const tallersImages = {
   tallerIcons3: "/images/legacy/taller-icon-3.png",
   statementEspai: "/images/legacy/tallers-statement-espai.jpg",
   statementArt: "/images/legacy/tallers-statement-art.jpg",
-  productJardines: "/images/legacy/tallers-product-jardines.jpg",
-  productKokedama: "/images/legacy/tallers-product-kokedama.jpg",
 } as const;

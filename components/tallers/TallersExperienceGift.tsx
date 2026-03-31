@@ -1,7 +1,12 @@
-import { tallersImages } from "@/lib/tallersAssets";
 import { elsie } from "@/lib/fonts";
+import { filterShopProductsByCategory } from "@/lib/shop/filterProductsByCategory";
+import { formatProductPrice } from "@/lib/shop/priceLabel";
 import Image from "next/image";
 import Link from "next/link";
+
+const TALLERS_CATEGORY = "Tallers";
+
+const tallerWorkshopProducts = filterShopProductsByCategory(TALLERS_CATEGORY);
 
 interface TallersWorkshopCardProps {
   href: string;
@@ -65,24 +70,21 @@ export function TallersExperienceGift() {
           Regala una experiència
         </h2>
         <ul className="mt-10 grid list-none gap-8 md:grid-cols-2 md:gap-10">
-          <li>
-            <TallersWorkshopCard
-              href="/producto/taller-jardines/"
-              imageSrc={tallersImages.productJardines}
-              imageAlt="Taller Jardines"
-              title="Taller Jardines"
-              priceLabel="50,00 €"
-            />
-          </li>
-          <li>
-            <TallersWorkshopCard
-              href="/producto/taller-kokedama/"
-              imageSrc={tallersImages.productKokedama}
-              imageAlt="Taller Kokedama"
-              title="Taller Kokedama"
-              priceLabel="50,00 €"
-            />
-          </li>
+          {tallerWorkshopProducts.map((product) => {
+            const imageSrc = product.imagePaths[0];
+            if (!imageSrc) return null;
+            return (
+              <li key={product.slug}>
+                <TallersWorkshopCard
+                  href={`/botiga/${product.slug}`}
+                  imageSrc={imageSrc}
+                  imageAlt={product.name}
+                  title={product.name}
+                  priceLabel={formatProductPrice(product.price)}
+                />
+              </li>
+            );
+          })}
         </ul>
         <p className="mt-10 text-center">
           <Link

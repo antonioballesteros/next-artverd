@@ -12,12 +12,26 @@ import Image from "next/image";
 import Link from "next/link";
 import { Trash2 } from "lucide-react";
 
-export function CartPageClient() {
+interface CartPageClientProps {
+  /** Set when the user landed after a successful cart order email (`?sent=1`). */
+  orderSent?: boolean;
+}
+
+export function CartPageClient({ orderSent = false }: CartPageClientProps) {
   const { lines, totalEur, removeItem, setQuantity, clearCart } = useCart();
 
   if (lines.length === 0) {
     return (
       <div className="mx-auto max-w-2xl px-4 py-16 text-center">
+        {orderSent ? (
+          <p
+            className="mb-8 rounded-xl border border-emerald-400/50 bg-emerald-50 px-4 py-3 text-sm text-emerald-950"
+            role="status"
+          >
+            S&apos;ha enviat la sol·licitud amb la cistella. Et contactarem
+            aviat.
+          </p>
+        ) : null}
         <h1
           className={`${elsie.className} text-3xl font-normal text-emerald-950 md:text-4xl`}
         >
@@ -140,14 +154,23 @@ export function CartPageClient() {
           {formatEur(totalEur)}
         </p>
         <p className="max-w-md text-right text-sm text-emerald-800/75">
-          La compra online no està activa; aquesta cistella és només de referència.
+          No hi ha pagament online: des de la pàgina següent enviaràs la
+          sol·licitud i et confirmarem la comanda per correu o telèfon.
         </p>
-        <Link
-          href="/botiga"
-          className="mt-4 inline-flex min-h-11 items-center justify-center rounded-sm border border-emerald-700 bg-transparent px-6 py-2.5 text-sm font-semibold tracking-wide text-emerald-900 uppercase transition hover:bg-emerald-50"
-        >
-          Seguir comprant
-        </Link>
+        <div className="mt-6 flex w-full max-w-md flex-col gap-3 self-end sm:flex-row sm:justify-end">
+          <Link
+            href="/botiga"
+            className="inline-flex min-h-11 flex-1 items-center justify-center rounded-sm border border-emerald-700 bg-transparent px-6 py-2.5 text-sm font-semibold tracking-wide text-emerald-900 uppercase transition hover:bg-emerald-50 sm:flex-initial"
+          >
+            Seguir comprant
+          </Link>
+          <Link
+            href="/botiga/cistella/comanda"
+            className="inline-flex min-h-11 flex-1 items-center justify-center rounded-sm bg-emerald-800 px-6 py-2.5 text-sm font-semibold tracking-wide text-white uppercase shadow-md transition hover:bg-emerald-900 sm:flex-initial"
+          >
+            Fer la comanda
+          </Link>
+        </div>
       </div>
     </div>
   );

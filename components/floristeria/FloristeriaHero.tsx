@@ -26,10 +26,10 @@ function CoverflowSlideCard(props: CoverflowSlideCardProps) {
 
   return (
     <div
-      className={`relative aspect-3/4 w-full overflow-hidden rounded-2xl border border-emerald-900/12 bg-white shadow-[0_20px_50px_-12px_rgba(15,80,50,0.18)] transition-[opacity,box-shadow] duration-300 ${
+      className={`relative aspect-3/4 w-full overflow-hidden rounded-2xl bg-white shadow-[0_20px_50px_-12px_rgba(15,80,50,0.18)] transition-[opacity,box-shadow] duration-300 ${
         isActive
-          ? "opacity-100 ring-2 ring-emerald-500/55 ring-offset-2 ring-offset-[#faf9f6]"
-          : "opacity-[0.48]"
+          ? "border-0 opacity-100"
+          : "border border-emerald-900/12 opacity-[0.48]"
       }`}
       style={
         isActive

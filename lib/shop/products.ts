@@ -63,7 +63,25 @@ export const SHOP_PRODUCTS: ShopProduct[] = [
         { id: "gran", label: "Gran", amountEur: 68 },
       ],
     },
-    imagePaths: ["/images/products/ram.jpg"],
+    imagePaths: ["/images/products/ram.webp"],
+  },
+  {
+    slug: "terrari",
+    name: "Terrari",
+    description:
+      "Terrari amb plantes i decoració. Pregunta’ns per les varietats disponibles i les cures que necessita.",
+    category: "Terraris",
+    price: {
+      kind: "variants",
+      options: [
+        { id: "mini", label: "Mini", amountEur: 35 },
+        { id: "petit", label: "Petit", amountEur: 43 },
+        { id: "mitja", label: "Mitjà", amountEur: 58 },
+        { id: "gran", label: "Gran", amountEur: 68 },
+        { id: "xl", label: "Xl", amountEur: 98 },
+      ],
+    },
+    imagePaths: ["/images/products/terrari.jpg"],
   },
   {
     slug: "taller-jardineria",

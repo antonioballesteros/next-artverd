@@ -7,7 +7,7 @@ export function FloristeriaPageIntro() {
       aria-labelledby="floristeria-title"
     >
       <div
-        className="absolute inset-0 bg-[#faf9f6]/88 backdrop-blur-[1px]"
+        className="absolute inset-0 bg-[#faf9f6] backdrop-blur-[1px]"
         aria-hidden
       />
       <div className="relative z-10 mx-auto max-w-4xl px-4 text-center">

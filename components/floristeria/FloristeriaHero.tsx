@@ -26,9 +26,9 @@ function CoverflowSlideCard(props: CoverflowSlideCardProps) {
 
   return (
     <div
-      className={`relative aspect-3/4 w-full overflow-hidden rounded-2xl border border-white/15 bg-zinc-900 shadow-[0_20px_50px_-12px_rgba(0,0,0,0.65)] transition-[opacity,box-shadow] duration-300 ${
+      className={`relative aspect-3/4 w-full overflow-hidden rounded-2xl border border-emerald-900/12 bg-white shadow-[0_20px_50px_-12px_rgba(15,80,50,0.18)] transition-[opacity,box-shadow] duration-300 ${
         isActive
-          ? "opacity-100 ring-2 ring-emerald-400/70 ring-offset-2 ring-offset-zinc-950"
+          ? "opacity-100 ring-2 ring-emerald-500/55 ring-offset-2 ring-offset-[#faf9f6]"
           : "opacity-[0.48]"
       }`}
       style={
@@ -117,15 +117,9 @@ export function FloristeriaHero() {
 
   return (
     <section
-      className="relative w-full overflow-x-clip bg-zinc-950 pb-8 md:pb-12"
+      className="relative w-full overflow-x-clip bg-linear-to-b from-emerald-50/95 via-emerald-50/80 to-[#faf9f6] pb-8 md:pb-12"
       aria-labelledby="floristeria-hero-heading"
     >
-      {/* Floor sheen (reference-style glossy base) */}
-      <div
-        className="pointer-events-none absolute inset-x-0 bottom-0 h-40 bg-linear-to-t from-emerald-950/50 via-zinc-950/80 to-transparent"
-        aria-hidden
-      />
-
       <div className="relative mx-auto max-w-[1500px] px-3 pt-6 md:px-6 md:pt-10">
         <div
           className={`relative overflow-x-clip py-4 transition-opacity duration-200 md:py-8 ${
@@ -198,7 +192,7 @@ export function FloristeriaHero() {
                 setAutoplayReverse(true);
                 swiperRef.current?.slidePrev();
               }}
-              className="pointer-events-auto flex h-11 w-11 items-center justify-center rounded-full border border-white/35 bg-black/50 text-white shadow-lg backdrop-blur-sm transition hover:bg-black/70 md:h-12 md:w-12"
+              className="pointer-events-auto flex h-11 w-11 items-center justify-center rounded-full border border-emerald-800/20 bg-white/90 text-emerald-950 shadow-md backdrop-blur-sm transition hover:bg-white md:h-12 md:w-12"
               aria-label="Previous image"
             >
               <ChevronLeft
@@ -215,7 +209,7 @@ export function FloristeriaHero() {
                 setAutoplayReverse(false);
                 swiperRef.current?.slideNext();
               }}
-              className="pointer-events-auto flex h-11 w-11 items-center justify-center rounded-full border border-white/35 bg-black/50 text-white shadow-lg backdrop-blur-sm transition hover:bg-black/70 md:h-12 md:w-12"
+              className="pointer-events-auto flex h-11 w-11 items-center justify-center rounded-full border border-emerald-800/20 bg-white/90 text-emerald-950 shadow-md backdrop-blur-sm transition hover:bg-white md:h-12 md:w-12"
               aria-label="Next image"
             >
               <ChevronRight
@@ -229,12 +223,12 @@ export function FloristeriaHero() {
 
         <div className="relative z-10 mx-auto max-w-3xl px-2 pb-2 text-center md:px-4">
           <p
-            className={`${elsie.className} text-3xl leading-tight font-normal tracking-wide text-white [text-shadow:0_2px_28px_rgba(0,0,0,0.55)] md:text-4xl lg:text-5xl`}
+            className={`${elsie.className} text-3xl leading-tight font-normal tracking-wide text-emerald-950 md:text-4xl lg:text-5xl`}
             id="floristeria-hero-heading"
           >
             La teva floristeria a Terrassa
           </p>
-          <p className="mt-3 text-sm text-emerald-50/95 md:text-base">
+          <p className="mt-3 text-sm text-emerald-800/90 md:text-base">
             Carrer Cardaire, 11 · Terrassa
           </p>
         </div>

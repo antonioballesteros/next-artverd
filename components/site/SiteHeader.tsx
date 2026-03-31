@@ -13,7 +13,6 @@ const OVERLAY_SCROLL_PX = 24;
 /** Path prefixes whose first section is a full-bleed hero; header uses overlay until scroll. */
 const OVERLAY_HEADER_PATHS = [
   "/",
-  "/floristeria",
   "/tallers",
   "/casaments-i-events",
   "/blog",

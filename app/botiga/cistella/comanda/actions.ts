@@ -9,16 +9,8 @@ import {
   getProductBySlug,
   getVariantLabel,
 } from "@/lib/shop/products";
+import { getResendFromTo } from "@/lib/resendFromTo";
 import { Resend } from "resend";
-
-/** Resend sandbox: test-only sender (no verified domain required). */
-const RESEND_TEST_FROM = "Art Verd <onboarding@resend.dev>";
-const RESEND_TEST_TO = "delivered@resend.dev";
-
-function isResendTestMode(): boolean {
-  const v = process.env.RESEND_TEST_MODE;
-  return v === "1" || v === "true";
-}
 
 const SPAM_TRAP_FIELD = "website";
 const SPAM_TRAP_RESPONSE_DELAY_MS = 200;
@@ -161,23 +153,14 @@ export async function submitCartOrder(
     };
   }
 
-  let from: string;
-  let to: string;
-
-  if (isResendTestMode()) {
-    from = RESEND_TEST_FROM;
-    to = RESEND_TEST_TO;
-  } else {
-    from = process.env.RESEND_FROM ?? "";
-    to = process.env.RESEND_TO ?? "";
-  }
-
-  if (!from || !to) {
+  const addresses = getResendFromTo();
+  if (!addresses) {
     return {
       success: false,
       error: "El servei de correu no està disponible en aquest moment.",
     };
   }
+  const { from, to } = addresses;
 
   const { resolved: items, totalEur } = order;
 

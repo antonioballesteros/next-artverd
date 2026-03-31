@@ -31,14 +31,11 @@ function CoverflowSlideCard(props: CoverflowSlideCardProps) {
           ? "border-0 opacity-100"
           : "border border-emerald-900/12 opacity-[0.48]"
       }`}
-      style={
-        isActive
-          ? {
-              WebkitBoxReflect:
-                "below 2px linear-gradient(transparent, rgba(0,0,0,0.22))",
-            }
-          : undefined
-      }
+      style={{
+        WebkitBoxReflect: isActive
+          ? "below 2px linear-gradient(transparent, rgba(0,0,0,0.22))"
+          : "below 2px linear-gradient(transparent, rgba(0,0,0,0.06))",
+      }}
     >
       <Image
         src={src}

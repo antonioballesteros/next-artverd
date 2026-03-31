@@ -23,7 +23,7 @@ export function HomeBestSeller() {
         }
         right={
           <div>
-            <p className="mt-6 max-w-3xl text-base leading-relaxed text-emerald-900/90 md:text-lg">
+            <p className="mx-4 mt-6 max-w-3xl text-base leading-relaxed text-emerald-900/90 md:mx-0 md:text-lg">
               Els nostres productes best seller són els més venuts i apreciats
               pels nostres clients. Descobreix la nostra selecció de productes
               destacats i troba el que millor s’adapti a les teves necessitats.

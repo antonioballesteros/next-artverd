@@ -47,7 +47,7 @@ export function FloristeriaShopSection() {
             </div>
           }
           right={
-            <div className="text-pretty md:pl-2">
+            <div className="mx-4 text-pretty md:mx-0 md:pl-2">
               <div
                 className="mx-auto mb-8 h-px w-20 bg-emerald-200/90 md:mx-0"
                 aria-hidden

@@ -8,7 +8,7 @@ export function FloristeriaStorySection() {
       <ScrollConvergePair
         className="mx-auto grid max-w-6xl items-center gap-10 px-4 max-md:*:first:order-2 max-md:*:last:order-1 md:grid-cols-2 md:gap-14"
         left={
-          <div className="text-pretty">
+          <div className="mx-4 text-pretty md:mx-0">
             <p className="text-base leading-relaxed text-emerald-900/90 md:text-lg">
               Artverd és un lloc màgic on pots trobar arranjaments florals,
               plantes, així com amb una varietat de complements, per fer el
@@ -18,8 +18,7 @@ export function FloristeriaStorySection() {
               Fundada l’any 2000, la floristeria Artverd està ubicada la zona
               peatonal del Centre històric de Terrassa en un local espaiós i
               acollidor, amb una decoració rústica escandinava, que ressalta la
-              bellesa de les flors, que creen un ambient encantador i
-              relaxant.
+              bellesa de les flors, que creen un ambient encantador i relaxant.
             </p>
           </div>
         }

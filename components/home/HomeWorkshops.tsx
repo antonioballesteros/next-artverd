@@ -11,7 +11,7 @@ export function HomeWorkshops() {
       <ScrollConvergePair
         className="mx-auto grid max-w-6xl items-center gap-10 max-md:*:first:order-2 max-md:*:last:order-1 md:grid-cols-2 md:gap-14"
         left={
-          <div>
+          <div className="mx-4 md:mx-0">
             <p className="mt-6 max-w-3xl text-base leading-relaxed text-emerald-900/90 md:text-lg">
               Descobreix els nostres tallers florals a ArtVerd i aprèn a crear
               arranjaments espectaculars amb les millors flors i plantes.

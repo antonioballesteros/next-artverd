@@ -33,7 +33,7 @@ function CasamentsSplitBlock({
   ctaLabel,
 }: CasamentsSplitBlockProps) {
   const textBlock = (
-    <div className="text-pretty text-emerald-900/90">
+    <div className="mx-4 text-pretty text-emerald-900/90 md:mx-0">
       <h2
         id={sectionId}
         className={`${elsie.className} text-2xl font-normal tracking-wide text-emerald-950 md:text-3xl`}

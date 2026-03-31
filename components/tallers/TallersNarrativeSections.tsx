@@ -52,7 +52,7 @@ export function TallersNarrativeSections() {
         <ScrollConvergePair
           className="mx-auto grid max-w-6xl items-center gap-10 px-4 max-md:*:first:order-2 max-md:*:last:order-1 md:grid-cols-2 md:gap-14"
           left={
-            <div className="text-pretty text-emerald-900/90">
+            <div className="mx-4 text-pretty text-emerald-900/90 md:mx-0">
               <p className="text-base leading-relaxed md:text-lg">
                 A més, dedicarem temps a explorar la importància de
                 l&apos;elecció dels colors en els nostres arranjaments i com

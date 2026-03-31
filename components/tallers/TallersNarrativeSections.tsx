@@ -50,7 +50,7 @@ export function TallersNarrativeSections() {
 
       <section className="pb-12 md:pb-16" aria-label="Color i conservació">
         <ScrollConvergePair
-          className="mx-auto grid max-w-6xl items-center gap-10 px-4 md:grid-cols-2 md:gap-14"
+          className="mx-auto grid max-w-6xl items-center gap-10 px-4 max-md:*:first:order-2 max-md:*:last:order-1 md:grid-cols-2 md:gap-14"
           left={
             <div className="text-pretty text-emerald-900/90">
               <p className="text-base leading-relaxed md:text-lg">

@@ -3,7 +3,7 @@ import Link from "next/link";
 
 export function FloristeriaContactCta() {
   return (
-    <section className="px-4 py-16 md:py-24" aria-label="Contacte">
+    <section className="px-4 py-16" aria-label="Contacte">
       <div className="mx-auto flex max-w-3xl justify-center">
         <Link
           href="/contacte"

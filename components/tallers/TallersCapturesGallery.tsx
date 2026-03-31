@@ -21,15 +21,20 @@ interface TallersCaptureTileProps {
   alt: string;
 }
 
+/** Intrinsic size of legacy workshop icon assets (194×243). */
+const CAPTURE_WIDTH = 194;
+const CAPTURE_HEIGHT = 243;
+
 function TallersCaptureTile({ src, alt }: TallersCaptureTileProps) {
   return (
-    <div className="relative aspect-194/243 max-w-[220px]">
+    <div className="w-full max-w-[220px]">
       <Image
         src={src}
         alt={alt}
-        fill
-        className="object-contain drop-shadow-md"
-        sizes="220px"
+        width={CAPTURE_WIDTH}
+        height={CAPTURE_HEIGHT}
+        className="h-auto w-full object-contain drop-shadow-md"
+        sizes="(max-width: 639px) min(220px, 100vw), 220px"
       />
     </div>
   );
@@ -41,7 +46,7 @@ export function TallersCapturesGallery() {
       className="bg-emerald-50/40 py-12 md:py-16"
       aria-label="Galeria il·lustrativa"
     >
-      <div className="mx-auto grid max-w-6xl grid-cols-1 items-end gap-10 px-4 sm:grid-cols-3 sm:gap-6 md:gap-10">
+      <div className="mx-auto grid max-w-6xl grid-cols-1 items-end justify-items-center gap-10 px-4 sm:grid-cols-3 sm:gap-6 md:gap-10">
         {CAPTURES.map((item) => (
           <TallersCaptureTile key={item.src} src={item.src} alt={item.alt} />
         ))}

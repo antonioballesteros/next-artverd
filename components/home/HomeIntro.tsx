@@ -27,7 +27,7 @@ export function HomeIntro() {
     <section className="bg-emerald-50/50" aria-labelledby="intro-heading">
       <HomeSubtitle>Floristeria Art Verd</HomeSubtitle>
       <ScrollConvergePair
-        className="mx-auto grid max-w-6xl items-center gap-10 md:grid-cols-2 md:gap-14"
+        className="mx-auto grid max-w-6xl items-center gap-10 max-md:*:first:order-2 max-md:*:last:order-1 md:grid-cols-2 md:gap-14"
         left={
           <div>
             <div className="mt-6 max-w-3xl space-y-4 text-base leading-relaxed text-emerald-900/90 md:text-lg">

@@ -53,13 +53,13 @@ export function DecorativeIconRow() {
   return (
     <div
       ref={rootRef}
-      className="flex flex-wrap justify-center gap-8 py-10 md:gap-14 md:py-14"
+      className="flex flex-wrap justify-center gap-8 py-5 md:gap-14 md:py-7"
       aria-hidden
     >
       {ICONS.map((item, index) => (
         <div
           key={item.src}
-          className={`relative h-24 w-24 shrink-0 md:h-28 md:w-28 ${
+          className={`relative h-12 w-12 shrink-0 md:h-28 md:w-28 ${
             showAnimated
               ? reduceMotion
                 ? "opacity-100"

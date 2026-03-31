@@ -10,7 +10,7 @@ interface HeroSectionProps {
 export function HeroSection({ src, alt, ariaLabel }: HeroSectionProps) {
   return (
     <section className="relative w-full" aria-label={ariaLabel}>
-      <div className="relative aspect-16/10 min-h-[min(52vh,560px)] w-full md:aspect-auto md:min-h-[min(70vh,900px)]">
+      <div className="relative aspect-16/10 min-h-[min(52vh,560px)] w-full overflow-hidden md:aspect-auto md:min-h-[min(70vh,900px)]">
         <Image
           src={src}
           alt={alt}

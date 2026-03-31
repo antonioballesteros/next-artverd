@@ -6,7 +6,7 @@ export function FloristeriaStorySection() {
   return (
     <section className="bg-background py-12 md:py-16">
       <ScrollConvergePair
-        className="mx-auto grid max-w-6xl items-center gap-10 px-4 md:grid-cols-2 md:gap-14"
+        className="mx-auto grid max-w-6xl items-center gap-10 px-4 max-md:*:first:order-2 max-md:*:last:order-1 md:grid-cols-2 md:gap-14"
         left={
           <div className="text-pretty">
             <p className="text-base leading-relaxed text-emerald-900/90 md:text-lg">

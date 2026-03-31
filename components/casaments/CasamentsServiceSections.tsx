@@ -87,7 +87,7 @@ function CasamentsSplitBlock({
   return (
     <section className="pb-2 md:pb-4" aria-labelledby={sectionId}>
       <ScrollConvergePair
-        className="mx-auto grid max-w-6xl items-center gap-10 px-4 md:grid-cols-2 md:gap-14"
+        className={`mx-auto grid max-w-6xl items-center gap-10 px-4 md:grid-cols-2 md:gap-14 ${imageSide === "right" && "max-md:*:first:order-2 max-md:*:last:order-1"}`}
         left={imageSide === "left" ? visual : textBlock}
         right={imageSide === "left" ? textBlock : visual}
         once={false}

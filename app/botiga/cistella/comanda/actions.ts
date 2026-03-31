@@ -81,11 +81,24 @@ function resolveOrderLines(
           error: `Cal triar una opció vàlida per a «${product.name}».`,
         };
       }
-    } else if (line.variantId) {
+      if (
+        line.complementId &&
+        !product.price.complements?.some((c) => c.id === line.complementId)
+      ) {
+        return {
+          ok: false,
+          error: `Complement no vàlid per a «${product.name}».`,
+        };
+      }
+    } else if (line.variantId || line.complementId) {
       return { ok: false, error: "Dades de cistella no vàlides." };
     }
 
-    const unitEur = getLineUnitPriceEur(product.price, line.variantId);
+    const unitEur = getLineUnitPriceEur(
+      product.price,
+      line.variantId,
+      line.complementId
+    );
     const lineTotalEur = unitEur * line.quantity;
     totalEur += lineTotalEur;
 
@@ -93,7 +106,11 @@ function resolveOrderLines(
       productName: product.name,
       slug: product.slug,
       quantity: line.quantity,
-      variantLabel: getVariantLabel(product.price, line.variantId),
+      variantLabel: getVariantLabel(
+        product.price,
+        line.variantId,
+        line.complementId
+      ),
       unitEur,
       lineTotalEur,
     });

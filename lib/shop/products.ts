@@ -1,15 +1,23 @@
 /** Single purchasable option when the legacy shop used a variable attribute (e.g. size). */
 export interface ProductVariant {
-  /** Stable id stored in the cart (ASCII). */
   id: string;
   label: string;
   amountEur: number;
 }
 
+export interface ProductComplement {
+  id: string;
+  label: string;
+  amountEur: number;
+}
 /** How the product is priced in the static catalog. */
 export type ProductPrice =
   | { kind: "fixed"; amountEur: number }
-  | { kind: "variants"; options: ProductVariant[] };
+  | {
+      kind: "variants";
+      options: ProductVariant[];
+      complements?: ProductComplement[];
+    };
 
 export interface ShopProduct {
   slug: string;
@@ -21,6 +29,14 @@ export interface ShopProduct {
   imagePaths: string[];
   soldOut?: boolean;
 }
+
+const COMPLEMENTS = [
+  { id: "cap", label: "Cap", amountEur: 0 },
+  { id: "chocolate", label: "Chocolate", amountEur: 5 },
+  { id: "os-de-peluix-petit", label: "Os de peluix petit", amountEur: 5 },
+  { id: "os-de-peluix-mitja", label: "Os de peluix mitjà", amountEur: 12 },
+  { id: "os-de-peluix-gran", label: "Os de peluix gran", amountEur: 18 },
+];
 
 /** Static catalog migrated from the legacy shop (no stock sync). */
 export const SHOP_PRODUCTS: ShopProduct[] = [
@@ -53,6 +69,7 @@ export const SHOP_PRODUCTS: ShopProduct[] = [
         { id: "mitja", label: "Mitjà", amountEur: 48 },
         { id: "gran", label: "Gran", amountEur: 68 },
       ],
+      complements: COMPLEMENTS,
     },
     imagePaths: ["/images/products/ram-de-flors-seques-de-primavera.webp"],
   },
@@ -69,6 +86,7 @@ export const SHOP_PRODUCTS: ShopProduct[] = [
         { id: "mitja", label: "Mitjà", amountEur: 48 },
         { id: "gran", label: "Gran", amountEur: 68 },
       ],
+      complements: COMPLEMENTS,
     },
     imagePaths: ["/images/products/ram.webp"],
   },
@@ -109,12 +127,28 @@ export const SHOP_PRODUCTS: ShopProduct[] = [
     imagePaths: ["/images/products/taller-kokedama.webp"],
   },
   {
+    slug: "taller-terrari",
+    name: "Taller Terrari",
+    description:
+      "Taller per crear la teva pròpia terrari: espai tancat amb plantes i decoració. Pregunta’ns per les varietats disponibles i les cures que necessita.",
+    category: "Tallers",
+    price: { kind: "fixed", amountEur: 50 },
+    imagePaths: ["/images/products/taller-terrari.webp"],
+  },
+  {
     slug: "os-de-peluix",
     name: "Os de peluix",
     description:
       "Os de peluix suau, ideal com a detall per a naixements, aniversaris o qualsevol ocasió especial.",
     category: "Regals i decoració",
-    price: { kind: "fixed", amountEur: 18 },
+    price: {
+      kind: "variants",
+      options: [
+        { id: "petit", label: "Petit", amountEur: 5 },
+        { id: "mitja", label: "Mitjà", amountEur: 12 },
+        { id: "gran", label: "Gran", amountEur: 18 },
+      ],
+    },
     imagePaths: ["/images/products/os-de-peluix.webp"],
   },
 ];
@@ -132,20 +166,34 @@ export function getAllProductSlugs(): string[] {
 /** Resolves the unit price for a cart line; unknown or missing variant uses the cheapest option. */
 export function getLineUnitPriceEur(
   price: ProductPrice,
-  variantId?: string
+  variantId?: string,
+  complementId?: string
 ): number {
   if (price.kind === "fixed") return price.amountEur;
   const match = variantId
     ? price.options.find((o) => o.id === variantId)
     : undefined;
-  if (match) return match.amountEur;
-  return Math.min(...price.options.map((o) => o.amountEur));
+  const base =
+    match?.amountEur ?? Math.min(...price.options.map((o) => o.amountEur));
+  const complement = complementId
+    ? price.complements?.find((c) => c.id === complementId)
+    : undefined;
+  const extra = complement?.amountEur ?? 0;
+  return base + extra;
 }
 
 export function getVariantLabel(
   price: ProductPrice,
-  variantId?: string
+  variantId?: string,
+  complementId?: string
 ): string | undefined {
   if (price.kind !== "variants") return undefined;
-  return price.options.find((o) => o.id === variantId)?.label;
+  const vLabel = price.options.find((o) => o.id === variantId)?.label;
+  const cLabel = complementId
+    ? price.complements?.find((c) => c.id === complementId)?.label
+    : undefined;
+  if (vLabel && cLabel) return `${vLabel} · ${cLabel}`;
+  if (vLabel) return vLabel;
+  if (cLabel) return cLabel;
+  return undefined;
 }

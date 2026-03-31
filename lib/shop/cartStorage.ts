@@ -7,6 +7,8 @@ export interface CartLine {
   quantity: number;
   /** Set when `ShopProduct.price.kind === "variants"` (same id as `ProductVariant.id`). */
   variantId?: string;
+  /** Set when `ShopProduct.price.kind === "variants"` (same id as `ProductComplement.id`). */
+  complementId?: string;
 }
 
 export function parseCartLines(raw: string | null): CartLine[] {
@@ -14,7 +16,7 @@ export function parseCartLines(raw: string | null): CartLine[] {
   try {
     const data = JSON.parse(raw) as unknown;
     if (!Array.isArray(data)) return [];
-    return data.filter(
+    const rows = data.filter(
       (x): x is CartLine =>
         typeof x === "object" &&
         x !== null &&
@@ -22,8 +24,14 @@ export function parseCartLines(raw: string | null): CartLine[] {
         typeof (x as CartLine).quantity === "number" &&
         (x as CartLine).quantity > 0 &&
         ((x as CartLine).variantId === undefined ||
-          typeof (x as CartLine).variantId === "string")
+          typeof (x as CartLine).variantId === "string") &&
+        ((x as CartLine).complementId === undefined ||
+          typeof (x as CartLine).complementId === "string")
     );
+    return rows.map((line) => ({
+      ...line,
+      complementId: line.complementId ? line.complementId : undefined,
+    }));
   } catch {
     return [];
   }

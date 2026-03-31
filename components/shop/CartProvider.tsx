@@ -21,9 +21,19 @@ interface CartContextValue {
   lines: CartLine[];
   itemCount: number;
   totalEur: number;
-  addItem: (slug: string, quantity?: number, variantId?: string) => void;
-  removeItem: (slug: string, variantId?: string) => void;
-  setQuantity: (slug: string, quantity: number, variantId?: string) => void;
+  addItem: (
+    slug: string,
+    quantity?: number,
+    variantId?: string,
+    complementId?: string
+  ) => void;
+  removeItem: (slug: string, variantId?: string, complementId?: string) => void;
+  setQuantity: (
+    slug: string,
+    quantity: number,
+    variantId?: string,
+    complementId?: string
+  ) => void;
   clearCart: () => void;
 }
 
@@ -49,67 +59,111 @@ export function CartProvider({ children }: { children: ReactNode }) {
     return () => window.removeEventListener("storage", onStorage);
   }, []);
 
-  const addItem = useCallback((slug: string, quantity = 1, variantId?: string) => {
-    const product = getProductBySlug(slug);
-    if (!product || quantity < 1) return;
-    if (product.price.kind === "variants") {
-      if (
-        !variantId ||
-        !product.price.options.some((o) => o.id === variantId)
-      ) {
-        return;
+  const addItem = useCallback(
+    (slug: string, quantity = 1, variantId?: string, complementId?: string) => {
+      const product = getProductBySlug(slug);
+      if (!product || quantity < 1) return;
+      if (product.price.kind === "variants") {
+        if (!variantId || !product.price.options.some((o) => o.id === variantId)) {
+          return;
+        }
+        if (
+          complementId &&
+          !product.price.complements?.some((c) => c.id === complementId)
+        ) {
+          return;
+        }
       }
-    }
-    const lineVariant =
-      product.price.kind === "variants" ? variantId : undefined;
-    setLines((prev) => {
-      const idx = prev.findIndex(
-        (l) =>
-          l.slug === slug && (l.variantId ?? "") === (lineVariant ?? ""),
-      );
-      let next: CartLine[];
-      if (idx === -1) next = [...prev, { slug, quantity, variantId: lineVariant }];
-      else {
-        next = [...prev];
-        next[idx] = {
-          slug,
-          variantId: lineVariant,
-          quantity: next[idx].quantity + quantity,
-        };
-      }
-      localStorage.setItem(CART_STORAGE_KEY, serializeCartLines(next));
-      return next;
-    });
-  }, []);
-
-  const removeItem = useCallback((slug: string, variantId?: string) => {
-    setLines((prev) => {
-      const next = prev.filter(
-        (l) =>
-          !(
+      const lineVariant =
+        product.price.kind === "variants" ? variantId : undefined;
+      const lineComplement =
+        product.price.kind === "variants" &&
+        product.price.complements &&
+        product.price.complements.length > 0 &&
+        complementId
+          ? complementId
+          : undefined;
+      setLines((prev) => {
+        const idx = prev.findIndex(
+          (l) =>
             l.slug === slug &&
-            (l.variantId ?? "") === (variantId ?? "")
-          ),
-      );
-      localStorage.setItem(CART_STORAGE_KEY, serializeCartLines(next));
-      return next;
-    });
-  }, []);
+            (l.variantId ?? "") === (lineVariant ?? "") &&
+            (l.complementId ?? "") === (lineComplement ?? "")
+        );
+        let next: CartLine[];
+        if (idx === -1)
+          next = [
+            ...prev,
+            {
+              slug,
+              quantity,
+              variantId: lineVariant,
+              complementId: lineComplement,
+            },
+          ];
+        else {
+          next = [...prev];
+          next[idx] = {
+            slug,
+            variantId: lineVariant,
+            complementId: lineComplement,
+            quantity: next[idx].quantity + quantity,
+          };
+        }
+        localStorage.setItem(CART_STORAGE_KEY, serializeCartLines(next));
+        return next;
+      });
+    },
+    []
+  );
+
+  const removeItem = useCallback(
+    (slug: string, variantId?: string, complementId?: string) => {
+      setLines((prev) => {
+        const next = prev.filter(
+          (l) =>
+            !(
+              l.slug === slug &&
+              (l.variantId ?? "") === (variantId ?? "") &&
+              (l.complementId ?? "") === (complementId ?? "")
+            )
+        );
+        localStorage.setItem(CART_STORAGE_KEY, serializeCartLines(next));
+        return next;
+      });
+    },
+    []
+  );
 
   const setQuantity = useCallback(
-    (slug: string, quantity: number, variantId?: string) => {
+    (
+      slug: string,
+      quantity: number,
+      variantId?: string,
+      complementId?: string
+    ) => {
       const product = getProductBySlug(slug);
       if (!product) return;
       const lineVariant =
         product.price.kind === "variants" ? variantId : undefined;
+      const lineComplement =
+        product.price.kind === "variants" &&
+        product.price.complements &&
+        product.price.complements.length > 0 &&
+        complementId
+          ? complementId
+          : undefined;
       if (quantity < 1) {
-        removeItem(slug, lineVariant);
+        removeItem(slug, lineVariant, lineComplement);
         return;
       }
       if (product.price.kind === "variants") {
+        if (!variantId || !product.price.options.some((o) => o.id === variantId)) {
+          return;
+        }
         if (
-          !variantId ||
-          !product.price.options.some((o) => o.id === variantId)
+          complementId &&
+          !product.price.complements?.some((c) => c.id === complementId)
         ) {
           return;
         }
@@ -117,20 +171,35 @@ export function CartProvider({ children }: { children: ReactNode }) {
       setLines((prev) => {
         const idx = prev.findIndex(
           (l) =>
-            l.slug === slug && (l.variantId ?? "") === (lineVariant ?? ""),
+            l.slug === slug &&
+            (l.variantId ?? "") === (lineVariant ?? "") &&
+            (l.complementId ?? "") === (lineComplement ?? "")
         );
         if (idx === -1) {
-          const next = [...prev, { slug, quantity, variantId: lineVariant }];
+          const next = [
+            ...prev,
+            {
+              slug,
+              quantity,
+              variantId: lineVariant,
+              complementId: lineComplement,
+            },
+          ];
           localStorage.setItem(CART_STORAGE_KEY, serializeCartLines(next));
           return next;
         }
         const next = [...prev];
-        next[idx] = { slug, quantity, variantId: lineVariant };
+        next[idx] = {
+          slug,
+          quantity,
+          variantId: lineVariant,
+          complementId: lineComplement,
+        };
         localStorage.setItem(CART_STORAGE_KEY, serializeCartLines(next));
         return next;
       });
     },
-    [removeItem],
+    [removeItem]
   );
 
   const clearCart = useCallback(() => {
@@ -146,7 +215,8 @@ export function CartProvider({ children }: { children: ReactNode }) {
       if (!product) continue;
       count += line.quantity;
       total +=
-        getLineUnitPriceEur(product.price, line.variantId) * line.quantity;
+        getLineUnitPriceEur(product.price, line.variantId, line.complementId) *
+        line.quantity;
     }
     return { itemCount: count, totalEur: total };
   }, [lines]);
@@ -161,20 +231,10 @@ export function CartProvider({ children }: { children: ReactNode }) {
       setQuantity,
       clearCart,
     }),
-    [
-      lines,
-      itemCount,
-      totalEur,
-      addItem,
-      removeItem,
-      setQuantity,
-      clearCart,
-    ],
+    [lines, itemCount, totalEur, addItem, removeItem, setQuantity, clearCart]
   );
 
-  return (
-    <CartContext.Provider value={value}>{children}</CartContext.Provider>
-  );
+  return <CartContext.Provider value={value}>{children}</CartContext.Provider>;
 }
 
 export function useCart(): CartContextValue {

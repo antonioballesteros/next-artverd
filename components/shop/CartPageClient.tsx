@@ -71,11 +71,19 @@ export function CartPageClient({ orderSent = false }: CartPageClientProps) {
         {lines.map((line) => {
           const product = getProductBySlug(line.slug);
           if (!product) return null;
-          const unit = getLineUnitPriceEur(product.price, line.variantId);
+          const unit = getLineUnitPriceEur(
+            product.price,
+            line.variantId,
+            line.complementId
+          );
           const lineTotal = unit * line.quantity;
           const cover = product.imagePaths[0];
-          const variantLabel = getVariantLabel(product.price, line.variantId);
-          const lineKey = `${line.slug}:${line.variantId ?? ""}`;
+          const variantLabel = getVariantLabel(
+            product.price,
+            line.variantId,
+            line.complementId
+          );
+          const lineKey = `${line.slug}:${line.variantId ?? ""}:${line.complementId ?? ""}`;
 
           return (
             <li
@@ -120,14 +128,25 @@ export function CartPageClient({ orderSent = false }: CartPageClientProps) {
                       onChange={(e) => {
                         const n = Number.parseInt(e.target.value, 10);
                         if (Number.isNaN(n)) return;
-                        setQuantity(line.slug, n, line.variantId);
+                        setQuantity(
+                          line.slug,
+                          n,
+                          line.variantId,
+                          line.complementId
+                        );
                       }}
                       className="w-16 rounded border border-emerald-300 bg-white px-2 py-1 text-center text-emerald-950"
                     />
                   </label>
                   <button
                     type="button"
-                    onClick={() => removeItem(line.slug, line.variantId)}
+                    onClick={() =>
+                      removeItem(
+                        line.slug,
+                        line.variantId,
+                        line.complementId
+                      )
+                    }
                     className="inline-flex items-center gap-1 rounded-lg px-2 py-1 text-sm font-medium text-red-700 transition hover:bg-red-50"
                   >
                     <Trash2 className="h-4 w-4" aria-hidden />

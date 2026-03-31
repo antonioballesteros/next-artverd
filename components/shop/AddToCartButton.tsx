@@ -15,6 +15,7 @@ export function AddToCartButton({ product }: AddToCartButtonProps) {
   const [added, setAdded] = useState(false);
   const [quantity, setQuantity] = useState(1);
   const [variantId, setVariantId] = useState("");
+  const [complementId, setComplementId] = useState("");
 
   const handleQuantityChange = (e: ChangeEvent<HTMLInputElement>) => {
     const n = Number.parseInt(e.target.value, 10);
@@ -26,10 +27,14 @@ export function AddToCartButton({ product }: AddToCartButtonProps) {
     setVariantId(e.target.value);
   };
 
+  const handleComplementChange = (e: ChangeEvent<HTMLSelectElement>) => {
+    setComplementId(e.target.value);
+  };
+
   const handleClick = () => {
     if (product.price.kind === "variants") {
       if (!variantId) return;
-      addItem(product.slug, quantity, variantId);
+      addItem(product.slug, quantity, variantId, complementId);
     } else {
       addItem(product.slug, quantity);
     }
@@ -63,6 +68,25 @@ export function AddToCartButton({ product }: AddToCartButtonProps) {
               ))}
             </select>
           </label>
+
+          {product.price.complements && product.price.complements.length > 0 ? (
+            <label className="flex max-w-md flex-col gap-2 text-sm text-emerald-900">
+              <span className="font-medium">Complement</span>
+              <select
+                value={complementId}
+                onChange={handleComplementChange}
+                disabled={added}
+                className="rounded border border-emerald-300 bg-white px-3 py-2.5 text-emerald-950 disabled:opacity-60"
+              >
+                <option value="">Trieu un complement</option>
+                {product.price.complements?.map((e) => (
+                  <option key={e.id} value={e.id}>
+                    {e.label} ({formatEur(e.amountEur)})
+                  </option>
+                ))}
+              </select>
+            </label>
+          ) : null}
         </>
       ) : null}
       <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">

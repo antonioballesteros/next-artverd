@@ -1,3 +1,4 @@
+import { FooterCookiePreferences } from "@/components/legal/FooterCookiePreferences";
 import { artverdImages } from "@/lib/artverdAssets";
 import { SITE_NAV_ITEMS } from "@/lib/siteNav";
 import Image from "next/image";
@@ -72,6 +73,7 @@ export function SiteFooter() {
                 {item.label}
               </Link>
             ))}
+            <FooterCookiePreferences />
           </nav>
         </div>
 

@@ -1,3 +1,4 @@
+import { LEGAL_CONTENT_LAST_UPDATED_LABEL } from "@/lib/legal/legalMeta";
 import {
   COOKIE_POLICY_SECTIONS,
   type CookiePolicySection,
@@ -117,6 +118,75 @@ function CookieSectionParts({
           return <BrowserLinksList key={key} />;
         }
 
+        if (part.kind === "cookie-table") {
+          return (
+            <div
+              key={key}
+              className="mt-4 overflow-x-auto rounded-lg border border-emerald-900/10 bg-white/80 shadow-sm"
+            >
+              <table className="min-w-xl w-full border-collapse text-left text-[0.85rem] text-emerald-950/90 md:min-w-0 md:text-[0.92rem]">
+                <thead>
+                  <tr className="border-b border-emerald-900/10 bg-emerald-50/80">
+                    <th scope="col" className="px-3 py-2 font-semibold text-emerald-900">
+                      Nom
+                    </th>
+                    <th scope="col" className="px-3 py-2 font-semibold text-emerald-900">
+                      Proveïdor
+                    </th>
+                    <th scope="col" className="px-3 py-2 font-semibold text-emerald-900">
+                      Finalitat
+                    </th>
+                    <th scope="col" className="px-3 py-2 font-semibold text-emerald-900">
+                      Durada
+                    </th>
+                    <th scope="col" className="px-3 py-2 font-semibold text-emerald-900">
+                      Base legal (informativa)
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {part.rows.map((row) => (
+                    <tr
+                      key={row.name.slice(0, 32)}
+                      className="border-b border-emerald-900/5 last:border-b-0"
+                    >
+                      <td className="align-top px-3 py-2.5 font-medium text-emerald-900">
+                        {row.name}
+                      </td>
+                      <td className="align-top px-3 py-2.5">{row.provider}</td>
+                      <td className="align-top px-3 py-2.5">{row.purpose}</td>
+                      <td className="align-top px-3 py-2.5">{row.duration}</td>
+                      <td className="align-top px-3 py-2.5">{row.legalNote}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          );
+        }
+
+        if (part.kind === "link-list") {
+          return (
+            <ul
+              key={key}
+              className="mt-4 list-disc space-y-2 pl-5 text-[0.98rem] leading-relaxed text-emerald-950/90 marker:text-emerald-600 md:text-base"
+            >
+              {part.items.map((item) => (
+                <li key={item.href}>
+                  <a
+                    href={item.href}
+                    className="font-medium text-emerald-700 underline-offset-2 hover:text-emerald-800 hover:underline"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {item.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          );
+        }
+
         return null;
       })}
     </>
@@ -166,6 +236,12 @@ export function CookiePolicyContent() {
             política de privacitat
           </Link>{" "}
           quant a l’ús de galetes i tecnologies similars.
+        </p>
+        <p
+          className="mt-3 text-sm text-emerald-950/75 motion-safe:animate-[blog-section-reveal_0.65s_ease-out_forwards] motion-safe:opacity-0 motion-reduce:animate-none motion-reduce:opacity-100"
+          style={{ animationDelay: "90ms", animationFillMode: "forwards" }}
+        >
+          Darrera actualització del text: {LEGAL_CONTENT_LAST_UPDATED_LABEL}.
         </p>
 
         <div className="mt-12 space-y-12 md:mt-14 md:space-y-14">

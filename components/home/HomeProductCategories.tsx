@@ -1,5 +1,4 @@
 import { artverdImages } from "@/lib/artverdAssets";
-import { elsie } from "@/lib/fonts";
 import Image from "next/image";
 import Link from "next/link";
 import { HomeSubtitle } from "./HomeSubtitle";

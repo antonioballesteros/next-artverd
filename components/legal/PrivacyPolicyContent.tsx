@@ -1,4 +1,7 @@
 import {
+  LEGAL_CONTENT_LAST_UPDATED_LABEL,
+} from "@/lib/legal/legalMeta";
+import {
   PRIVACY_POLICY_FINALITAT_LEAD,
   PRIVACY_POLICY_INTRO,
   PRIVACY_POLICY_INTRO_CLOSING_BEFORE_LINK,
@@ -122,6 +125,49 @@ function FinalitatSectionBody({ section }: { section: PrivacyPolicySection }) {
   );
 }
 
+function NavegacioSectionBody({ section }: { section: PrivacyPolicySection }) {
+  return (
+    <>
+      {section.paragraphs?.map((p) => (
+        <p
+          key={p.slice(0, 48)}
+          className="mt-4 text-[0.98rem] leading-relaxed text-emerald-950/90 md:text-base"
+        >
+          {p}
+        </p>
+      ))}
+      {section.analyticsServiceEntries?.length ? (
+        <ul className="mt-4 list-disc space-y-3 pl-5 text-[0.98rem] leading-relaxed text-emerald-950/90 marker:text-emerald-600 md:text-base">
+          {section.analyticsServiceEntries.map((entry) => (
+            <li key={entry.name}>
+              <span className="font-semibold text-emerald-900">{entry.name}</span>
+              {": "}
+              {entry.purpose}{" "}
+              <a
+                href={entry.docHref}
+                className="font-medium text-emerald-700 underline-offset-2 hover:text-emerald-800 hover:underline"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {entry.docLabel}
+              </a>
+              .
+            </li>
+          ))}
+        </ul>
+      ) : null}
+      {section.trailingParagraphs?.map((p) => (
+        <p
+          key={p.slice(0, 48)}
+          className="mt-4 text-[0.98rem] leading-relaxed text-emerald-950/90 md:text-base"
+        >
+          {p}
+        </p>
+      ))}
+    </>
+  );
+}
+
 function GaletesSectionBody({ section }: { section: PrivacyPolicySection }) {
   return (
     <>
@@ -176,6 +222,8 @@ function PrivacyPolicySectionBlock({
         <FinalitatSectionBody section={section} />
       ) : section.id === "galetes" ? (
         <GaletesSectionBody section={section} />
+      ) : section.id === "navegacio" ? (
+        <NavegacioSectionBody section={section} />
       ) : (
         <DefaultSectionBody section={section} />
       )}
@@ -218,6 +266,12 @@ export function PrivacyPolicyContent() {
               avís legal
             </Link>
             .
+          </p>
+          <p
+            className="text-sm text-emerald-950/75 motion-safe:animate-[blog-section-reveal_0.65s_ease-out_forwards] motion-safe:opacity-0 motion-reduce:animate-none motion-reduce:opacity-100"
+            style={{ animationDelay: "190ms", animationFillMode: "forwards" }}
+          >
+            Darrera actualització del text: {LEGAL_CONTENT_LAST_UPDATED_LABEL}.
           </p>
         </div>
 

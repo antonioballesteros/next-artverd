@@ -19,11 +19,20 @@ export const PRIVACY_POLICY_INTRO_CLOSING_BEFORE_LINK =
 export const PRIVACY_POLICY_FINALITAT_LEAD =
   "Quan es connecta al lloc web per enviar un correu al responsable, subscriure’s al butlletí o facilitar informació de caràcter personal, el responsable del tractament és el titular. Aquesta informació pot incloure dades com l’adreça IP, nom i cognoms, adreça física, correu electrònic, número de telèfon i altra informació. En facilitar aquesta informació, dóna el seu consentiment perquè la seva informació sigui recollida, utilitzada, gestionada i emmagatzemada per Susana Fernandez Ballester només com es descriu a les pàgines:";
 
+export interface PrivacyAnalyticsServiceEntry {
+  name: string;
+  purpose: string;
+  docHref: string;
+  docLabel: string;
+}
+
 export interface PrivacyPolicySection {
   id: string;
   heading: string;
   paragraphs?: readonly string[];
   listItems?: readonly string[];
+  /** Rich list with doc links (e.g. Vercel services under “Navegació web”). */
+  analyticsServiceEntries?: readonly PrivacyAnalyticsServiceEntry[];
   /** Paragraphs after optional list */
   trailingParagraphs?: readonly string[];
 }
@@ -47,7 +56,7 @@ export const PRIVACY_POLICY_SECTIONS: readonly PrivacyPolicySection[] = [
       "En el tractament de les seves dades personals, el responsable aplicarà els principis següents, que s’ajusten a les exigències del nou reglament europeu de protecció de dades (RGPD):",
     ],
     listItems: [
-      "Principi de licitud, lleialtat i transparència: el responsable sempre requerirà el consentiment per al tractament de les dades personals, que pot ser per un o diversos fins específics sobre els quals informarà l’usuari prèviament amb absoluta transparència.",
+      "Principi de licitud, lleialtat i transparència: el responsable informarà l’usuari amb transparència i sol·licitarà consentiment quan la normativa així ho exigeixi per al tractament concret; en altres casos s’aplicaran les bases legals que corresponguin (d’acord amb aquesta política i la de galetes).",
       "Principi de minimització de dades: el responsable sol·licitarà només les dades estrictament necessàries per al fi o els fins que les sol·licita.",
       "Principi de limitació del termini de conservació: el responsable mantindrà les dades personals recollides durant el temps estrictament necessari per al fi o els fins del tractament. Informarà l’usuari del termini de conservació corresponent segons la finalitat. En el cas de subscripcions, el responsable revisarà periòdicament les llistes i eliminarà aquells registres inactius durant un temps considerable.",
       "Principi d’integritat i confidencialitat: les dades personals recollides es tractaran de manera que la seva seguretat, confidencialitat i integritat estiguin garantides. El responsable pren les precaucions necessàries per evitar l’accés no autoritzat o l’ús indegut de les dades dels seus usuaris per part de tercers.",
@@ -115,14 +124,19 @@ export const PRIVACY_POLICY_SECTIONS: readonly PrivacyPolicySection[] = [
     id: "galetes",
     heading: "Política de galetes",
     paragraphs: [
-      "Perquè aquest lloc web funcioni correctament cal utilitzar galetes, que són informació que s’emmagatzema al navegador web.",
+      "Aquest lloc utilitza galetes i tecnologies similars (com l’emmagatzematge local) segons es detalla a la política de galetes. Les eines d’anàlisi i rendiment de tercers només s’activen si les accepteu al bàner de galetes o des de la configuració del peu de pàgina.",
     ],
   },
   {
     id: "legitimacio",
     heading: "Legitimació per al tractament de dades",
-    paragraphs: ["La base legal per al tractament de les seves dades és:"],
-    listItems: ["El consentiment de l’interessat."],
+    paragraphs: [
+      "Les bases legals aplicables depenen de cada tractament. En relació amb el lloc web:",
+    ],
+    listItems: [
+      "Consentiment de l’interessat quan la normativa així ho exigeixi (incloent-hi, si escau, l’ús de tecnologies d’anàlisi o rendiment no estrictament necessàries).",
+      "Altres bases previstes al RGPD i la LOPDGDD quan escaigui (per exemple, l’interès legítim o l’execució de mesures precontractuals en tractaments estrictament necessaris per al servei sol·licitat), d’acord amb la política de galetes i la normativa de protecció de dades.",
+    ],
   },
   {
     id: "categories",
@@ -146,9 +160,27 @@ export const PRIVACY_POLICY_SECTIONS: readonly PrivacyPolicySection[] = [
     id: "navegacio",
     heading: "Navegació web",
     paragraphs: [
-      "En navegar pel lloc web es poden recollir dades no identificatives, que poden incloure l’adreça IP, geolocalització, un registre de com s’utilitzen els serveis i llocs, hàbits de navegació i altres dades que no poden ser utilitzades per identificar-lo.",
-      "El lloc web utilitza els serveis d’anàlisi de tercers següents:",
-      "El responsable utilitza la informació obtinguda per obtenir dades estadístiques, analitzar tendències, administrar el lloc, estudiar patrons de navegació i per recollir informació demogràfica.",
+      "En navegar pel lloc web es poden generar o recollir dades amb caràcter no o poc identificatiu, com ara l’adreça IP, informació aproximada de dispositiu o navegador, o patrons d’ús agregats, d’acord amb les eines activades.",
+      "Els scripts de Vercel Inc. (Estats Units) següents només es carreguen si heu acceptat les categories corresponents al bàner de galetes (o les heu activat després des de la configuració de galetes):",
+    ],
+    analyticsServiceEntries: [
+      {
+        name: "Vercel Web Analytics",
+        purpose:
+          "Mesura agregada de visites i pàgines vistes per entendre com s’utilitza el lloc.",
+        docHref: "https://vercel.com/docs/analytics/privacy-policy",
+        docLabel: "Privacitat de Web Analytics (Vercel)",
+      },
+      {
+        name: "Vercel Speed Insights",
+        purpose:
+          "Mesura de mètriques de rendiment (p. ex. Core Web Vitals) per millorar el lloc.",
+        docHref: "https://vercel.com/docs/speed-insights/privacy-policy",
+        docLabel: "Privacitat de Speed Insights (Vercel)",
+      },
+    ],
+    trailingParagraphs: [
+      "El responsable utilitza la informació obtinguda, quan escaigui, per obtenir dades estadístiques, analitzar tendències, administrar el lloc i estudiar patrons de navegació en forma agregada.",
       "El responsable no es fa responsable del tractament de dades personals que facin les pàgines web a les quals pugui accedir a través dels diferents enllaços que conté el lloc web.",
     ],
   },

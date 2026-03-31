@@ -1,3 +1,6 @@
+import { CookieConsentBanner } from "@/components/legal/CookieConsentBanner";
+import { CookieConsentProvider } from "@/components/legal/CookieConsentProvider";
+import { VercelTrackingIfConsented } from "@/components/legal/VercelTrackingIfConsented";
 import { CartProvider } from "@/components/shop/CartProvider";
 import { SiteFooter } from "@/components/site/SiteFooter";
 import { SiteHeader } from "@/components/site/SiteHeader";
@@ -25,11 +28,15 @@ export default function RootLayout({
       className={`${geistSans.variable} ${geistMono.variable} ${elsie.variable} h-full antialiased`}
     >
       <body className="flex min-h-full flex-col font-sans">
-        <CartProvider>
-          <SiteHeader />
-          <main className="min-w-0 flex-1">{children}</main>
-          <SiteFooter />
-        </CartProvider>
+        <CookieConsentProvider>
+          <CartProvider>
+            <SiteHeader />
+            <main className="min-w-0 flex-1">{children}</main>
+            <SiteFooter />
+          </CartProvider>
+          <CookieConsentBanner />
+          <VercelTrackingIfConsented />
+        </CookieConsentProvider>
       </body>
     </html>
   );

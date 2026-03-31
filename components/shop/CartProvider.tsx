@@ -33,7 +33,10 @@ export function CartProvider({ children }: { children: ReactNode }) {
   const [lines, setLines] = useState<CartLine[]>([]);
 
   useEffect(() => {
-    setLines(parseCartLines(localStorage.getItem(CART_STORAGE_KEY)));
+    const raw = localStorage.getItem(CART_STORAGE_KEY);
+    queueMicrotask(() => {
+      setLines(parseCartLines(raw));
+    });
   }, []);
 
   useEffect(() => {

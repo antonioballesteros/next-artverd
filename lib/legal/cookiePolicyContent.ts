@@ -5,13 +5,28 @@
 export const COOKIE_POLICY_TITLE = "Política de galetes";
 
 export const COOKIE_POLICY_DESCRIPTION =
-  "Política de galetes d’Art Verd: tipus de galetes, finalitat, com gestionar-les al navegador i informació sobre el bàner de consentiment.";
+  "Política de galetes d’Art Verd: inventari de tecnologies, bàner de consentiment, Vercel Analytics i Speed Insights, emmagatzematge local de la cistella.";
+
+export interface CookieInventoryRow {
+  name: string;
+  provider: string;
+  purpose: string;
+  duration: string;
+  legalNote: string;
+}
+
+export interface CookiePolicyDocLink {
+  label: string;
+  href: string;
+}
 
 export type CookieSectionPart =
   | { kind: "p"; text: string }
   | { kind: "h3"; text: string }
   | { kind: "ul"; items: readonly string[] }
-  | { kind: "browser-links" };
+  | { kind: "browser-links" }
+  | { kind: "cookie-table"; rows: readonly CookieInventoryRow[] }
+  | { kind: "link-list"; items: readonly CookiePolicyDocLink[] };
 
 export interface CookiePolicySection {
   id: string;
@@ -48,7 +63,7 @@ export const COOKIE_POLICY_SECTIONS: readonly CookiePolicySection[] = [
       },
       {
         kind: "p",
-        text: "En determinats casos, si hem obtingut el seu consentiment previ informat, podrem utilitzar galetes per a altres usos, com per obtenir informació que ens permeti mostrar publicitat basada en l’anàlisi dels seus hàbits de navegació.",
+        text: "En aquest lloc web no utilitzem galetes de publicitat comportamental. Les eines d’anàlisi i de rendiment de Vercel (Web Analytics i Speed Insights) només es carreguen si ho autoritzeu mitjançant el bàner de galetes.",
       },
     ],
   },
@@ -68,7 +83,7 @@ export const COOKIE_POLICY_SECTIONS: readonly CookiePolicySection[] = [
     parts: [
       {
         kind: "p",
-        text: "La informació emmagatzemada a les galetes del nostre lloc web és utilitzada exclusivament per nosaltres, a excepció d’aquelles identificades més endavant com a galetes de tercers, que són utilitzades i gestionades per entitats externes que ens proporcionen serveis que milloren l’experiència de l’usuari. Per exemple les estadístiques que es recullen sobre el nombre de visites, el contingut que més agrada, etc.",
+        text: "La informació emmagatzemada a les galetes i tecnologies similars del nostre lloc web és utilitzada per nosaltres, a excepció de les gestionades per Vercel Inc. quan hàgiu acceptat l’anàlisi o el rendiment: aquestes dades les tracta Vercel com a encarregat de tractament en el marc dels serveis d’allotjament i eines del lloc.",
       },
     ],
   },
@@ -78,11 +93,15 @@ export const COOKIE_POLICY_SECTIONS: readonly CookiePolicySection[] = [
     parts: [
       {
         kind: "p",
-        text: "Si prefereix evitar l’ús de les galetes, pot REBUTJAR-ne l’ús o pot CONFIGURAR les que vol evitar i les que permet utilitzar (en aquest document li donem informació àmplia al respecte de cada tipus de galeta, la seva finalitat, destinatari, temporalitat, etc.).",
+        text: "Si prefereix evitar l’ús de les galetes opcionals, pot REBUTJAR-les al bàner (opció «Només necessàries») o revocar el consentiment en qualsevol moment des de «Configuració de galetes» al peu de pàgina.",
       },
       {
         kind: "p",
-        text: "Si les ha acceptat, no tornarem a preguntar-li tret que esborri les galetes al seu dispositiu segons s’indica a l’apartat següent. Si vol revocar el consentiment haurà d’eliminar les galetes i tornar a configurar-les.",
+        text: "La vostra elecció es desa al navegador (emmagatzematge local). Si actualitzem aquesta política o l’inventari de manera rellevant, podem incrementar la versió del consentiment i tornar-vos a mostrar el bàner. Si esborra les dades del lloc al navegador, tornarem a sol·licitar la vostra elecció.",
+      },
+      {
+        kind: "p",
+        text: "Si les ha acceptat, no tornarem a preguntar-li tret que obri la configuració de galetes, esborri les dades emmagatzemades o acceptem una nova versió del consentiment. Pot canviar d’opinió en qualsevol moment des del mateix bàner o l’enllaç del peu.",
       },
     ],
   },
@@ -164,7 +183,83 @@ export const COOKIE_POLICY_SECTIONS: readonly CookiePolicySection[] = [
       },
       {
         kind: "p",
-        text: "Detall de galetes utilitzades en aquest web: la combinació concreta de galetes pot variar segons les eines i integracions actives al lloc web; el bàner de galetes i la configuració del navegador permeten gestionar-ne l’ús.",
+        text: "La relació concreta de tecnologies activa en aquest lloc web figura a l’apartat «Inventari de tecnologies».",
+      },
+    ],
+  },
+  {
+    id: "inventari",
+    heading: "Inventari de tecnologies (galetes i emmagatzematge local)",
+    parts: [
+      {
+        kind: "p",
+        text: "A continuació es relacionen les tecnologies que poden emmagatzemar o llegir informació al vostre dispositiu en relació amb aquest lloc. Les dues primeres files descriuen pràctiques habituals sense identificadors de galeta HTTP pròpiament dits; les de Vercel depenen del vostre consentiment al bàner.",
+      },
+      {
+        kind: "cookie-table",
+        rows: [
+          {
+            name: "Emmagatzematge local (localStorage) de la cistella",
+            provider: "Art Verd (origen propi)",
+            purpose:
+              "Conservar els productes afegits a la cistella de la botiga entre visites.",
+            duration:
+              "Fins que es buidi la cistella, es canviï el contingut o s’esborrin les dades del lloc al navegador.",
+            legalNote:
+              "Necessària per a la funcionalitat de la botiga que sol·liciteu; es descriu com a tecnologia equivalent en transparència.",
+          },
+          {
+            name: "Preferència de consentiment de galetes",
+            provider: "Art Verd (origen propi)",
+            purpose:
+              "Recordar si heu acceptat o rebutjat les categories opcionals d’anàlisi i rendiment.",
+            duration:
+              "Fins que esborreu les dades del lloc, canvieu la preferència des del bàner o s’actualitzi la versió del consentiment.",
+            legalNote:
+              "Necessària per respectar la vostra elecció sobre les tecnologies no estrictament necessàries.",
+          },
+          {
+            name: "Vercel Web Analytics",
+            provider: "Vercel Inc. (tercer, EUA)",
+            purpose:
+              "Mesura agregada de visites i visualitzacions de pàgina per entendre l’ús del lloc.",
+            duration: "Segons la configuració de Vercel; consulteu la seva documentació.",
+            legalNote: "Només si accepteu les opcions corresponents al bàner (consentiment).",
+          },
+          {
+            name: "Vercel Speed Insights",
+            provider: "Vercel Inc. (tercer, EUA)",
+            purpose:
+              "Mesura de mètriques de rendiment (p. ex. Web Vitals) per millorar el lloc.",
+            duration: "Segons la configuració de Vercel; consulteu la seva documentació.",
+            legalNote: "Només si accepteu les opcions corresponents al bàner (consentiment).",
+          },
+        ],
+      },
+      {
+        kind: "p",
+        text: "Més informació sobre com Vercel tracta les dades es troba als documents següents:",
+      },
+      {
+        kind: "link-list",
+        items: [
+          {
+            label: "Web Analytics — privacitat",
+            href: "https://vercel.com/docs/analytics/privacy-policy",
+          },
+          {
+            label: "Speed Insights — privacitat i compliment",
+            href: "https://vercel.com/docs/speed-insights/privacy-policy",
+          },
+          {
+            label: "Avís de privacitat de Vercel",
+            href: "https://vercel.com/legal/privacy-policy",
+          },
+        ],
+      },
+      {
+        kind: "p",
+        text: "Les transferències de dades fora de l’Espai Econòmic Europeu, si escauen, es poden basar en clàusules contractuals tipus o altres garanties previstes al RGPD; el proveïdor n’informa a la seva documentació.",
       },
     ],
   },

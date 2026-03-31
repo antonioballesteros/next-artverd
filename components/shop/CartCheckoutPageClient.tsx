@@ -2,10 +2,10 @@
 
 import { CartOrderForm } from "@/components/shop/CartOrderForm";
 import { useCart } from "@/components/shop/CartProvider";
+import { Link } from "@/i18n/navigation";
 import { formatEur } from "@/lib/shop/formatEur";
 import { elsie } from "@/lib/fonts";
 import { ArrowLeft } from "lucide-react";
-import Link from "next/link";
 
 export function CartCheckoutPageClient() {
   const { lines, totalEur } = useCart();

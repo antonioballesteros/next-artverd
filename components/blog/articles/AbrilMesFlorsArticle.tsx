@@ -11,7 +11,7 @@ import {
 } from "@/lib/blog/abrilMesFlorsContent";
 
 const PREV_POST = {
-  href: "/blog/el-significat-del-color-de-les-roses",
+  slug: "el-significat-del-color-de-les-roses",
   label: "El significat del color de les roses",
 };
 
@@ -21,7 +21,7 @@ export function AbrilMesFlorsArticle() {
       <BlogPageHeader title={ABRIL_MES_FLORS_TITLE} />
 
       <BlogArticlePostNav
-        prevHref={PREV_POST.href}
+        prevSlug={PREV_POST.slug}
         prevLabel={PREV_POST.label}
       />
 

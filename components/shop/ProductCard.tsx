@@ -1,8 +1,8 @@
 import { formatProductPrice } from "@/lib/shop/priceLabel";
 import type { ShopProduct } from "@/lib/shop/products";
 import { elsie } from "@/lib/fonts";
+import { Link } from "@/i18n/navigation";
 import Image from "next/image";
-import Link from "next/link";
 
 interface ProductCardProps {
   product: ShopProduct;
@@ -11,11 +11,15 @@ interface ProductCardProps {
 export function ProductCard({ product }: ProductCardProps) {
   const cover = product.imagePaths[0] ?? "/images/products/placeholder.webp";
   const priceLabel = formatProductPrice(product.price);
+  const productHref = {
+    pathname: "/botiga/[slug]" as const,
+    params: { slug: product.slug },
+  };
 
   return (
     <li className="flex flex-col overflow-hidden rounded-2xl border border-emerald-200/80 bg-white shadow-sm transition hover:border-emerald-300 hover:shadow-md">
       <Link
-        href={`/botiga/${product.slug}`}
+        href={productHref}
         className="group relative block aspect-square w-full overflow-hidden bg-emerald-50"
       >
         <Image
@@ -36,7 +40,7 @@ export function ProductCard({ product }: ProductCardProps) {
           className={`${elsie.className} text-xl leading-snug font-normal text-emerald-950 md:text-2xl`}
         >
           <Link
-            href={`/botiga/${product.slug}`}
+            href={productHref}
             className="hover:text-emerald-800 focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none"
           >
             {product.name}

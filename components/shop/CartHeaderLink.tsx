@@ -1,9 +1,9 @@
 "use client";
 
 import { useCart } from "@/components/shop/CartProvider";
+import { Link } from "@/i18n/navigation";
 import { formatEur } from "@/lib/shop/formatEur";
 import { ShoppingCart } from "lucide-react";
-import Link from "next/link";
 
 interface CartHeaderLinkProps {
   overlay: boolean;

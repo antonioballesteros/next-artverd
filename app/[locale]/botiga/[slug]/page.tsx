@@ -1,14 +1,14 @@
 import { AddToCartButton } from "@/components/shop/AddToCartButton";
 import { ProductImageGallery } from "@/components/shop/ProductImageGallery";
+import { Link } from "@/i18n/navigation";
 import { formatProductPrice } from "@/lib/shop/priceLabel";
 import { getAllProductSlugs, getProductBySlug } from "@/lib/shop/products";
 import { elsie } from "@/lib/fonts";
-import Link from "next/link";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
 interface BotigaProductPageProps {
-  params: Promise<{ slug: string }>;
+  params: Promise<{ locale: string; slug: string }>;
 }
 
 export function generateStaticParams(): { slug: string }[] {
@@ -62,34 +62,21 @@ export default async function BotigaProductPage({
               imagePaths={product.imagePaths}
             />
           </div>
-
           <div>
-            <p className="text-sm font-medium tracking-wide text-emerald-700 uppercase">
-              {product.category}
-            </p>
             <h1
-              className={`${elsie.className} mt-2 text-3xl font-normal text-emerald-950 md:text-4xl lg:text-5xl`}
+              className={`${elsie.className} text-3xl font-normal text-emerald-950 md:text-4xl`}
             >
               {product.name}
             </h1>
-            {product.soldOut ? (
-              <p className="mt-3 inline-block rounded-full bg-emerald-100 px-3 py-1 text-xs font-semibold tracking-wide text-emerald-900 uppercase">
-                Esgotat a la web anterior (referència)
-              </p>
-            ) : null}
+            <p className="mt-4 text-base leading-relaxed text-emerald-900/90">
+              {product.description}
+            </p>
             <p className="mt-6 text-2xl font-semibold text-emerald-800">
               {priceLabel}
             </p>
-            <div className="mt-8 max-w-none text-base leading-relaxed text-emerald-900/95">
-              <p>{product.description}</p>
-            </div>
-            <div className="mt-10">
+            <div className="mt-8">
               <AddToCartButton product={product} />
             </div>
-            <p className="mt-6 text-sm text-emerald-800/75">
-              Sense pagament en línia. La cistella serveix per a fer una
-              reserva.
-            </p>
           </div>
         </div>
       </div>

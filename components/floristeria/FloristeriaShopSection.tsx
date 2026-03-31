@@ -1,8 +1,8 @@
+import { Link } from "@/i18n/navigation";
 import { ScrollConvergePair } from "@/components/ScrollConvergePair";
 import { floristeriaImages } from "@/lib/floristeriaAssets";
 import { elsie } from "@/lib/fonts";
 import Image from "next/image";
-import Link from "next/link";
 
 export function FloristeriaShopSection() {
   return (

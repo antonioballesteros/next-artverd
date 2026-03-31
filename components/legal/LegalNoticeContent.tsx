@@ -5,7 +5,7 @@ import {
   type LegalNoticeSection,
 } from "@/lib/legal/legalNoticeContent";
 import { elsie } from "@/lib/fonts";
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 
 function IdentificacioBlock({ animationIndex }: { animationIndex: number }) {
   const delayMs = 80 + animationIndex * 45;

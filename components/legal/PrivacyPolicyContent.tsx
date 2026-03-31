@@ -8,8 +8,8 @@ import {
   PRIVACY_POLICY_SECTIONS,
   type PrivacyPolicySection,
 } from "@/lib/legal/privacyPolicyContent";
+import { Link } from "@/i18n/navigation";
 import { elsie } from "@/lib/fonts";
-import Link from "next/link";
 
 function IdentitatSectionBody({ section }: { section: PrivacyPolicySection }) {
   return (

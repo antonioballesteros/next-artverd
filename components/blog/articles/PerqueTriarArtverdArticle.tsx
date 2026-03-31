@@ -12,7 +12,7 @@ import {
 } from "@/lib/blog/perqueTriarArtVerdContent";
 
 const NEXT_POST = {
-  href: "/blog/el-significat-del-color-de-les-roses",
+  slug: "el-significat-del-color-de-les-roses",
   label: "El significat del color de les roses",
 };
 
@@ -58,7 +58,7 @@ export function PerqueTriarArtverdArticle() {
       />
 
       <BlogArticlePostNav
-        nextHref={NEXT_POST.href}
+        nextSlug={NEXT_POST.slug}
         nextLabel={NEXT_POST.label}
       />
 

@@ -3,11 +3,11 @@
 import {
   submitCartOrder,
   type CartOrderFormState,
-} from "@/app/botiga/cistella/comanda/actions";
+} from "@/app/actions/cartOrder";
 import { useCart } from "@/components/shop/CartProvider";
+import { useRouter } from "@/i18n/navigation";
 import { elsie } from "@/lib/fonts";
 import { serializeCartLines } from "@/lib/shop/cartStorage";
-import { useRouter } from "next/navigation";
 import { useActionState, useEffect } from "react";
 import { useFormStatus } from "react-dom";
 
@@ -50,7 +50,10 @@ export function CartOrderForm({ formClassName }: CartOrderFormProps) {
   useEffect(() => {
     if (!state.success) return;
     clearCart();
-    router.replace("/botiga/cistella?sent=1");
+    router.replace({
+      pathname: "/botiga/cistella",
+      query: { sent: "1" },
+    });
   }, [state.success, clearCart, router]);
 
   return (

@@ -1,16 +1,19 @@
 "use client";
 
+import { LanguageSwitcher } from "@/components/site/LanguageSwitcher";
 import { CartHeaderLink } from "@/components/shop/CartHeaderLink";
 import { artverdImages } from "@/lib/artverdAssets";
+import { Link, usePathname } from "@/i18n/navigation";
 import { SITE_NAV_ITEMS } from "@/lib/siteNav";
 import Image from "next/image";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
+import type { ComponentProps } from "react";
+
+type NavHref = ComponentProps<typeof Link>["href"];
 
 const OVERLAY_SCROLL_PX = 24;
 
-/** Path prefixes whose first section is a full-bleed hero; header uses overlay until scroll. */
+/** Pathnames without locale prefix (internal paths used by next-intl). */
 const OVERLAY_HEADER_PATHS = [
   "/",
   "/tallers",
@@ -104,8 +107,8 @@ export function SiteHeader({ currentPath, variant }: SiteHeaderProps) {
           >
             {SITE_NAV_ITEMS.map((item) => (
               <Link
-                key={item.href}
-                href={item.href}
+                key={String(item.href)}
+                href={item.href as NavHref}
                 className={
                   item.href === resolvedPath ? navLinkActive : navLinkBase
                 }
@@ -117,6 +120,7 @@ export function SiteHeader({ currentPath, variant }: SiteHeaderProps) {
         </div>
 
         <div className="ml-auto flex shrink-0 items-center gap-1 md:gap-2">
+          <LanguageSwitcher overlay={isOverlay} showSolidBar={showSolidBar} />
           <CartHeaderLink overlay={isOverlay} showSolidBar={showSolidBar} />
           <button
             type="button"
@@ -152,8 +156,8 @@ export function SiteHeader({ currentPath, variant }: SiteHeaderProps) {
           >
             {SITE_NAV_ITEMS.map((item) => (
               <Link
-                key={item.href}
-                href={item.href}
+                key={String(item.href)}
+                href={item.href as NavHref}
                 className={`rounded-lg px-2 py-2 tracking-wide uppercase transition-colors ${
                   item.href === resolvedPath
                     ? "bg-emerald-100/90 font-semibold text-emerald-700"

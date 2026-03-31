@@ -1,6 +1,6 @@
+import { Link } from "@/i18n/navigation";
 import { artverdImages } from "@/lib/artverdAssets";
 import Image from "next/image";
-import Link from "next/link";
 import { ScrollConvergePair } from "../ScrollConvergePair";
 import { HomeSubtitle } from "./HomeSubtitle";
 

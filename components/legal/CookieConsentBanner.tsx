@@ -1,7 +1,7 @@
 "use client";
 
+import { Link } from "@/i18n/navigation";
 import { useCookieConsent } from "@/components/legal/CookieConsentProvider";
-import Link from "next/link";
 import { useEffect } from "react";
 
 export function CookieConsentBanner() {

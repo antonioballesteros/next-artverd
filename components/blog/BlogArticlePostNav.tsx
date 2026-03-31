@@ -1,17 +1,23 @@
+"use client";
+
+import { Link } from "@/i18n/navigation";
 import { ChevronLeft, ChevronRight, LayoutGrid } from "lucide-react";
-import Link from "next/link";
 
 interface BlogArticlePostNavProps {
-  prevHref?: string;
+  prevSlug?: string;
   prevLabel?: string;
-  nextHref?: string;
+  nextSlug?: string;
   nextLabel?: string;
 }
 
+function blogPostHref(slug: string) {
+  return { pathname: "/blog/[slug]" as const, params: { slug } };
+}
+
 export function BlogArticlePostNav({
-  prevHref,
+  prevSlug,
   prevLabel,
-  nextHref,
+  nextSlug,
   nextLabel,
 }: BlogArticlePostNavProps) {
   return (
@@ -20,9 +26,9 @@ export function BlogArticlePostNav({
       aria-label="Article navigation"
     >
       <div className="mx-auto flex max-w-3xl items-center justify-between gap-4 px-4 py-4 md:px-6">
-        {prevHref && prevLabel ? (
+        {prevSlug && prevLabel ? (
           <Link
-            href={prevHref}
+            href={blogPostHref(prevSlug)}
             className="group flex max-w-[min(100%,14rem)] items-center gap-2 text-sm font-medium text-emerald-800 transition-colors hover:text-emerald-950 md:max-w-xs md:text-base"
           >
             <ChevronLeft
@@ -43,9 +49,9 @@ export function BlogArticlePostNav({
           <LayoutGrid className="h-5 w-5" aria-hidden />
         </Link>
 
-        {nextHref && nextLabel ? (
+        {nextSlug && nextLabel ? (
           <Link
-            href={nextHref}
+            href={blogPostHref(nextSlug)}
             className="group flex max-w-[min(100%,14rem)] items-center gap-2 text-sm font-medium text-emerald-800 transition-colors hover:text-emerald-950 md:max-w-xs md:text-base"
           >
             <span className="line-clamp-2">{nextLabel}</span>

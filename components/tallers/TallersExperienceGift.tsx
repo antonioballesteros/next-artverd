@@ -1,28 +1,33 @@
+import { Link } from "@/i18n/navigation";
 import { elsie } from "@/lib/fonts";
 import { filterShopProductsByCategory } from "@/lib/shop/filterProductsByCategory";
 import { formatProductPrice } from "@/lib/shop/priceLabel";
 import Image from "next/image";
-import Link from "next/link";
 
 const TALLERS_CATEGORY = "Tallers";
 
 const tallerWorkshopProducts = filterShopProductsByCategory(TALLERS_CATEGORY);
 
 interface TallersWorkshopCardProps {
-  href: string;
+  slug: string;
   imageSrc: string;
   imageAlt: string;
   title: string;
   priceLabel: string;
 }
 
+function productHref(slug: string) {
+  return { pathname: "/botiga/[slug]" as const, params: { slug } };
+}
+
 function TallersWorkshopCard({
-  href,
+  slug,
   imageSrc,
   imageAlt,
   title,
   priceLabel,
 }: TallersWorkshopCardProps) {
+  const href = productHref(slug);
   return (
     <article className="group flex flex-col overflow-hidden rounded-2xl border border-emerald-900/10 bg-white shadow-md transition-shadow duration-300 hover:shadow-xl">
       <Link
@@ -76,7 +81,7 @@ export function TallersExperienceGift() {
             return (
               <li key={product.slug}>
                 <TallersWorkshopCard
-                  href={`/botiga/${product.slug}`}
+                  slug={product.slug}
                   imageSrc={imageSrc}
                   imageAlt={product.name}
                   title={product.name}

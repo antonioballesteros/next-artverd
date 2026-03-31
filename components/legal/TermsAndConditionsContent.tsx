@@ -4,7 +4,7 @@ import {
   type TermsSectionPart,
 } from "@/lib/legal/termsAndConditionsContent";
 import { elsie } from "@/lib/fonts";
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 
 function TermsSectionParts({
   parts,

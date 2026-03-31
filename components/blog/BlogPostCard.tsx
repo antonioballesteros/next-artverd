@@ -2,8 +2,8 @@
 
 import { artverdImages } from "@/lib/artverdAssets";
 import type { BlogPost } from "@/lib/blogPosts";
+import { Link } from "@/i18n/navigation";
 import Image from "next/image";
-import Link from "next/link";
 
 interface BlogPostCardProps {
   post: BlogPost;
@@ -11,7 +11,10 @@ interface BlogPostCardProps {
 
 export function BlogPostCard({ post }: BlogPostCardProps) {
   const imageFit = post.imageObjectFit ?? "cover";
-  const postHref = `/blog/${post.slug}`;
+  const postHref = {
+    pathname: "/blog/[slug]" as const,
+    params: { slug: post.slug },
+  };
 
   return (
     <article className="group flex h-full flex-col overflow-hidden rounded-2xl border border-emerald-200/80 bg-white/90 shadow-sm transition-[box-shadow,translate] duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-emerald-900/10">

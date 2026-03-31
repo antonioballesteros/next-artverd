@@ -1,8 +1,8 @@
+import { Link } from "@/i18n/navigation";
 import { ScrollConvergePair } from "@/components/ScrollConvergePair";
 import { casamentsImages } from "@/lib/casamentsAssets";
 import { elsie } from "@/lib/fonts";
 import Image from "next/image";
-import Link from "next/link";
 import { DecorativeIconRow } from "../DecorativeIconRow";
 
 interface CasamentsSplitBlockProps {

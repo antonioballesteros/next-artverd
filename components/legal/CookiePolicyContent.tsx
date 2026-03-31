@@ -4,8 +4,8 @@ import {
   type CookiePolicySection,
   type CookieSectionPart,
 } from "@/lib/legal/cookiePolicyContent";
+import { Link } from "@/i18n/navigation";
 import { elsie } from "@/lib/fonts";
-import Link from "next/link";
 
 const BROWSER_HELP_LINKS: { label: string; href: string }[] = [
   {

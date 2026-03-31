@@ -1,6 +1,6 @@
+import { LocalizedCategoryLink } from "@/components/home/LocalizedCategoryLink";
 import { artverdImages } from "@/lib/artverdAssets";
 import Image from "next/image";
-import Link from "next/link";
 import { HomeSubtitle } from "./HomeSubtitle";
 
 interface ProductCategory {
@@ -50,7 +50,7 @@ export function HomeProductCategories() {
         <ul className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {PRODUCT_CATEGORIES.map((cat) => (
             <li key={cat.href}>
-              <Link
+              <LocalizedCategoryLink
                 href={cat.href}
                 className="group flex h-full flex-col overflow-hidden rounded-2xl border border-emerald-900/10 bg-white shadow-sm transition hover:-translate-y-0.5 hover:shadow-md"
               >
@@ -74,7 +74,7 @@ export function HomeProductCategories() {
                     Veure més →
                   </span>
                 </div>
-              </Link>
+              </LocalizedCategoryLink>
             </li>
           ))}
         </ul>

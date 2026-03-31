@@ -1,8 +1,11 @@
 import { FooterCookiePreferences } from "@/components/legal/FooterCookiePreferences";
 import { artverdImages } from "@/lib/artverdAssets";
+import { Link } from "@/i18n/navigation";
 import { SITE_NAV_ITEMS } from "@/lib/siteNav";
 import Image from "next/image";
-import Link from "next/link";
+import type { ComponentProps } from "react";
+
+type NavHref = ComponentProps<typeof Link>["href"];
 
 const FOOTER_LINKS: { href: string; label: string }[] = [
   { href: "/legal/politica-de-privacitat", label: "Política de privacitat" },
@@ -55,8 +58,8 @@ export function SiteFooter() {
           >
             {SITE_NAV_ITEMS.map((item) => (
               <Link
-                key={item.href}
-                href={item.href}
+                key={String(item.href)}
+                href={item.href as NavHref}
                 className="text-emerald-100/90 underline-offset-2 hover:text-white hover:underline"
               >
                 {item.label}
@@ -71,7 +74,7 @@ export function SiteFooter() {
             {FOOTER_LINKS.map((item) => (
               <Link
                 key={item.href}
-                href={item.href}
+                href={item.href as NavHref}
                 className="text-emerald-100/90 underline-offset-2 hover:text-white hover:underline"
               >
                 {item.label}

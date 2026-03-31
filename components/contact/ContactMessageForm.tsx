@@ -1,6 +1,9 @@
 "use client";
 
-import { submitContactForm, type ContactFormState } from "@/app/contacte/actions";
+import {
+  submitContactForm,
+  type ContactFormState,
+} from "@/app/actions/contactForm";
 import { useActionState } from "react";
 import { useFormStatus } from "react-dom";
 

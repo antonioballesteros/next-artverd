@@ -11,11 +11,11 @@ import {
 } from "@/lib/blog/elSignificatRosesContent";
 
 const PREV_POST = {
-  href: "/blog/perque-triar-art-verd-pels-teus-events-especials",
+  slug: "perque-triar-art-verd-pels-teus-events-especials",
   label: "¿Perqué triar Artverd pels teus events especials?",
 };
 const NEXT_POST = {
-  href: "/blog/abril-el-mes-de-les-flors",
+  slug: "abril-el-mes-de-les-flors",
   label: "Abril el mes de les flors",
 };
 
@@ -29,9 +29,9 @@ export function ElSignificatRosesArticle() {
       />
 
       <BlogArticlePostNav
-        prevHref={PREV_POST.href}
+        prevSlug={PREV_POST.slug}
         prevLabel={PREV_POST.label}
-        nextHref={NEXT_POST.href}
+        nextSlug={NEXT_POST.slug}
         nextLabel={NEXT_POST.label}
       />
 

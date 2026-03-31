@@ -1,8 +1,8 @@
+import { Link } from "@/i18n/navigation";
 import { ScrollConvergePair } from "@/components/ScrollConvergePair";
 import { artverdImages } from "@/lib/artverdAssets";
 import { Check } from "lucide-react";
 import Image from "next/image";
-import Link from "next/link";
 import { HomeSubtitle } from "./HomeSubtitle";
 
 interface IntroCheckListItemProps {

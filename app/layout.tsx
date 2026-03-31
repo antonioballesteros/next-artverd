@@ -2,8 +2,6 @@ import { CookieConsentBanner } from "@/components/legal/CookieConsentBanner";
 import { CookieConsentProvider } from "@/components/legal/CookieConsentProvider";
 import { VercelTrackingIfConsented } from "@/components/legal/VercelTrackingIfConsented";
 import { CartProvider } from "@/components/shop/CartProvider";
-import { SiteFooter } from "@/components/site/SiteFooter";
-import { SiteHeader } from "@/components/site/SiteHeader";
 import { elsie, geistMono, geistSans } from "@/lib/fonts";
 import type { Metadata } from "next";
 import "./globals.css";
@@ -29,11 +27,7 @@ export default function RootLayout({
     >
       <body className="flex min-h-full flex-col font-sans">
         <CookieConsentProvider>
-          <CartProvider>
-            <SiteHeader />
-            <main className="min-w-0 flex-1">{children}</main>
-            <SiteFooter />
-          </CartProvider>
+          <CartProvider>{children}</CartProvider>
           <CookieConsentBanner />
           <VercelTrackingIfConsented />
         </CookieConsentProvider>

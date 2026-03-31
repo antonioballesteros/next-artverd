@@ -1,8 +1,8 @@
 import { artverdImages } from "@/lib/artverdAssets";
+import { Link } from "@/i18n/navigation";
 import { elsie } from "@/lib/fonts";
 import type { Metadata } from "next";
 import { Home } from "lucide-react";
-import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "Producte no trobat",

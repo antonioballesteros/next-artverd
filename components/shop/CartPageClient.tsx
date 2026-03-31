@@ -1,6 +1,7 @@
 "use client";
 
 import { useCart } from "@/components/shop/CartProvider";
+import { Link } from "@/i18n/navigation";
 import { formatEur } from "@/lib/shop/formatEur";
 import {
   getLineUnitPriceEur,
@@ -9,7 +10,6 @@ import {
 } from "@/lib/shop/products";
 import { elsie } from "@/lib/fonts";
 import Image from "next/image";
-import Link from "next/link";
 import { Trash2 } from "lucide-react";
 
 interface CartPageClientProps {
@@ -74,16 +74,20 @@ export function CartPageClient({ orderSent = false }: CartPageClientProps) {
           const unit = getLineUnitPriceEur(
             product.price,
             line.variantId,
-            line.complementId
+            line.complementId,
           );
           const lineTotal = unit * line.quantity;
           const cover = product.imagePaths[0];
           const variantLabel = getVariantLabel(
             product.price,
             line.variantId,
-            line.complementId
+            line.complementId,
           );
           const lineKey = `${line.slug}:${line.variantId ?? ""}:${line.complementId ?? ""}`;
+          const lineHref = {
+            pathname: "/botiga/[slug]" as const,
+            params: { slug: product.slug },
+          };
 
           return (
             <li
@@ -103,7 +107,7 @@ export function CartPageClient({ orderSent = false }: CartPageClientProps) {
               </div>
               <div className="min-w-0 flex-1">
                 <Link
-                  href={`/botiga/${product.slug}`}
+                  href={lineHref}
                   className={`${elsie.className} text-xl font-normal text-emerald-950 hover:text-emerald-800`}
                 >
                   {product.name}
@@ -132,7 +136,7 @@ export function CartPageClient({ orderSent = false }: CartPageClientProps) {
                           line.slug,
                           n,
                           line.variantId,
-                          line.complementId
+                          line.complementId,
                         );
                       }}
                       className="w-16 rounded border border-emerald-300 bg-white px-2 py-1 text-center text-emerald-950"
@@ -144,7 +148,7 @@ export function CartPageClient({ orderSent = false }: CartPageClientProps) {
                       removeItem(
                         line.slug,
                         line.variantId,
-                        line.complementId
+                        line.complementId,
                       )
                     }
                     className="inline-flex items-center gap-1 rounded-lg px-2 py-1 text-sm font-medium text-red-700 transition hover:bg-red-50"

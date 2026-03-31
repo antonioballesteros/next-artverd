@@ -23,7 +23,7 @@ import type { ComponentType } from "react";
 import { notFound } from "next/navigation";
 
 interface BlogPostPageProps {
-  params: Promise<{ slug: string }>;
+  params: Promise<{ locale: string; slug: string }>;
 }
 
 const ARTICLE_BY_SLUG: Record<MigratedBlogSlug, ComponentType> = {

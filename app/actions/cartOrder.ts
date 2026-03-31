@@ -2,13 +2,17 @@
 
 import { randomUUID } from "node:crypto";
 
+import { routing, type AppLocale } from "@/i18n/routing";
 import { parseCartLines, type CartLine } from "@/lib/shop/cartStorage";
 import { formatEur } from "@/lib/shop/formatEur";
 import {
+  getCartStorageSlug,
   getLineUnitPriceEur,
   getProductBySlug,
+  getProductName,
   getVariantLabel,
 } from "@/lib/shop/products";
+import { hasLocale } from "next-intl";
 import { getResendFromTo } from "@/lib/resendFromTo";
 import { Resend } from "resend";
 
@@ -33,8 +37,15 @@ interface ResolvedLine {
   lineTotalEur: number;
 }
 
+function parseOrderLocale(formData: FormData): AppLocale {
+  const raw = String(formData.get("locale") ?? "").trim();
+  if (hasLocale(routing.locales, raw)) return raw as AppLocale;
+  return routing.defaultLocale as AppLocale;
+}
+
 function resolveOrderLines(
-  lines: CartLine[]
+  lines: CartLine[],
+  locale: AppLocale
 ):
   | { ok: true; resolved: ResolvedLine[]; totalEur: number }
   | { ok: false; error: string } {
@@ -67,7 +78,7 @@ function resolveOrderLines(
     if (product.soldOut) {
       return {
         ok: false,
-        error: `El producte «${product.name}» no està disponible ara mateix.`,
+        error: `El producte «${getProductName(product, locale)}» no està disponible ara mateix.`,
       };
     }
 
@@ -78,7 +89,7 @@ function resolveOrderLines(
       ) {
         return {
           ok: false,
-          error: `Cal triar una opció vàlida per a «${product.name}».`,
+          error: `Cal triar una opció vàlida per a «${getProductName(product, locale)}».`,
         };
       }
       if (
@@ -87,7 +98,7 @@ function resolveOrderLines(
       ) {
         return {
           ok: false,
-          error: `Complement no vàlid per a «${product.name}».`,
+          error: `Complement no vàlid per a «${getProductName(product, locale)}».`,
         };
       }
     } else if (line.variantId || line.complementId) {
@@ -103,8 +114,8 @@ function resolveOrderLines(
     totalEur += lineTotalEur;
 
     resolved.push({
-      productName: product.name,
-      slug: product.slug,
+      productName: getProductName(product, locale),
+      slug: getCartStorageSlug(product),
       quantity: line.quantity,
       variantLabel: getVariantLabel(
         product.price,
@@ -156,8 +167,9 @@ export async function submitCartOrder(
   }
 
   const lines = parseCartLines(cartRaw);
+  const orderLocale = parseOrderLocale(formData);
 
-  const order = resolveOrderLines(lines);
+  const order = resolveOrderLines(lines, orderLocale);
   if (!order.ok) {
     return { success: false, error: order.error };
   }

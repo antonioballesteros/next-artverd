@@ -1,9 +1,16 @@
+import type { AppLocale } from "@/i18n/routing";
 import {
   SHOP_PRODUCTS,
+  getProductCategory,
   type ShopProduct,
 } from "@/lib/shop/products";
 
-/** Returns catalog products whose `category` matches exactly (case-sensitive). */
-export function filterShopProductsByCategory(category: string): ShopProduct[] {
-  return SHOP_PRODUCTS.filter((product) => product.category === category);
+/** Returns catalog products whose localized category label matches (case-sensitive). */
+export function filterShopProductsByCategory(
+  categoryLabel: string,
+  locale: AppLocale
+): ShopProduct[] {
+  return SHOP_PRODUCTS.filter(
+    (product) => getProductCategory(product, locale) === categoryLabel
+  );
 }

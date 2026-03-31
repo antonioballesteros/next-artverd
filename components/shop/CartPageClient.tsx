@@ -3,13 +3,17 @@
 import { useCart } from "@/components/shop/CartProvider";
 import { Link } from "@/i18n/navigation";
 import { formatEur } from "@/lib/shop/formatEur";
+import type { AppLocale } from "@/i18n/routing";
 import {
   getLineUnitPriceEur,
   getProductBySlug,
+  getProductName,
+  getProductSlug,
   getVariantLabel,
 } from "@/lib/shop/products";
 import { elsie } from "@/lib/fonts";
 import Image from "next/image";
+import { useLocale } from "next-intl";
 import { Trash2 } from "lucide-react";
 
 interface CartPageClientProps {
@@ -18,6 +22,7 @@ interface CartPageClientProps {
 }
 
 export function CartPageClient({ orderSent = false }: CartPageClientProps) {
+  const locale = useLocale() as AppLocale;
   const { lines, totalEur, removeItem, setQuantity, clearCart } = useCart();
 
   if (lines.length === 0) {
@@ -71,6 +76,7 @@ export function CartPageClient({ orderSent = false }: CartPageClientProps) {
         {lines.map((line) => {
           const product = getProductBySlug(line.slug);
           if (!product) return null;
+          const lineTitle = getProductName(product, locale);
           const unit = getLineUnitPriceEur(
             product.price,
             line.variantId,
@@ -86,7 +92,7 @@ export function CartPageClient({ orderSent = false }: CartPageClientProps) {
           const lineKey = `${line.slug}:${line.variantId ?? ""}:${line.complementId ?? ""}`;
           const lineHref = {
             pathname: "/botiga/[slug]" as const,
-            params: { slug: product.slug },
+            params: { slug: getProductSlug(product, locale) },
           };
 
           return (
@@ -98,7 +104,7 @@ export function CartPageClient({ orderSent = false }: CartPageClientProps) {
                 {cover ? (
                   <Image
                     src={cover}
-                    alt={product.name}
+                    alt={lineTitle}
                     fill
                     className="object-cover"
                     sizes="96px"
@@ -110,7 +116,7 @@ export function CartPageClient({ orderSent = false }: CartPageClientProps) {
                   href={lineHref}
                   className={`${elsie.className} text-xl font-normal text-emerald-950 hover:text-emerald-800`}
                 >
-                  {product.name}
+                  {lineTitle}
                 </Link>
                 <p className="mt-1 text-sm text-emerald-800/80">
                   {product.price.kind === "variants" ? (

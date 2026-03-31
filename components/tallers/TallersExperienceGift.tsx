@@ -1,33 +1,37 @@
 import { Link } from "@/i18n/navigation";
+import type { AppLocale } from "@/i18n/routing";
 import { elsie } from "@/lib/fonts";
 import { filterShopProductsByCategory } from "@/lib/shop/filterProductsByCategory";
 import { formatProductPrice } from "@/lib/shop/priceLabel";
+import {
+  getProductName,
+  getProductSlug,
+  WORKSHOP_CATEGORY_LABEL,
+  type ShopProduct,
+} from "@/lib/shop/products";
 import Image from "next/image";
-
-const TALLERS_CATEGORY = "Tallers";
-
-const tallerWorkshopProducts = filterShopProductsByCategory(TALLERS_CATEGORY);
+import { getLocale } from "next-intl/server";
 
 interface TallersWorkshopCardProps {
-  slug: string;
+  product: ShopProduct;
+  locale: AppLocale;
   imageSrc: string;
   imageAlt: string;
-  title: string;
   priceLabel: string;
 }
 
-function productHref(slug: string) {
-  return { pathname: "/botiga/[slug]" as const, params: { slug } };
-}
-
 function TallersWorkshopCard({
-  slug,
+  product,
+  locale,
   imageSrc,
   imageAlt,
-  title,
   priceLabel,
 }: TallersWorkshopCardProps) {
-  const href = productHref(slug);
+  const href = {
+    pathname: "/botiga/[slug]" as const,
+    params: { slug: getProductSlug(product, locale) },
+  };
+  const title = getProductName(product, locale);
   return (
     <article className="group flex flex-col overflow-hidden rounded-2xl border border-emerald-900/10 bg-white shadow-md transition-shadow duration-300 hover:shadow-xl">
       <Link
@@ -61,7 +65,13 @@ function TallersWorkshopCard({
   );
 }
 
-export function TallersExperienceGift() {
+export async function TallersExperienceGift() {
+  const locale = (await getLocale()) as AppLocale;
+  const tallerWorkshopProducts = filterShopProductsByCategory(
+    WORKSHOP_CATEGORY_LABEL[locale],
+    locale
+  );
+
   return (
     <section
       className="bg-emerald-50/35 pt-4 pb-16 md:pb-24"
@@ -79,12 +89,12 @@ export function TallersExperienceGift() {
             const imageSrc = product.imagePaths[0];
             if (!imageSrc) return null;
             return (
-              <li key={product.slug}>
+              <li key={product.slugs.ca}>
                 <TallersWorkshopCard
-                  slug={product.slug}
+                  product={product}
+                  locale={locale}
                   imageSrc={imageSrc}
-                  imageAlt={product.name}
-                  title={product.name}
+                  imageAlt={getProductName(product, locale)}
                   priceLabel={formatProductPrice(product.price)}
                 />
               </li>

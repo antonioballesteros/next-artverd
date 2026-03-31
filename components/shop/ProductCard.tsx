@@ -1,20 +1,30 @@
 import { formatProductPrice } from "@/lib/shop/priceLabel";
-import type { ShopProduct } from "@/lib/shop/products";
 import { elsie } from "@/lib/fonts";
 import { Link } from "@/i18n/navigation";
+import type { AppLocale } from "@/i18n/routing";
+import {
+  getProductCategory,
+  getProductName,
+  getProductSlug,
+  type ShopProduct,
+} from "@/lib/shop/products";
 import Image from "next/image";
+import { useLocale } from "next-intl";
 
 interface ProductCardProps {
   product: ShopProduct;
 }
 
 export function ProductCard({ product }: ProductCardProps) {
+  const locale = useLocale() as AppLocale;
   const cover = product.imagePaths[0] ?? "/images/products/placeholder.webp";
   const priceLabel = formatProductPrice(product.price);
   const productHref = {
     pathname: "/botiga/[slug]" as const,
-    params: { slug: product.slug },
+    params: { slug: getProductSlug(product, locale) },
   };
+  const title = getProductName(product, locale);
+  const categoryLabel = getProductCategory(product, locale);
 
   return (
     <li className="flex flex-col overflow-hidden rounded-2xl border border-emerald-200/80 bg-white shadow-sm transition hover:border-emerald-300 hover:shadow-md">
@@ -24,7 +34,7 @@ export function ProductCard({ product }: ProductCardProps) {
       >
         <Image
           src={cover}
-          alt={product.name}
+          alt={title}
           fill
           className="object-cover transition duration-300 group-hover:scale-[1.03]"
           sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
@@ -43,10 +53,10 @@ export function ProductCard({ product }: ProductCardProps) {
             href={productHref}
             className="hover:text-emerald-800 focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:outline-none"
           >
-            {product.name}
+            {title}
           </Link>
         </h3>
-        <p className="text-sm text-emerald-800/80">{product.category}</p>
+        <p className="text-sm text-emerald-800/80">{categoryLabel}</p>
         <p className="mt-auto pt-2 text-lg font-semibold text-emerald-700">
           {priceLabel}
         </p>

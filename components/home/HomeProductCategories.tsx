@@ -1,10 +1,17 @@
-import { LocalizedCategoryLink } from "@/components/home/LocalizedCategoryLink";
+import { Link } from "@/i18n/navigation";
+import type { AppLocale } from "@/i18n/routing";
 import { artverdImages } from "@/lib/artverdAssets";
+import {
+  getProductBySlug,
+  getProductSlug,
+} from "@/lib/shop/products";
 import Image from "next/image";
+import { getLocale } from "next-intl/server";
+import { LocalizedCategoryLink } from "./LocalizedCategoryLink";
 import { HomeSubtitle } from "./HomeSubtitle";
 
 interface ProductCategory {
-  href: string;
+  href: "/botiga" | "/casaments-i-events" | { caSlug: "ram" | "planta" };
   title: string;
   description: string;
   imageSrc: string;
@@ -13,14 +20,14 @@ interface ProductCategory {
 
 const PRODUCT_CATEGORIES: ProductCategory[] = [
   {
-    href: "/botiga/ram",
+    href: { caSlug: "ram" },
     title: "Rams",
     description: "Rams i composicions per a cada moment.",
     imageSrc: artverdImages.categoryRams,
     imageAlt: "Rams i flors naturals",
   },
   {
-    href: "/botiga/planta",
+    href: { caSlug: "planta" },
     title: "Plantes",
     description: "Verd per casa i assessorament.",
     imageSrc: artverdImages.categoryPlantes,
@@ -42,18 +49,17 @@ const PRODUCT_CATEGORIES: ProductCategory[] = [
   },
 ];
 
-export function HomeProductCategories() {
+export async function HomeProductCategories() {
+  const locale = (await getLocale()) as AppLocale;
+
   return (
     <section className="bg-emerald-50/50" aria-labelledby="products-heading">
       <HomeSubtitle>Els nostres productes</HomeSubtitle>
       <div className="mx-auto max-w-6xl">
         <ul className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          {PRODUCT_CATEGORIES.map((cat) => (
-            <li key={cat.href}>
-              <LocalizedCategoryLink
-                href={cat.href}
-                className="group flex h-full flex-col overflow-hidden rounded-2xl border border-emerald-900/10 bg-white shadow-sm transition hover:-translate-y-0.5 hover:shadow-md"
-              >
+          {PRODUCT_CATEGORIES.map((cat) => {
+            const inner = (
+              <>
                 <div className="relative aspect-4/3 w-full overflow-hidden">
                   <Image
                     src={cat.imageSrc}
@@ -74,9 +80,38 @@ export function HomeProductCategories() {
                     Veure més →
                   </span>
                 </div>
-              </LocalizedCategoryLink>
-            </li>
-          ))}
+              </>
+            );
+
+            if (typeof cat.href === "object" && "caSlug" in cat.href) {
+              const product = getProductBySlug(cat.href.caSlug);
+              if (!product) return null;
+              return (
+                <li key={cat.href.caSlug}>
+                  <Link
+                    href={{
+                      pathname: "/botiga/[slug]",
+                      params: { slug: getProductSlug(product, locale) },
+                    }}
+                    className="group flex h-full flex-col overflow-hidden rounded-2xl border border-emerald-900/10 bg-white shadow-sm transition hover:-translate-y-0.5 hover:shadow-md"
+                  >
+                    {inner}
+                  </Link>
+                </li>
+              );
+            }
+
+            return (
+              <li key={cat.href}>
+                <LocalizedCategoryLink
+                  href={cat.href}
+                  className="group flex h-full flex-col overflow-hidden rounded-2xl border border-emerald-900/10 bg-white shadow-sm transition hover:-translate-y-0.5 hover:shadow-md"
+                >
+                  {inner}
+                </LocalizedCategoryLink>
+              </li>
+            );
+          })}
         </ul>
       </div>
     </section>

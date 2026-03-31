@@ -2,11 +2,16 @@
 
 import {
   CART_STORAGE_KEY,
+  normalizeCartLines,
   parseCartLines,
   serializeCartLines,
   type CartLine,
 } from "@/lib/shop/cartStorage";
-import { getLineUnitPriceEur, getProductBySlug } from "@/lib/shop/products";
+import {
+  getCartStorageSlug,
+  getLineUnitPriceEur,
+  getProductBySlug,
+} from "@/lib/shop/products";
 import {
   createContext,
   useCallback,
@@ -44,8 +49,14 @@ export function CartProvider({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     const raw = localStorage.getItem(CART_STORAGE_KEY);
+    const parsed = parseCartLines(raw);
+    const normalized = normalizeCartLines(parsed);
+    const serialized = serializeCartLines(normalized);
+    if (serialized !== (raw ?? "[]")) {
+      localStorage.setItem(CART_STORAGE_KEY, serialized);
+    }
     queueMicrotask(() => {
-      setLines(parseCartLines(raw));
+      setLines(normalized);
     });
   }, []);
 
@@ -63,6 +74,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
     (slug: string, quantity = 1, variantId?: string, complementId?: string) => {
       const product = getProductBySlug(slug);
       if (!product || quantity < 1) return;
+      const storageSlug = getCartStorageSlug(product);
       if (product.price.kind === "variants") {
         if (!variantId || !product.price.options.some((o) => o.id === variantId)) {
           return;
@@ -86,7 +98,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
       setLines((prev) => {
         const idx = prev.findIndex(
           (l) =>
-            l.slug === slug &&
+            l.slug === storageSlug &&
             (l.variantId ?? "") === (lineVariant ?? "") &&
             (l.complementId ?? "") === (lineComplement ?? "")
         );
@@ -95,7 +107,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
           next = [
             ...prev,
             {
-              slug,
+              slug: storageSlug,
               quantity,
               variantId: lineVariant,
               complementId: lineComplement,
@@ -104,7 +116,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
         else {
           next = [...prev];
           next[idx] = {
-            slug,
+            slug: storageSlug,
             variantId: lineVariant,
             complementId: lineComplement,
             quantity: next[idx].quantity + quantity,

@@ -7,7 +7,9 @@ import {
 import { useCart } from "@/components/shop/CartProvider";
 import { useRouter } from "@/i18n/navigation";
 import { elsie } from "@/lib/fonts";
+import type { AppLocale } from "@/i18n/routing";
 import { serializeCartLines } from "@/lib/shop/cartStorage";
+import { useLocale } from "next-intl";
 import { useActionState, useEffect } from "react";
 import { useFormStatus } from "react-dom";
 
@@ -41,6 +43,7 @@ interface CartOrderFormProps {
 
 export function CartOrderForm({ formClassName }: CartOrderFormProps) {
   const { lines, clearCart } = useCart();
+  const locale = useLocale() as AppLocale;
   const router = useRouter();
   const [state, formAction] = useActionState(
     submitCartOrder,
@@ -68,6 +71,7 @@ export function CartOrderForm({ formClassName }: CartOrderFormProps) {
         readOnly
         aria-hidden
       />
+      <input type="hidden" name="locale" value={locale} readOnly aria-hidden />
       <div
         className="pointer-events-none absolute -left-[10000px] top-auto m-[-1px] h-px w-px overflow-hidden border-0 p-0 opacity-0"
         aria-hidden="true"

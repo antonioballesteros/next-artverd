@@ -2,7 +2,10 @@
 
 import { useCart } from "@/components/shop/CartProvider";
 import { formatEur } from "@/lib/shop/formatEur";
-import type { ShopProduct } from "@/lib/shop/products";
+import {
+  getCartStorageSlug,
+  type ShopProduct,
+} from "@/lib/shop/products";
 import { ShoppingCart } from "lucide-react";
 import { useState, type ChangeEvent } from "react";
 
@@ -34,9 +37,9 @@ export function AddToCartButton({ product }: AddToCartButtonProps) {
   const handleClick = () => {
     if (product.price.kind === "variants") {
       if (!variantId) return;
-      addItem(product.slug, quantity, variantId, complementId);
+      addItem(getCartStorageSlug(product), quantity, variantId, complementId);
     } else {
-      addItem(product.slug, quantity);
+      addItem(getCartStorageSlug(product), quantity);
     }
     setAdded(true);
     window.setTimeout(() => setAdded(false), 2000);

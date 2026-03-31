@@ -1,3 +1,8 @@
+import {
+  getCartStorageSlug,
+  getProductBySlug,
+} from "@/lib/shop/products";
+
 /** localStorage payload for the static shop cart (no checkout). */
 
 export const CART_STORAGE_KEY = "artverd-shop-cart";
@@ -39,4 +44,26 @@ export function parseCartLines(raw: string | null): CartLine[] {
 
 export function serializeCartLines(lines: CartLine[]): string {
   return JSON.stringify(lines);
+}
+
+/** Merges duplicate lines and normalizes slugs to `defaultLocale` segments. */
+export function normalizeCartLines(lines: CartLine[]): CartLine[] {
+  const merged = new Map<string, CartLine>();
+  for (const line of lines) {
+    const product = getProductBySlug(line.slug);
+    if (!product) continue;
+    const slug = getCartStorageSlug(product);
+    const key = `${slug}:${line.variantId ?? ""}:${line.complementId ?? ""}`;
+    const canon: CartLine = { ...line, slug };
+    const prev = merged.get(key);
+    if (prev) {
+      merged.set(key, {
+        ...prev,
+        quantity: prev.quantity + canon.quantity,
+      });
+    } else {
+      merged.set(key, canon);
+    }
+  }
+  return Array.from(merged.values());
 }

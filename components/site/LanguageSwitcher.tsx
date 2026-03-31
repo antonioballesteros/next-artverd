@@ -1,8 +1,12 @@
 "use client";
 
 import { persistLocalePreference } from "@/lib/i18n/localePreference";
-import { routing, type AppLocale } from "@/i18n/routing";
 import { usePathname, useRouter } from "@/i18n/navigation";
+import { routing, type AppLocale } from "@/i18n/routing";
+import {
+  getProductBySlug,
+  getProductSlug,
+} from "@/lib/shop/products";
 import { Languages } from "lucide-react";
 import { useLocale } from "next-intl";
 import { useParams } from "next/navigation";
@@ -40,6 +44,23 @@ export function LanguageSwitcher({
   const onSelect = (next: AppLocale) => {
     if (next === current) return;
     persistLocalePreference(next);
+
+    const slugParam = params.slug;
+    const slug = typeof slugParam === "string" ? slugParam : undefined;
+    if (pathname === "/botiga/[slug]" && slug) {
+      const product = getProductBySlug(slug);
+      if (product) {
+        router.replace(
+          {
+            pathname: "/botiga/[slug]",
+            params: { slug: getProductSlug(product, next) },
+          },
+          { locale: next },
+        );
+        return;
+      }
+    }
+
     router.replace(
       { pathname, params } as Parameters<typeof router.replace>[0],
       { locale: next },

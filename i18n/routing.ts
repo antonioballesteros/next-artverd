@@ -22,7 +22,7 @@ export const routing = defineRouting({
     },
     "/casaments-i-events": {
       ca: "/casaments-i-events",
-      es: "/casamientos-y-eventos",
+      es: "/bodas-y-eventos",
     },
     "/blog": "/blog",
     "/blog/[slug]": "/blog/[slug]",

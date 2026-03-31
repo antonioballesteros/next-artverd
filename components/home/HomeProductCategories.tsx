@@ -28,14 +28,14 @@ const PRODUCT_CATEGORIES: ProductCategory[] = [
     imageAlt: "Plantes en test i decoració verda",
   },
   {
-    href: "/categoria/accesoris",
+    href: "/botiga",
     title: "Accessoris",
     description: "Detalls per decorar amb encant.",
     imageSrc: artverdImages.categoryAccesoris,
     imageAlt: "Accessoris i objectes de decoració",
   },
   {
-    href: "/categoria/events",
+    href: "/casaments-i-events",
     title: "Events",
     description: "Flors per celebracions i esdeveniments.",
     imageSrc: artverdImages.categoryEvents,

@@ -30,7 +30,14 @@ export const SHOP_PRODUCTS: ShopProduct[] = [
     description:
       "Planta natural en test. Pregunta’ns per les varietats disponibles i les cures que necessita.",
     category: "Plantes",
-    price: { kind: "fixed", amountEur: 35 },
+    price: {
+      kind: "variants",
+      options: [
+        { id: "petit", label: "Petit", amountEur: 35 },
+        { id: "mitja", label: "Mitjà", amountEur: 48 },
+        { id: "gran", label: "Gran", amountEur: 80 },
+      ],
+    },
     imagePaths: ["/images/products/planta.webp"],
   },
   {

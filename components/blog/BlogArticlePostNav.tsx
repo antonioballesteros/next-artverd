@@ -8,6 +8,8 @@ interface BlogArticlePostNavProps {
   prevLabel?: string;
   nextSlug?: string;
   nextLabel?: string;
+  ariaLabel: string;
+  allPostsAriaLabel: string;
 }
 
 function blogPostHref(slug: string) {
@@ -19,11 +21,13 @@ export function BlogArticlePostNav({
   prevLabel,
   nextSlug,
   nextLabel,
+  ariaLabel,
+  allPostsAriaLabel,
 }: BlogArticlePostNavProps) {
   return (
     <nav
       className="border-b border-emerald-100/90 bg-[#f3f3f3]/80 backdrop-blur-sm"
-      aria-label="Article navigation"
+      aria-label={ariaLabel}
     >
       <div className="mx-auto flex max-w-3xl items-center justify-between gap-4 px-4 py-4 md:px-6">
         {prevSlug && prevLabel ? (
@@ -44,7 +48,7 @@ export function BlogArticlePostNav({
         <Link
           href="/blog"
           className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-emerald-200/90 bg-white/90 text-emerald-800 shadow-sm transition-[box-shadow,transform,background-color] duration-300 hover:-translate-y-0.5 hover:bg-white hover:shadow-md motion-reduce:hover:translate-y-0"
-          aria-label="All blog posts"
+          aria-label={allPostsAriaLabel}
         >
           <LayoutGrid className="h-5 w-5" aria-hidden />
         </Link>

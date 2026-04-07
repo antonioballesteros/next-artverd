@@ -87,6 +87,19 @@
       }
     }
   },
+  "blog": {
+    "title": "Blog",
+    "list": {
+      "readMore": "Llegir"
+    },
+    "article": {
+      "share": "Comparteix",
+      "navigation": {
+        "ariaLabel": "Navegació de l'article",
+        "allPostsAriaLabel": "Tots els articles del blog"
+      }
+    }
+  },
   "home": {
     "hero": {
       "headline0": "Passió per les flors, des de l'any 2000",

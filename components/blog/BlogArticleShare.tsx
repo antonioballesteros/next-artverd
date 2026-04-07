@@ -5,9 +5,13 @@ import { useEffect, useState } from "react";
 
 interface BlogArticleShareProps {
   shareTitle: string;
+  headingLabel: string;
 }
 
-export function BlogArticleShare({ shareTitle }: BlogArticleShareProps) {
+export function BlogArticleShare({
+  shareTitle,
+  headingLabel,
+}: BlogArticleShareProps) {
   const [pageUrl, setPageUrl] = useState("");
 
   useEffect(() => {
@@ -43,7 +47,7 @@ export function BlogArticleShare({ shareTitle }: BlogArticleShareProps) {
   return (
     <div className="mt-14 border-t border-emerald-100/90 pt-8">
       <p className="text-xs font-semibold tracking-[0.2em] text-emerald-800/70 uppercase">
-        Share
+        {headingLabel}
       </p>
       <ul className="mt-4 flex flex-wrap gap-2 motion-safe:animate-[blog-section-reveal_0.55s_ease-out_both] motion-reduce:animate-none">
         {links.map(({ label, href }) => (

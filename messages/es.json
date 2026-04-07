@@ -87,6 +87,19 @@
       }
     }
   },
+  "blog": {
+    "title": "Blog",
+    "list": {
+      "readMore": "Leer"
+    },
+    "article": {
+      "share": "Compartir",
+      "navigation": {
+        "ariaLabel": "Navegación del artículo",
+        "allPostsAriaLabel": "Todos los artículos del blog"
+      }
+    }
+  },
   "home": {
     "hero": {
       "headline0": "Pasión por las flores, desde el año 2000",

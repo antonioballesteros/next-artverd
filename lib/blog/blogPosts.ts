@@ -1,51 +1,96 @@
 import { AbrilMesFlorsArticle } from "@/components/blog/articles/AbrilMesFlorsArticle";
 import { ElSignificatRosesArticle } from "@/components/blog/articles/ElSignificatRosesArticle";
 import { PerqueTriarArtverdArticle } from "@/components/blog/articles/PerqueTriarArtverdArticle";
-import type { ComponentType } from "react";
+import type { AppLocale } from "@/i18n/routing";
+import type { ReactNode } from "react";
+
+type BlogArticleComponent = (props: { locale: AppLocale }) => Promise<ReactNode> | ReactNode;
 
 interface BlogPostEntry {
-  slug: string;
+  id: string;
+  slugByLocale: Record<AppLocale, string>;
   metadataKey: string;
-  component: ComponentType;
+  titleByLocale: Record<AppLocale, string>;
+  component: BlogArticleComponent;
 }
 
 const BLOG_POST_ENTRIES = [
   {
-    slug: "perque-triar-art-verd-pels-teus-events-especials",
+    id: "perque-triar-art-verd-pels-teus-events-especials",
+    slugByLocale: {
+      ca: "perque-triar-art-verd-pels-teus-events-especials",
+      es: "por-que-elegir-art-verd-para-tus-eventos-especiales",
+    },
     metadataKey: "perque-triar-art-verd-pels-teus-events-especials",
+    titleByLocale: {
+      ca: "¿Perqué triar Artverd pels teus events especials?",
+      es: "¿Por qué elegir Artverd para tus eventos especiales?",
+    },
     component: PerqueTriarArtverdArticle,
   },
   {
-    slug: "abril-el-mes-de-les-flors",
+    id: "abril-el-mes-de-les-flors",
+    slugByLocale: {
+      ca: "abril-el-mes-de-les-flors",
+      es: "abril-el-mes-de-las-flores",
+    },
     metadataKey: "abril-el-mes-de-les-flors",
+    titleByLocale: {
+      ca: "Abril el mes de les flors",
+      es: "Abril, el mes de las flores",
+    },
     component: AbrilMesFlorsArticle,
   },
   {
-    slug: "el-significat-del-color-de-les-roses",
+    id: "el-significat-del-color-de-les-roses",
+    slugByLocale: {
+      ca: "el-significat-del-color-de-les-roses",
+      es: "el-significado-del-color-de-las-rosas",
+    },
     metadataKey: "el-significat-del-color-de-les-roses",
+    titleByLocale: {
+      ca: "El significat del color de les roses",
+      es: "El significado del color de las rosas",
+    },
     component: ElSignificatRosesArticle,
   },
 ] as const satisfies readonly BlogPostEntry[];
 
-export type BlogPostSlug = (typeof BLOG_POST_ENTRIES)[number]["slug"];
+export type BlogPostId = (typeof BLOG_POST_ENTRIES)[number]["id"];
+export type BlogPostSlug = (typeof BLOG_POST_ENTRIES)[number]["slugByLocale"][AppLocale];
 
-const BLOG_POSTS_BY_SLUG: Record<BlogPostSlug, (typeof BLOG_POST_ENTRIES)[number]> =
+const BLOG_POSTS_BY_ID: Record<BlogPostId, (typeof BLOG_POST_ENTRIES)[number]> =
   BLOG_POST_ENTRIES.reduce(
     (accumulator, entry) => {
-      accumulator[entry.slug] = entry;
+      accumulator[entry.id] = entry;
       return accumulator;
     },
-    {} as Record<BlogPostSlug, (typeof BLOG_POST_ENTRIES)[number]>
+    {} as Record<BlogPostId, (typeof BLOG_POST_ENTRIES)[number]>
   );
 
-export const BLOG_POST_SLUGS: readonly BlogPostSlug[] = BLOG_POST_ENTRIES.map(
-  (entry) => entry.slug
-);
+const BLOG_POST_IDS = BLOG_POST_ENTRIES.map((entry) => entry.id) as readonly BlogPostId[];
 
-export function isBlogPostSlug(slug: string): slug is BlogPostSlug {
-  return slug in BLOG_POSTS_BY_SLUG;
+export function getBlogPostById(id: BlogPostId) {
+  return BLOG_POSTS_BY_ID[id];
 }
 
-export function getBlogPostBySlug(slug: BlogPostSlug) {
-  return BLOG_POSTS_BY_SLUG[slug];
+export function getBlogPostBySlugAndLocale(slug: string, locale: AppLocale) {
+  return BLOG_POST_ENTRIES.find((entry) => entry.slugByLocale[locale] === slug);
+}
+
+export function getBlogPostByAnyLocalizedSlug(slug: string) {
+  return BLOG_POST_ENTRIES.find(
+    (entry) => entry.slugByLocale.ca === slug || entry.slugByLocale.es === slug
+  );
+}
+
+export function getLocalizedBlogSlug(id: BlogPostId, locale: AppLocale): string {
+  return BLOG_POSTS_BY_ID[id].slugByLocale[locale];
+}
+
+export function getAllLocalizedBlogSlugs(): string[] {
+  return BLOG_POST_IDS.flatMap((id) => {
+    const post = BLOG_POSTS_BY_ID[id];
+    return [post.slugByLocale.ca, post.slugByLocale.es];
+  });
 }

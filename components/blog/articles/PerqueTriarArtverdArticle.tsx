@@ -4,17 +4,18 @@ import {
   BlogPageHeader,
 } from "@/components/blog";
 import {
-  PERQUE_TRIAR_ARTVERD_CLOSING_SEGMENTS,
-  PERQUE_TRIAR_ARTVERD_INTRO,
-  PERQUE_TRIAR_ARTVERD_LEAD_IN,
-  PERQUE_TRIAR_ARTVERD_REASONS,
-  PERQUE_TRIAR_ARTVERD_TITLE,
+  getBlogPostById,
+  getLocalizedBlogSlug,
+} from "@/lib/blog/blogPosts";
+import {
+  getPerqueTriarArtVerdContent,
 } from "@/lib/blog/perqueTriarArtVerdContent";
+import type { AppLocale } from "@/i18n/routing";
+import { getTranslations } from "next-intl/server";
 
 const NEXT_POST = {
-  slug: "el-significat-del-color-de-les-roses",
-  label: "El significat del color de les roses",
-};
+  id: "el-significat-del-color-de-les-roses",
+} as const;
 
 interface EventReasonSectionProps {
   title: string;
@@ -48,18 +49,30 @@ function EventReasonSection({
   );
 }
 
-export function PerqueTriarArtverdArticle() {
+interface PerqueTriarArtverdArticleProps {
+  locale: AppLocale;
+}
+
+export async function PerqueTriarArtverdArticle({
+  locale,
+}: PerqueTriarArtverdArticleProps) {
+  const t = await getTranslations({ locale, namespace: "blog.article" });
+  const content = getPerqueTriarArtVerdContent(locale);
+  const nextPost = getBlogPostById(NEXT_POST.id);
+
   return (
     <div className="bg-[#f3f3f3]">
       <BlogPageHeader
-        title={PERQUE_TRIAR_ARTVERD_TITLE}
+        title={content.title}
         imageSrc="/images/legacy/blog-triar-art-verd.webp"
-        imageAlt="Flors i decoració per a esdeveniments especials"
+        imageAlt={content.headerImageAlt}
       />
 
       <BlogArticlePostNav
-        nextSlug={NEXT_POST.slug}
-        nextLabel={NEXT_POST.label}
+        nextSlug={getLocalizedBlogSlug(NEXT_POST.id, locale)}
+        nextLabel={nextPost.titleByLocale[locale]}
+        ariaLabel={t("navigation.ariaLabel")}
+        allPostsAriaLabel={t("navigation.allPostsAriaLabel")}
       />
 
       <article className="relative mx-auto max-w-3xl px-4 py-10 pb-6 md:px-6 md:py-14">
@@ -68,19 +81,19 @@ export function PerqueTriarArtverdArticle() {
             className="motion-safe:animate-[blog-section-reveal_0.65s_ease-out_forwards] motion-safe:opacity-0 motion-reduce:animate-none motion-reduce:opacity-100"
             style={{ animationDelay: "40ms" }}
           >
-            {PERQUE_TRIAR_ARTVERD_INTRO}
+            {content.intro}
           </p>
 
           <p
             className="motion-safe:animate-[blog-section-reveal_0.65s_ease-out_forwards] motion-safe:opacity-0 motion-reduce:animate-none motion-reduce:opacity-100"
             style={{ animationDelay: "90ms" }}
           >
-            {PERQUE_TRIAR_ARTVERD_LEAD_IN}
+            {content.leadIn}
           </p>
         </div>
 
         <div className="mt-10 space-y-8 md:mt-12 md:space-y-10">
-          {PERQUE_TRIAR_ARTVERD_REASONS.map((reason, index) => (
+          {content.reasons.map((reason, index) => (
             <EventReasonSection
               key={reason.title}
               title={reason.title}
@@ -93,10 +106,10 @@ export function PerqueTriarArtverdArticle() {
         <p
           className="mt-12 text-[0.98rem] leading-relaxed text-black motion-safe:animate-[blog-section-reveal_0.65s_ease-out_forwards] motion-safe:opacity-0 motion-reduce:animate-none motion-reduce:opacity-100 md:text-base"
           style={{
-            animationDelay: `${140 + PERQUE_TRIAR_ARTVERD_REASONS.length * 70 + 40}ms`,
+            animationDelay: `${140 + content.reasons.length * 70 + 40}ms`,
           }}
         >
-          {PERQUE_TRIAR_ARTVERD_CLOSING_SEGMENTS.map((segment, index) =>
+          {content.closingSegments.map((segment, index) =>
             segment.type === "strong" ? (
               <strong key={index}>{segment.value}</strong>
             ) : (
@@ -105,7 +118,7 @@ export function PerqueTriarArtverdArticle() {
           )}
         </p>
 
-        <BlogArticleShare shareTitle={PERQUE_TRIAR_ARTVERD_TITLE} />
+        <BlogArticleShare shareTitle={content.title} headingLabel={t("share")} />
       </article>
     </div>
   );

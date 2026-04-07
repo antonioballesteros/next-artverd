@@ -12,18 +12,16 @@ export interface RoseMeaningSection {
   paragraphs: string[];
 }
 
-export const EL_SIGNIFICAT_ROSES_TITLE = "El significat del color de les roses";
+import type { AppLocale } from "@/i18n/routing";
 
-/** Open Graph / meta description (Catalan, matches article focus). */
-export const EL_SIGNIFICAT_ROSES_DESCRIPTION =
-  "Més enllà del color vermell tradicional, per Sant Jordi trobem roses de molts colors. Què signifiquen el vermell, el blanc, el groc, el taronja, el rosa i el blau?";
+interface ElSignificatRosesContent {
+  title: string;
+  intro: string[];
+  sections: RoseMeaningSection[];
+  headerImageAlt: string;
+}
 
-export const EL_SIGNIFICAT_ROSES_INTRO: string[] = [
-  "Més enllà del tradicional color vermell tradicional, per Sant Jordi trobem roses blanques, grogues i fins i tot blaves. Els colors transmeten sensacions i tenen un significat en l’àmbit de la psicologia i també en l’art floral. En el cas de les roses, són símbols antics d’amor i bellesa. La rosa tradicional és la vermella, és un dels símbols de Catalunya, juntament amb l’espiga de blat i, a més, simbolitza la sang del drac de Sant Jordi.",
-  "El 90% de les roses que es venen són vermelles. Els colors són subjectius, ja que depenen de cada cultura”. Des de l’antiguitat, les flors s’han utilitzat per donar a conèixer i transmetre sentiments, en un llenguatge no verbal. Quin significat tenen aquí?",
-];
-
-export const EL_SIGNIFICAT_ROSES_SECTIONS: RoseMeaningSection[] = [
+const EL_SIGNIFICAT_ROSES_SECTIONS_CA: RoseMeaningSection[] = [
   {
     accent: "vermella",
     title: "Vermella: passió",
@@ -67,3 +65,73 @@ export const EL_SIGNIFICAT_ROSES_SECTIONS: RoseMeaningSection[] = [
     ],
   },
 ];
+
+const EL_SIGNIFICAT_ROSES_SECTIONS_ES: RoseMeaningSection[] = [
+  {
+    accent: "vermella",
+    title: "Roja: pasión",
+    paragraphs: [
+      "Además de ser la más tradicional de Sant Jordi, la rosa roja se asocia al amor romántico y por eso es ideal para parejas enamoradas. Es símbolo de pasión, sexualidad y erotismo. Pero también puede regalarse a personas muy especiales como muestra de respeto. En la pintura se utiliza mucho con este sentido. De hecho, simboliza la sangre que brota del dragón cuando Sant Jordi lo hiere.",
+    ],
+  },
+  {
+    accent: "blanca",
+    title: "Blanca: pureza",
+    paragraphs: [
+      "Las rosas blancas son un símbolo de pureza e inocencia. Por eso muchas novias las llevan en su ramo: significa que el matrimonio durará toda la vida. Si la regalamos a nuestra pareja, le estamos diciendo implícitamente que esperamos un futuro sólido junto a ella. También suele regalarse de padres a hijos o entre amigos: a alguien con quien se mantiene una relación más intelectual o espiritual, o con quien se quiere empezar de nuevo de forma más sincera.",
+    ],
+  },
+  {
+    accent: "groga",
+    title: "Amarilla: amistad",
+    paragraphs: [
+      "Por un lado es el color del sol y significa luz, alegría, optimismo y amistad. Por eso es ideal para regalar a un buen amigo o amiga con quien tenemos claro que no queremos ir más allá. También podemos regalarla a alguien a quien queremos transmitir buena energía, como un familiar o amigo que está en el hospital, para demostrarle que le deseamos toda la salud del mundo. El amarillo, sin embargo, también puede simbolizar celos, mentira o traición. Así que las personas más supersticiosas podrían tomarlo como una advertencia.",
+    ],
+  },
+  {
+    accent: "taronja",
+    title: "Naranja: creatividad",
+    paragraphs: [
+      "Normalmente se regala a amigos porque es un color muy alegre y vistoso, que simboliza fiesta, placer y diversión. En definitiva: energía positiva. Pero en realidad el naranja está entre el amarillo y el rojo, y podría querer decir que se quiere ir más allá de la amistad. Por eso también es ideal para regalar a amigos que con el tiempo se han convertido en tu pareja actual. Otra opción es regalarla a una persona que está pasando por un mal momento: el naranja ayuda a mejorar el estado de ánimo y estimula la creatividad.",
+    ],
+  },
+  {
+    accent: "rosa",
+    title: "Rosa: admiración",
+    paragraphs: [
+      "Regalar una flor rosada es una forma de agradecer un favor importante mediante las flores. También significa ausencia de maldad, es decir, que no hay dobles intenciones. Por eso también es una manera de mostrar a alguien que puede confiar en nosotros. Si se trata de un tono rosa suave, simboliza admiración y simpatía. Podemos regalarla a alguien a quien admiramos por su valentía o serenidad. Este color también puede significar melancolía e introversión, por lo que una buena opción es regalarla a alguien a quien echamos de menos.",
+    ],
+  },
+  {
+    accent: "blava",
+    title: "Azul: confianza",
+    paragraphs: [
+      "El azul es símbolo de confianza, armonía y afecto. Las flores azules aportan calma, así que son ideales para regalar a quienes están pasando por un momento de estrés o deben tomar una decisión importante. Las flores azules son muy relajantes y tranquilizadoras. Si regalas rosas azules a alguien que está angustiado, le ayudarás a sentirse más calmado.",
+    ],
+  },
+];
+
+const EL_SIGNIFICAT_ROSES_CONTENT: Record<AppLocale, ElSignificatRosesContent> = {
+  ca: {
+    title: "El significat del color de les roses",
+    intro: [
+      "Més enllà del tradicional color vermell tradicional, per Sant Jordi trobem roses blanques, grogues i fins i tot blaves. Els colors transmeten sensacions i tenen un significat en l’àmbit de la psicologia i també en l’art floral. En el cas de les roses, són símbols antics d’amor i bellesa. La rosa tradicional és la vermella, és un dels símbols de Catalunya, juntament amb l’espiga de blat i, a més, simbolitza la sang del drac de Sant Jordi.",
+      "El 90% de les roses que es venen són vermelles. Els colors són subjectius, ja que depenen de cada cultura. Des de l’antiguitat, les flors s’han utilitzat per donar a conèixer i transmetre sentiments, en un llenguatge no verbal. Quin significat tenen aquí?",
+    ],
+    sections: EL_SIGNIFICAT_ROSES_SECTIONS_CA,
+    headerImageAlt: "Roses de diversos colors per Sant Jordi",
+  },
+  es: {
+    title: "El significado del color de las rosas",
+    intro: [
+      "Más allá del tradicional color rojo, en Sant Jordi encontramos rosas blancas, amarillas e incluso azules. Los colores transmiten sensaciones y tienen un significado en el ámbito de la psicología y también en el arte floral. En el caso de las rosas, son símbolos antiguos de amor y belleza. La rosa tradicional es la roja, uno de los símbolos de Catalunya junto con la espiga de trigo y, además, representa la sangre del dragón de Sant Jordi.",
+      "El 90% de las rosas que se venden son rojas. Los colores son subjetivos, ya que dependen de cada cultura. Desde la antigüedad, las flores se han utilizado para comunicar y transmitir sentimientos, en un lenguaje no verbal. ¿Qué significado tienen aquí?",
+    ],
+    sections: EL_SIGNIFICAT_ROSES_SECTIONS_ES,
+    headerImageAlt: "Rosas de varios colores para Sant Jordi",
+  },
+};
+
+export function getElSignificatRosesContent(locale: AppLocale) {
+  return EL_SIGNIFICAT_ROSES_CONTENT[locale];
+}

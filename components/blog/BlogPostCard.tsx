@@ -1,15 +1,16 @@
 "use client";
 
 import { artverdImages } from "@/lib/artverdAssets";
-import type { BlogPost } from "@/lib/blogPosts";
+import type { BlogPostListItem } from "@/lib/blogPosts";
 import { Link } from "@/i18n/navigation";
 import Image from "next/image";
 
 interface BlogPostCardProps {
-  post: BlogPost;
+  post: BlogPostListItem;
+  readMoreLabel: string;
 }
 
-export function BlogPostCard({ post }: BlogPostCardProps) {
+export function BlogPostCard({ post, readMoreLabel }: BlogPostCardProps) {
   const imageFit = post.imageObjectFit ?? "cover";
   const postHref = {
     pathname: "/blog/[slug]" as const,
@@ -52,7 +53,7 @@ export function BlogPostCard({ post }: BlogPostCardProps) {
             href={postHref}
             className="ml-auto text-sm font-semibold text-emerald-700 underline-offset-4 transition hover:text-emerald-900 hover:underline"
           >
-            Llegir
+            {readMoreLabel}
           </Link>
         </div>
       </div>

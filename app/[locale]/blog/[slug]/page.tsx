@@ -1,19 +1,20 @@
 import { getMetadataTranslations } from "@/lib/i18n/pageMetadata";
 import {
-  BLOG_POST_SLUGS,
-  getBlogPostBySlug,
-  isBlogPostSlug,
-  type BlogPostSlug,
+  getAllLocalizedBlogSlugs,
+  getBlogPostByAnyLocalizedSlug,
+  getBlogPostBySlugAndLocale,
 } from "@/lib/blog/blogPosts";
+import { routing, type AppLocale } from "@/i18n/routing";
 import type { Metadata } from "next";
+import { hasLocale } from "next-intl";
 import { notFound } from "next/navigation";
 
 interface BlogPostPageProps {
   params: Promise<{ locale: string; slug: string }>;
 }
 
-export function generateStaticParams(): { slug: BlogPostSlug }[] {
-  return BLOG_POST_SLUGS.map((slug) => ({ slug }));
+export function generateStaticParams(): { slug: string }[] {
+  return getAllLocalizedBlogSlugs().map((slug) => ({ slug }));
 }
 
 export async function generateMetadata({
@@ -22,14 +23,19 @@ export async function generateMetadata({
   const { slug, locale } = await params;
   const t = await getMetadataTranslations(locale, "blogPost");
 
-  if (!isBlogPostSlug(slug)) {
+  const localeForPage: AppLocale = hasLocale(routing.locales, locale)
+    ? locale
+    : routing.defaultLocale;
+  const post =
+    getBlogPostBySlugAndLocale(slug, localeForPage) ??
+    getBlogPostByAnyLocalizedSlug(slug);
+
+  if (!post) {
     return {
       title: t("notFound.title"),
       description: t("notFound.description"),
     };
   }
-
-  const post = getBlogPostBySlug(slug);
 
   return {
     title: t(`${post.metadataKey}.title`),
@@ -38,12 +44,17 @@ export async function generateMetadata({
 }
 
 export default async function BlogPostPage({ params }: BlogPostPageProps) {
-  const { slug } = await params;
+  const { slug, locale } = await params;
 
-  if (!isBlogPostSlug(slug)) {
+  const localeForPage: AppLocale = hasLocale(routing.locales, locale)
+    ? locale
+    : routing.defaultLocale;
+  const post =
+    getBlogPostBySlugAndLocale(slug, localeForPage) ??
+    getBlogPostByAnyLocalizedSlug(slug);
+  if (!post) {
     notFound();
   }
-
-  const { component: Article } = getBlogPostBySlug(slug);
-  return <Article />;
+  const { component: Article } = post;
+  return <Article locale={localeForPage} />;
 }

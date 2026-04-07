@@ -4,6 +4,7 @@ import { floristeriaHeroSlides } from "@/lib/floristeriaAssets";
 import { elsie } from "@/lib/fonts";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import Image from "next/image";
+import { useTranslations } from "next-intl";
 import { useCallback, useEffect, useRef, useState } from "react";
 import type { Swiper as SwiperType } from "swiper";
 import { Autoplay, EffectCoverflow, Keyboard } from "swiper/modules";
@@ -63,6 +64,7 @@ function CoverflowSlideCard(props: CoverflowSlideCardProps) {
 }
 
 export function FloristeriaHero() {
+  const t = useTranslations("floristeria.hero");
   const swiperRef = useRef<SwiperType | null>(null);
   const imagePaintDebounceRef = useRef<ReturnType<typeof setTimeout> | null>(
     null
@@ -190,7 +192,7 @@ export function FloristeriaHero() {
                 swiperRef.current?.slidePrev();
               }}
               className="pointer-events-auto flex h-11 w-11 items-center justify-center rounded-full border border-emerald-800/20 bg-white/90 text-emerald-950 shadow-md backdrop-blur-sm transition hover:bg-white md:h-12 md:w-12"
-              aria-label="Previous image"
+              aria-label={t("previousImageAriaLabel")}
             >
               <ChevronLeft
                 className="h-7 w-7 md:h-8 md:w-8"
@@ -207,7 +209,7 @@ export function FloristeriaHero() {
                 swiperRef.current?.slideNext();
               }}
               className="pointer-events-auto flex h-11 w-11 items-center justify-center rounded-full border border-emerald-800/20 bg-white/90 text-emerald-950 shadow-md backdrop-blur-sm transition hover:bg-white md:h-12 md:w-12"
-              aria-label="Next image"
+              aria-label={t("nextImageAriaLabel")}
             >
               <ChevronRight
                 className="h-7 w-7 md:h-8 md:w-8"
@@ -223,10 +225,10 @@ export function FloristeriaHero() {
             className={`${elsie.className} text-3xl leading-tight font-normal tracking-wide text-emerald-950 md:text-4xl lg:text-5xl`}
             id="floristeria-hero-heading"
           >
-            La teva floristeria a Terrassa
+            {t("heading")}
           </p>
           <p className="mt-3 text-sm text-emerald-800/90 md:text-base">
-            Carrer Cardaire, 11 · Terrassa
+            {t("address")}
           </p>
         </div>
       </div>

@@ -1,9 +1,12 @@
 import { elsie } from "@/lib/fonts";
+import { getTranslations } from "next-intl/server";
 
 const MAP_EMBED_SRC =
   "https://www.google.com/maps/embed?pb=!4v1686042008495!6m8!1m7!1sCAoSLEFGMVFpcFBudWpfUmZLb0cxak9Cc1BmTlR1OEkzMllKZXp6MEdlLThSU1Ri!2m2!1d41.56364871!2d2.01295596!3f245.63!4f1.9599999999999937!5f0.4000000000000002";
 
-export function FloristeriaTourSection() {
+export async function FloristeriaTourSection() {
+  const t = await getTranslations("floristeria.tour");
+
   return (
     <section
       className="bg-emerald-50/35 py-14 md:py-20"
@@ -15,11 +18,11 @@ export function FloristeriaTourSection() {
           id="floristeria-tour-heading"
           className={`${elsie.className} text-3xl font-normal text-emerald-950 md:text-4xl`}
         >
-          Fes un tour per la nostra floristeria
+          {t("heading")}
         </h2>
         <div className="mt-10 overflow-hidden rounded-2xl border border-emerald-900/15 shadow-lg">
           <iframe
-            title="Tour virtual — Floristeria Artverd, Carrer Cardaire 11, Terrassa"
+            title={t("iframeTitle")}
             src={MAP_EMBED_SRC}
             className="aspect-4/3 min-h-[320px] w-full border-0 md:min-h-[480px] lg:min-h-[560px]"
             loading="lazy"

@@ -1,8 +1,11 @@
 import { ScrollConvergePair } from "@/components/ScrollConvergePair";
 import { floristeriaImages } from "@/lib/floristeriaAssets";
+import { getTranslations } from "next-intl/server";
 import Image from "next/image";
 
-export function FloristeriaStorySection() {
+export async function FloristeriaStorySection() {
+  const t = await getTranslations("floristeria.story");
+
   return (
     <section className="bg-background py-12 md:py-16">
       <ScrollConvergePair
@@ -10,15 +13,10 @@ export function FloristeriaStorySection() {
         left={
           <div className="mx-4 text-pretty md:mx-0">
             <p className="text-base leading-relaxed text-emerald-900/90 md:text-lg">
-              Artverd és un lloc màgic on pots trobar arranjaments florals,
-              plantes, així com amb una varietat de complements, per fer el
-              regal perfecte per cada persona.
+              {t("paragraph1")}
             </p>
             <p className="mt-4 text-base leading-relaxed text-emerald-900/90 md:text-lg">
-              Fundada l’any 2000, la floristeria Artverd està ubicada la zona
-              peatonal del Centre històric de Terrassa en un local espaiós i
-              acollidor, amb una decoració rústica escandinava, que ressalta la
-              bellesa de les flors, que creen un ambient encantador i relaxant.
+              {t("paragraph2")}
             </p>
           </div>
         }
@@ -26,7 +24,7 @@ export function FloristeriaStorySection() {
           <div className="relative aspect-4/3 w-full overflow-hidden rounded-2xl border border-emerald-900/10 shadow-xl">
             <Image
               src={floristeriaImages.bouquetHero}
-              alt="Ramo de flors i espai de la floristeria"
+                alt={t("imageAlt")}
               fill
               className="object-cover"
               sizes="(max-width: 768px) 100vw, 50vw"

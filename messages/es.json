@@ -192,5 +192,38 @@
     "map": {
       "iframeTitle": "Artverd Floristeria en Google Maps"
     }
+  },
+  "floristeria": {
+    "hero": {
+      "previousImageAriaLabel": "Imagen anterior",
+      "nextImageAriaLabel": "Imagen siguiente",
+      "heading": "Tu floristería en Terrassa",
+      "address": "Calle Cardaire, 11 · Terrassa"
+    },
+    "pageIntro": {
+      "title": "Floristería Artverd",
+      "subtitle": "Las flores son mucho más que simples plantas; son símbolos de belleza, amor y emociones."
+    },
+    "story": {
+      "paragraph1": "Artverd es un lugar mágico donde puedes encontrar arreglos florales, plantas y una gran variedad de complementos, para hacer el regalo perfecto para cada persona.",
+      "paragraph2": "Fundada en el año 2000, la floristería Artverd está ubicada en la zona peatonal del Centro Histórico de Terrassa, en un local espacioso y acogedor, con una decoración rústica escandinava que resalta la belleza de las flores y crea un ambiente encantador y relajante.",
+      "imageAlt": "Ramo de flores y espacio de la floristería"
+    },
+    "shop": {
+      "heading": "Flores, plantas naturales y decoración",
+      "intro": "En la tienda encontrarás los mejores ramos de flores, plantas naturales y decoración. Haz tu pedido online y puedes recogerlo en la tienda o te lo entregamos a domicilio.",
+      "cta": "Tienda",
+      "imageAlt": "Interior de la tienda Artverd con flores y decoración",
+      "paragraph1": "La selección de flores es amplia y de la más alta calidad. Se pueden encontrar variedades exóticas y tropicales, así como las clásicas y tradicionales. Las flores son frescas y las mantenemos en condiciones óptimas para garantizar su durabilidad y belleza. Además de flores cortadas, también te ofrecemos flor seca, plantas, terrarios, macetas y objetos de regalo y decoración de prestigiosas marcas, como Bloomingville.",
+      "paragraph2": "Somos floristas expertos y apasionados, y nos esforzamos por ofrecer un trato y asesoramiento personalizado para que aciertes con el regalo perfecto para cada ocasión, como un aniversario, un santo, un día especial, el Día de la Madre, Sant Jordi o San Valentín."
+    },
+    "tour": {
+      "heading": "Haz un tour por nuestra floristería",
+      "iframeTitle": "Tour virtual — Floristería Artverd, Calle Cardaire 11, Terrassa"
+    },
+    "contactCta": {
+      "ariaLabel": "Contacto",
+      "button": "Contacta con nosotros"
+    }
   }
 }

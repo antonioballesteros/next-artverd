@@ -2,9 +2,12 @@ import { Link } from "@/i18n/navigation";
 import { ScrollConvergePair } from "@/components/ScrollConvergePair";
 import { floristeriaImages } from "@/lib/floristeriaAssets";
 import { elsie } from "@/lib/fonts";
+import { getTranslations } from "next-intl/server";
 import Image from "next/image";
 
-export function FloristeriaShopSection() {
+export async function FloristeriaShopSection() {
+  const t = await getTranslations("floristeria.shop");
+
   return (
     <section
       className="bg-background py-14 md:py-20"
@@ -15,19 +18,17 @@ export function FloristeriaShopSection() {
           id="floristeria-shop-heading"
           className={`${elsie.className} text-3xl font-normal text-emerald-950 md:text-6xl`}
         >
-          Flors, plantes naturals i decoració
+          {t("heading")}
         </h2>
         <p className="mx-auto mt-6 max-w-2xl text-base leading-relaxed text-emerald-900/90 md:text-lg">
-          A la botiga trobaràs els millors rams de flors, plantes naturals i
-          decoració. Fes la comanda online i pots recollir a la botiga o t’ho
-          lliurem a domicili.
+          {t("intro")}
         </p>
         <div className="mt-10 flex justify-center">
           <Link
             href="/botiga"
             className="inline-flex min-h-12 items-center justify-center rounded-sm bg-emerald-800 px-12 py-3.5 text-sm font-semibold tracking-widest text-white uppercase shadow-md transition hover:bg-emerald-900"
           >
-            Botiga
+            {t("cta")}
           </Link>
         </div>
       </div>
@@ -39,7 +40,7 @@ export function FloristeriaShopSection() {
             <div className="relative aspect-3/4 max-h-[min(90vh,720px)] w-full overflow-hidden rounded-2xl border border-emerald-900/10 shadow-xl md:mx-0">
               <Image
                 src={floristeriaImages.shopInterior}
-                alt="Interior de la botiga Artverd amb flors i decoració"
+                alt={t("imageAlt")}
                 fill
                 className="object-cover object-center"
                 sizes="(max-width: 768px) 100vw, 50vw"
@@ -53,19 +54,10 @@ export function FloristeriaShopSection() {
                 aria-hidden
               />
               <p className="text-base leading-relaxed text-emerald-900/90 md:text-lg">
-                La selecció de flors és àmplia i de la més alta qualitat. S’hi
-                poden trobar varietats exòtiques i tropicals, així com les
-                clàssiques i tradicionals. Les flors són fresques i les mantenim
-                en condicions òptimes per garantir-ne la durabilitat i la
-                bellesa. A més de les flors tallades, també t’oferim flor seca,
-                plantes, terràriums, testos, i objectes de regal i decoració de
-                prestigioses marques de decoració, com Bloomingville.
+                {t("paragraph1")}
               </p>
               <p className="mt-5 text-base leading-relaxed text-emerald-900/90 md:text-lg">
-                Som floristes experts i apassionats, i ens esforcem per oferir
-                un tracte i assessorament personalitzat per que encertis en el
-                regal perfecte per cada ocasió, com un aniversari, un sant, un
-                dia especial, el dia de la Mare, Sant Jordi o Sant Valentí.
+                {t("paragraph2")}
               </p>
             </div>
           }

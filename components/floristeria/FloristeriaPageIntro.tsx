@@ -1,6 +1,9 @@
 import { elsie } from "@/lib/fonts";
+import { getTranslations } from "next-intl/server";
 
-export function FloristeriaPageIntro() {
+export async function FloristeriaPageIntro() {
+  const t = await getTranslations("floristeria.pageIntro");
+
   return (
     <section
       className="relative overflow-hidden py-14 md:py-20"
@@ -16,13 +19,12 @@ export function FloristeriaPageIntro() {
           id="floristeria-title"
           className={`${elsie.className} text-3xl font-normal tracking-wide text-emerald-950 md:text-8xl`}
         >
-          Floristeria Artverd
+          {t("title")}
         </h1>
         <h2
           className={`${elsie.className} mx-auto mt-5 max-w-2xl text-lg leading-relaxed text-emerald-900/90 md:text-xl`}
         >
-          Les flors són molt més que simples plantes; són símbols de bellesa,
-          amor i emocions.
+          {t("subtitle")}
         </h2>
         <div
           className="mx-auto mt-10 h-px w-24 bg-emerald-300/80"

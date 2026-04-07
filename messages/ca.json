@@ -129,6 +129,24 @@
       "nextImage": "Imatge següent",
       "slideIndicators": "Indicadors de diapositives",
       "goToSlide": "Anar a la imatge {n}"
+    },
+    "cartPage": {
+      "orderSentMessage": "S’ha enviat la sol·licitud amb la cistella. Et contactarem aviat.",
+      "emptyTitle": "La cistella és buida",
+      "emptyDescription": "Explora la botiga i afegeix productes per veure’ls aquí.",
+      "goToShop": "Anar a la botiga",
+      "title": "Cistella",
+      "clearCart": "Buidar la cistella",
+      "sizeFallback": "Mida",
+      "pricePerUnitVariants": "{variant} · {price} / unitat",
+      "pricePerUnitSimple": "{price} / unitat",
+      "quantityLabel": "Quantitat",
+      "remove": "Eliminar",
+      "subtotal": "Subtotal",
+      "estimatedTotal": "Total estimat",
+      "noOnlinePaymentNote": "No hi ha pagament online: des de la pàgina següent enviaràs la sol·licitud i et confirmarem la comanda per correu o telèfon.",
+      "continueShopping": "Seguir comprant",
+      "placeOrder": "Fer la comanda"
     }
   },
   "home": {

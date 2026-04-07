@@ -129,6 +129,24 @@
       "nextImage": "Imagen siguiente",
       "slideIndicators": "Indicadores de diapositivas",
       "goToSlide": "Ir a la imagen {n}"
+    },
+    "cartPage": {
+      "orderSentMessage": "Se ha enviado la solicitud con la cesta. Te contactaremos pronto.",
+      "emptyTitle": "La cesta está vacía",
+      "emptyDescription": "Explora la tienda y añade productos para verlos aquí.",
+      "goToShop": "Ir a la tienda",
+      "title": "Cesta",
+      "clearCart": "Vaciar la cesta",
+      "sizeFallback": "Tamaño",
+      "pricePerUnitVariants": "{variant} · {price} / unidad",
+      "pricePerUnitSimple": "{price} / unidad",
+      "quantityLabel": "Cantidad",
+      "remove": "Eliminar",
+      "subtotal": "Subtotal",
+      "estimatedTotal": "Total estimado",
+      "noOnlinePaymentNote": "No hay pago online: desde la página siguiente enviarás la solicitud y te confirmaremos el pedido por correo o teléfono.",
+      "continueShopping": "Seguir comprando",
+      "placeOrder": "Hacer el pedido"
     }
   },
   "home": {

@@ -13,7 +13,7 @@ import {
 } from "@/lib/shop/products";
 import { elsie } from "@/lib/fonts";
 import Image from "next/image";
-import { useLocale } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { Trash2 } from "lucide-react";
 
 interface CartPageClientProps {
@@ -23,6 +23,7 @@ interface CartPageClientProps {
 
 export function CartPageClient({ orderSent = false }: CartPageClientProps) {
   const locale = useLocale() as AppLocale;
+  const t = useTranslations("botiga.cartPage");
   const { lines, totalEur, removeItem, setQuantity, clearCart } = useCart();
 
   if (lines.length === 0) {
@@ -33,23 +34,20 @@ export function CartPageClient({ orderSent = false }: CartPageClientProps) {
             className="mb-8 rounded-xl border border-emerald-400/50 bg-emerald-50 px-4 py-3 text-sm text-emerald-950"
             role="status"
           >
-            S&apos;ha enviat la sol·licitud amb la cistella. Et contactarem
-            aviat.
+            {t("orderSentMessage")}
           </p>
         ) : null}
         <h1
           className={`${elsie.className} text-3xl font-normal text-emerald-950 md:text-4xl`}
         >
-          La cistella és buida
+          {t("emptyTitle")}
         </h1>
-        <p className="mt-4 text-emerald-900/85">
-          Explora la botiga i afegeix productes per veure’ls aquí.
-        </p>
+        <p className="mt-4 text-emerald-900/85">{t("emptyDescription")}</p>
         <Link
           href="/botiga"
           className="mt-8 inline-flex min-h-12 items-center justify-center rounded-sm bg-emerald-800 px-8 py-3 text-sm font-semibold tracking-widest text-white uppercase shadow-md transition hover:bg-emerald-900"
         >
-          Anar a la botiga
+          {t("goToShop")}
         </Link>
       </div>
     );
@@ -61,14 +59,14 @@ export function CartPageClient({ orderSent = false }: CartPageClientProps) {
         <h1
           className={`${elsie.className} text-3xl font-normal text-emerald-950 md:text-4xl`}
         >
-          Cistella
+          {t("title")}
         </h1>
         <button
           type="button"
           onClick={clearCart}
           className="self-start text-sm font-medium text-emerald-800 underline-offset-4 hover:text-emerald-950 hover:underline"
         >
-          Buidar la cistella
+          {t("clearCart")}
         </button>
       </div>
 
@@ -122,15 +120,18 @@ export function CartPageClient({ orderSent = false }: CartPageClientProps) {
                 <p className="mt-1 text-sm text-emerald-800/80">
                   {product.price.kind === "variants" ? (
                     <>
-                      {variantLabel ?? "Mida"} · {formatEur(unit)} / unitat
+                      {t("pricePerUnitVariants", {
+                        variant: variantLabel ?? t("sizeFallback"),
+                        price: formatEur(unit),
+                      })}
                     </>
                   ) : (
-                    <>{formatEur(unit)} / unitat</>
+                    <>{t("pricePerUnitSimple", { price: formatEur(unit) })}</>
                   )}
                 </p>
                 <div className="mt-3 flex flex-wrap items-center gap-3">
                   <label className="flex items-center gap-2 text-sm text-emerald-900">
-                    <span className="sr-only">Quantitat</span>
+                    <span className="sr-only">{t("quantityLabel")}</span>
                     <input
                       type="number"
                       min={1}
@@ -161,12 +162,12 @@ export function CartPageClient({ orderSent = false }: CartPageClientProps) {
                     className="inline-flex items-center gap-1 rounded-lg px-2 py-1 text-sm font-medium text-red-700 transition hover:bg-red-50"
                   >
                     <Trash2 className="h-4 w-4" aria-hidden />
-                    Eliminar
+                    {t("remove")}
                   </button>
                 </div>
               </div>
               <div className="text-right sm:pl-4">
-                <p className="text-sm text-emerald-800/80">Subtotal</p>
+                <p className="text-sm text-emerald-800/80">{t("subtotal")}</p>
                 <p className="text-lg font-semibold text-emerald-950">
                   {formatEur(lineTotal)}
                 </p>
@@ -178,27 +179,26 @@ export function CartPageClient({ orderSent = false }: CartPageClientProps) {
 
       <div className="mt-8 flex flex-col items-end gap-2 border-t border-emerald-200/90 pt-6">
         <p className="text-sm uppercase tracking-wide text-emerald-800/80">
-          Total estimat
+          {t("estimatedTotal")}
         </p>
         <p className={`${elsie.className} text-3xl text-emerald-950`}>
           {formatEur(totalEur)}
         </p>
         <p className="max-w-md text-right text-sm text-emerald-800/75">
-          No hi ha pagament online: des de la pàgina següent enviaràs la
-          sol·licitud i et confirmarem la comanda per correu o telèfon.
+          {t("noOnlinePaymentNote")}
         </p>
         <div className="mt-6 flex w-full max-w-md flex-col gap-3 self-end sm:flex-row sm:justify-end">
           <Link
             href="/botiga"
             className="inline-flex min-h-11 flex-1 items-center justify-center rounded-sm border border-emerald-700 bg-transparent px-6 py-2.5 text-sm font-semibold tracking-wide text-emerald-900 uppercase transition hover:bg-emerald-50 sm:flex-initial"
           >
-            Seguir comprant
+            {t("continueShopping")}
           </Link>
           <Link
             href="/botiga/cistella/comanda"
             className="inline-flex min-h-11 flex-1 items-center justify-center rounded-sm bg-emerald-800 px-6 py-2.5 text-sm font-semibold tracking-wide text-white uppercase shadow-md transition hover:bg-emerald-900 sm:flex-initial"
           >
-            Fer la comanda
+            {t("placeOrder")}
           </Link>
         </div>
       </div>

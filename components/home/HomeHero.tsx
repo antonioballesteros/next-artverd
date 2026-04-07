@@ -2,7 +2,9 @@
 
 import { artverdSignature, elsie } from "@/lib/fonts";
 import { artverdHeroSlides } from "@/lib/artverdAssets";
+import type { AppLocale } from "@/i18n/routing";
 import Image from "next/image";
+import { useLocale } from "next-intl";
 import { useEffect, useState } from "react";
 
 const SLIDE_INTERVAL_MS = 5500;
@@ -11,11 +13,19 @@ const FADE_MS = 1000;
 const HEADLINE_FADE_MS = 900;
 
 const HERO_HEADLINES = [
-  "Passió per les flors, des de l’any 2000",
-  "Sempre queda perfum a les mans de qui regala flors",
+  {
+    ca: "Passió per les flors, des de l'any 2000",
+    es: "Pasión por las flores, desde el año 2000",
+  },
+  {
+    ca: "Sempre queda perfum a les mans de qui regala flors",
+    es: "Siempre queda perfume en las manos de quien regala flores",
+  },
 ] as const;
 
 export function HomeHero() {
+  const locale = useLocale() as AppLocale;
+  const heroHeadlines = HERO_HEADLINES.map((headline) => headline[locale]);
   const [activeIndex, setActiveIndex] = useState(0);
   const [reduceMotion, setReduceMotion] = useState(false);
 
@@ -35,7 +45,7 @@ export function HomeHero() {
     return () => window.clearInterval(id);
   }, [reduceMotion]);
 
-  const headlineIndex = activeIndex % HERO_HEADLINES.length;
+  const headlineIndex = activeIndex % heroHeadlines.length;
 
   return (
     <section
@@ -93,7 +103,7 @@ export function HomeHero() {
             id="hero-heading"
             className={`${elsie.className} relative z-10 mx-auto grid max-w-2xl grid-cols-1 text-4xl leading-snug font-normal tracking-wide italic [-webkit-text-stroke:0.02em_rgb(15_31_20/0.28)] [paint-order:stroke_fill] [text-shadow:0_0.06em_0.12em_rgb(0_0_0/0.45),0_0_0.45em_rgb(0_0_0/0.35),0_0_1em_rgb(0_0_0/0.2)] md:max-w-3xl md:text-5xl`}
           >
-            {HERO_HEADLINES.map((line, i) => {
+            {heroHeadlines.map((line, i) => {
               const isActive = headlineIndex === i;
               return (
                 <span

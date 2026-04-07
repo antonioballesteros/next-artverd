@@ -225,5 +225,58 @@
       "ariaLabel": "Contacto",
       "button": "Contacta con nosotros"
     }
+  },
+  "tallers": {
+    "hero": {
+      "imageAlt": "Taller floral — trabajando con flores y follaje",
+      "ariaLabel": "Talleres"
+    },
+    "intro": {
+      "title": "Talleres en ArtVerd",
+      "lead": "En los talleres nos adentraremos en el maravilloso mundo de las flores y las plantas y aprenderemos a crear bellas composiciones florales, kokedamas y terrarios."
+    },
+    "narrative": {
+      "sectionWorkshopsAria": "Introducción a los talleres",
+      "sectionColorAria": "Color y conservación",
+      "imageMainAlt": "Detalle de un taller floral con hojas verdes",
+      "imageArrangementAlt": "Arreglo floral en recipiente de vidrio",
+      "section1": {
+        "p1": "Empezaremos aprendiendo las técnicas básicas de manipulación de flores: cómo cortar los tallos adecuadamente, cómo preparar los recipientes y cómo crear la estructura base para nuestros arreglos. Además, descubriremos los principios del diseño floral, como el equilibrio, la simetría y la proporción, que nos ayudarán a crear arreglos visualmente atractivos.",
+        "p2": "A medida que avanzamos, exploraremos distintos estilos de arte floral, desde los clásicos y elegantes hasta los modernos y vanguardistas. Conoceremos las distintas flores de temporada y aprenderemos a seleccionar las más adecuadas para cada ocasión, ya sea un evento especial, una boda, una fiesta o simplemente para decorar nuestro hogar."
+      },
+      "section2": {
+        "p1": "Además, dedicaremos tiempo a explorar la importancia de la elección de los colores en nuestros arreglos y cómo pueden evocar distintos estados de ánimo y emociones. Aprenderemos a jugar con los contrastes y las combinaciones armoniosas para lograr efectos visuales impactantes.",
+        "p2": "Pero el arte floral no trata solo de la estética, sino también del cuidado y el mantenimiento de nuestras creaciones. Aprenderemos técnicas de conservación para prolongar la vida de las flores y consejos prácticos para mantener nuestros arreglos frescos y bonitos durante más tiempo."
+      }
+    },
+    "capturesGallery": {
+      "ariaLabel": "Galería ilustrativa",
+      "imageAlts": [
+        "Ilustración decorativa del taller floral",
+        "Detalle artístico del taller",
+        "Motivo floral del taller"
+      ]
+    },
+    "statementSlider": {
+      "sectionAriaLabel": "Nuestros talleres florales",
+      "slideLabel": "Diapositiva {current} de {total}",
+      "slide0": {
+        "title": "Espacio abierto para la expresión",
+        "body": "Este taller es un espacio abierto para la expresión individual y la experimentación.\n\nTe invito a dejarte llevar por tu intuición y creatividad mientras trabajamos\n\njuntos en el diseño y la creación de arreglos florales únicos."
+      },
+      "slide1": {
+        "title": "Arte y belleza",
+        "body": "Al terminar el taller, no solo te llevarás a casa tus creaciones florales, sino también nuevas\n\namistades y una nueva perspectiva sobre el arte y la belleza que nos rodea."
+      }
+    },
+    "closingNote": {
+      "ariaLabel": "Reflexión final sobre los talleres",
+      "p1": "Espero que estos talleres sean una experiencia enriquecedora y que te inspiren a seguir explorando el apasionante mundo del arte floral.",
+      "p2": "Y aún hay algo mejor que hacer un taller: regalar un taller a tu ser querido."
+    },
+    "experienceGift": {
+      "heading": "Regala una experiencia",
+      "ctaShop": "Tienda"
+    }
   }
 }

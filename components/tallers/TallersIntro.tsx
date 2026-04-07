@@ -1,6 +1,8 @@
 import { elsie } from "@/lib/fonts";
+import { getTranslations } from "next-intl/server";
 
-export function TallersIntro() {
+export async function TallersIntro() {
+  const t = await getTranslations("tallers.intro");
   return (
     <section
       className="bg-background py-12 md:py-16"
@@ -12,14 +14,12 @@ export function TallersIntro() {
           id="tallers-page-title"
           className={`${elsie.className} text-3xl font-normal tracking-wide text-emerald-950 md:text-5xl lg:text-8xl`}
         >
-          Tallers a ArtVerd
+          {t("title")}
         </h1>
         <p
           className={`${elsie.className} mx-auto mt-6 max-w-3xl text-base leading-relaxed text-emerald-900/90 md:text-lg`}
         >
-          Als tallers ens endinsarem en el meravellós món de les flors i les
-          plantes i aprendrem a crear belles composicions florals, kokedamas i
-          terraris.
+          {t("lead")}
         </p>
       </div>
     </section>

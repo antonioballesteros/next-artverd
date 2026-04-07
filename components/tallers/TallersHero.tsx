@@ -1,12 +1,14 @@
 import { HeroSection } from "@/components/HeroSection";
 import { tallersImages } from "@/lib/tallersAssets";
+import { getTranslations } from "next-intl/server";
 
-export function TallersHero() {
+export async function TallersHero() {
+  const t = await getTranslations("tallers.hero");
   return (
     <HeroSection
       src={tallersImages.heroMain}
-      alt="Floral workshop — working with flowers and foliage"
-      ariaLabel="Tallers"
+      alt={t("imageAlt")}
+      ariaLabel={t("ariaLabel")}
     />
   );
 }

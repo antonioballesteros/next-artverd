@@ -3,43 +3,33 @@
 import { elsie } from "@/lib/fonts";
 import { tallersImages } from "@/lib/tallersAssets";
 import Image from "next/image";
-import { useCallback, useEffect, useState } from "react";
+import { useTranslations } from "next-intl";
+import { useCallback, useEffect, useMemo, useState } from "react";
 
 const SLIDE_INTERVAL_MS = 6500;
 const CROSSFADE_MS = 900;
 
-const SLIDES = [
-  {
-    image: tallersImages.statementEspai,
-    title: "Espai obert per l'expressió",
-    body: (
-      <>
-        Aquest taller és un espai obert per a l&apos;expressió individual i
-        l&apos;experimentació.
-        <br />
-        Et convido a deixar-te portar per la teva intuïció i creativitat mentre
-        treballem
-        <br />
-        junts en el disseny i la creació d&apos;arranjaments florals únics.
-      </>
-    ),
-  },
-  {
-    image: tallersImages.statementArt,
-    title: "Art i bellesa",
-    body: (
-      <>
-        En acabar el taller, no només t&apos;enduràs a casa les teves creacions
-        florals, sinó també noves
-        <br />
-        amistats i una nova perspectiva sobre l&apos;art i la bellesa que ens
-        envolta.
-      </>
-    ),
-  },
-] as const;
+const SLIDE_IMAGES = [tallersImages.statementEspai, tallersImages.statementArt] as const;
 
 export function TallersStatementSlider() {
+  const t = useTranslations("tallers.statementSlider");
+  const slides = useMemo(
+    () =>
+      [
+        {
+          image: SLIDE_IMAGES[0],
+          title: t("slide0.title"),
+          body: t("slide0.body"),
+        },
+        {
+          image: SLIDE_IMAGES[1],
+          title: t("slide1.title"),
+          body: t("slide1.body"),
+        },
+      ] as const,
+    [t]
+  );
+
   const [index, setIndex] = useState(0);
   const [reduceMotion, setReduceMotion] = useState(false);
 
@@ -52,12 +42,12 @@ export function TallersStatementSlider() {
   }, []);
 
   useEffect(() => {
-    if (reduceMotion || SLIDES.length <= 1) return;
+    if (reduceMotion || slides.length <= 1) return;
     const id = window.setInterval(() => {
-      setIndex((i) => (i + 1) % SLIDES.length);
+      setIndex((i) => (i + 1) % slides.length);
     }, SLIDE_INTERVAL_MS);
     return () => window.clearInterval(id);
-  }, [reduceMotion]);
+  }, [reduceMotion, slides.length]);
 
   const goTo = useCallback((i: number) => {
     setIndex(i);
@@ -66,11 +56,11 @@ export function TallersStatementSlider() {
   return (
     <section
       className="relative w-full overflow-hidden bg-zinc-900"
-      aria-label="Els nostres tallers florals"
+      aria-label={t("sectionAriaLabel")}
       aria-roledescription="carousel"
     >
       <div className="relative aspect-5/3 min-h-[min(52vh,560px)] w-full md:aspect-21/9 md:min-h-[480px]">
-        {SLIDES.map((slide, i) => {
+        {slides.map((slide, i) => {
           const active = i === index;
           const zoomIn = i % 2 === 0;
           const activeZoomClass = zoomIn
@@ -106,7 +96,7 @@ export function TallersStatementSlider() {
 
         <div className="pointer-events-none absolute inset-0 z-10 flex flex-col items-center justify-center px-4 text-center text-white">
           <div
-            key={SLIDES[index].title}
+            key={slides[index].title}
             className="flex max-w-4xl flex-col items-center justify-center md:px-6"
           >
             <p
@@ -116,17 +106,17 @@ export function TallersStatementSlider() {
                   : "animate-[tallers-title-pop_1.1s_ease-out_both]"
               }`}
             >
-              {SLIDES[index].title}
+              {slides[index].title}
             </p>
-            <p className="text-md mt-6 max-w-2xl leading-relaxed tracking-wide text-pretty text-white/95 shadow-black/20 drop-shadow-sm md:text-base">
-              {SLIDES[index].body}
+            <p className="text-md mt-6 max-w-2xl whitespace-pre-line leading-relaxed tracking-wide text-pretty text-white/95 shadow-black/20 drop-shadow-sm md:text-base">
+              {slides[index].body}
             </p>
           </div>
         </div>
       </div>
 
       <div className="pointer-events-auto absolute right-0 bottom-5 left-0 z-20 flex justify-center gap-2">
-        {SLIDES.map((_, i) => (
+        {slides.map((_, i) => (
           <button
             key={String(i)}
             type="button"
@@ -135,7 +125,10 @@ export function TallersStatementSlider() {
               backgroundColor:
                 i === index ? "rgb(52 211 153)" : "rgba(255,255,255,0.35)",
             }}
-            aria-label={`Diapositiva ${i + 1} de ${SLIDES.length}`}
+            aria-label={t("slideLabel", {
+              current: i + 1,
+              total: slides.length,
+            })}
             aria-current={i === index ? "true" : undefined}
             onClick={() => goTo(i)}
           />

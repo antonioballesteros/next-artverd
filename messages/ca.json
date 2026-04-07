@@ -225,5 +225,58 @@
       "ariaLabel": "Contacte",
       "button": "Contacta amb nosaltres"
     }
+  },
+  "tallers": {
+    "hero": {
+      "imageAlt": "Taller floral — treballant amb flors i fullatge",
+      "ariaLabel": "Tallers"
+    },
+    "intro": {
+      "title": "Tallers a ArtVerd",
+      "lead": "Als tallers ens endinsarem en el meravellós món de les flors i les plantes i aprendrem a crear belles composicions florals, kokedames i terraris."
+    },
+    "narrative": {
+      "sectionWorkshopsAria": "Introducció als tallers",
+      "sectionColorAria": "Color i conservació",
+      "imageMainAlt": "Detall d’un taller floral amb fulles verdes",
+      "imageArrangementAlt": "Arranjament floral en recipient de vidre",
+      "section1": {
+        "p1": "Començarem per aprendre les tècniques bàsiques de manipulació de flors: com tallar les tiges adequadament, com preparar els recipients i com crear l’estructura de base per als nostres arranjaments. A més, descobrirem els principis del disseny floral, com ara l’equilibri, la simetria i la proporció, que ens ajudaran a crear arranjaments visualment atractius.",
+        "p2": "A mesura que avancem, explorarem diferents estils d’art floral, des dels clàssics i els elegants fins als moderns i avantguardistes. Coneixerem les diferents flors de temporada i aprendrem a seleccionar les més adequades per a cada ocasió, ja sigui un esdeveniment especial, un casament, una festa o simplement per decorar la nostra llar."
+      },
+      "section2": {
+        "p1": "A més, dedicarem temps a explorar la importància de l’elecció dels colors en els nostres arranjaments i com poden evocar diferents estats d’ànim i emocions. Aprendrem a jugar amb els contrastos i les combinacions harmonioses per assolir efectes visuals impactants.",
+        "p2": "Però l’art floral no només tracta de l’estètica, sinó també de la cura i el manteniment de les nostres creacions. Aprendrem tècniques de conservació per prolongar la vida de les flors i consells pràctics per mantenir els nostres arranjaments frescos i bonics durant més temps."
+      }
+    },
+    "capturesGallery": {
+      "ariaLabel": "Galeria il·lustrativa",
+      "imageAlts": [
+        "Il·lustració decorativa del taller floral",
+        "Detall artístic del taller",
+        "Motiu floral del taller"
+      ]
+    },
+    "statementSlider": {
+      "sectionAriaLabel": "Els nostres tallers florals",
+      "slideLabel": "Diapositiva {current} de {total}",
+      "slide0": {
+        "title": "Espai obert per l’expressió",
+        "body": "Aquest taller és un espai obert per a l’expressió individual i l’experimentació.\n\nEt convido a deixar-te portar per la teva intuïció i creativitat mentre treballem\n\njunts en el disseny i la creació d’arranjaments florals únics."
+      },
+      "slide1": {
+        "title": "Art i bellesa",
+        "body": "En acabar el taller, no només t’enduràs a casa les teves creacions florals, sinó també noves\n\namistats i una nova perspectiva sobre l’art i la bellesa que ens envolta."
+      }
+    },
+    "closingNote": {
+      "ariaLabel": "Reflexió final sobre els tallers",
+      "p1": "Espero que aquests tallers siguin una experiència enriquidora i que t’inspirin a seguir explorant l’apassionant món de l’art floral.",
+      "p2": "I encara hi ha una cosa millor que fer un taller, es regalar un taller pel teu esser estimat."
+    },
+    "experienceGift": {
+      "heading": "Regala una experiència",
+      "ctaShop": "Botiga"
+    }
   }
 }

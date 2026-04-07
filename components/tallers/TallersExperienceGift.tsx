@@ -10,7 +10,7 @@ import {
   type ShopProduct,
 } from "@/lib/shop/products";
 import Image from "next/image";
-import { getLocale } from "next-intl/server";
+import { getLocale, getTranslations } from "next-intl/server";
 
 interface TallersWorkshopCardProps {
   product: ShopProduct;
@@ -67,6 +67,7 @@ function TallersWorkshopCard({
 
 export async function TallersExperienceGift() {
   const locale = (await getLocale()) as AppLocale;
+  const t = await getTranslations("tallers.experienceGift");
   const tallerWorkshopProducts = filterShopProductsByCategory(
     WORKSHOP_CATEGORY_LABEL[locale],
     locale
@@ -82,7 +83,7 @@ export async function TallersExperienceGift() {
           id="tallers-gift-heading"
           className={`${elsie.className} text-center text-2xl text-emerald-950 md:text-6xl`}
         >
-          Regala una experiència
+          {t("heading")}
         </h2>
         <ul className="mt-10 grid list-none gap-8 md:grid-cols-2 md:gap-10">
           {tallerWorkshopProducts.map((product) => {
@@ -106,7 +107,7 @@ export async function TallersExperienceGift() {
             href="/botiga"
             className="inline-flex items-center justify-center rounded-full border border-emerald-800/30 bg-white px-8 py-3 text-sm font-semibold text-emerald-900 shadow-sm transition hover:border-emerald-700 hover:bg-emerald-50"
           >
-            Botiga
+            {t("ctaShop")}
           </Link>
         </p>
       </div>

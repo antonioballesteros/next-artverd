@@ -1,20 +1,12 @@
 import { tallersImages } from "@/lib/tallersAssets";
 import Image from "next/image";
+import { getTranslations } from "next-intl/server";
 
-const CAPTURES: { src: string; alt: string }[] = [
-  {
-    src: tallersImages.tallerIcons1,
-    alt: "Il·lustració decorativa del taller floral",
-  },
-  {
-    src: tallersImages.tallerIcons2,
-    alt: "Detall artístic del taller",
-  },
-  {
-    src: tallersImages.tallerIcons3,
-    alt: "Motiu floral del taller",
-  },
-];
+const CAPTURE_SRCS = [
+  tallersImages.tallerIcons1,
+  tallersImages.tallerIcons2,
+  tallersImages.tallerIcons3,
+] as const;
 
 interface TallersCaptureTileProps {
   src: string;
@@ -40,15 +32,22 @@ function TallersCaptureTile({ src, alt }: TallersCaptureTileProps) {
   );
 }
 
-export function TallersCapturesGallery() {
+export async function TallersCapturesGallery() {
+  const t = await getTranslations("tallers.capturesGallery");
+  const imageAlts = t.raw("imageAlts") as string[];
+
   return (
     <section
       className="bg-emerald-50/40 py-12 md:py-16"
-      aria-label="Galeria il·lustrativa"
+      aria-label={t("ariaLabel")}
     >
       <div className="mx-auto grid max-w-6xl grid-cols-1 items-end justify-items-center gap-10 px-4 sm:grid-cols-3 sm:gap-6 md:gap-10">
-        {CAPTURES.map((item) => (
-          <TallersCaptureTile key={item.src} src={item.src} alt={item.alt} />
+        {CAPTURE_SRCS.map((src, i) => (
+          <TallersCaptureTile
+            key={src}
+            src={src}
+            alt={imageAlts[i] ?? ""}
+          />
         ))}
       </div>
     </section>

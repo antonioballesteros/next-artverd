@@ -451,5 +451,10 @@
       "heading": "Regala una experiencia",
       "ctaShop": "Tienda"
     }
+  },
+  "site": {
+    "footer": {
+      "cookieSettings": "Configuración de cookies"
+    }
   }
 }

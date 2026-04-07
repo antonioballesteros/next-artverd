@@ -4,25 +4,27 @@ import { Link } from "@/i18n/navigation";
 import type { AppLocale } from "@/i18n/routing";
 import { getSiteNavItems } from "@/lib/siteNav";
 import Image from "next/image";
-import { getLocale } from "next-intl/server";
+import { getLocale, getTranslations } from "next-intl/server";
 import type { ComponentProps } from "react";
 
 type NavHref = ComponentProps<typeof Link>["href"];
 
-const FOOTER_LINKS: { href: string; label: string }[] = [
-  { href: "/legal/politica-de-privacitat", label: "Política de privacitat" },
-  { href: "/legal/politica-de-cookies", label: "Política de cookies" },
-  {
-    href: "/legal/politica-d-accessibilitat",
-    label: "Política d’accessibilitat",
-  },
-  { href: "/legal/avis-legal", label: "Avís legal" },
-  { href: "/legal/termes-i-condicions", label: "Termes i condicions" },
+/** Pathnames from i18n routing; labels from messages metadata.legal.*.title (ca and es). */
+const FOOTER_LEGAL_LINKS: {
+  href: NavHref;
+  titleKey: "privacitat" | "cookies" | "accessibilitat" | "avisLegal" | "termes";
+}[] = [
+  { href: "/legal/politica-de-privacitat", titleKey: "privacitat" },
+  { href: "/legal/politica-de-cookies", titleKey: "cookies" },
+  { href: "/legal/politica-d-accessibilitat", titleKey: "accessibilitat" },
+  { href: "/legal/avis-legal", titleKey: "avisLegal" },
+  { href: "/legal/termes-i-condicions", titleKey: "termes" },
 ];
 
 export async function SiteFooter() {
   const locale = (await getLocale()) as AppLocale;
   const siteNavItems = getSiteNavItems(locale);
+  const tLegal = await getTranslations("metadata.legal");
 
   return (
     <footer className="relative mt-8 flex w-full flex-col items-center justify-center md:mt-20">
@@ -76,13 +78,13 @@ export async function SiteFooter() {
             className="flex flex-col items-center gap-2 border-t border-emerald-800/80 pt-6 text-sm md:border-none md:pt-0"
             aria-label="Informació legal"
           >
-            {FOOTER_LINKS.map((item) => (
+            {FOOTER_LEGAL_LINKS.map((item) => (
               <Link
-                key={item.href}
-                href={item.href as NavHref}
+                key={String(item.href)}
+                href={item.href}
                 className="text-emerald-100/90 underline-offset-2 hover:text-white hover:underline"
               >
-                {item.label}
+                {tLegal(`${item.titleKey}.title`)}
               </Link>
             ))}
             <FooterCookiePreferences />

@@ -1,4 +1,3 @@
-import { CookieConsentBanner } from "@/components/legal/CookieConsentBanner";
 import { CookieConsentProvider } from "@/components/legal/CookieConsentProvider";
 import { VercelTrackingIfConsented } from "@/components/legal/VercelTrackingIfConsented";
 import { CartProvider } from "@/components/shop/CartProvider";
@@ -21,7 +20,6 @@ export default async function RootLayout({
       <body className="flex min-h-full flex-col font-sans">
         <CookieConsentProvider>
           <CartProvider>{children}</CartProvider>
-          <CookieConsentBanner />
           <VercelTrackingIfConsented />
         </CookieConsentProvider>
       </body>

@@ -3,13 +3,13 @@ import { routing, type AppLocale } from "@/i18n/routing";
 /** Single purchasable option when the legacy shop used a variable attribute (e.g. size). */
 export interface ProductVariant {
   id: string;
-  label: string;
+  labels: Record<AppLocale, string>;
   amountEur: number;
 }
 
 export interface ProductComplement {
   id: string;
-  label: string;
+  labels: Record<AppLocale, string>;
   amountEur: number;
 }
 /** How the product is priced in the static catalog. */
@@ -26,7 +26,7 @@ export interface ShopProduct {
   slugs: Record<AppLocale, string>;
   /** Display title per locale. */
   names: Record<AppLocale, string>;
-  description: string;
+  descriptions: Record<AppLocale, string>;
   /** Shelf / section label per locale (shop listing). */
   categories: Record<AppLocale, string>;
   price: ProductPrice;
@@ -35,12 +35,24 @@ export interface ShopProduct {
   soldOut?: boolean;
 }
 
-const COMPLEMENTS = [
-  { id: "cap", label: "Cap", amountEur: 0 },
-  { id: "chocolate", label: "Chocolate", amountEur: 5 },
-  { id: "os-de-peluix-petit", label: "Os de peluix petit", amountEur: 5 },
-  { id: "os-de-peluix-mitja", label: "Os de peluix mitjà", amountEur: 12 },
-  { id: "os-de-peluix-gran", label: "Os de peluix gran", amountEur: 18 },
+const COMPLEMENTS: ProductComplement[] = [
+  { id: "cap", labels: { ca: "Cap", es: "Ninguno" }, amountEur: 0 },
+  { id: "chocolate", labels: { ca: "Chocolate", es: "Chocolate" }, amountEur: 5 },
+  {
+    id: "os-de-peluix-petit",
+    labels: { ca: "Os de peluix petit", es: "Oso de peluche pequeño" },
+    amountEur: 5,
+  },
+  {
+    id: "os-de-peluix-mitja",
+    labels: { ca: "Os de peluix mitjà", es: "Oso de peluche mediano" },
+    amountEur: 12,
+  },
+  {
+    id: "os-de-peluix-gran",
+    labels: { ca: "Os de peluix gran", es: "Oso de peluche grande" },
+    amountEur: 18,
+  },
 ];
 
 /** Static catalog migrated from the legacy shop (no stock sync). */
@@ -48,15 +60,29 @@ export const SHOP_PRODUCTS: ShopProduct[] = [
   {
     slugs: { ca: "planta", es: "planta" },
     names: { ca: "Planta", es: "Planta" },
-    description:
-      "Planta natural en test. Pregunta’ns per les varietats disponibles i les cures que necessita.",
+    descriptions: {
+      ca: "Planta natural en test. Pregunta’ns per les varietats disponibles i les cures que necessita.",
+      es: "Planta natural en maceta. Consúltanos por las variedades disponibles y los cuidados que necesita.",
+    },
     categories: { ca: "Plantes", es: "Plantas" },
     price: {
       kind: "variants",
       options: [
-        { id: "petit", label: "Petit", amountEur: 35 },
-        { id: "mitja", label: "Mitjà", amountEur: 48 },
-        { id: "gran", label: "Gran", amountEur: 80 },
+        {
+          id: "petit",
+          labels: { ca: "Petit", es: "Pequeño" },
+          amountEur: 35,
+        },
+        {
+          id: "mitja",
+          labels: { ca: "Mitjà", es: "Mediano" },
+          amountEur: 48,
+        },
+        {
+          id: "gran",
+          labels: { ca: "Gran", es: "Grande" },
+          amountEur: 80,
+        },
       ],
     },
     imagePaths: ["/images/products/planta.webp"],
@@ -70,15 +96,29 @@ export const SHOP_PRODUCTS: ShopProduct[] = [
       ca: "Ram de flors seques de primavera",
       es: "Ramo de flores secas de primavera",
     },
-    description:
-      "A la primavera apareix una nova naturalesa i nous colors. Flors seques acolorides i delicades. El ram inclou, entre d’altres, civada, blat, phalaris, limonium, statice, setarea, lagurus i delphinium; la composició pot variar segons la inspiració del moment. Conserva’l en lloc sec i sense humitat directa.",
+    descriptions: {
+      ca: "A la primavera apareix una nova naturalesa i nous colors. Flors seques acolorides i delicades. El ram inclou, entre d’altres, civada, blat, phalaris, limonium, statice, setarea, lagurus i delphinium; la composició pot variar segons la inspiració del moment. Conserva’l en lloc sec i sense humitat directa.",
+      es: "En primavera aparece una nueva naturaleza y nuevos colores. Flores secas delicadas y coloridas. El ramo incluye, entre otras, avena, trigo, phalaris, limonium, statice, setaria, lagurus y delphinium; la composición puede variar según la inspiración del momento. Consérvalo en un lugar seco y sin humedad directa.",
+    },
     categories: { ca: "Flors seques", es: "Flores secas" },
     price: {
       kind: "variants",
       options: [
-        { id: "petit", label: "Petit", amountEur: 38 },
-        { id: "mitja", label: "Mitjà", amountEur: 48 },
-        { id: "gran", label: "Gran", amountEur: 68 },
+        {
+          id: "petit",
+          labels: { ca: "Petit", es: "Pequeño" },
+          amountEur: 38,
+        },
+        {
+          id: "mitja",
+          labels: { ca: "Mitjà", es: "Mediano" },
+          amountEur: 48,
+        },
+        {
+          id: "gran",
+          labels: { ca: "Gran", es: "Grande" },
+          amountEur: 68,
+        },
       ],
       complements: COMPLEMENTS,
     },
@@ -87,15 +127,29 @@ export const SHOP_PRODUCTS: ShopProduct[] = [
   {
     slugs: { ca: "ram", es: "ramo" },
     names: { ca: "Ram", es: "Ramo" },
-    description:
-      "Ram fresc per a tot tipus d’ocasions: aniversaris, felicitacions, detalls corporatius i celebracions.",
+    descriptions: {
+      ca: "Ram fresc per a tot tipus d’ocasions: aniversaris, felicitacions, detalls corporatius i celebracions.",
+      es: "Ramo fresco para todo tipo de ocasiones: aniversarios, felicitaciones, detalles corporativos y celebraciones.",
+    },
     categories: { ca: "Rams", es: "Ramos" },
     price: {
       kind: "variants",
       options: [
-        { id: "petit", label: "Petit", amountEur: 38 },
-        { id: "mitja", label: "Mitjà", amountEur: 48 },
-        { id: "gran", label: "Gran", amountEur: 68 },
+        {
+          id: "petit",
+          labels: { ca: "Petit", es: "Pequeño" },
+          amountEur: 38,
+        },
+        {
+          id: "mitja",
+          labels: { ca: "Mitjà", es: "Mediano" },
+          amountEur: 48,
+        },
+        {
+          id: "gran",
+          labels: { ca: "Gran", es: "Grande" },
+          amountEur: 68,
+        },
       ],
       complements: COMPLEMENTS,
     },
@@ -104,17 +158,39 @@ export const SHOP_PRODUCTS: ShopProduct[] = [
   {
     slugs: { ca: "terrari", es: "terrario" },
     names: { ca: "Terrari", es: "Terrario" },
-    description:
-      "Terrari amb plantes i decoració. Pregunta’ns per les varietats disponibles i les cures que necessita.",
+    descriptions: {
+      ca: "Terrari amb plantes i decoració. Pregunta’ns per les varietats disponibles i les cures que necessita.",
+      es: "Terrario con plantas y decoración. Consúltanos por las variedades disponibles y los cuidados que necesita.",
+    },
     categories: { ca: "Terraris", es: "Terrarios" },
     price: {
       kind: "variants",
       options: [
-        { id: "mini", label: "Mini", amountEur: 35 },
-        { id: "petit", label: "Petit", amountEur: 43 },
-        { id: "mitja", label: "Mitjà", amountEur: 58 },
-        { id: "gran", label: "Gran", amountEur: 68 },
-        { id: "xl", label: "Xl", amountEur: 98 },
+        {
+          id: "mini",
+          labels: { ca: "Mini", es: "Mini" },
+          amountEur: 35,
+        },
+        {
+          id: "petit",
+          labels: { ca: "Petit", es: "Pequeño" },
+          amountEur: 43,
+        },
+        {
+          id: "mitja",
+          labels: { ca: "Mitjà", es: "Mediano" },
+          amountEur: 58,
+        },
+        {
+          id: "gran",
+          labels: { ca: "Gran", es: "Grande" },
+          amountEur: 68,
+        },
+        {
+          id: "xl",
+          labels: { ca: "Xl", es: "XL" },
+          amountEur: 98,
+        },
       ],
     },
     imagePaths: ["/images/products/terrari.webp"],
@@ -122,8 +198,10 @@ export const SHOP_PRODUCTS: ShopProduct[] = [
   {
     slugs: { ca: "taller-jardineria", es: "taller-jardineria" },
     names: { ca: "Taller jardineria", es: "Taller de jardinería" },
-    description:
-      "Taller pràctic per aprendre conceptes bàsics de jardineria i disseny d’espais verds. Consulta calendari i places a la botiga.",
+    descriptions: {
+      ca: "Taller pràctic per aprendre conceptes bàsics de jardineria i disseny d’espais verds. Consulta calendari i places a la botiga.",
+      es: "Taller práctico para aprender conceptos básicos de jardinería y diseño de espacios verdes. Consulta calendario y plazas en la tienda.",
+    },
     categories: { ca: "Tallers", es: "Talleres" },
     price: { kind: "fixed", amountEur: 50 },
     imagePaths: ["/images/products/taller-jardineria.webp"],
@@ -131,8 +209,10 @@ export const SHOP_PRODUCTS: ShopProduct[] = [
   {
     slugs: { ca: "taller-kokedama", es: "taller-kokedama" },
     names: { ca: "Taller Kokedama", es: "Taller Kokedama" },
-    description:
-      "Taller per crear la teva pròpia kokedama: bola de musgo amb planta que pots penjar o exposar sobre ceràmica.",
+    descriptions: {
+      ca: "Taller per crear la teva pròpia kokedama: bola de musgo amb planta que pots penjar o exposar sobre ceràmica.",
+      es: "Taller para crear tu propia kokedama: bola de musgo con planta que puedes colgar o exponer sobre cerámica.",
+    },
     categories: { ca: "Tallers", es: "Talleres" },
     price: { kind: "fixed", amountEur: 50 },
     imagePaths: ["/images/products/taller-kokedama.webp"],
@@ -140,8 +220,10 @@ export const SHOP_PRODUCTS: ShopProduct[] = [
   {
     slugs: { ca: "taller-terrari", es: "taller-terrario" },
     names: { ca: "Taller Terrari", es: "Taller de terrario" },
-    description:
-      "Taller per crear la teva pròpia terrari: espai tancat amb plantes i decoració. Pregunta’ns per les varietats disponibles i les cures que necessita.",
+    descriptions: {
+      ca: "Taller per crear la teva pròpia terrari: espai tancat amb plantes i decoració. Pregunta’ns per les varietats disponibles i les cures que necessita.",
+      es: "Taller para crear tu propio terrario: espacio cerrado con plantas y decoración. Consúltanos por las variedades disponibles y los cuidados que necesita.",
+    },
     categories: { ca: "Tallers", es: "Talleres" },
     price: { kind: "fixed", amountEur: 50 },
     imagePaths: ["/images/products/taller-terrari.webp"],
@@ -149,8 +231,10 @@ export const SHOP_PRODUCTS: ShopProduct[] = [
   {
     slugs: { ca: "os-de-peluix", es: "oso-de-peluche" },
     names: { ca: "Os de peluix", es: "Oso de peluche" },
-    description:
-      "Os de peluix suau, ideal com a detall per a naixements, aniversaris o qualsevol ocasió especial.",
+    descriptions: {
+      ca: "Os de peluix suau, ideal com a detall per a naixements, aniversaris o qualsevol ocasió especial.",
+      es: "Oso de peluche suave, ideal como detalle para nacimientos, aniversarios o cualquier ocasión especial.",
+    },
     categories: {
       ca: "Regals i decoració",
       es: "Regalos y decoración",
@@ -158,9 +242,21 @@ export const SHOP_PRODUCTS: ShopProduct[] = [
     price: {
       kind: "variants",
       options: [
-        { id: "petit", label: "Petit", amountEur: 5 },
-        { id: "mitja", label: "Mitjà", amountEur: 12 },
-        { id: "gran", label: "Gran", amountEur: 18 },
+        {
+          id: "petit",
+          labels: { ca: "Petit", es: "Pequeño" },
+          amountEur: 5,
+        },
+        {
+          id: "mitja",
+          labels: { ca: "Mitjà", es: "Mediano" },
+          amountEur: 12,
+        },
+        {
+          id: "gran",
+          labels: { ca: "Gran", es: "Grande" },
+          amountEur: 18,
+        },
       ],
     },
     imagePaths: ["/images/products/os-de-peluix.webp"],
@@ -205,6 +301,13 @@ export function getProductName(
   locale: AppLocale
 ): string {
   return product.names[locale];
+}
+
+export function getProductDescription(
+  product: ShopProduct,
+  locale: AppLocale
+): string {
+  return product.descriptions[locale];
 }
 
 export function getProductCategory(
@@ -253,14 +356,17 @@ export function getLineUnitPriceEur(
 
 export function getVariantLabel(
   price: ProductPrice,
+  locale: AppLocale,
   variantId?: string,
   complementId?: string
 ): string | undefined {
   if (price.kind !== "variants") return undefined;
-  const vLabel = price.options.find((o) => o.id === variantId)?.label;
-  const cLabel = complementId
-    ? price.complements?.find((c) => c.id === complementId)?.label
+  const variant = price.options.find((o) => o.id === variantId);
+  const vLabel = variant?.labels[locale];
+  const complement = complementId
+    ? price.complements?.find((c) => c.id === complementId)
     : undefined;
+  const cLabel = complement?.labels[locale];
   if (vLabel && cLabel) return `${vLabel} · ${cLabel}`;
   if (vLabel) return vLabel;
   if (cLabel) return cLabel;

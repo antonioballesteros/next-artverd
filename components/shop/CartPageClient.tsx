@@ -86,6 +86,7 @@ export function CartPageClient({ orderSent = false }: CartPageClientProps) {
           const cover = product.imagePaths[0];
           const variantLabel = getVariantLabel(
             product.price,
+            locale,
             line.variantId,
             line.complementId,
           );

@@ -3,6 +3,7 @@
 import Image from "next/image";
 import useEmblaCarousel from "embla-carousel-react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { useCallback, useEffect, useMemo, useState } from "react";
 
 interface ProductImageGalleryProps {
@@ -43,6 +44,7 @@ export function ProductImageGallery({
   productName,
   imagePaths,
 }: ProductImageGalleryProps) {
+  const t = useTranslations("botiga.productGallery");
   const [reduceMotion, setReduceMotion] = useState(false);
   const count = imagePaths.length;
 
@@ -111,7 +113,7 @@ export function ProductImageGallery({
     <div
       className="relative w-full"
       aria-roledescription="carousel"
-      aria-label={`${productName} photos`}
+      aria-label={t("carouselOf", { name: productName })}
     >
       <div className={frameClass}>
         <div className="h-full touch-pan-y overflow-hidden" ref={emblaRef}>
@@ -120,7 +122,11 @@ export function ProductImageGallery({
               <ProductGalleryImage
                 key={src}
                 src={src}
-                alt={`${productName} (${i + 1} of ${count})`}
+                alt={t("imageAlt", {
+                  name: productName,
+                  current: i + 1,
+                  total: count,
+                })}
                 priority={i === 0}
                 wrapperClassName="relative h-full min-w-0 shrink-0 basis-full"
               />
@@ -132,7 +138,7 @@ export function ProductImageGallery({
           type="button"
           onClick={() => emblaApi?.scrollPrev()}
           className="absolute top-1/2 left-2 z-10 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-emerald-200/90 bg-white/95 text-emerald-900 shadow-md backdrop-blur-sm transition hover:bg-white hover:shadow-lg focus-visible:ring-2 focus-visible:ring-emerald-600 focus-visible:outline-none"
-          aria-label="Previous image"
+          aria-label={t("previousImage")}
         >
           <ChevronLeft className="h-6 w-6" aria-hidden />
         </button>
@@ -140,7 +146,7 @@ export function ProductImageGallery({
           type="button"
           onClick={() => emblaApi?.scrollNext()}
           className="absolute top-1/2 right-2 z-10 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-emerald-200/90 bg-white/95 text-emerald-900 shadow-md backdrop-blur-sm transition hover:bg-white hover:shadow-lg focus-visible:ring-2 focus-visible:ring-emerald-600 focus-visible:outline-none"
-          aria-label="Next image"
+          aria-label={t("nextImage")}
         >
           <ChevronRight className="h-6 w-6" aria-hidden />
         </button>
@@ -148,14 +154,14 @@ export function ProductImageGallery({
 
       <div
         className="mt-3 flex flex-wrap items-center justify-center gap-2"
-        aria-label="Slide indicators"
+        aria-label={t("slideIndicators")}
       >
         {imagePaths.map((src, i) => (
           <button
             key={src}
             type="button"
             aria-current={i === selectedIndex ? "true" : undefined}
-            aria-label={`Go to image ${i + 1}`}
+            aria-label={t("goToSlide", { n: i + 1 })}
             onClick={() => emblaApi?.scrollTo(i)}
             className={`h-2.5 rounded-full transition-all focus-visible:ring-2 focus-visible:ring-emerald-600 focus-visible:outline-none ${
               i === selectedIndex

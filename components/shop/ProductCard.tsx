@@ -9,14 +9,15 @@ import {
   type ShopProduct,
 } from "@/lib/shop/products";
 import Image from "next/image";
-import { useLocale } from "next-intl";
+import { getLocale, getTranslations } from "next-intl/server";
 
 interface ProductCardProps {
   product: ShopProduct;
 }
 
-export function ProductCard({ product }: ProductCardProps) {
-  const locale = useLocale() as AppLocale;
+export async function ProductCard({ product }: ProductCardProps) {
+  const locale = (await getLocale()) as AppLocale;
+  const t = await getTranslations("botiga.productCard");
   const cover = product.imagePaths[0] ?? "/images/products/placeholder.webp";
   const priceLabel = formatProductPrice(product.price);
   const productHref = {
@@ -41,7 +42,7 @@ export function ProductCard({ product }: ProductCardProps) {
         />
         {product.soldOut ? (
           <span className="absolute top-3 left-3 rounded-full bg-emerald-950/85 px-3 py-1 text-xs font-semibold tracking-wide text-white uppercase">
-            Esgotat
+            {t("soldOut")}
           </span>
         ) : null}
       </Link>

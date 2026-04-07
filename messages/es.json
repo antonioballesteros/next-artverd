@@ -100,6 +100,37 @@
       }
     }
   },
+  "botiga": {
+    "hero": {
+      "title": "Tienda",
+      "intro": "Descubre una selección de productos y experiencias de la floristería. Los precios son orientativos; la cesta es solo de referencia (sin pago online)."
+    },
+    "catalogAriaLabel": "Catálogo",
+    "productCard": {
+      "soldOut": "Agotado"
+    },
+    "productPage": {
+      "breadcrumbNavAriaLabel": "Ruta de navegación"
+    },
+    "addToCart": {
+      "pickSizeBeforeCart": "Elige el tamaño antes de añadir a la cesta.",
+      "size": "Tamaño",
+      "chooseOption": "Elige una opción",
+      "complement": "Complemento",
+      "chooseComplement": "Elige un complemento",
+      "quantity": "Cantidad",
+      "addToCart": "Añadir a la cesta",
+      "addedToCart": "Añadido a la cesta"
+    },
+    "productGallery": {
+      "carouselOf": "Imágenes de {name}",
+      "imageAlt": "{name} ({current} de {total})",
+      "previousImage": "Imagen anterior",
+      "nextImage": "Imagen siguiente",
+      "slideIndicators": "Indicadores de diapositivas",
+      "goToSlide": "Ir a la imagen {n}"
+    }
+  },
   "home": {
     "hero": {
       "headline0": "Pasión por las flores, desde el año 2000",

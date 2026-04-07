@@ -119,6 +119,7 @@ function resolveOrderLines(
       quantity: line.quantity,
       variantLabel: getVariantLabel(
         product.price,
+        locale,
         line.variantId,
         line.complementId
       ),

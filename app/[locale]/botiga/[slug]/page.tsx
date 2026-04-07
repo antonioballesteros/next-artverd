@@ -5,12 +5,14 @@ import { formatProductPrice } from "@/lib/shop/priceLabel";
 import { routing, type AppLocale } from "@/i18n/routing";
 import {
   getProductBySlug,
+  getProductDescription,
   getProductName,
   getProductSlugsForLocale,
 } from "@/lib/shop/products";
 import { getMetadataTranslations } from "@/lib/i18n/pageMetadata";
 import { elsie } from "@/lib/fonts";
 import { hasLocale } from "next-intl";
+import { getTranslations } from "next-intl/server";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
@@ -41,10 +43,13 @@ export async function generateMetadata({
     };
   }
 
-  const loc = locale as AppLocale;
+  const localeForMetadata: AppLocale = hasLocale(routing.locales, locale)
+    ? (locale as AppLocale)
+    : routing.defaultLocale;
+  const descriptionText = getProductDescription(product, localeForMetadata);
   return {
-    title: getProductName(product, loc),
-    description: product.description.slice(0, 160),
+    title: getProductName(product, localeForMetadata),
+    description: descriptionText.slice(0, 160),
   };
 }
 
@@ -55,8 +60,15 @@ export default async function BotigaProductPage({
   const product = getProductBySlug(slug);
   if (!product) notFound();
 
-  const loc = locale as AppLocale;
-  const productTitle = getProductName(product, loc);
+  const localeForPage: AppLocale = hasLocale(routing.locales, locale)
+    ? (locale as AppLocale)
+    : routing.defaultLocale;
+  const t = await getTranslations({
+    locale: localeForPage,
+    namespace: "botiga",
+  });
+  const productTitle = getProductName(product, localeForPage);
+  const productDescription = getProductDescription(product, localeForPage);
   const priceLabel = formatProductPrice(product.price);
 
   return (
@@ -64,13 +76,13 @@ export default async function BotigaProductPage({
       <div className="mx-auto max-w-6xl px-4">
         <nav
           className="text-sm text-emerald-800/90"
-          aria-label="Camí de navegació"
+          aria-label={t("productPage.breadcrumbNavAriaLabel")}
         >
           <Link
             href="/botiga"
             className="hover:text-emerald-950 hover:underline"
           >
-            Botiga
+            {t("hero.title")}
           </Link>
           <span className="mx-2 text-emerald-600/80" aria-hidden>
             /
@@ -92,7 +104,7 @@ export default async function BotigaProductPage({
               {productTitle}
             </h1>
             <p className="mt-4 text-base leading-relaxed text-emerald-900/90">
-              {product.description}
+              {productDescription}
             </p>
             <p className="mt-6 text-2xl font-semibold text-emerald-800">
               {priceLabel}

@@ -1,7 +1,10 @@
 import { ProductCard } from "@/components/shop/ProductCard";
+import { routing, type AppLocale } from "@/i18n/routing";
 import { getMetadataTranslations } from "@/lib/i18n/pageMetadata";
 import { elsie } from "@/lib/fonts";
 import { SHOP_PRODUCTS } from "@/lib/shop/products";
+import { hasLocale } from "next-intl";
+import { getTranslations } from "next-intl/server";
 import type { Metadata } from "next";
 
 interface BotigaPageProps {
@@ -19,7 +22,16 @@ export async function generateMetadata({
   };
 }
 
-export default function BotigaPage() {
+export default async function BotigaPage({ params }: BotigaPageProps) {
+  const { locale } = await params;
+  const localeForPage: AppLocale = hasLocale(routing.locales, locale)
+    ? locale
+    : routing.defaultLocale;
+  const t = await getTranslations({
+    locale: localeForPage,
+    namespace: "botiga",
+  });
+
   return (
     <>
       <section
@@ -28,10 +40,10 @@ export default function BotigaPage() {
       >
         <div className="relative mx-auto max-w-5xl px-4 text-center">
           <h1
-            id="blog-page-title"
+            id="botiga-heading"
             className={`${elsie.className} text-4xl font-normal tracking-wide md:text-6xl`}
           >
-            Botiga
+            {t("hero.title")}
           </h1>
           <div
             className="mx-auto mt-6 h-px w-32 origin-center bg-emerald-400/90 motion-safe:animate-[blog-title-line_0.9s_ease-out_both] motion-reduce:opacity-100"
@@ -40,13 +52,14 @@ export default function BotigaPage() {
         </div>
 
         <p className="mx-auto mt-5 max-w-2xl text-base leading-relaxed text-pretty text-white/90 md:text-lg">
-          Descobreix una selecció de productes i experiències de la floristeria.
-          Els preus són orientatius; la cistella és només de referència (sense
-          pagament en línia).
+          {t("hero.intro")}
         </p>
       </section>
 
-      <section className="bg-emerald-50/80 py-12 md:py-16" aria-label="Catàleg">
+      <section
+        className="bg-emerald-50/80 py-12 md:py-16"
+        aria-label={t("catalogAriaLabel")}
+      >
         <div className="mx-auto max-w-6xl px-4">
           <ul className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
             {SHOP_PRODUCTS.map((product) => (

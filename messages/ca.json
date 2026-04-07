@@ -100,6 +100,37 @@
       }
     }
   },
+  "botiga": {
+    "hero": {
+      "title": "Botiga",
+      "intro": "Descobreix una selecció de productes i experiències de la floristeria. Els preus són orientatius; la cistella és només de referència (sense pagament en línia)."
+    },
+    "catalogAriaLabel": "Catàleg",
+    "productCard": {
+      "soldOut": "Esgotat"
+    },
+    "productPage": {
+      "breadcrumbNavAriaLabel": "Camí de navegació"
+    },
+    "addToCart": {
+      "pickSizeBeforeCart": "Tria la mida abans d’afegir a la cistella.",
+      "size": "Mida",
+      "chooseOption": "Trieu una opció",
+      "complement": "Complement",
+      "chooseComplement": "Trieu un complement",
+      "quantity": "Quantitat",
+      "addToCart": "Afegir a la cistella",
+      "addedToCart": "Afegit a la cistella"
+    },
+    "productGallery": {
+      "carouselOf": "Imatges de {name}",
+      "imageAlt": "{name} ({current} de {total})",
+      "previousImage": "Imatge anterior",
+      "nextImage": "Imatge següent",
+      "slideIndicators": "Indicadors de diapositives",
+      "goToSlide": "Anar a la imatge {n}"
+    }
+  },
   "home": {
     "hero": {
       "headline0": "Passió per les flors, des de l'any 2000",

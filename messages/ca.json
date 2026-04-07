@@ -193,6 +193,64 @@
       "iframeTitle": "Artverd Floristeria a Google Maps"
     }
   },
+  "casamentsIEvents": {
+    "hero": {
+      "imageAlt": "Decoració floral per a casaments i esdeveniments",
+      "ariaLabel": "Casaments i events"
+    },
+    "intro": {
+      "title": "Casaments i events",
+      "lead": "A la nostra floristeria pots trobar tots els arranjaments florals pel teu casaments, banquets, aniversaris, festes d'aniversari i altres esdeveniments."
+    },
+    "sections": {
+      "ramsNuvia": {
+        "title": "Rams de núvia",
+        "p1": "A Art Verd, la nostra floristeria a Terrassa, ens especialitzem en la creació de rams de núvia únics i personalitzats que reflecteixin el teu estil i gust. Sabem que el teu dia especial requereix una atenció minuciosa a cada detall, i les nostres expertes floristes estan aquí per ajudar-te a crear el ram de núvia perfecte utilitzant una àmplia varietat de flors de temporada.",
+        "p2": "El nostre objectiu és fer realitat els teus somnis florals i oferir-te un ram de núvia que sigui veritablement especial. Treballem amb una àmplia gamma de flors de temporada, incloent delicades roses i exquisides peònies, per oferir-te una selecció diversa i bella per triar. Ja sigui que desitgis un ram de núvia clàssic i elegant o un més audaç i modern, el nostre talentós equip de dissenyadors florals s’assegurarà de captar la teva visió i crear una obra mestra floral.",
+        "imageAlt": "Ram de núvia amb flors de temporada",
+        "ctaLabel": "Rams de núvia"
+      },
+      "cerimonia": {
+        "title": "Decoració de la cerimònia",
+        "p1": "A Art Verd, la nostra floristeria a Terrassa, ens enorgulleix oferir un servei complet de decoració floral per a la cerimònia del teu esdeveniment especial. Entenem que cada detall compta i que una decoració ben dissenyada pot crear l’ambient perfecte per a la teva cerimònia. Amb el nostre equip d’experts floristes, et proporcionarem una decoració floral personalitzada i impressionant que complementarà a la perfecció el teu esdeveniment.",
+        "p2": "Podem encarregar-nos de tota la decoració floral de la cerimònia, des de la creació d’arcs elegants fins a arranjaments florals per als bancs o cadires. El nostre objectiu és crear una atmosfera encantadora i romàntica que faci de la teva cerimònia un moment inoblidable. Utilitzarem una varietat de flors fresques i de temporada per aportar vida i color a l’espai, creant un ambient acollidor i sofisticat.",
+        "imageAlt": "Decoració floral per a la cerimònia",
+        "ctaLabel": "Decoració de la cerimònia"
+      },
+      "banquet": {
+        "title": "Decoració del banquet",
+        "p1": "A Art Verd, la nostra floristeria a Terrassa, som experts en la creació de decoracions florals per a banquets que deixaran els teus convidats impressionats. Entenem que la decoració de les taules del banquet és un aspecte essencial per a crear l’ambient perfecte per al teu esdeveniment especial. Amb la nostra atenció als detalls i el nostre toc artístic, crearem centres de taula impressionants i altres detalls florals per embellir el lloc.",
+        "p2": "Els nostres dissenyadors florals treballaran estretament amb tu per entendre el teu estil i les teves preferències. Crearem centres de taula únics i personalitzats que reflectiran la temàtica o l’estil de la teva celebració. Utilitzarem una varietat de flors de temporada i combinacions de colors per crear composicions visualment impactants i harmonioses.",
+        "imageAlt": "Centres de taula i decoració floral per al banquet",
+        "ctaLabel": "Decoració del banquet"
+      },
+      "ramets": {
+        "title": "Ramets i boutonnieres",
+        "p1": "A Art Verd, la nostra floristeria a Terrassa, ens encarreguem de dissenyar ramets per a les dames d’honor i boutonnieres per al nuvi i els padrins, utilitzant flors que complementin l’estil del teu casament. Entenem la importància de cada detall en aquest dia tan especial, i amb la nostra passió per les flors i la nostra habilitat artística, crearem ramets i boutonnieres únics i encantadors.",
+        "p2": "Per a les dames d’honor, dissenyarem ramets elegants i harmoniosos que complementin el seu vestit i l’estil general del casament. Utilitzarem flors de temporada que reflecteixin la temàtica i els colors del teu casament. Cada ramet serà confeccionat amb cura, tenint en compte els gustos personals de les dames d’honor per crear un detall floral perfecte que les faci sentir especials.",
+        "imageAlt": "Ramets i boutonnieres per a casament",
+        "ctaLabel": "Ramets i boutonnieres"
+      },
+      "pastis": {
+        "title": "Decoració del pastís nupcial",
+        "p1": "A Art Verd, la nostra floristeria a Terrassa, som especialistes en la creació d’adorns florals per al pastís nupcial. Entenem que el pastís és una de les peces centrals i més esperades del casament, i volem assegurar-nos que estigui elegantment decorat amb flors fresques que harmonitzin amb la resta de la decoració.",
+        "p2": "Amb la nostra habilitat artística i la passió per les flors, crearem adorns florals exquisits que ressaltin la bellesa del teu pastís de casament. Utilitzarem flors fresques i de qualitat per crear composicions delicades i sofisticades que s’adaptin al teu estil i preferències.",
+        "imageAlt": "Flors decorant un pastís nupcial",
+        "ctaLabel": "Decoració del pastís nupcial"
+      },
+      "esdeveniments": {
+        "title": "Esdeveniments",
+        "p1": "A Art Verd, la nostra floristeria a Terrassa, oferim serveis de decoració floral per a tot tipus d’esdeveniments. Sigui quina sigui l’ocasió, des de festes i congressos fins a presentacions i concerts, ens encarregarem de crear una ambientació floral impressionant que capti l’atenció dels convidats i afegeixi un toc de bellesa natural a l’espai.",
+        "p2": "La nostra àmplia experiència en decoració floral d’esdeveniments ens permet adaptar-nos a diferents temàtiques i estils. Treballarem de prop amb tu per entendre les teves expectatives, els requisits de l’esdeveniment i el lloc on es durà a terme. A partir d’aquí, utilitzarem la nostra creativitat i coneixements florals per dissenyar una decoració floral personalitzada que compleixi els teus desitjos i reflecteixi l’essència de l’ocasió.",
+        "imageAlt": "Decoració floral per a esdeveniments",
+        "ctaLabel": "Esdeveniments"
+      }
+    },
+    "closingNote": {
+      "ariaLabel": "Nota sobre la planificació del casament",
+      "text": "És important que ens puguem reunir abans de l'esdeveniment per adaptar-nos a les teves preferències i el teu pressupost, i aconseguir una cerimònia perfecta."
+    }
+  },
   "floristeria": {
     "hero": {
       "previousImageAriaLabel": "Imatge anterior",

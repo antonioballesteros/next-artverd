@@ -1,12 +1,15 @@
 import { HeroSection } from "@/components/HeroSection";
 import { casamentsImages } from "@/lib/casamentsAssets";
+import { getTranslations } from "next-intl/server";
 
-export function CasamentsHero() {
+export async function CasamentsHero() {
+  const t = await getTranslations("casamentsIEvents.hero");
+
   return (
     <HeroSection
       src={casamentsImages.heroMain}
-      alt="Decoració floral per a casaments i esdeveniments"
-      ariaLabel="Casaments i events"
+      alt={t("imageAlt")}
+      ariaLabel={t("ariaLabel")}
     />
   );
 }

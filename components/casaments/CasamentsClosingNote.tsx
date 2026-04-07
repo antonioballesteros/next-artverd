@@ -1,18 +1,19 @@
 import { elsie } from "@/lib/fonts";
+import { getTranslations } from "next-intl/server";
 
-export function CasamentsClosingNote() {
+export async function CasamentsClosingNote() {
+  const t = await getTranslations("casamentsIEvents.closingNote");
+
   return (
     <section
       className="border-t border-emerald-200/60 bg-emerald-50/40 py-12 md:py-16"
-      aria-label="Nota sobre la planificació del casament"
+      aria-label={t("ariaLabel")}
     >
       <div className="mx-auto max-w-3xl px-4 text-center">
         <p
           className={`${elsie.className} text-lg leading-relaxed text-emerald-950 md:text-xl`}
         >
-          És important que ens puguem reunir abans de l&apos;esdeveniment per
-          adaptar-nos a les teves preferències i el teu pressupost, i aconseguir
-          una cerimònia perfecta.
+          {t("text")}
         </p>
       </div>
     </section>

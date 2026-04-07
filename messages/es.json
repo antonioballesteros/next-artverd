@@ -193,6 +193,64 @@
       "iframeTitle": "Artverd Floristeria en Google Maps"
     }
   },
+  "casamentsIEvents": {
+    "hero": {
+      "imageAlt": "Decoración floral para bodas y eventos",
+      "ariaLabel": "Bodas y eventos"
+    },
+    "intro": {
+      "title": "Bodas y eventos",
+      "lead": "En nuestra floristería encontrarás todos los arreglos florales para tu boda, banquetes, aniversarios, fiestas de cumpleaños y otros eventos."
+    },
+    "sections": {
+      "ramsNuvia": {
+        "title": "Ramos de novia",
+        "p1": "En Art Verd, nuestra floristería en Terrassa, nos especializamos en la creación de ramos de novia únicos y personalizados que reflejen tu estilo y gusto. Sabemos que tu día especial requiere una atención minuciosa a cada detalle, y nuestras expertas floristas están aquí para ayudarte a crear el ramo de novia perfecto utilizando una amplia variedad de flores de temporada.",
+        "p2": "Nuestro objetivo es hacer realidad tus sueños florales y ofrecerte un ramo de novia verdaderamente especial. Trabajamos con una amplia gama de flores de temporada, incluidas delicadas rosas y exquisitas peonías, para ofrecerte una selección diversa y hermosa. Ya desees un ramo de novia clásico y elegante o uno más atrevido y moderno, nuestro talentoso equipo de diseñadores florales se asegurará de captar tu visión y crear una obra maestra floral.",
+        "imageAlt": "Ramo de novia con flores de temporada",
+        "ctaLabel": "Ramos de novia"
+      },
+      "cerimonia": {
+        "title": "Decoración de la ceremonia",
+        "p1": "En Art Verd, nuestra floristería en Terrassa, nos enorgullece ofrecer un servicio completo de decoración floral para la ceremonia de tu evento especial. Entendemos que cada detalle cuenta y que una decoración bien diseñada puede crear el ambiente perfecto para tu ceremonia. Con nuestro equipo de expertos floristas, te proporcionaremos una decoración floral personalizada e impresionante que complementará a la perfección tu evento.",
+        "p2": "Podemos encargarnos de toda la decoración floral de la ceremonia, desde la creación de arcos elegantes hasta arreglos florales para bancos o sillas. Nuestro objetivo es crear una atmósfera encantadora y romántica que haga de tu ceremonia un momento inolvidable. Utilizaremos una variedad de flores frescas y de temporada para dar vida y color al espacio, creando un ambiente acogedor y sofisticado.",
+        "imageAlt": "Decoración floral para la ceremonia",
+        "ctaLabel": "Decoración de la ceremonia"
+      },
+      "banquet": {
+        "title": "Decoración del banquete",
+        "p1": "En Art Verd, nuestra floristería en Terrassa, somos expertos en la creación de decoraciones florales para banquetes que dejarán impresionados a tus invitados. Entendemos que la decoración de las mesas del banquete es un aspecto esencial para crear el ambiente perfecto en tu evento especial. Con nuestra atención al detalle y nuestro toque artístico, crearemos centros de mesa impresionantes y otros detalles florales para embellecer el lugar.",
+        "p2": "Nuestros diseñadores florales trabajarán estrechamente contigo para entender tu estilo y tus preferencias. Crearemos centros de mesa únicos y personalizados que reflejen la temática o el estilo de tu celebración. Utilizaremos una variedad de flores de temporada y combinaciones de colores para crear composiciones visualmente impactantes y armoniosas.",
+        "imageAlt": "Centros de mesa y decoración floral para el banquete",
+        "ctaLabel": "Decoración del banquete"
+      },
+      "ramets": {
+        "title": "Ramilletes y boutonnieres",
+        "p1": "En Art Verd, nuestra floristería en Terrassa, nos encargamos de diseñar ramilletes para las damas de honor y boutonnieres para el novio y los padrinos, utilizando flores que complementen el estilo de tu boda. Entendemos la importancia de cada detalle en este día tan especial, y con nuestra pasión por las flores y nuestra habilidad artística, crearemos ramilletes y boutonnieres únicos y encantadores.",
+        "p2": "Para las damas de honor, diseñaremos ramilletes elegantes y armoniosos que complementen su vestido y el estilo general de la boda. Utilizaremos flores de temporada que reflejen la temática y los colores de tu boda. Cada ramillete será confeccionado con cuidado, teniendo en cuenta los gustos personales de las damas de honor para crear un detalle floral perfecto que las haga sentir especiales.",
+        "imageAlt": "Ramilletes y boutonnieres para boda",
+        "ctaLabel": "Ramilletes y boutonnieres"
+      },
+      "pastis": {
+        "title": "Decoración del pastel nupcial",
+        "p1": "En Art Verd, nuestra floristería en Terrassa, somos especialistas en la creación de adornos florales para el pastel nupcial. Entendemos que el pastel es una de las piezas centrales y más esperadas de la boda, y queremos asegurarnos de que esté elegantemente decorado con flores frescas que armonicen con el resto de la decoración.",
+        "p2": "Con nuestra habilidad artística y la pasión por las flores, crearemos adornos florales exquisitos que resalten la belleza de tu pastel de boda. Utilizaremos flores frescas y de calidad para crear composiciones delicadas y sofisticadas que se adapten a tu estilo y preferencias.",
+        "imageAlt": "Flores decorando un pastel nupcial",
+        "ctaLabel": "Decoración del pastel nupcial"
+      },
+      "esdeveniments": {
+        "title": "Eventos",
+        "p1": "En Art Verd, nuestra floristería en Terrassa, ofrecemos servicios de decoración floral para todo tipo de eventos. Sea cual sea la ocasión, desde fiestas y congresos hasta presentaciones y conciertos, nos encargaremos de crear una ambientación floral impresionante que capte la atención de los invitados y añada un toque de belleza natural al espacio.",
+        "p2": "Nuestra amplia experiencia en decoración floral de eventos nos permite adaptarnos a diferentes temáticas y estilos. Trabajaremos de cerca contigo para entender tus expectativas, los requisitos del evento y el lugar donde se celebrará. A partir de ahí, utilizaremos nuestra creatividad y conocimientos florales para diseñar una decoración floral personalizada que cumpla tus deseos y refleje la esencia de la ocasión.",
+        "imageAlt": "Decoración floral para eventos",
+        "ctaLabel": "Eventos"
+      }
+    },
+    "closingNote": {
+      "ariaLabel": "Nota sobre la planificación de la boda",
+      "text": "Es importante que podamos reunirnos antes del evento para adaptarnos a tus preferencias y tu presupuesto, y lograr una ceremonia perfecta."
+    }
+  },
   "floristeria": {
     "hero": {
       "previousImageAriaLabel": "Imagen anterior",

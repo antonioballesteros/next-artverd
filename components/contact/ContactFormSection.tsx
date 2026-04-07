@@ -1,9 +1,12 @@
 import { artverdImages } from "@/lib/artverdAssets";
 import { elsie } from "@/lib/fonts";
 import Image from "next/image";
+import { getTranslations } from "next-intl/server";
 import { ContactMessageForm } from "./ContactMessageForm";
 
-export function ContactFormSection() {
+export async function ContactFormSection() {
+  const t = await getTranslations("contacte.formSection");
+
   return (
     <section
       className="border-t border-emerald-900/10 bg-[#f3f3f3] pt-0 pb-16 md:pb-20"
@@ -22,7 +25,7 @@ export function ContactFormSection() {
                 id="contact-form-heading"
                 className={`${elsie.className} text-3xl font-normal text-emerald-900 md:text-4xl`}
               >
-                Envia&apos;ns un missatge
+                {t("heading")}
               </h2>
               <div className="mt-8">
                 <ContactMessageForm />

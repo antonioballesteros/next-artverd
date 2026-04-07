@@ -1,16 +1,19 @@
 import { StoreGoogleMapEmbed } from "@/components/home/StoreGoogleMapEmbed";
 import { elsie } from "@/lib/fonts";
 import { Mail, MapPin } from "lucide-react";
+import { getTranslations } from "next-intl/server";
 import { SocialLinksList } from "../social/SocialLinksList";
 
-export function ContactDetailsAndMap() {
+export async function ContactDetailsAndMap() {
+  const t = await getTranslations("contacte.details");
+
   return (
     <section
       className="bg-emerald-900 pt-10 pb-16 md:pt-14 md:pb-20"
       aria-labelledby="contact-details-heading"
     >
       <h2 id="contact-details-heading" className="sr-only">
-        Contact details and map
+        {t("srHeading")}
       </h2>
       <div className="mx-auto max-w-6xl px-4 md:px-6">
         <div className="grid gap-10 md:grid-cols-3 md:gap-8">
@@ -18,7 +21,7 @@ export function ContactDetailsAndMap() {
             className="text-center motion-safe:animate-[blog-section-reveal_0.8s_ease-out_both] motion-safe:opacity-0 motion-reduce:animate-none motion-reduce:opacity-100"
             style={{ animationDelay: "60ms", animationFillMode: "forwards" }}
           >
-            <p className="text-lg font-medium text-[#f8d2a1]">Telèfon</p>
+            <p className="text-lg font-medium text-[#f8d2a1]">{t("phoneLabel")}</p>
             <p
               className={`${elsie.className} mt-3 text-2xl text-white md:text-3xl`}
             >
@@ -36,7 +39,7 @@ export function ContactDetailsAndMap() {
           >
             <p className="flex items-center justify-center gap-2 text-lg font-medium text-[#f8d2a1]">
               <Mail className="h-5 w-5 shrink-0 text-[#f8d2a1]" aria-hidden />
-              Correu
+              {t("emailLabel")}
             </p>
             <p className={`${elsie.className} mt-3 text-2xl md:text-3xl`}>
               <a
@@ -53,14 +56,14 @@ export function ContactDetailsAndMap() {
           >
             <p className="flex items-center justify-center gap-2 text-lg font-medium text-[#f8d2a1]">
               <MapPin className="h-5 w-5 shrink-0 text-[#f8d2a1]" aria-hidden />
-              Adreça
+              {t("addressLabel")}
             </p>
             <p
               className={`${elsie.className} mt-3 text-xl leading-snug text-white md:text-2xl`}
             >
-              Carrer del Cardaire, 11
+              {t("addressLine1")}
               <br />
-              08221 Terrassa, Barcelona
+              {t("addressLine2")}
             </p>
           </div>
         </div>

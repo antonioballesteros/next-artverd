@@ -147,6 +147,42 @@
       "noOnlinePaymentNote": "No hay pago online: desde la página siguiente enviarás la solicitud y te confirmaremos el pedido por correo o teléfono.",
       "continueShopping": "Seguir comprando",
       "placeOrder": "Hacer el pedido"
+    },
+    "cartOrderPage": {
+      "emptyDescription": "Añade productos a la cesta antes de enviar la solicitud.",
+      "backToCart": "Volver a la cesta",
+      "title": "Solicitud de pedido",
+      "intro": "Revisa el total estimado y envía tus datos de contacto. Te responderemos para confirmar el pedido y las opciones de pago o recogida.",
+      "estimatedTotalLabel": "Total estimado (referencia)",
+      "itemsInCartOne": "1 artículo en la cesta.",
+      "itemsInCartMany": "{count} artículos en la cesta.",
+      "contactTitle": "Datos de contacto",
+      "contactIntro": "Envía tu cesta por correo. Te responderemos para confirmar el pedido y las opciones de pago o recogida.",
+      "submitSending": "Enviando…",
+      "submit": "Enviar solicitud",
+      "sentStatus": "Se ha enviado la solicitud…",
+      "nameLabel": "Nombre",
+      "phoneLabel": "Teléfono",
+      "emailLabel": "Correo electrónico",
+      "notesLabel": "Observaciones",
+      "notesPlaceholder": "Horario preferido, dedicatoria, alergias, etc.",
+      "privacyNote": "Al enviar el formulario aceptas que tratemos estos datos para gestionar tu solicitud."
+    },
+    "cartOrderErrors": {
+      "emptyCart": "La cesta está vacía.",
+      "tooManyLines": "La cesta tiene demasiadas líneas.",
+      "invalidQuantity": "Cantidad no válida en algún producto.",
+      "productNotFound": "Hay un producto que ya no está disponible.",
+      "productSoldOut": "El producto «{name}» no está disponible ahora mismo.",
+      "invalidVariant": "Hay que elegir una opción válida para «{name}».",
+      "invalidComplement": "Complemento no válido para «{name}».",
+      "invalidCartData": "Datos de cesta no válidos.",
+      "fillRequiredFields": "Rellena el nombre, el teléfono y el correo.",
+      "fieldsTooLong": "Algunos campos son demasiado largos.",
+      "invalidEmail": "El correo electrónico no es válido.",
+      "observationsTooLong": "Las observaciones son demasiado largas.",
+      "emailServiceUnavailable": "El servicio de correo no está disponible en este momento.",
+      "sendFailed": "No se ha podido enviar la solicitud. Inténtalo de nuevo más tarde."
     }
   },
   "home": {
@@ -240,6 +276,36 @@
     },
     "map": {
       "iframeTitle": "Artverd Floristeria en Google Maps"
+    }
+  },
+  "contacte": {
+    "subheader": {
+      "title": "Contacta con nosotros"
+    },
+    "formSection": {
+      "heading": "Envíanos un mensaje"
+    },
+    "details": {
+      "srHeading": "Datos de contacto y mapa",
+      "phoneLabel": "Teléfono",
+      "emailLabel": "Correo",
+      "addressLabel": "Dirección",
+      "addressLine1": "Calle del Cardaire, 11",
+      "addressLine2": "08221 Terrassa, Barcelona"
+    },
+    "form": {
+      "submit": "Enviar",
+      "submitting": "Cargando…",
+      "success": "El mensaje se ha enviado correctamente.",
+      "honeypotLabel": "Sitio web",
+      "nameLabel": "Nombre",
+      "emailLabel": "Correo electrónico",
+      "messageLabel": "Mensaje"
+    },
+    "errors": {
+      "fillAllFields": "Rellena todos los campos.",
+      "emailServiceUnavailable": "El servicio de correo no está disponible en este momento.",
+      "sendFailed": "No se ha podido enviar el mensaje. Inténtalo de nuevo más tarde."
     }
   },
   "casamentsIEvents": {

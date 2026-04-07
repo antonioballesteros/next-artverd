@@ -13,8 +13,14 @@ import {
   getVariantLabel,
 } from "@/lib/shop/products";
 import { hasLocale } from "next-intl";
+import { getTranslations } from "next-intl/server";
 import { getResendFromTo } from "@/lib/resendFromTo";
 import { Resend } from "resend";
+
+type CartOrderErrorsTranslate = (
+  key: string,
+  values?: Record<string, string | number>,
+) => string;
 
 const SPAM_TRAP_FIELD = "website";
 const SPAM_TRAP_RESPONSE_DELAY_MS = 200;
@@ -45,15 +51,16 @@ function parseOrderLocale(formData: FormData): AppLocale {
 
 function resolveOrderLines(
   lines: CartLine[],
-  locale: AppLocale
+  locale: AppLocale,
+  te: CartOrderErrorsTranslate,
 ):
   | { ok: true; resolved: ResolvedLine[]; totalEur: number }
   | { ok: false; error: string } {
   if (lines.length === 0) {
-    return { ok: false, error: "La cistella és buida." };
+    return { ok: false, error: te("emptyCart") };
   }
   if (lines.length > 80) {
-    return { ok: false, error: "La cistella té massa línies." };
+    return { ok: false, error: te("tooManyLines") };
   }
 
   const resolved: ResolvedLine[] = [];
@@ -65,20 +72,22 @@ function resolveOrderLines(
       line.quantity > 99 ||
       !Number.isInteger(line.quantity)
     ) {
-      return { ok: false, error: "Quantitat no vàlida en algun producte." };
+      return { ok: false, error: te("invalidQuantity") };
     }
 
     const product = getProductBySlug(line.slug);
     if (!product) {
       return {
         ok: false,
-        error: "Hi ha un producte que ja no està disponible.",
+        error: te("productNotFound"),
       };
     }
     if (product.soldOut) {
       return {
         ok: false,
-        error: `El producte «${getProductName(product, locale)}» no està disponible ara mateix.`,
+        error: te("productSoldOut", {
+          name: getProductName(product, locale),
+        }),
       };
     }
 
@@ -89,7 +98,9 @@ function resolveOrderLines(
       ) {
         return {
           ok: false,
-          error: `Cal triar una opció vàlida per a «${getProductName(product, locale)}».`,
+          error: te("invalidVariant", {
+            name: getProductName(product, locale),
+          }),
         };
       }
       if (
@@ -98,11 +109,13 @@ function resolveOrderLines(
       ) {
         return {
           ok: false,
-          error: `Complement no vàlid per a «${getProductName(product, locale)}».`,
+          error: te("invalidComplement", {
+            name: getProductName(product, locale),
+          }),
         };
       }
     } else if (line.variantId || line.complementId) {
-      return { ok: false, error: "Dades de cistella no vàlides." };
+      return { ok: false, error: te("invalidCartData") };
     }
 
     const unitEur = getLineUnitPriceEur(
@@ -148,6 +161,12 @@ export async function submitCartOrder(
     return { success: true };
   }
 
+  const orderLocale = parseOrderLocale(formData);
+  const te = await getTranslations({
+    locale: orderLocale,
+    namespace: "botiga.cartOrderErrors",
+  });
+
   const name = String(formData.get("nom") ?? "").trim();
   const phone = String(formData.get("telefon") ?? "").trim();
   const email = String(formData.get("correu") ?? "").trim();
@@ -155,22 +174,21 @@ export async function submitCartOrder(
   const cartRaw = String(formData.get("cart") ?? "");
 
   if (!name || !phone || !email) {
-    return { success: false, error: "Omple el nom, el telèfon i el correu." };
+    return { success: false, error: te("fillRequiredFields") };
   }
   if (name.length > MAX_NAME_LENGTH || phone.length > MAX_PHONE_LENGTH) {
-    return { success: false, error: "Alguns camps són massa llargs." };
+    return { success: false, error: te("fieldsTooLong") };
   }
   if (!isValidEmail(email)) {
-    return { success: false, error: "El correu electrònic no és vàlid." };
+    return { success: false, error: te("invalidEmail") };
   }
   if (observations.length > MAX_OBSERVATIONS_LENGTH) {
-    return { success: false, error: "Les observacions són massa llargues." };
+    return { success: false, error: te("observationsTooLong") };
   }
 
   const lines = parseCartLines(cartRaw);
-  const orderLocale = parseOrderLocale(formData);
 
-  const order = resolveOrderLines(lines, orderLocale);
+  const order = resolveOrderLines(lines, orderLocale, te);
   if (!order.ok) {
     return { success: false, error: order.error };
   }
@@ -179,7 +197,7 @@ export async function submitCartOrder(
   if (!apiKey) {
     return {
       success: false,
-      error: "El servei de correu no està disponible en aquest moment.",
+      error: te("emailServiceUnavailable"),
     };
   }
 
@@ -187,7 +205,7 @@ export async function submitCartOrder(
   if (!addresses) {
     return {
       success: false,
-      error: "El servei de correu no està disponible en aquest moment.",
+      error: te("emailServiceUnavailable"),
     };
   }
   const { from, to } = addresses;
@@ -241,7 +259,7 @@ export async function submitCartOrder(
   if (error) {
     return {
       success: false,
-      error: "No s’ha pogut enviar la sol·licitud. Torna-ho a provar més tard.",
+      error: te("sendFailed"),
     };
   }
 

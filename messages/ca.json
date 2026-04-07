@@ -147,6 +147,42 @@
       "noOnlinePaymentNote": "No hi ha pagament online: des de la pàgina següent enviaràs la sol·licitud i et confirmarem la comanda per correu o telèfon.",
       "continueShopping": "Seguir comprant",
       "placeOrder": "Fer la comanda"
+    },
+    "cartOrderPage": {
+      "emptyDescription": "Afegeix productes a la cistella abans d’enviar la sol·licitud.",
+      "backToCart": "Tornar a la cistella",
+      "title": "Sol·licitud de comanda",
+      "intro": "Revisa el total estimat i envia les teves dades de contacte. Et respondrem per confirmar la comanda i les opcions de pagament o recollida.",
+      "estimatedTotalLabel": "Total estimat (referència)",
+      "itemsInCartOne": "1 article a la cistella.",
+      "itemsInCartMany": "{count} articles a la cistella.",
+      "contactTitle": "Dades de contacte",
+      "contactIntro": "Envia la teva cistella per correu. Et respondrem per confirmar la comanda i les opcions de pagament o recollida.",
+      "submitSending": "S’està enviant…",
+      "submit": "Enviar sol·licitud",
+      "sentStatus": "S’ha enviat la sol·licitud…",
+      "nameLabel": "Nom",
+      "phoneLabel": "Telèfon",
+      "emailLabel": "Correu electrònic",
+      "notesLabel": "Observacions",
+      "notesPlaceholder": "Horari preferit, dedicatòria, al·lèrgies, etc.",
+      "privacyNote": "En enviar el formulari acceptes que tractem aquestes dades per gestionar la teva sol·licitud."
+    },
+    "cartOrderErrors": {
+      "emptyCart": "La cistella és buida.",
+      "tooManyLines": "La cistella té massa línies.",
+      "invalidQuantity": "Quantitat no vàlida en algun producte.",
+      "productNotFound": "Hi ha un producte que ja no està disponible.",
+      "productSoldOut": "El producte «{name}» no està disponible ara mateix.",
+      "invalidVariant": "Cal triar una opció vàlida per a «{name}».",
+      "invalidComplement": "Complement no vàlid per a «{name}».",
+      "invalidCartData": "Dades de cistella no vàlides.",
+      "fillRequiredFields": "Omple el nom, el telèfon i el correu.",
+      "fieldsTooLong": "Alguns camps són massa llargs.",
+      "invalidEmail": "El correu electrònic no és vàlid.",
+      "observationsTooLong": "Les observacions són massa llargues.",
+      "emailServiceUnavailable": "El servei de correu no està disponible en aquest moment.",
+      "sendFailed": "No s’ha pogut enviar la sol·licitud. Torna-ho a provar més tard."
     }
   },
   "home": {
@@ -240,6 +276,36 @@
     },
     "map": {
       "iframeTitle": "Artverd Floristeria a Google Maps"
+    }
+  },
+  "contacte": {
+    "subheader": {
+      "title": "Contacta amb nosaltres"
+    },
+    "formSection": {
+      "heading": "Envia'ns un missatge"
+    },
+    "details": {
+      "srHeading": "Detalls de contacte i mapa",
+      "phoneLabel": "Telèfon",
+      "emailLabel": "Correu",
+      "addressLabel": "Adreça",
+      "addressLine1": "Carrer del Cardaire, 11",
+      "addressLine2": "08221 Terrassa, Barcelona"
+    },
+    "form": {
+      "submit": "Enviar",
+      "submitting": "S'està carregant…",
+      "success": "El missatge s'ha enviat correctament.",
+      "honeypotLabel": "Lloc web",
+      "nameLabel": "Nom",
+      "emailLabel": "Correu electrònic",
+      "messageLabel": "Missatge"
+    },
+    "errors": {
+      "fillAllFields": "Omple tots els camps.",
+      "emailServiceUnavailable": "El servei de correu no està disponible en aquest moment.",
+      "sendFailed": "No s'ha pogut enviar el missatge. Torna-ho a provar més tard."
     }
   },
   "casamentsIEvents": {

@@ -4,6 +4,8 @@ import {
   submitContactForm,
   type ContactFormState,
 } from "@/app/actions/contactForm";
+import type { AppLocale } from "@/i18n/routing";
+import { useLocale, useTranslations } from "next-intl";
 import { useActionState } from "react";
 import { useFormStatus } from "react-dom";
 
@@ -11,13 +13,14 @@ const initialContactState: ContactFormState = { success: false };
 
 function ContactSubmitButton() {
   const { pending } = useFormStatus();
+  const t = useTranslations("contacte.form");
   return (
     <button
       type="submit"
       disabled={pending}
       className="inline-flex min-h-12 items-center justify-center rounded-full bg-[#67aa25] px-10 py-3 text-sm font-bold tracking-wide text-white shadow-sm transition hover:bg-[#5e9b21] disabled:cursor-not-allowed disabled:opacity-80"
     >
-      {pending ? "S'està carregant…" : "Enviar"}
+      {pending ? t("submitting") : t("submit")}
     </button>
   );
 }
@@ -27,6 +30,8 @@ const fieldClass =
 const inputClass = `w-full rounded-full ${fieldClass}`;
 const textareaClass = `w-full min-h-36 resize-y rounded-3xl ${fieldClass}`;
 export function ContactMessageForm() {
+  const t = useTranslations("contacte.form");
+  const locale = useLocale() as AppLocale;
   const [state, formAction] = useActionState(
     submitContactForm,
     initialContactState,
@@ -34,12 +39,13 @@ export function ContactMessageForm() {
 
   return (
     <form action={formAction} className="relative flex flex-col gap-6">
+      <input type="hidden" name="locale" value={locale} readOnly aria-hidden />
       {/* Anti-spam trap field: must stay empty */}
       <div
         className="pointer-events-none absolute -left-[10000px] top-auto m-[-1px] h-px w-px overflow-hidden border-0 p-0 opacity-0"
         aria-hidden="true"
       >
-        <label htmlFor="contact-website">Website</label>
+        <label htmlFor="contact-website">{t("honeypotLabel")}</label>
         <input
           id="contact-website"
           name="website"
@@ -61,7 +67,7 @@ export function ContactMessageForm() {
           className="rounded-2xl border border-[#67aa25]/40 bg-[#f4f9f0] px-4 py-3 text-sm text-[#0f1f14]"
           role="status"
         >
-          El missatge s&apos;ha enviat correctament.
+          {t("success")}
         </p>
       ) : null}
       <div
@@ -72,7 +78,7 @@ export function ContactMessageForm() {
           htmlFor="contact-nom"
           className="mb-2 block text-sm font-medium text-emerald-900"
         >
-          Nom <span className="text-[#67aa25]">*</span>
+          {t("nameLabel")} <span className="text-[#67aa25]">*</span>
         </label>
         <input
           id="contact-nom"
@@ -91,7 +97,7 @@ export function ContactMessageForm() {
           htmlFor="contact-correu"
           className="mb-2 block text-sm font-medium text-emerald-900"
         >
-          Correu electrònic <span className="text-[#67aa25]">*</span>
+          {t("emailLabel")} <span className="text-[#67aa25]">*</span>
         </label>
         <input
           id="contact-correu"
@@ -111,7 +117,7 @@ export function ContactMessageForm() {
           htmlFor="contact-missatge"
           className="mb-2 block text-sm font-medium text-emerald-900"
         >
-          Missatge <span className="text-[#67aa25]">*</span>
+          {t("messageLabel")} <span className="text-[#67aa25]">*</span>
         </label>
         <textarea
           id="contact-missatge"

@@ -2,8 +2,17 @@
 
 import { randomUUID } from "node:crypto";
 
+import { routing, type AppLocale } from "@/i18n/routing";
 import { getResendFromTo } from "@/lib/resendFromTo";
+import { hasLocale } from "next-intl";
+import { getTranslations } from "next-intl/server";
 import { Resend } from "resend";
+
+function parseContactLocale(formData: FormData): AppLocale {
+  const raw = String(formData.get("locale") ?? "").trim();
+  if (hasLocale(routing.locales, raw)) return raw as AppLocale;
+  return routing.defaultLocale as AppLocale;
+}
 
 export type ContactFormState = {
   success: boolean;
@@ -32,15 +41,21 @@ export async function submitContactForm(
   const email = String(formData.get("correu") ?? "").trim();
   const message = String(formData.get("missatge") ?? "").trim();
 
+  const locale = parseContactLocale(formData);
+  const tErrors = await getTranslations({
+    locale,
+    namespace: "contacte.errors",
+  });
+
   if (!name || !email || !message) {
-    return { success: false, error: "Omple tots els camps." };
+    return { success: false, error: tErrors("fillAllFields") };
   }
 
   const apiKey = process.env.RESEND_API_KEY;
   if (!apiKey) {
     return {
       success: false,
-      error: "El servei de correu no està disponible en aquest moment.",
+      error: tErrors("emailServiceUnavailable"),
     };
   }
 
@@ -48,7 +63,7 @@ export async function submitContactForm(
   if (!addresses) {
     return {
       success: false,
-      error: "El servei de correu no està disponible en aquest moment.",
+      error: tErrors("emailServiceUnavailable"),
     };
   }
   const { from, to } = addresses;
@@ -78,7 +93,7 @@ export async function submitContactForm(
   if (error) {
     return {
       success: false,
-      error: "No s'ha pogut enviar el missatge. Torna-ho a provar més tard.",
+      error: tErrors("sendFailed"),
     };
   }
 

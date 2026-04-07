@@ -9,7 +9,7 @@ import { useRouter } from "@/i18n/navigation";
 import { elsie } from "@/lib/fonts";
 import type { AppLocale } from "@/i18n/routing";
 import { serializeCartLines } from "@/lib/shop/cartStorage";
-import { useLocale } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { useActionState, useEffect } from "react";
 import { useFormStatus } from "react-dom";
 
@@ -17,13 +17,14 @@ const initialCartOrderState: CartOrderFormState = { success: false };
 
 function CartOrderSubmitButton() {
   const { pending } = useFormStatus();
+  const t = useTranslations("botiga.cartOrderPage");
   return (
     <button
       type="submit"
       disabled={pending}
       className="inline-flex min-h-12 w-full items-center justify-center rounded-sm bg-emerald-800 px-8 py-3 text-sm font-semibold tracking-widest text-white uppercase shadow-md transition hover:bg-emerald-900 disabled:cursor-not-allowed disabled:opacity-80 sm:w-auto"
     >
-      {pending ? "S'està enviant…" : "Enviar sol·licitud"}
+      {pending ? t("submitSending") : t("submit")}
     </button>
   );
 }
@@ -44,6 +45,7 @@ interface CartOrderFormProps {
 export function CartOrderForm({ formClassName }: CartOrderFormProps) {
   const { lines, clearCart } = useCart();
   const locale = useLocale() as AppLocale;
+  const t = useTranslations("botiga.cartOrderPage");
   const router = useRouter();
   const [state, formAction] = useActionState(
     submitCartOrder,
@@ -89,12 +91,9 @@ export function CartOrderForm({ formClassName }: CartOrderFormProps) {
       <h2
         className={`${elsie.className} text-2xl font-normal text-emerald-950`}
       >
-        Dades de contacte
+        {t("contactTitle")}
       </h2>
-      <p className="mt-2 text-sm text-emerald-800/85">
-        Envia la teva cistella per correu. Et respondrem per confirmar la
-        comanda i les opcions de pagament o recollida.
-      </p>
+      <p className="mt-2 text-sm text-emerald-800/85">{t("contactIntro")}</p>
 
       {state.error ? (
         <p
@@ -106,14 +105,14 @@ export function CartOrderForm({ formClassName }: CartOrderFormProps) {
       ) : null}
       {state.success ? (
         <p className="mt-6 text-sm text-emerald-800" role="status">
-          S&apos;ha enviat la sol·licitud…
+          {t("sentStatus")}
         </p>
       ) : null}
       {!state.success ? (
         <div className="mt-6 flex flex-col gap-5">
           <div>
             <label htmlFor="cart-nom" className={labelClass}>
-              Nom <span className="text-emerald-700">*</span>
+              {t("nameLabel")} <span className="text-emerald-700">*</span>
             </label>
             <input
               id="cart-nom"
@@ -127,7 +126,7 @@ export function CartOrderForm({ formClassName }: CartOrderFormProps) {
           </div>
           <div>
             <label htmlFor="cart-telefon" className={labelClass}>
-              Telèfon <span className="text-emerald-700">*</span>
+              {t("phoneLabel")} <span className="text-emerald-700">*</span>
             </label>
             <input
               id="cart-telefon"
@@ -141,7 +140,7 @@ export function CartOrderForm({ formClassName }: CartOrderFormProps) {
           </div>
           <div>
             <label htmlFor="cart-correu" className={labelClass}>
-              Correu electrònic <span className="text-emerald-700">*</span>
+              {t("emailLabel")} <span className="text-emerald-700">*</span>
             </label>
             <input
               id="cart-correu"
@@ -156,22 +155,19 @@ export function CartOrderForm({ formClassName }: CartOrderFormProps) {
           </div>
           <div>
             <label htmlFor="cart-observacions" className={labelClass}>
-              Observacions
+              {t("notesLabel")}
             </label>
             <textarea
               id="cart-observacions"
               name="observacions"
               rows={4}
               maxLength={4000}
-              placeholder="Horari preferit, dedicatòria, al·lèrgies, etc."
+              placeholder={t("notesPlaceholder")}
               className={textareaClass}
             />
           </div>
           <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-            <p className="text-xs text-emerald-800/80">
-              En enviar el formulari acceptes que tractem aquestes dades per
-              gestionar la teva sol·licitud.
-            </p>
+            <p className="text-xs text-emerald-800/80">{t("privacyNote")}</p>
             <CartOrderSubmitButton />
           </div>
         </div>

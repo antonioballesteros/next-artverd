@@ -1,16 +1,54 @@
 import { artverdImages } from "@/lib/artverdAssets";
 import { Link } from "@/i18n/navigation";
+import type { AppLocale } from "@/i18n/routing";
+import { routing } from "@/i18n/routing";
 import { elsie } from "@/lib/fonts";
 import type { Metadata } from "next";
 import { Home } from "lucide-react";
+import { getLocale } from "next-intl/server";
 
-export const metadata: Metadata = {
-  title: "Producte no trobat",
-  description:
-    "El producte que cerques no existeix o l’adreça no és correcta. Torna a l’inici de la botiga.",
+interface ShopNotFoundCopy {
+  title: string;
+  description: string;
+  shopLabel: string;
+  contactLabel: string;
+}
+
+const shopNotFoundCopyByLocale: Record<AppLocale, ShopNotFoundCopy> = {
+  ca: {
+    title: "Producte no trobat",
+    description:
+      "El producte que cerques no existeix o l'adreca no es correcta. Torna a l'inici de la botiga.",
+    shopLabel: "Botiga",
+    contactLabel: "Contacte",
+  },
+  es: {
+    title: "Producto no encontrado",
+    description:
+      "El producto que buscas no existe o la direccion no es correcta. Vuelve al inicio de la tienda.",
+    shopLabel: "Tienda",
+    contactLabel: "Contacto",
+  },
 };
 
-export default function NotFound() {
+export async function generateMetadata(): Promise<Metadata> {
+  const locale = (await getLocale()) as AppLocale;
+  const copy =
+    shopNotFoundCopyByLocale[locale] ??
+    shopNotFoundCopyByLocale[routing.defaultLocale as AppLocale];
+
+  return {
+    title: copy.title,
+    description: copy.description,
+  };
+}
+
+export default async function NotFound() {
+  const locale = (await getLocale()) as AppLocale;
+  const copy =
+    shopNotFoundCopyByLocale[locale] ??
+    shopNotFoundCopyByLocale[routing.defaultLocale as AppLocale];
+
   return (
     <section
       className="relative flex min-h-[calc(100dvh-10rem)] flex-col justify-center overflow-hidden bg-emerald-900 px-4 py-16 md:min-h-[calc(100dvh-12rem)] md:py-24"
@@ -38,15 +76,14 @@ export default function NotFound() {
           id="not-found-title"
           className={`${elsie.className} mt-3 text-3xl font-normal tracking-wide text-white md:mt-4 md:text-5xl`}
         >
-          Producte no trobat
+          {copy.title}
         </h1>
         <div
           className="mx-auto mt-6 h-px w-28 bg-emerald-300/90 md:mt-8"
           aria-hidden
         />
         <p className="mt-6 text-base leading-relaxed text-emerald-50/95 md:mt-8 md:text-lg">
-          El producte que cerques no existeix o l’adreça no és correcta. Torna a
-          l’inici de la botiga.
+          {copy.description}
         </p>
         <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
           <Link
@@ -54,13 +91,13 @@ export default function NotFound() {
             className="inline-flex items-center gap-2 rounded-full border-2 border-emerald-300/90 bg-emerald-950/35 px-6 py-3 text-sm font-medium tracking-wide text-white uppercase transition-colors hover:border-emerald-200 hover:bg-emerald-900/55 focus-visible:ring-2 focus-visible:ring-emerald-300/60 focus-visible:outline-none md:text-base"
           >
             <Home className="h-5 w-5 shrink-0 text-emerald-200" aria-hidden />
-            Botiga
+            {copy.shopLabel}
           </Link>
           <Link
             href="/contacte"
             className="text-sm font-medium text-emerald-200/95 underline decoration-emerald-400/80 underline-offset-4 transition-colors hover:text-white hover:decoration-emerald-200 md:text-base"
           >
-            Contacte
+            {copy.contactLabel}
           </Link>
         </div>
       </div>

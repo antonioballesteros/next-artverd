@@ -3,26 +3,19 @@ import { CookieConsentProvider } from "@/components/legal/CookieConsentProvider"
 import { VercelTrackingIfConsented } from "@/components/legal/VercelTrackingIfConsented";
 import { CartProvider } from "@/components/shop/CartProvider";
 import { elsie, geistMono, geistSans } from "@/lib/fonts";
-import type { Metadata } from "next";
+import { getLocale } from "next-intl/server";
 import "./globals.css";
 
-export const metadata: Metadata = {
-  title: {
-    default: "Art Verd · La teva floristeria a Terrassa",
-    template: "%s · Art Verd",
-  },
-  description:
-    "Floristeria Art Verd: rams, plantes i decoració a Terrassa. Passió per les flors des de l’any 2000. Lliuraments a domicili.",
-};
-
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const locale = await getLocale();
+
   return (
     <html
-      lang="ca"
+      lang={locale}
       className={`${geistSans.variable} ${geistMono.variable} ${elsie.variable} h-full antialiased`}
     >
       <body className="flex min-h-full flex-col font-sans">

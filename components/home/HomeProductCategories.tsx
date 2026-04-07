@@ -6,55 +6,48 @@ import {
   getProductSlug,
 } from "@/lib/shop/products";
 import Image from "next/image";
-import { getLocale } from "next-intl/server";
+import { getLocale, getTranslations } from "next-intl/server";
 import { LocalizedCategoryLink } from "./LocalizedCategoryLink";
 import { HomeSubtitle } from "./HomeSubtitle";
 
+type CategoryCopyKey = "rams" | "plantes" | "accesoris" | "events";
+
 interface ProductCategory {
   href: "/botiga" | "/casaments-i-events" | { caSlug: "ram" | "planta" };
-  title: string;
-  description: string;
+  copyKey: CategoryCopyKey;
   imageSrc: string;
-  imageAlt: string;
 }
 
 const PRODUCT_CATEGORIES: ProductCategory[] = [
   {
     href: { caSlug: "ram" },
-    title: "Rams",
-    description: "Rams i composicions per a cada moment.",
+    copyKey: "rams",
     imageSrc: artverdImages.categoryRams,
-    imageAlt: "Rams i flors naturals",
   },
   {
     href: { caSlug: "planta" },
-    title: "Plantes",
-    description: "Verd per casa i assessorament.",
+    copyKey: "plantes",
     imageSrc: artverdImages.categoryPlantes,
-    imageAlt: "Plantes en test i decoració verda",
   },
   {
     href: "/botiga",
-    title: "Accessoris",
-    description: "Detalls per decorar amb encant.",
+    copyKey: "accesoris",
     imageSrc: artverdImages.categoryAccesoris,
-    imageAlt: "Accessoris i objectes de decoració",
   },
   {
     href: "/casaments-i-events",
-    title: "Events",
-    description: "Flors per celebracions i esdeveniments.",
+    copyKey: "events",
     imageSrc: artverdImages.categoryEvents,
-    imageAlt: "Flors i decoració per a esdeveniments",
   },
 ];
 
 export async function HomeProductCategories() {
   const locale = (await getLocale()) as AppLocale;
+  const t = await getTranslations("home.productCategories");
 
   return (
     <section className="bg-emerald-50/50" aria-labelledby="products-heading">
-      <HomeSubtitle>Els nostres productes</HomeSubtitle>
+      <HomeSubtitle>{t("subtitle")}</HomeSubtitle>
       <div className="mx-auto max-w-6xl">
         <ul className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {PRODUCT_CATEGORIES.map((cat) => {
@@ -63,7 +56,7 @@ export async function HomeProductCategories() {
                 <div className="relative aspect-4/3 w-full overflow-hidden">
                   <Image
                     src={cat.imageSrc}
-                    alt={cat.imageAlt}
+                    alt={t(`${cat.copyKey}.imageAlt`)}
                     fill
                     className="object-cover transition duration-300 group-hover:scale-105"
                     sizes="(max-width: 768px) 100vw, 50vw"
@@ -71,13 +64,13 @@ export async function HomeProductCategories() {
                 </div>
                 <div className="flex flex-1 flex-col p-5">
                   <span className="text-lg font-semibold text-emerald-950 group-hover:text-emerald-800">
-                    {cat.title}
+                    {t(`${cat.copyKey}.title`)}
                   </span>
                   <span className="mt-2 text-sm text-emerald-900/75">
-                    {cat.description}
+                    {t(`${cat.copyKey}.description`)}
                   </span>
                   <span className="mt-4 text-sm font-semibold text-emerald-800">
-                    Veure més →
+                    {t("seeMore")}
                   </span>
                 </div>
               </>

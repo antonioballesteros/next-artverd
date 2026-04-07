@@ -2,6 +2,7 @@ import { Link } from "@/i18n/navigation";
 import { ScrollConvergePair } from "@/components/ScrollConvergePair";
 import { artverdImages } from "@/lib/artverdAssets";
 import { Check } from "lucide-react";
+import { getTranslations } from "next-intl/server";
 import Image from "next/image";
 import { HomeSubtitle } from "./HomeSubtitle";
 
@@ -22,49 +23,37 @@ function IntroCheckListItem({ children }: IntroCheckListItemProps) {
   );
 }
 
-export function HomeIntro() {
+export async function HomeIntro() {
+  const t = await getTranslations("home.intro");
+
   return (
     <section className="bg-emerald-50/50" aria-labelledby="intro-heading">
-      <HomeSubtitle>Floristeria Art Verd</HomeSubtitle>
+      <HomeSubtitle>{t("subtitle")}</HomeSubtitle>
       <ScrollConvergePair
         className="mx-auto grid max-w-6xl items-center gap-10 max-md:*:first:order-2 max-md:*:last:order-1 md:grid-cols-2 md:gap-14"
         left={
           <div>
             <div className="mx-4 mt-6 max-w-3xl space-y-4 text-base leading-relaxed text-emerald-900/90 md:mx-0 md:text-lg">
-              <p>
-                A la floristeria Art Verd trobaràs rams, plantes i objectes de
-                decoració per fer un regal únic i personalitzat, per cada
-                ocasió. Sigui un ram de flors per un ésser estimat, per celebrar
-                un naixement o un aniversari, o per organitzar el teu casament.
-                Regala flors per a qualsevol ocasió.
-              </p>
-              <p>
-                La teva floristeria a Terrassa: estem al centre, molt a prop de
-                Mútua de Terrassa. Fem lliuraments a domicili.
-              </p>
+              <p>{t("paragraph1")}</p>
+              <p>{t("paragraph2")}</p>
             </div>
             <ul className="mt-8 max-w-2xl list-none space-y-3 text-emerald-900/90 md:text-lg">
-              <IntroCheckListItem>
-                Àmplia varietat de plantes per cada racó, així com
-                l’assessorament per tenir-ne cura.
-              </IntroCheckListItem>
-              <IntroCheckListItem>
-                Accessoris per decorar la teva llar amb estil i personalitat.
-              </IntroCheckListItem>
-              <IntroCheckListItem>Events florals.</IntroCheckListItem>
+              <IntroCheckListItem>{t("checklist1")}</IntroCheckListItem>
+              <IntroCheckListItem>{t("checklist2")}</IntroCheckListItem>
+              <IntroCheckListItem>{t("checklist3")}</IntroCheckListItem>
             </ul>
             <div className="mt-8 flex flex-wrap gap-3">
               <Link
                 href="/floristeria"
                 className="inline-flex items-center justify-center rounded-full bg-white px-6 py-3 font-semibold text-emerald-900 shadow-sm transition hover:bg-emerald-50"
               >
-                Coneix la botiga
+                {t("ctaShop")}
               </Link>
               <Link
                 href="/contacte"
                 className="inline-flex items-center justify-center rounded-full bg-white px-6 py-3 font-semibold text-emerald-900 shadow-sm transition hover:bg-emerald-50"
               >
-                Contacte
+                {t("ctaContact")}
               </Link>
             </div>
           </div>
@@ -73,7 +62,7 @@ export function HomeIntro() {
           <div className="relative aspect-4/3 w-full overflow-hidden rounded-2xl border border-emerald-900/10 shadow-lg">
             <Image
               src={artverdImages.tenda}
-              alt="Interior de la floristeria ArtVerd a Terrassa"
+              alt={t("imageAlt")}
               fill
               className="object-cover"
               sizes="(max-width: 768px) 100vw, 50vw"

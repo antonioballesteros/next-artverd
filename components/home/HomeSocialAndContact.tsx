@@ -1,13 +1,16 @@
 import { Mail, MapPin, Phone } from "lucide-react";
+import { getTranslations } from "next-intl/server";
 import { SocialLinksList } from "../social/SocialLinksList";
 import { ScrollConvergePair } from "../ScrollConvergePair";
 import { HomeSubtitle } from "./HomeSubtitle";
 import { StoreGoogleMapEmbed } from "./StoreGoogleMapEmbed";
 
-export function HomeSocialAndContact() {
+export async function HomeSocialAndContact() {
+  const t = await getTranslations("home.socialAndContact");
+
   return (
     <section className="bg-emerald-50/50" aria-labelledby="social-heading">
-      <HomeSubtitle>Contacta amb nosaltres</HomeSubtitle>
+      <HomeSubtitle>{t("subtitle")}</HomeSubtitle>
       <ScrollConvergePair
         className="mx-auto grid max-w-6xl items-start gap-10 md:grid-cols-2 md:gap-14"
         left={
@@ -16,7 +19,7 @@ export function HomeSocialAndContact() {
               id="social-heading"
               className="text-2xl font-semibold text-emerald-950 md:text-3xl"
             >
-              Les nostres xarxes socials
+              {t("socialHeading")}
             </h3>
             <SocialLinksList />
           </div>
@@ -24,7 +27,7 @@ export function HomeSocialAndContact() {
         right={
           <div className="flex flex-col text-center">
             <h3 className="text-2xl font-semibold text-emerald-950 md:text-3xl">
-              Contacta amb nosaltres per les teves comandes
+              {t("contactHeading")}
             </h3>
             <ul className="mx-auto mt-6 flex flex-wrap gap-3 text-emerald-900/90">
               <li className="flex gap-2 leading-relaxed">
@@ -33,11 +36,11 @@ export function HomeSocialAndContact() {
                   aria-hidden
                 />
                 <span>
-                  Artverd Floristeria
+                  {t("addressName")}
                   <br />
-                  Carrer Cardaire, 11
+                  {t("addressLine1")}
                   <br />
-                  08221 Terrassa (Barcelona)
+                  {t("addressLine2")}
                 </span>
               </li>
               <li className="flex flex-col gap-2">

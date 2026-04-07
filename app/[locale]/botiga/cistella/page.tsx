@@ -1,14 +1,21 @@
 import { CartPageClient } from "@/components/shop/CartPageClient";
+import { getMetadataTranslations } from "@/lib/i18n/pageMetadata";
 import type { Metadata } from "next";
 
-export const metadata: Metadata = {
-  title: "Cistella",
-  description:
-    "Revisa la teva cistella: articles, quantitats i total estimat. Continua cap a la sol·licitud de comanda quan estiguis llest.",
-};
-
 interface BotigaCistellaPageProps {
+  params: Promise<{ locale: string }>;
   searchParams?: Promise<{ sent?: string }>;
+}
+
+export async function generateMetadata({
+  params,
+}: Pick<BotigaCistellaPageProps, "params">): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getMetadataTranslations(locale, "cart");
+  return {
+    title: t("title"),
+    description: t("description"),
+  };
 }
 
 export default async function BotigaCistellaPage({

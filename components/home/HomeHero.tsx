@@ -2,9 +2,8 @@
 
 import { artverdSignature, elsie } from "@/lib/fonts";
 import { artverdHeroSlides } from "@/lib/artverdAssets";
-import type { AppLocale } from "@/i18n/routing";
 import Image from "next/image";
-import { useLocale } from "next-intl";
+import { useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
 
 const SLIDE_INTERVAL_MS = 5500;
@@ -12,20 +11,9 @@ const FADE_MS = 1000;
 /** Hero headline crossfade (ms); slightly softer than an instant swap. */
 const HEADLINE_FADE_MS = 900;
 
-const HERO_HEADLINES = [
-  {
-    ca: "Passió per les flors, des de l'any 2000",
-    es: "Pasión por las flores, desde el año 2000",
-  },
-  {
-    ca: "Sempre queda perfum a les mans de qui regala flors",
-    es: "Siempre queda perfume en las manos de quien regala flores",
-  },
-] as const;
-
 export function HomeHero() {
-  const locale = useLocale() as AppLocale;
-  const heroHeadlines = HERO_HEADLINES.map((headline) => headline[locale]);
+  const t = useTranslations("home.hero");
+  const heroHeadlines = [t("headline0"), t("headline1")];
   const [activeIndex, setActiveIndex] = useState(0);
   const [reduceMotion, setReduceMotion] = useState(false);
 

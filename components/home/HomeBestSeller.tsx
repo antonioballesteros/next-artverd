@@ -1,20 +1,23 @@
 import { Link } from "@/i18n/navigation";
 import { artverdImages } from "@/lib/artverdAssets";
+import { getTranslations } from "next-intl/server";
 import Image from "next/image";
 import { ScrollConvergePair } from "../ScrollConvergePair";
 import { HomeSubtitle } from "./HomeSubtitle";
 
-export function HomeBestSeller() {
+export async function HomeBestSeller() {
+  const t = await getTranslations("home.bestSeller");
+
   return (
     <section className="bg-emerald-50/50" aria-labelledby="bestseller-heading">
-      <HomeSubtitle>Novetats · Best seller</HomeSubtitle>
+      <HomeSubtitle>{t("subtitle")}</HomeSubtitle>
       <ScrollConvergePair
         className="mx-auto grid max-w-6xl items-center gap-10 md:grid-cols-2 md:gap-14"
         left={
           <div className="relative aspect-4/3 w-full overflow-hidden rounded-2xl border border-emerald-900/10 shadow-lg">
             <Image
               src={artverdImages.bestSeller}
-              alt="Selecció de productes destacats i best seller"
+              alt={t("imageAlt")}
               fill
               className="object-cover"
               sizes="(max-width: 768px) 100vw, 50vw"
@@ -24,12 +27,7 @@ export function HomeBestSeller() {
         right={
           <div>
             <p className="mx-4 mt-6 max-w-3xl text-base leading-relaxed text-emerald-900/90 md:mx-0 md:text-lg">
-              Els nostres productes best seller són els més venuts i apreciats
-              pels nostres clients. Descobreix la nostra selecció de productes
-              destacats i troba el que millor s’adapti a les teves necessitats.
-              A Art Verd, t’oferim la millor qualitat i varietat de flors i
-              plantes perquè el teu espai es converteixi en un lloc únic i
-              especial.
+              {t("body")}
             </p>
 
             <div className="mt-8 flex flex-wrap gap-3">
@@ -37,7 +35,7 @@ export function HomeBestSeller() {
                 href="/botiga"
                 className="inline-flex items-center justify-center rounded-full bg-white px-6 py-3 font-semibold text-emerald-900 shadow-sm transition hover:bg-emerald-50"
               >
-                Botiga
+                {t("ctaShop")}
               </Link>
             </div>
           </div>

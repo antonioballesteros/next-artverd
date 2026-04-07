@@ -1,1 +1,183 @@
-{}
+{
+  "metadata": {
+    "site": {
+      "title": "Art Verd · La teva floristeria a Terrassa",
+      "description": "Floristeria Art Verd: rams, plantes i decoració a Terrassa. Passió per les flors des de l'any 2000. Lliuraments a domicili."
+    },
+    "home": {
+      "title": "Inici",
+      "description": "Floristeria Art Verd a Terrassa: rams, plantes, tallers i decoració floral per a cada ocasió."
+    },
+    "blog": {
+      "title": "Blog",
+      "description": "Notícies i consells de floristeria Art Verd a Terrassa: colors de les roses, primavera i flors per a esdeveniments."
+    },
+    "botiga": {
+      "title": "Botiga",
+      "description": "Botiga online Art Verd: rams, plantes, flors seques, regals i tallers. Consulta el catàleg i la cistella de referència."
+    },
+    "cart": {
+      "title": "Cistella",
+      "description": "Revisa la teva cistella: articles, quantitats i total estimat. Continua cap a la sol·licitud de comanda quan estiguis llest."
+    },
+    "cartOrder": {
+      "title": "Sol·licitud de comanda",
+      "description": "Envia la teva cistella i les dades de contacte per confirmar la comanda per correu o telèfon."
+    },
+    "contacte": {
+      "title": "Contacte",
+      "description": "Contacta amb Art Verd: formulari, telèfon, correu i adreça a Terrassa."
+    },
+    "casamentsIEvents": {
+      "title": "Casaments i events",
+      "description": "Rams de núvia, decoració de cerimònia i banquet, ramets, pastís nupcial i esdeveniments — floristeria ArtVerd a Terrassa."
+    },
+    "tallers": {
+      "title": "Tallers",
+      "description": "Tallers florals a ArtVerd a Terrassa: composicions, kokedames i terraris. Regala una experiència creativa amb flors i plantes."
+    },
+    "floristeria": {
+      "title": "Floristeria",
+      "description": "Floristeria Artverd a Terrassa: rams, plantes naturals i decoració. Qualitat, assessorament personalitzat i comanda online."
+    },
+    "legal": {
+      "avisLegal": {
+        "title": "Avís legal",
+        "description": "Avís legal d’Art Verd: dades del titular, condicions d’ús, continguts, enllaços, propietat intel·lectual i legislació aplicable."
+      },
+      "accessibilitat": {
+        "title": "Política d’accessibilitat",
+        "description": "Política d’accessibilitat d’Art Verd: estàndards, navegació per teclat, mida del text, configuració tècnica i enllaços al W3C i la WAI."
+      },
+      "cookies": {
+        "title": "Política de galetes",
+        "description": "Política de galetes d’Art Verd: inventari de tecnologies, bàner de consentiment, Vercel Analytics i Speed Insights, emmagatzematge local de la cistella."
+      },
+      "privacitat": {
+        "title": "Política de privacitat",
+        "description": "Política de privacitat d’Art Verd: tractament de dades personals, drets dels interessats i informació del responsable, Susana Fernandez Ballester."
+      },
+      "termes": {
+        "title": "Termes i condicions",
+        "description": "Termes i condicions d’ús de la botiga Art Verd: compres en línia, llicències, cancel·lacions, reemborsaments, garanties i privacitat."
+      }
+    },
+    "blogPost": {
+      "notFound": {
+        "title": "Article no trobat",
+        "description": "Aquest article del blog no està disponible."
+      },
+      "perque-triar-art-verd-pels-teus-events-especials": {
+        "title": "¿Perqué triar Artverd pels teus events especials?",
+        "description": "Les flors són essencials en qualsevol celebració. A Artverd, floristeria a Terrassa des de l’any 2000, creem arranjaments únics perquè els teus esdeveniments siguin inoblidables."
+      },
+      "abril-el-mes-de-les-flors": {
+        "title": "Abril el mes de les flors",
+        "description": "Desprès d’un hivern llarg i fred, Abril marca el començament de primavera: natura que desperta, camps i jardins plens de flors, i les primeres flors del mes."
+      },
+      "el-significat-del-color-de-les-roses": {
+        "title": "El significat del color de les roses",
+        "description": "Més enllà del color vermell tradicional, per Sant Jordi trobem roses de molts colors. Què signifiquen el vermell, el blanc, el groc, el taronja, el rosa i el blau?"
+      }
+    },
+    "botigaProduct": {
+      "notFound": {
+        "title": "No trobat",
+        "description": "Aquest producte no està disponible."
+      }
+    }
+  },
+  "home": {
+    "hero": {
+      "headline0": "Passió per les flors, des de l'any 2000",
+      "headline1": "Sempre queda perfum a les mans de qui regala flors"
+    },
+    "intro": {
+      "subtitle": "Floristeria Art Verd",
+      "paragraph1": "A la floristeria Art Verd trobaràs rams, plantes i objectes de decoració per fer un regal únic i personalitzat, per cada ocasió. Sigui un ram de flors per un ésser estimat, per celebrar un naixement o un aniversari, o per organitzar el teu casament. Regala flors per a qualsevol ocasió.",
+      "paragraph2": "La teva floristeria a Terrassa: estem al centre, molt a prop de Mútua de Terrassa. Fem lliuraments a domicili.",
+      "checklist1": "Àmplia varietat de plantes per cada racó, així com l’assessorament per tenir-ne cura.",
+      "checklist2": "Accessoris per decorar la teva llar amb estil i personalitat.",
+      "checklist3": "Events florals.",
+      "ctaShop": "Coneix la botiga",
+      "ctaContact": "Contacte",
+      "imageAlt": "Interior de la floristeria ArtVerd a Terrassa"
+    },
+    "productCategories": {
+      "subtitle": "Els nostres productes",
+      "seeMore": "Veure més →",
+      "rams": {
+        "title": "Rams",
+        "description": "Rams i composicions per a cada moment.",
+        "imageAlt": "Rams i flors naturals"
+      },
+      "plantes": {
+        "title": "Plantes",
+        "description": "Verd per casa i assessorament.",
+        "imageAlt": "Plantes en test i decoració verda"
+      },
+      "accesoris": {
+        "title": "Accessoris",
+        "description": "Detalls per decorar amb encant.",
+        "imageAlt": "Accessoris i objectes de decoració"
+      },
+      "events": {
+        "title": "Events",
+        "description": "Flors per celebracions i esdeveniments.",
+        "imageAlt": "Flors i decoració per a esdeveniments"
+      }
+    },
+    "bestSeller": {
+      "subtitle": "Novetats · Best seller",
+      "body": "Els nostres productes best seller són els més venuts i apreciats pels nostres clients. Descobreix la nostra selecció de productes destacats i troba el que millor s’adapti a les teves necessitats. A Art Verd, t’oferim la millor qualitat i varietat de flors i plantes perquè el teu espai es converteixi en un lloc únic i especial.",
+      "ctaShop": "Botiga",
+      "imageAlt": "Selecció de productes destacats i best seller"
+    },
+    "workshops": {
+      "subtitle": "Tallers florals",
+      "body": "Descobreix els nostres tallers florals a ArtVerd i aprèn a crear arranjaments espectaculars amb les millors flors i plantes. T’oferim tallers per a tots els nivells, des de principiants fins a experts, perquè puguis gaudir de l’art floral independentment de la teva experiència. Vine a viure una experiència única i creativa amb nosaltres, a Terrassa.",
+      "cta": "Coneix els nostres tallers",
+      "imageAlt": "Rams i arranjaments florals per als tallers"
+    },
+    "testimonials": {
+      "subtitle": "Els nostres clients opinen",
+      "items": [
+        {
+          "quote": "Flors i rams molt bonics; per Sant Jordi em van fer el ram de Sant Jordi més bonic que havia vist mai i molt bon de preu.",
+          "author": "Max Power"
+        },
+        {
+          "quote": "Una noia amb molt traça i molt bon gust. No és pas una floristeria convencional!",
+          "author": "Ramon Grimalt"
+        },
+        {
+          "quote": "Flors i rams preciosos i a més mil detalls per inspirar-te! Hi tornaré segur!",
+          "author": "Ariadna Orriols"
+        },
+        {
+          "quote": "Tenen plantes exòtiques, articles preciosos de decoració i arranjaments florals bonics; a més de ser molt amable i professional.",
+          "author": "Andrea M."
+        },
+        {
+          "quote": "Una botiga molt variada i una dependenta amb molt bon gust. Un plaer.",
+          "author": "Guillem Miralles"
+        },
+        {
+          "quote": "Un magnífic espai a Terrassa… deixeu-vos sorprendre i aconsellar.",
+          "author": "Áran GV"
+        }
+      ]
+    },
+    "socialAndContact": {
+      "subtitle": "Contacta amb nosaltres",
+      "socialHeading": "Les nostres xarxes socials",
+      "contactHeading": "Contacta amb nosaltres per les teves comandes",
+      "addressName": "Artverd Floristeria",
+      "addressLine1": "Carrer Cardaire, 11",
+      "addressLine2": "08221 Terrassa (Barcelona)"
+    },
+    "map": {
+      "iframeTitle": "Artverd Floristeria a Google Maps"
+    }
+  }
+}

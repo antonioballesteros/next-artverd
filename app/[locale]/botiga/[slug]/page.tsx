@@ -8,6 +8,7 @@ import {
   getProductName,
   getProductSlugsForLocale,
 } from "@/lib/shop/products";
+import { getMetadataTranslations } from "@/lib/i18n/pageMetadata";
 import { elsie } from "@/lib/fonts";
 import { hasLocale } from "next-intl";
 import type { Metadata } from "next";
@@ -31,7 +32,15 @@ export async function generateMetadata({
 }: BotigaProductPageProps): Promise<Metadata> {
   const { slug, locale } = await params;
   const product = getProductBySlug(slug);
-  if (!product) return { title: "No trobat" };
+  const t = await getMetadataTranslations(locale, "botigaProduct");
+
+  if (!product) {
+    return {
+      title: t("notFound.title"),
+      description: t("notFound.description"),
+    };
+  }
+
   const loc = locale as AppLocale;
   return {
     title: getProductName(product, loc),

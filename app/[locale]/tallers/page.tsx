@@ -7,13 +7,23 @@ import {
   TallersNarrativeSections,
   TallersStatementSlider,
 } from "@/components/tallers";
+import { getMetadataTranslations } from "@/lib/i18n/pageMetadata";
 import type { Metadata } from "next";
 
-export const metadata: Metadata = {
-  title: "Tallers",
-  description:
-    "Tallers florals a ArtVerd a Terrassa: composicions, kokedames i terraris. Regala una experiència creativa amb flors i plantes.",
-};
+interface TallersPageProps {
+  params: Promise<{ locale: string }>;
+}
+
+export async function generateMetadata({
+  params,
+}: TallersPageProps): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getMetadataTranslations(locale, "tallers");
+  return {
+    title: t("title"),
+    description: t("description"),
+  };
+}
 
 export default function TallersPage() {
   return (

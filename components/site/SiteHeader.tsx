@@ -4,8 +4,10 @@ import { LanguageSwitcher } from "@/components/site/LanguageSwitcher";
 import { CartHeaderLink } from "@/components/shop/CartHeaderLink";
 import { artverdImages } from "@/lib/artverdAssets";
 import { Link, usePathname } from "@/i18n/navigation";
-import { SITE_NAV_ITEMS } from "@/lib/siteNav";
+import type { AppLocale } from "@/i18n/routing";
+import { getSiteNavItems } from "@/lib/siteNav";
 import Image from "next/image";
+import { useLocale } from "next-intl";
 import { useEffect, useState } from "react";
 import type { ComponentProps } from "react";
 
@@ -42,6 +44,8 @@ interface SiteHeaderProps {
 
 export function SiteHeader({ currentPath, variant }: SiteHeaderProps) {
   const pathname = usePathname();
+  const locale = useLocale() as AppLocale;
+  const siteNavItems = getSiteNavItems(locale);
   const resolvedPath = currentPath ?? pathname;
   const resolvedVariant =
     variant !== undefined
@@ -105,7 +109,7 @@ export function SiteHeader({ currentPath, variant }: SiteHeaderProps) {
             className={`hidden items-center gap-6 text-sm font-medium md:flex ${isOverlay ? "drop-shadow-sm" : ""}`}
             aria-label="Principal"
           >
-            {SITE_NAV_ITEMS.map((item) => (
+            {siteNavItems.map((item) => (
               <Link
                 key={String(item.href)}
                 href={item.href as NavHref}
@@ -154,7 +158,7 @@ export function SiteHeader({ currentPath, variant }: SiteHeaderProps) {
             className="flex flex-col gap-3 text-base font-medium text-emerald-950"
             aria-label="Principal mòbil"
           >
-            {SITE_NAV_ITEMS.map((item) => (
+            {siteNavItems.map((item) => (
               <Link
                 key={String(item.href)}
                 href={item.href as NavHref}

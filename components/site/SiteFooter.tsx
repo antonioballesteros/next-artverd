@@ -1,8 +1,10 @@
 import { FooterCookiePreferences } from "@/components/legal/FooterCookiePreferences";
 import { artverdImages } from "@/lib/artverdAssets";
 import { Link } from "@/i18n/navigation";
-import { SITE_NAV_ITEMS } from "@/lib/siteNav";
+import type { AppLocale } from "@/i18n/routing";
+import { getSiteNavItems } from "@/lib/siteNav";
 import Image from "next/image";
+import { getLocale } from "next-intl/server";
 import type { ComponentProps } from "react";
 
 type NavHref = ComponentProps<typeof Link>["href"];
@@ -18,7 +20,10 @@ const FOOTER_LINKS: { href: string; label: string }[] = [
   { href: "/legal/termes-i-condicions", label: "Termes i condicions" },
 ];
 
-export function SiteFooter() {
+export async function SiteFooter() {
+  const locale = (await getLocale()) as AppLocale;
+  const siteNavItems = getSiteNavItems(locale);
+
   return (
     <footer className="relative mt-8 flex w-full flex-col items-center justify-center md:mt-20">
       <Image
@@ -56,7 +61,7 @@ export function SiteFooter() {
             className="flex flex-col items-center gap-2 border-t border-emerald-800/80 pt-6 text-sm md:border-none md:pt-0"
             aria-label="Principal"
           >
-            {SITE_NAV_ITEMS.map((item) => (
+            {siteNavItems.map((item) => (
               <Link
                 key={String(item.href)}
                 href={item.href as NavHref}

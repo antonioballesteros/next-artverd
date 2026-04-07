@@ -75,7 +75,7 @@ export function CartOrderForm({ formClassName }: CartOrderFormProps) {
       />
       <input type="hidden" name="locale" value={locale} readOnly aria-hidden />
       <div
-        className="pointer-events-none absolute -left-[10000px] top-auto m-[-1px] h-px w-px overflow-hidden border-0 p-0 opacity-0"
+        className="pointer-events-none absolute -left-[10000px] top-auto -m-px h-px w-px overflow-hidden border-0 p-0 opacity-0"
         aria-hidden="true"
       >
         <label htmlFor="cart-order-website">Website</label>

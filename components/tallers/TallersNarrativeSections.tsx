@@ -15,7 +15,7 @@ export async function TallersNarrativeSections() {
         <ScrollConvergePair
           className="mx-auto grid max-w-6xl items-center gap-10 px-4 md:grid-cols-2 md:gap-14"
           left={
-            <div className="relative aspect-video w-full overflow-hidden rounded-2xl border border-emerald-900/10 shadow-xl md:aspect-[1564/880]">
+            <div className="relative aspect-video w-full overflow-hidden rounded-2xl border border-emerald-900/10 shadow-xl md:aspect-1564/880">
               <Image
                 src={tallersImages.heroMain}
                 alt={t("imageMainAlt")}

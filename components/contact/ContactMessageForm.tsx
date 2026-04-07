@@ -42,7 +42,7 @@ export function ContactMessageForm() {
       <input type="hidden" name="locale" value={locale} readOnly aria-hidden />
       {/* Anti-spam trap field: must stay empty */}
       <div
-        className="pointer-events-none absolute -left-[10000px] top-auto m-[-1px] h-px w-px overflow-hidden border-0 p-0 opacity-0"
+        className="pointer-events-none absolute -left-[10000px] top-auto -m-px h-px w-px overflow-hidden border-0 p-0 opacity-0"
         aria-hidden="true"
       >
         <label htmlFor="contact-website">{t("honeypotLabel")}</label>

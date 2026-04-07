@@ -23,7 +23,7 @@ export const SITE_NAV_ITEMS: SiteNavItem[] = [
   },
   {
     href: "/floristeria",
-    label: { ca: "Floristeria", es: "Floristeria" },
+    label: { ca: "Floristeria", es: "Floristería" },
   },
   {
     href: "/tallers",

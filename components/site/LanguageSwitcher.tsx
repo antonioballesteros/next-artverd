@@ -4,6 +4,10 @@ import { persistLocalePreference } from "@/lib/i18n/localePreference";
 import { usePathname, useRouter } from "@/i18n/navigation";
 import { routing, type AppLocale } from "@/i18n/routing";
 import {
+  getBlogPostByAnyLocalizedSlug,
+  getLocalizedBlogSlug,
+} from "@/lib/blog/blogPosts";
+import {
   getProductBySlug,
   getProductSlug,
 } from "@/lib/shop/products";
@@ -54,6 +58,20 @@ export function LanguageSwitcher({
           {
             pathname: "/botiga/[slug]",
             params: { slug: getProductSlug(product, next) },
+          },
+          { locale: next },
+        );
+        return;
+      }
+    }
+
+    if (pathname === "/blog/[slug]" && slug) {
+      const post = getBlogPostByAnyLocalizedSlug(slug);
+      if (post) {
+        router.replace(
+          {
+            pathname: "/blog/[slug]",
+            params: { slug: getLocalizedBlogSlug(post.id, next) },
           },
           { locale: next },
         );

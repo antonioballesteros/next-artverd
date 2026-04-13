@@ -94,3 +94,7 @@ export function getAllLocalizedBlogSlugs(): string[] {
     return [post.slugByLocale.ca, post.slugByLocale.es];
   });
 }
+
+export function getBlogSlugsForLocale(locale: AppLocale): string[] {
+  return BLOG_POST_IDS.map((id) => BLOG_POSTS_BY_ID[id].slugByLocale[locale]);
+}

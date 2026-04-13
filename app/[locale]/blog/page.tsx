@@ -1,6 +1,7 @@
 import { BlogPageHeader, BlogPostGrid } from "@/components/blog";
 import { routing, type AppLocale } from "@/i18n/routing";
 import { getMetadataTranslations } from "@/lib/i18n/pageMetadata";
+import { buildPageMetadata } from "@/lib/seo/metadata";
 import { hasLocale } from "next-intl";
 import { getTranslations } from "next-intl/server";
 import type { Metadata } from "next";
@@ -13,12 +14,20 @@ export async function generateMetadata({
   params,
 }: BlogPageProps): Promise<Metadata> {
   const { locale } = await params;
+  const localeForPage: AppLocale = hasLocale(routing.locales, locale)
+    ? locale
+    : routing.defaultLocale;
   const t = await getMetadataTranslations(locale, "blog");
 
-  return {
+  return buildPageMetadata({
+    locale: localeForPage,
     title: t("title"),
     description: t("description"),
-  };
+    localizedPath: {
+      ca: "/blog",
+      es: "/blog",
+    },
+  });
 }
 
 export default async function BlogPage({ params }: BlogPageProps) {

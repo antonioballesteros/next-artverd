@@ -2,6 +2,7 @@ import { ProductCard } from "@/components/shop/ProductCard";
 import { routing, type AppLocale } from "@/i18n/routing";
 import { getMetadataTranslations } from "@/lib/i18n/pageMetadata";
 import { elsie } from "@/lib/fonts";
+import { buildPageMetadata } from "@/lib/seo/metadata";
 import { SHOP_PRODUCTS } from "@/lib/shop/products";
 import { hasLocale } from "next-intl";
 import { getTranslations } from "next-intl/server";
@@ -15,11 +16,19 @@ export async function generateMetadata({
   params,
 }: BotigaPageProps): Promise<Metadata> {
   const { locale } = await params;
+  const localeForPage: AppLocale = hasLocale(routing.locales, locale)
+    ? locale
+    : routing.defaultLocale;
   const t = await getMetadataTranslations(locale, "botiga");
-  return {
+  return buildPageMetadata({
+    locale: localeForPage,
     title: t("title"),
     description: t("description"),
-  };
+    localizedPath: {
+      ca: "/botiga",
+      es: "/tienda",
+    },
+  });
 }
 
 export default async function BotigaPage({ params }: BotigaPageProps) {

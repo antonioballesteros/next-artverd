@@ -1,4 +1,5 @@
 import { getMetadataTranslations } from "@/lib/i18n/pageMetadata";
+import { buildPageMetadata } from "@/lib/seo/metadata";
 import {
   getAllLocalizedBlogSlugs,
   getBlogPostByAnyLocalizedSlug,
@@ -31,16 +32,26 @@ export async function generateMetadata({
     getBlogPostByAnyLocalizedSlug(slug);
 
   if (!post) {
-    return {
+    return buildPageMetadata({
+      locale: localeForPage,
       title: t("notFound.title"),
       description: t("notFound.description"),
-    };
+      localizedPath: {
+        ca: "/blog",
+        es: "/blog",
+      },
+    });
   }
 
-  return {
+  return buildPageMetadata({
+    locale: localeForPage,
     title: t(`${post.metadataKey}.title`),
     description: t(`${post.metadataKey}.description`),
-  };
+    localizedPath: {
+      ca: `/blog/${post.slugByLocale.ca}`,
+      es: `/blog/${post.slugByLocale.es}`,
+    },
+  });
 }
 
 export default async function BlogPostPage({ params }: BlogPostPageProps) {

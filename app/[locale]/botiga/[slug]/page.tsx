@@ -11,6 +11,7 @@ import {
 } from "@/lib/shop/products";
 import { getMetadataTranslations } from "@/lib/i18n/pageMetadata";
 import { elsie } from "@/lib/fonts";
+import { buildPageMetadata } from "@/lib/seo/metadata";
 import { hasLocale } from "next-intl";
 import { getTranslations } from "next-intl/server";
 import type { Metadata } from "next";
@@ -33,24 +34,34 @@ export async function generateMetadata({
   params,
 }: BotigaProductPageProps): Promise<Metadata> {
   const { slug, locale } = await params;
+  const localeForMetadata: AppLocale = hasLocale(routing.locales, locale)
+    ? (locale as AppLocale)
+    : routing.defaultLocale;
   const product = getProductBySlug(slug);
   const t = await getMetadataTranslations(locale, "botigaProduct");
 
   if (!product) {
-    return {
+    return buildPageMetadata({
+      locale: localeForMetadata,
       title: t("notFound.title"),
       description: t("notFound.description"),
-    };
+      localizedPath: {
+        ca: "/botiga",
+        es: "/tienda",
+      },
+    });
   }
 
-  const localeForMetadata: AppLocale = hasLocale(routing.locales, locale)
-    ? (locale as AppLocale)
-    : routing.defaultLocale;
   const descriptionText = getProductDescription(product, localeForMetadata);
-  return {
+  return buildPageMetadata({
+    locale: localeForMetadata,
     title: getProductName(product, localeForMetadata),
     description: descriptionText.slice(0, 160),
-  };
+    localizedPath: {
+      ca: `/botiga/${product.slugs.ca}`,
+      es: `/tienda/${product.slugs.es}`,
+    },
+  });
 }
 
 export default async function BotigaProductPage({

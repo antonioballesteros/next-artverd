@@ -2,8 +2,12 @@ import { CookieConsentProvider } from "@/components/legal/CookieConsentProvider"
 import { VercelTrackingIfConsented } from "@/components/legal/VercelTrackingIfConsented";
 import { CartProvider } from "@/components/shop/CartProvider";
 import { elsie, geistMono, geistSans } from "@/lib/fonts";
+import { ROOT_METADATA } from "@/lib/seo/metadata";
 import { getLocale } from "next-intl/server";
+import type { Metadata } from "next";
 import "./globals.css";
+
+export const metadata: Metadata = ROOT_METADATA;
 
 export default async function RootLayout({
   children,

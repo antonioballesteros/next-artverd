@@ -10,7 +10,7 @@ import { elsie } from "@/lib/fonts";
 const BROWSER_HELP_LINKS: { label: string; href: string }[] = [
   {
     label: "Firefox",
-    href: "https://support.mozilla.org/ca/kb/galetes-informacio-que-llocs-web-guarden",
+    href: "https://support.mozilla.org/ca/kb/Galetes",
   },
   {
     label: "Google Chrome",
@@ -91,7 +91,8 @@ function CookieSectionParts({
             >
               {part.items.map((item) => {
                 const cookiePolicyExtra =
-                  item.includes("addicional") && item.includes("política de galetes");
+                  item.includes("addicional") &&
+                  item.includes("política de galetes");
 
                 if (cookiePolicyExtra) {
                   return (
@@ -124,22 +125,37 @@ function CookieSectionParts({
               key={key}
               className="mt-4 overflow-x-auto rounded-lg border border-emerald-900/10 bg-white/80 shadow-sm"
             >
-              <table className="min-w-xl w-full border-collapse text-left text-[0.85rem] text-emerald-950/90 md:min-w-0 md:text-[0.92rem]">
+              <table className="w-full min-w-xl border-collapse text-left text-[0.85rem] text-emerald-950/90 md:min-w-0 md:text-[0.92rem]">
                 <thead>
                   <tr className="border-b border-emerald-900/10 bg-emerald-50/80">
-                    <th scope="col" className="px-3 py-2 font-semibold text-emerald-900">
+                    <th
+                      scope="col"
+                      className="px-3 py-2 font-semibold text-emerald-900"
+                    >
                       Nom
                     </th>
-                    <th scope="col" className="px-3 py-2 font-semibold text-emerald-900">
+                    <th
+                      scope="col"
+                      className="px-3 py-2 font-semibold text-emerald-900"
+                    >
                       Proveïdor
                     </th>
-                    <th scope="col" className="px-3 py-2 font-semibold text-emerald-900">
+                    <th
+                      scope="col"
+                      className="px-3 py-2 font-semibold text-emerald-900"
+                    >
                       Finalitat
                     </th>
-                    <th scope="col" className="px-3 py-2 font-semibold text-emerald-900">
+                    <th
+                      scope="col"
+                      className="px-3 py-2 font-semibold text-emerald-900"
+                    >
                       Durada
                     </th>
-                    <th scope="col" className="px-3 py-2 font-semibold text-emerald-900">
+                    <th
+                      scope="col"
+                      className="px-3 py-2 font-semibold text-emerald-900"
+                    >
                       Base legal (informativa)
                     </th>
                   </tr>
@@ -150,13 +166,13 @@ function CookieSectionParts({
                       key={row.name.slice(0, 32)}
                       className="border-b border-emerald-900/5 last:border-b-0"
                     >
-                      <td className="align-top px-3 py-2.5 font-medium text-emerald-900">
+                      <td className="px-3 py-2.5 align-top font-medium text-emerald-900">
                         {row.name}
                       </td>
-                      <td className="align-top px-3 py-2.5">{row.provider}</td>
-                      <td className="align-top px-3 py-2.5">{row.purpose}</td>
-                      <td className="align-top px-3 py-2.5">{row.duration}</td>
-                      <td className="align-top px-3 py-2.5">{row.legalNote}</td>
+                      <td className="px-3 py-2.5 align-top">{row.provider}</td>
+                      <td className="px-3 py-2.5 align-top">{row.purpose}</td>
+                      <td className="px-3 py-2.5 align-top">{row.duration}</td>
+                      <td className="px-3 py-2.5 align-top">{row.legalNote}</td>
                     </tr>
                   ))}
                 </tbody>
@@ -205,7 +221,7 @@ function CookiePolicySectionBlock({
   return (
     <section
       id={section.id}
-      className="motion-safe:animate-[blog-section-reveal_0.65s_cubic-bezier(0.22,1,0.36,1)_forwards] motion-safe:opacity-0 motion-reduce:animate-none motion-reduce:opacity-100 scroll-mt-28"
+      className="scroll-mt-28 motion-safe:animate-[blog-section-reveal_0.65s_cubic-bezier(0.22,1,0.36,1)_forwards] motion-safe:opacity-0 motion-reduce:animate-none motion-reduce:opacity-100"
       style={{ animationDelay: `${delayMs}ms`, animationFillMode: "forwards" }}
       aria-labelledby={`heading-${section.id}`}
     >
@@ -246,7 +262,11 @@ export function CookiePolicyContent() {
 
         <div className="mt-12 space-y-12 md:mt-14 md:space-y-14">
           {COOKIE_POLICY_SECTIONS.map((section, index) => (
-            <CookiePolicySectionBlock key={section.id} section={section} index={index} />
+            <CookiePolicySectionBlock
+              key={section.id}
+              section={section}
+              index={index}
+            />
           ))}
         </div>
       </article>

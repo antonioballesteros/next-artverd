@@ -2,6 +2,7 @@
 
 import { useCart } from "@/components/shop/CartProvider";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import { formatEur } from "@/lib/shop/formatEur";
 import type { AppLocale } from "@/i18n/routing";
 import {
@@ -100,7 +101,7 @@ export function AddToCartButton({ product }: AddToCartButtonProps) {
       <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
         <label className="flex items-center gap-2 text-sm text-emerald-900">
           <span className="sr-only">{t("quantity")}</span>
-          <input
+          <Input
             type="number"
             min={1}
             max={9}

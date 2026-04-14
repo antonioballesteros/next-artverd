@@ -30,7 +30,7 @@ export default async function LoginPage({ searchParams }: LoginPageProps) {
         </CardHeader>
         <CardContent>
           <form action={signIn} className="flex flex-col gap-4">
-            <input
+            <Input
               type="hidden"
               name="redirectTo"
               value={redirectTo ?? "/admin/dashboard"}

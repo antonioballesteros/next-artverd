@@ -2,6 +2,7 @@
 
 import { useCart } from "@/components/shop/CartProvider";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import { Link } from "@/i18n/navigation";
 import { formatEur } from "@/lib/shop/formatEur";
 import type { AppLocale } from "@/i18n/routing";
@@ -134,7 +135,7 @@ export function CartPageClient({ orderSent = false }: CartPageClientProps) {
                 <div className="mt-3 flex flex-wrap items-center gap-3">
                   <label className="flex items-center gap-2 text-sm text-emerald-900">
                     <span className="sr-only">{t("quantityLabel")}</span>
-                    <input
+                    <Input
                       type="number"
                       min={1}
                       max={99}

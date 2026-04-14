@@ -6,6 +6,8 @@ import {
 } from "@/app/actions/cartOrder";
 import { useCart } from "@/components/shop/CartProvider";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
 import { useRouter } from "@/i18n/navigation";
 import { elsie } from "@/lib/fonts";
 import type { AppLocale } from "@/i18n/routing";
@@ -68,20 +70,20 @@ export function CartOrderForm({ formClassName }: CartOrderFormProps) {
       action={formAction}
       className={formClassName ?? defaultFormClassName}
     >
-      <input
+      <Input
         type="hidden"
         name="cart"
         value={serializeCartLines(lines)}
         readOnly
         aria-hidden
       />
-      <input type="hidden" name="locale" value={locale} readOnly aria-hidden />
+      <Input type="hidden" name="locale" value={locale} readOnly aria-hidden />
       <div
         className="pointer-events-none absolute -left-[10000px] top-auto -m-px h-px w-px overflow-hidden border-0 p-0 opacity-0"
         aria-hidden="true"
       >
         <label htmlFor="cart-order-website">Website</label>
-        <input
+        <Input
           id="cart-order-website"
           name="website"
           type="text"
@@ -116,7 +118,7 @@ export function CartOrderForm({ formClassName }: CartOrderFormProps) {
             <label htmlFor="cart-nom" className={labelClass}>
               {t("nameLabel")} <span className="text-emerald-700">*</span>
             </label>
-            <input
+            <Input
               id="cart-nom"
               name="nom"
               type="text"
@@ -130,7 +132,7 @@ export function CartOrderForm({ formClassName }: CartOrderFormProps) {
             <label htmlFor="cart-telefon" className={labelClass}>
               {t("phoneLabel")} <span className="text-emerald-700">*</span>
             </label>
-            <input
+            <Input
               id="cart-telefon"
               name="telefon"
               type="tel"
@@ -144,7 +146,7 @@ export function CartOrderForm({ formClassName }: CartOrderFormProps) {
             <label htmlFor="cart-correu" className={labelClass}>
               {t("emailLabel")} <span className="text-emerald-700">*</span>
             </label>
-            <input
+            <Input
               id="cart-correu"
               name="correu"
               type="email"
@@ -159,7 +161,7 @@ export function CartOrderForm({ formClassName }: CartOrderFormProps) {
             <label htmlFor="cart-observacions" className={labelClass}>
               {t("notesLabel")}
             </label>
-            <textarea
+            <Textarea
               id="cart-observacions"
               name="observacions"
               rows={4}

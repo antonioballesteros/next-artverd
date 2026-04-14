@@ -5,6 +5,8 @@ import {
   type ContactFormState,
 } from "@/app/actions/contactForm";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
 import type { AppLocale } from "@/i18n/routing";
 import { useLocale, useTranslations } from "next-intl";
 import { useActionState } from "react";
@@ -41,14 +43,14 @@ export function ContactMessageForm() {
 
   return (
     <form action={formAction} className="relative flex flex-col gap-6">
-      <input type="hidden" name="locale" value={locale} readOnly aria-hidden />
+      <Input type="hidden" name="locale" value={locale} readOnly aria-hidden />
       {/* Anti-spam trap field: must stay empty */}
       <div
         className="pointer-events-none absolute -left-[10000px] top-auto -m-px h-px w-px overflow-hidden border-0 p-0 opacity-0"
         aria-hidden="true"
       >
         <label htmlFor="contact-website">{t("honeypotLabel")}</label>
-        <input
+        <Input
           id="contact-website"
           name="website"
           type="text"
@@ -82,7 +84,7 @@ export function ContactMessageForm() {
         >
           {t("nameLabel")} <span className="text-[#67aa25]">*</span>
         </label>
-        <input
+        <Input
           id="contact-nom"
           name="nom"
           type="text"
@@ -101,7 +103,7 @@ export function ContactMessageForm() {
         >
           {t("emailLabel")} <span className="text-[#67aa25]">*</span>
         </label>
-        <input
+        <Input
           id="contact-correu"
           name="correu"
           type="email"
@@ -121,7 +123,7 @@ export function ContactMessageForm() {
         >
           {t("messageLabel")} <span className="text-[#67aa25]">*</span>
         </label>
-        <textarea
+        <Textarea
           id="contact-missatge"
           name="missatge"
           required

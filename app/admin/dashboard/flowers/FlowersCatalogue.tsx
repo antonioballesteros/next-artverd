@@ -307,7 +307,7 @@ export function FlowersCatalogue({
                           </Button>
                           <DialogContent>
                             <form action={handleUpdate}>
-                              <input
+                              <Input
                                 type="hidden"
                                 name="id"
                                 value={flower.id}

@@ -7,10 +7,7 @@ import {
   getBlogPostByAnyLocalizedSlug,
   getLocalizedBlogSlug,
 } from "@/lib/blog/blogPosts";
-import {
-  getProductBySlug,
-  getProductSlug,
-} from "@/lib/shop/products";
+import { getProductBySlug, getProductSlug } from "@/lib/shop/products";
 import { Languages } from "lucide-react";
 import { useLocale } from "next-intl";
 import { useParams } from "next/navigation";
@@ -38,7 +35,7 @@ export function LanguageSwitcher({
     "inline-flex min-h-10 min-w-[2.25rem] items-center justify-center rounded-lg px-2.5 py-1.5 text-xs font-bold tracking-wide transition-[background-color,color,box-shadow,border-color] duration-200";
 
   const buttonInactive = showSolidBar
-    ? "border border-emerald-200/90 bg-white/90 text-emerald-800 hover:border-emerald-400 hover:bg-emerald-50"
+    ? "border border-emerald-200/90 cursor-pointer bg-white/90 text-emerald-800 hover:border-emerald-400 hover:bg-emerald-50"
     : "border border-white/35 bg-white/12 text-white/90 hover:border-white/55 hover:bg-white/22";
 
   const buttonActive = showSolidBar
@@ -59,7 +56,7 @@ export function LanguageSwitcher({
             pathname: "/botiga/[slug]",
             params: { slug: getProductSlug(product, next) },
           },
-          { locale: next },
+          { locale: next }
         );
         return;
       }
@@ -73,7 +70,7 @@ export function LanguageSwitcher({
             pathname: "/blog/[slug]",
             params: { slug: getLocalizedBlogSlug(post.id, next) },
           },
-          { locale: next },
+          { locale: next }
         );
         return;
       }
@@ -81,7 +78,7 @@ export function LanguageSwitcher({
 
     router.replace(
       { pathname, params } as Parameters<typeof router.replace>[0],
-      { locale: next },
+      { locale: next }
     );
   };
 

@@ -57,7 +57,7 @@ export function RoseMeaningSection({
   return (
     <section
       className={cn(
-        "rounded-r-xl border-l-4 py-1 pl-5 md:pl-6 motion-safe:opacity-0 motion-safe:animate-[blog-section-reveal_0.7s_cubic-bezier(0.22,1,0.36,1)_forwards] motion-reduce:opacity-100 motion-reduce:animate-none",
+        "rounded-r-xl border-l-4 py-1 pl-5 md:pl-6 opacity-0 animate-[blog-section-reveal_0.7s_cubic-bezier(0.22,1,0.36,1)_forwards]",
         styles.border,
         styles.softBg
       )}

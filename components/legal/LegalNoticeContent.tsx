@@ -13,7 +13,7 @@ function IdentificacioBlock({ animationIndex }: { animationIndex: number }) {
   return (
     <section
       id="identificacio"
-      className="motion-safe:animate-[blog-section-reveal_0.65s_cubic-bezier(0.22,1,0.36,1)_forwards] motion-safe:opacity-0 motion-reduce:animate-none motion-reduce:opacity-100 scroll-mt-28"
+      className="animate-[blog-section-reveal_0.65s_cubic-bezier(0.22,1,0.36,1)_forwards] opacity-0 scroll-mt-28"
       style={{ animationDelay: `${delayMs}ms`, animationFillMode: "forwards" }}
       aria-labelledby="heading-identificacio"
     >
@@ -172,7 +172,7 @@ function LegalNoticeSectionBlock({
   return (
     <section
       id={section.id}
-      className="motion-safe:animate-[blog-section-reveal_0.65s_cubic-bezier(0.22,1,0.36,1)_forwards] motion-safe:opacity-0 motion-reduce:animate-none motion-reduce:opacity-100 scroll-mt-28"
+      className="animate-[blog-section-reveal_0.65s_cubic-bezier(0.22,1,0.36,1)_forwards] opacity-0 scroll-mt-28"
       style={{ animationDelay: `${delayMs}ms`, animationFillMode: "forwards" }}
       aria-labelledby={`heading-${section.id}`}
     >

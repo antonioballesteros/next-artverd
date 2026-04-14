@@ -81,7 +81,7 @@ export function ScrollConvergePair({
   const offsetRight = OFFSET_RIGHT[offset];
 
   const panelBase =
-    "motion-reduce:translate-x-0 max-md:translate-x-0 transition-transform duration-1000 ease-out will-change-transform";
+    "max-md:translate-x-0 transition-transform duration-1000 ease-out will-change-transform";
 
   return (
     <div ref={rootRef} className={className}>

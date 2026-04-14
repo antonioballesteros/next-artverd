@@ -49,14 +49,14 @@ export function BlogArticleShare({
       <p className="text-xs font-semibold tracking-[0.2em] text-emerald-800/70 uppercase">
         {headingLabel}
       </p>
-      <ul className="mt-4 flex flex-wrap gap-2 motion-safe:animate-[blog-section-reveal_0.55s_ease-out_both] motion-reduce:animate-none">
+      <ul className="mt-4 flex flex-wrap gap-2 animate-[blog-section-reveal_0.55s_ease-out_both]">
         {links.map(({ label, href }) => (
           <li key={label}>
             <a
               href={href}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 rounded-full border border-emerald-200/90 bg-white/95 px-4 py-2 text-sm font-medium text-emerald-900 shadow-sm transition-[transform,box-shadow,background-color] duration-300 hover:-translate-y-0.5 hover:bg-emerald-50/90 hover:shadow-md motion-reduce:hover:translate-y-0"
+              className="inline-flex items-center gap-2 rounded-full border border-emerald-200/90 bg-white/95 px-4 py-2 text-sm font-medium text-emerald-900 shadow-sm transition-[transform,box-shadow,background-color] duration-300 hover:-translate-y-0.5 hover:bg-emerald-50/90 hover:shadow-md"
             >
               <Link2 className="h-4 w-4 shrink-0 opacity-70" aria-hidden />
               {label}

@@ -32,7 +32,7 @@ export async function ContactFormSection() {
               </div>
             </div>
             <div
-              className="relative flex justify-center motion-safe:animate-[decorative-icon-zoom-in-up_0.95s_ease-out_both] motion-safe:opacity-0 motion-reduce:animate-none motion-reduce:opacity-100 md:justify-end"
+              className="relative flex justify-center animate-[decorative-icon-zoom-in-up_0.95s_ease-out_both] opacity-0 md:justify-end"
               style={{ animationDelay: "120ms", animationFillMode: "forwards" }}
             >
               <Image

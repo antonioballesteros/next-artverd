@@ -4,7 +4,7 @@ import Image from "next/image";
 import useEmblaCarousel from "embla-carousel-react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useTranslations } from "next-intl";
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
@@ -47,26 +47,8 @@ export function ProductImageGallery({
   imagePaths,
 }: ProductImageGalleryProps) {
   const t = useTranslations("botiga.productGallery");
-  const [reduceMotion, setReduceMotion] = useState(false);
   const count = imagePaths.length;
-
-  useEffect(() => {
-    const media = window.matchMedia("(prefers-reduced-motion: reduce)");
-    const update = () => setReduceMotion(media.matches);
-    update();
-    media.addEventListener("change", update);
-    return () => media.removeEventListener("change", update);
-  }, []);
-
-  const emblaOptions = useMemo(
-    () => ({
-      loop: true,
-      duration: reduceMotion ? 0 : 25,
-    }),
-    [reduceMotion]
-  );
-
-  const [emblaRef, emblaApi] = useEmblaCarousel(emblaOptions);
+  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true, duration: 25 });
 
   const [selectedIndex, setSelectedIndex] = useState(0);
 

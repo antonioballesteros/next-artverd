@@ -55,7 +55,7 @@ export default async function BotigaPage({ params }: BotigaPageProps) {
             {t("hero.title")}
           </h1>
           <div
-            className="mx-auto mt-6 h-px w-32 origin-center bg-emerald-400/90 motion-safe:animate-[blog-title-line_0.9s_ease-out_both] motion-reduce:opacity-100"
+            className="mx-auto mt-6 h-px w-32 origin-center bg-emerald-400/90 animate-[blog-title-line_0.9s_ease-out_both]"
             aria-hidden
           />
         </div>

@@ -18,7 +18,7 @@ export async function ContactDetailsAndMap() {
       <div className="mx-auto max-w-6xl px-4 md:px-6">
         <div className="grid gap-10 md:grid-cols-3 md:gap-8">
           <div
-            className="text-center motion-safe:animate-[blog-section-reveal_0.8s_ease-out_both] motion-safe:opacity-0 motion-reduce:animate-none motion-reduce:opacity-100"
+            className="text-center animate-[blog-section-reveal_0.8s_ease-out_both] opacity-0"
             style={{ animationDelay: "60ms", animationFillMode: "forwards" }}
           >
             <p className="text-lg font-medium text-[#f8d2a1]">{t("phoneLabel")}</p>
@@ -34,7 +34,7 @@ export async function ContactDetailsAndMap() {
             </p>
           </div>
           <div
-            className="text-center motion-safe:animate-[blog-section-reveal_0.8s_ease-out_both] motion-safe:opacity-0 motion-reduce:animate-none motion-reduce:opacity-100"
+            className="text-center animate-[blog-section-reveal_0.8s_ease-out_both] opacity-0"
             style={{ animationDelay: "140ms", animationFillMode: "forwards" }}
           >
             <p className="flex items-center justify-center gap-2 text-lg font-medium text-[#f8d2a1]">
@@ -51,7 +51,7 @@ export async function ContactDetailsAndMap() {
             </p>
           </div>
           <div
-            className="text-center motion-safe:animate-[blog-section-reveal_0.8s_ease-out_both] motion-safe:opacity-0 motion-reduce:animate-none motion-reduce:opacity-100"
+            className="text-center animate-[blog-section-reveal_0.8s_ease-out_both] opacity-0"
             style={{ animationDelay: "220ms", animationFillMode: "forwards" }}
           >
             <p className="flex items-center justify-center gap-2 text-lg font-medium text-[#f8d2a1]">
@@ -70,7 +70,7 @@ export async function ContactDetailsAndMap() {
         <SocialLinksList className="mt-12 flex w-full justify-center gap-4" />
 
         <div
-          className="mt-12 overflow-hidden rounded-2xl border border-emerald-800/50 shadow-lg motion-safe:animate-[blog-section-reveal_0.9s_ease-out_both] motion-safe:opacity-0 motion-reduce:animate-none motion-reduce:opacity-100 md:mt-14"
+          className="mt-12 overflow-hidden rounded-2xl border border-emerald-800/50 shadow-lg animate-[blog-section-reveal_0.9s_ease-out_both] opacity-0 md:mt-14"
           style={{ animationDelay: "340ms", animationFillMode: "forwards" }}
         ></div>
       </div>

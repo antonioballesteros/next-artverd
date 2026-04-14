@@ -16,7 +16,7 @@ export function HeroSection({ src, alt, ariaLabel }: HeroSectionProps) {
           alt={alt}
           fill
           priority
-          className="origin-center animate-[hero-ken-burns_14s_ease-out_forwards] object-cover object-center motion-reduce:scale-100 motion-reduce:animate-none"
+          className="origin-center animate-[hero-ken-burns_14s_ease-out_forwards] object-cover object-center"
           sizes="100vw"
         />
       </div>

@@ -53,7 +53,7 @@ export async function ElSignificatRosesArticle({
           {content.intro.map((paragraph, index) => (
             <p
               key={index}
-              className="motion-safe:animate-[blog-section-reveal_0.65s_ease-out_forwards] motion-safe:opacity-0 motion-reduce:animate-none motion-reduce:opacity-100"
+              className="animate-[blog-section-reveal_0.65s_ease-out_forwards] opacity-0"
               style={{ animationDelay: `${40 + index * 60}ms` }}
             >
               {paragraph}

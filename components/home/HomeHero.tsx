@@ -16,23 +16,14 @@ export function HomeHero() {
   const t = useTranslations("home.hero");
   const heroHeadlines = [t("headline0"), t("headline1")];
   const [activeIndex, setActiveIndex] = useState(0);
-  const [reduceMotion, setReduceMotion] = useState(false);
 
   useEffect(() => {
-    const media = window.matchMedia("(prefers-reduced-motion: reduce)");
-    const update = () => setReduceMotion(media.matches);
-    update();
-    media.addEventListener("change", update);
-    return () => media.removeEventListener("change", update);
-  }, []);
-
-  useEffect(() => {
-    if (reduceMotion || artverdHeroSlides.length <= 1) return;
+    if (artverdHeroSlides.length <= 1) return;
     const id = window.setInterval(() => {
       setActiveIndex((i) => (i + 1) % artverdHeroSlides.length);
     }, SLIDE_INTERVAL_MS);
     return () => window.clearInterval(id);
-  }, [reduceMotion]);
+  }, []);
 
   const headlineIndex = activeIndex % heroHeadlines.length;
 
@@ -56,17 +47,11 @@ export function HomeHero() {
               fill
               priority={index === 0}
               className={cn(
-                "object-cover motion-reduce:transition-none",
-                isActive
-                  ? "z-10 opacity-100 motion-reduce:scale-100 motion-reduce:animate-none"
-                  : "z-0 scale-100 opacity-0 motion-reduce:animate-none",
+                "object-cover",
+                isActive ? "z-10 opacity-100" : "z-0 scale-100 opacity-0",
                 isActive && activeZoomClass
               )}
-              style={
-                reduceMotion
-                  ? undefined
-                  : { transition: `opacity ${FADE_MS}ms ease-in-out` }
-              }
+              style={{ transition: `opacity ${FADE_MS}ms ease-in-out` }}
               sizes="100vw"
             />
           );
@@ -99,13 +84,11 @@ export function HomeHero() {
               return (
                 <span
                   key={line}
-                  className="col-start-1 row-start-1 w-full text-center transition-opacity ease-in-out motion-reduce:transition-none"
+                  className="col-start-1 row-start-1 w-full text-center transition-opacity ease-in-out"
                   style={{
                     opacity: isActive ? 1 : 0,
                     zIndex: isActive ? 1 : 0,
-                    transitionDuration: reduceMotion
-                      ? "0ms"
-                      : `${HEADLINE_FADE_MS}ms`,
+                    transitionDuration: `${HEADLINE_FADE_MS}ms`,
                   }}
                   aria-hidden={!isActive}
                 >

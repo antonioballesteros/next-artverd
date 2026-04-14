@@ -206,7 +206,7 @@ function PrivacyPolicySectionBlock({
   return (
     <section
       id={section.id}
-      className="scroll-mt-28 motion-safe:animate-[blog-section-reveal_0.65s_cubic-bezier(0.22,1,0.36,1)_forwards] motion-safe:opacity-0 motion-reduce:animate-none motion-reduce:opacity-100"
+      className="scroll-mt-28 animate-[blog-section-reveal_0.65s_cubic-bezier(0.22,1,0.36,1)_forwards] opacity-0"
       style={{ animationDelay: `${delayMs}ms`, animationFillMode: "forwards" }}
       aria-labelledby={`heading-${section.id}`}
     >
@@ -237,7 +237,7 @@ export function PrivacyPolicyContent() {
       <article className="relative mx-auto max-w-3xl px-4 py-10 md:px-6 md:py-14">
         <div className="space-y-5 text-[0.98rem] leading-relaxed text-emerald-950/90 md:text-base">
           <p
-            className="motion-safe:animate-[blog-section-reveal_0.65s_ease-out_forwards] motion-safe:opacity-0 motion-reduce:animate-none motion-reduce:opacity-100"
+            className="animate-[blog-section-reveal_0.65s_ease-out_forwards] opacity-0"
             style={{ animationDelay: "40ms", animationFillMode: "forwards" }}
           >
             {PRIVACY_POLICY_INTRO[0]}{" "}
@@ -249,13 +249,13 @@ export function PrivacyPolicyContent() {
             </a>
           </p>
           <p
-            className="motion-safe:animate-[blog-section-reveal_0.65s_ease-out_forwards] motion-safe:opacity-0 motion-reduce:animate-none motion-reduce:opacity-100"
+            className="animate-[blog-section-reveal_0.65s_ease-out_forwards] opacity-0"
             style={{ animationDelay: "90ms", animationFillMode: "forwards" }}
           >
             {PRIVACY_POLICY_INTRO[1]}
           </p>
           <p
-            className="motion-safe:animate-[blog-section-reveal_0.65s_ease-out_forwards] motion-safe:opacity-0 motion-reduce:animate-none motion-reduce:opacity-100"
+            className="animate-[blog-section-reveal_0.65s_ease-out_forwards] opacity-0"
             style={{ animationDelay: "140ms", animationFillMode: "forwards" }}
           >
             {PRIVACY_POLICY_INTRO_CLOSING_BEFORE_LINK}
@@ -268,7 +268,7 @@ export function PrivacyPolicyContent() {
             .
           </p>
           <p
-            className="text-sm text-emerald-950/75 motion-safe:animate-[blog-section-reveal_0.65s_ease-out_forwards] motion-safe:opacity-0 motion-reduce:animate-none motion-reduce:opacity-100"
+            className="text-sm text-emerald-950/75 animate-[blog-section-reveal_0.65s_ease-out_forwards] opacity-0"
             style={{ animationDelay: "190ms", animationFillMode: "forwards" }}
           >
             Darrera actualització del text: {LEGAL_CONTENT_LAST_UPDATED_LABEL}.

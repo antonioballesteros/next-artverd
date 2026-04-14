@@ -40,14 +40,14 @@ export async function AbrilMesFlorsArticle({
       <article className="relative mx-auto max-w-3xl px-4 py-10 pb-6 md:px-6 md:py-14">
         <div className="space-y-5 text-[0.98rem] leading-relaxed text-black md:text-base">
           <p
-            className="motion-safe:animate-[blog-section-reveal_0.65s_ease-out_forwards] motion-safe:opacity-0 motion-reduce:animate-none motion-reduce:opacity-100"
+            className="animate-[blog-section-reveal_0.65s_ease-out_forwards] opacity-0"
             style={{ animationDelay: "40ms" }}
           >
             {content.introFirst}
           </p>
 
           <p
-            className="motion-safe:animate-[blog-section-reveal_0.65s_ease-out_forwards] motion-safe:opacity-0 motion-reduce:animate-none motion-reduce:opacity-100"
+            className="animate-[blog-section-reveal_0.65s_ease-out_forwards] opacity-0"
             style={{ animationDelay: "100ms" }}
           >
             {content.middleSegments.map((segment, index) =>
@@ -60,7 +60,7 @@ export async function AbrilMesFlorsArticle({
           </p>
 
           <p
-            className="motion-safe:animate-[blog-section-reveal_0.65s_ease-out_forwards] motion-safe:opacity-0 motion-reduce:animate-none motion-reduce:opacity-100"
+            className="animate-[blog-section-reveal_0.65s_ease-out_forwards] opacity-0"
             style={{ animationDelay: "160ms" }}
           >
             {content.introLast}

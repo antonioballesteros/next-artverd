@@ -75,7 +75,7 @@ export function ContactMessageForm() {
         </p>
       ) : null}
       <div
-        className="motion-safe:animate-[decorative-icon-zoom-in-up_0.85s_ease-out_both] motion-safe:opacity-0 motion-reduce:animate-none motion-reduce:opacity-100"
+        className="animate-[decorative-icon-zoom-in-up_0.85s_ease-out_both] opacity-0"
         style={{ animationDelay: "80ms", animationFillMode: "forwards" }}
       >
         <label
@@ -94,7 +94,7 @@ export function ContactMessageForm() {
         />
       </div>
       <div
-        className="motion-safe:animate-[decorative-icon-zoom-in-up_0.85s_ease-out_both] motion-safe:opacity-0 motion-reduce:animate-none motion-reduce:opacity-100"
+        className="animate-[decorative-icon-zoom-in-up_0.85s_ease-out_both] opacity-0"
         style={{ animationDelay: "140ms", animationFillMode: "forwards" }}
       >
         <label
@@ -114,7 +114,7 @@ export function ContactMessageForm() {
         />
       </div>
       <div
-        className="motion-safe:animate-[decorative-icon-zoom-in-up_0.85s_ease-out_both] motion-safe:opacity-0 motion-reduce:animate-none motion-reduce:opacity-100"
+        className="animate-[decorative-icon-zoom-in-up_0.85s_ease-out_both] opacity-0"
         style={{ animationDelay: "200ms", animationFillMode: "forwards" }}
       >
         <label
@@ -132,7 +132,7 @@ export function ContactMessageForm() {
         />
       </div>
       <div
-        className="motion-safe:animate-[decorative-icon-zoom-in-up_0.85s_ease-out_both] motion-safe:opacity-0 motion-reduce:animate-none motion-reduce:opacity-100"
+        className="animate-[decorative-icon-zoom-in-up_0.85s_ease-out_both] opacity-0"
         style={{ animationDelay: "260ms", animationFillMode: "forwards" }}
       >
         <ContactSubmitButton />

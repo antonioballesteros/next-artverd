@@ -48,7 +48,7 @@ export default async function NotFound() {
       aria-labelledby="not-found-title"
     >
       <div
-        className="absolute inset-0 origin-[center_top] bg-cover bg-top bg-no-repeat motion-safe:animate-[legal-subheader-bg_16s_ease-out_forwards] motion-reduce:animate-none"
+        className="absolute inset-0 origin-[center_top] bg-cover bg-top bg-no-repeat animate-[legal-subheader-bg_16s_ease-out_forwards]"
         style={{
           backgroundImage: `url(${artverdImages.flowerSectionBg})`,
         }}

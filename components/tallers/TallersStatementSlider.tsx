@@ -33,23 +33,14 @@ export function TallersStatementSlider() {
   );
 
   const [index, setIndex] = useState(0);
-  const [reduceMotion, setReduceMotion] = useState(false);
 
   useEffect(() => {
-    const media = window.matchMedia("(prefers-reduced-motion: reduce)");
-    const update = () => setReduceMotion(media.matches);
-    update();
-    media.addEventListener("change", update);
-    return () => media.removeEventListener("change", update);
-  }, []);
-
-  useEffect(() => {
-    if (reduceMotion || slides.length <= 1) return;
+    if (slides.length <= 1) return;
     const id = window.setInterval(() => {
       setIndex((i) => (i + 1) % slides.length);
     }, SLIDE_INTERVAL_MS);
     return () => window.clearInterval(id);
-  }, [reduceMotion, slides.length]);
+  }, [slides.length]);
 
   const goTo = useCallback((i: number) => {
     setIndex(i);
@@ -83,11 +74,9 @@ export function TallersStatementSlider() {
                 alt=""
                 fill
                 className={cn(
-                  "object-cover object-center motion-reduce:transition-none",
-                  active
-                    ? "motion-reduce:scale-100 motion-reduce:animate-none"
-                    : "scale-100 motion-reduce:animate-none",
-                  active && !reduceMotion ? activeZoomClass : null
+                  "object-cover object-center",
+                  active ? "scale-100" : "scale-100",
+                  active && activeZoomClass
                 )}
                 sizes="100vw"
                 priority={i === 0}
@@ -106,7 +95,7 @@ export function TallersStatementSlider() {
               className={cn(
                 elsie.className,
                 "text-center text-[clamp(1.35rem,4vw,2.75rem)] leading-tight font-black tracking-wide drop-shadow-md",
-                !reduceMotion && "animate-[tallers-title-pop_1.1s_ease-out_both]"
+                "animate-[tallers-title-pop_1.1s_ease-out_both]"
               )}
             >
               {slides[index].title}

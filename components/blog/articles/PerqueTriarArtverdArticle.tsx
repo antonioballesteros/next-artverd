@@ -32,7 +32,7 @@ function EventReasonSection({
 
   return (
     <section
-      className="rounded-r-xl border-l-4 border-l-emerald-600 bg-emerald-50/45 py-1 pl-5 motion-safe:animate-[blog-section-reveal_0.7s_cubic-bezier(0.22,1,0.36,1)_forwards] motion-safe:opacity-0 motion-reduce:animate-none motion-reduce:opacity-100 md:pl-6"
+      className="rounded-r-xl border-l-4 border-l-emerald-600 bg-emerald-50/45 py-1 pl-5 animate-[blog-section-reveal_0.7s_cubic-bezier(0.22,1,0.36,1)_forwards] opacity-0 md:pl-6"
       style={{ animationDelay: `${delayMs}ms` }}
       aria-labelledby={`reason-${animationIndex}`}
     >
@@ -78,14 +78,14 @@ export async function PerqueTriarArtverdArticle({
       <article className="relative mx-auto max-w-3xl px-4 py-10 pb-6 md:px-6 md:py-14">
         <div className="space-y-5 text-[0.98rem] leading-relaxed text-black md:text-base">
           <p
-            className="motion-safe:animate-[blog-section-reveal_0.65s_ease-out_forwards] motion-safe:opacity-0 motion-reduce:animate-none motion-reduce:opacity-100"
+            className="animate-[blog-section-reveal_0.65s_ease-out_forwards] opacity-0"
             style={{ animationDelay: "40ms" }}
           >
             {content.intro}
           </p>
 
           <p
-            className="motion-safe:animate-[blog-section-reveal_0.65s_ease-out_forwards] motion-safe:opacity-0 motion-reduce:animate-none motion-reduce:opacity-100"
+            className="animate-[blog-section-reveal_0.65s_ease-out_forwards] opacity-0"
             style={{ animationDelay: "90ms" }}
           >
             {content.leadIn}
@@ -104,7 +104,7 @@ export async function PerqueTriarArtverdArticle({
         </div>
 
         <p
-          className="mt-12 text-[0.98rem] leading-relaxed text-black motion-safe:animate-[blog-section-reveal_0.65s_ease-out_forwards] motion-safe:opacity-0 motion-reduce:animate-none motion-reduce:opacity-100 md:text-base"
+          className="mt-12 text-[0.98rem] leading-relaxed text-black animate-[blog-section-reveal_0.65s_ease-out_forwards] opacity-0 md:text-base"
           style={{
             animationDelay: `${140 + content.reasons.length * 70 + 40}ms`,
           }}

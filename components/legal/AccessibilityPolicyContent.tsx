@@ -98,7 +98,7 @@ function AccessibilitySectionBlock({
   return (
     <section
       id={section.id}
-      className="motion-safe:animate-[blog-section-reveal_0.65s_cubic-bezier(0.22,1,0.36,1)_forwards] motion-safe:opacity-0 motion-reduce:animate-none motion-reduce:opacity-100 scroll-mt-28"
+      className="animate-[blog-section-reveal_0.65s_cubic-bezier(0.22,1,0.36,1)_forwards] opacity-0 scroll-mt-28"
       style={{ animationDelay: `${delayMs}ms`, animationFillMode: "forwards" }}
       aria-labelledby={`heading-${section.id}`}
     >
@@ -119,19 +119,19 @@ export function AccessibilityPolicyContent() {
       <article className="relative mx-auto max-w-3xl px-4 py-10 md:px-6 md:py-14">
         <div className="space-y-4 text-[0.98rem] leading-relaxed text-emerald-950/90 md:text-base">
           <p
-            className="motion-safe:animate-[blog-section-reveal_0.65s_ease-out_forwards] motion-safe:opacity-0 motion-reduce:animate-none motion-reduce:opacity-100"
+            className="animate-[blog-section-reveal_0.65s_ease-out_forwards] opacity-0"
             style={{ animationDelay: "40ms", animationFillMode: "forwards" }}
           >
             {ACCESSIBILITY_INTRO_PARAGRAPH}
           </p>
           <p
-            className="motion-safe:animate-[blog-section-reveal_0.65s_ease-out_forwards] motion-safe:opacity-0 motion-reduce:animate-none motion-reduce:opacity-100"
+            className="animate-[blog-section-reveal_0.65s_ease-out_forwards] opacity-0"
             style={{ animationDelay: "90ms", animationFillMode: "forwards" }}
           >
             {ACCESSIBILITY_MEASURES_INTRO}
           </p>
           <ul
-            className="list-disc space-y-2 pl-5 marker:text-emerald-600 motion-safe:animate-[blog-section-reveal_0.65s_ease-out_forwards] motion-safe:opacity-0 motion-reduce:animate-none motion-reduce:opacity-100"
+            className="list-disc space-y-2 pl-5 marker:text-emerald-600 animate-[blog-section-reveal_0.65s_ease-out_forwards] opacity-0"
             style={{ animationDelay: "140ms", animationFillMode: "forwards" }}
           >
             {ACCESSIBILITY_MEASURES.map((item) => (

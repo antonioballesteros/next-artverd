@@ -89,7 +89,7 @@ function TermsSectionBlock({
   return (
     <section
       id={section.id}
-      className="scroll-mt-28 motion-safe:animate-[blog-section-reveal_0.65s_cubic-bezier(0.22,1,0.36,1)_forwards] motion-safe:opacity-0 motion-reduce:animate-none motion-reduce:opacity-100"
+      className="scroll-mt-28 animate-[blog-section-reveal_0.65s_cubic-bezier(0.22,1,0.36,1)_forwards] opacity-0"
       style={{ animationDelay: `${delayMs}ms`, animationFillMode: "forwards" }}
       aria-labelledby={`heading-${section.id}`}
     >
@@ -109,7 +109,7 @@ export function TermsAndConditionsContent() {
     <div className="bg-[#f3f3f3]">
       <article className="relative mx-auto max-w-3xl px-4 py-10 md:px-6 md:py-14">
         <p
-          className="text-[0.98rem] leading-relaxed text-emerald-950/90 motion-safe:animate-[blog-section-reveal_0.65s_ease-out_forwards] motion-safe:opacity-0 motion-reduce:animate-none motion-reduce:opacity-100 md:text-base"
+          className="text-[0.98rem] leading-relaxed text-emerald-950/90 animate-[blog-section-reveal_0.65s_ease-out_forwards] opacity-0 md:text-base"
           style={{ animationDelay: "40ms", animationFillMode: "forwards" }}
         >
           Aquests termes complementen l’

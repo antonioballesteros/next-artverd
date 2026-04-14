@@ -72,7 +72,6 @@ export function FloristeriaHero() {
   const imagePaintDebounceRef = useRef<ReturnType<typeof setTimeout> | null>(
     null
   );
-  const [reduceMotion, setReduceMotion] = useState(false);
   const [coverflowReady, setCoverflowReady] = useState(false);
   const [autoplayReverse, setAutoplayReverse] = useState(false);
 
@@ -89,14 +88,6 @@ export function FloristeriaHero() {
   }, []);
 
   useEffect(() => {
-    const media = window.matchMedia("(prefers-reduced-motion: reduce)");
-    const update = () => setReduceMotion(media.matches);
-    update();
-    media.addEventListener("change", update);
-    return () => media.removeEventListener("change", update);
-  }, []);
-
-  useEffect(() => {
     return () => {
       if (imagePaintDebounceRef.current) {
         clearTimeout(imagePaintDebounceRef.current);
@@ -110,12 +101,11 @@ export function FloristeriaHero() {
     const ap = swiper.params.autoplay;
     if (typeof ap !== "object" || !ap) return;
     ap.reverseDirection = autoplayReverse;
-    if (reduceMotion) return;
     if (swiper.autoplay?.running && !swiper.autoplay.paused) {
       swiper.autoplay.stop();
       swiper.autoplay.start();
     }
-  }, [autoplayReverse, reduceMotion]);
+  }, [autoplayReverse]);
 
   return (
     <section
@@ -126,8 +116,7 @@ export function FloristeriaHero() {
         <div
           className={cn(
             "relative overflow-x-clip py-4 transition-opacity duration-200 md:py-8",
-            coverflowReady ? "opacity-100" : "pointer-events-none opacity-0",
-            reduceMotion && "duration-0"
+            coverflowReady ? "opacity-100" : "pointer-events-none opacity-0"
           )}
         >
           <Swiper
@@ -138,17 +127,13 @@ export function FloristeriaHero() {
             centeredSlides
             slidesPerView="auto"
             loop={floristeriaHeroSlides.length > 2}
-            speed={reduceMotion ? 0 : 550}
-            autoplay={
-              reduceMotion
-                ? false
-                : {
-                    delay: SLIDE_INTERVAL_MS,
-                    disableOnInteraction: false,
-                    pauseOnMouseEnter: true,
-                    reverseDirection: autoplayReverse,
-                  }
-            }
+            speed={550}
+            autoplay={{
+              delay: SLIDE_INTERVAL_MS,
+              disableOnInteraction: false,
+              pauseOnMouseEnter: true,
+              reverseDirection: autoplayReverse,
+            }}
             keyboard={{ enabled: true }}
             coverflowEffect={{
               rotate: 40,

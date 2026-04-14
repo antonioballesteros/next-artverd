@@ -20,15 +20,6 @@ const ICONS: DecorativeIconRowItem[] = [
 export function DecorativeIconRow() {
   const rootRef = useRef<HTMLDivElement>(null);
   const [visible, setVisible] = useState(false);
-  const [reduceMotion, setReduceMotion] = useState(false);
-
-  useEffect(() => {
-    const media = window.matchMedia("(prefers-reduced-motion: reduce)");
-    const sync = () => setReduceMotion(media.matches);
-    sync();
-    media.addEventListener("change", sync);
-    return () => media.removeEventListener("change", sync);
-  }, []);
 
   useEffect(() => {
     const el = rootRef.current;
@@ -49,8 +40,6 @@ export function DecorativeIconRow() {
     return () => obs.disconnect();
   }, []);
 
-  const showAnimated = visible || reduceMotion;
-
   return (
     <div
       ref={rootRef}
@@ -62,17 +51,11 @@ export function DecorativeIconRow() {
           key={item.src}
           className={cn(
             "relative h-12 w-12 shrink-0 md:h-28 md:w-28",
-            showAnimated
-              ? reduceMotion
-                ? "opacity-100"
-                : "animate-[decorative-icon-zoom-in-up_0.75s_ease-out_both]"
+            visible
+              ? "animate-[decorative-icon-zoom-in-up_0.75s_ease-out_both]"
               : "translate-y-8 scale-90 opacity-0"
           )}
-          style={
-            showAnimated && !reduceMotion
-              ? { animationDelay: `${index * 0.12}s` }
-              : undefined
-          }
+          style={visible ? { animationDelay: `${index * 0.12}s` } : undefined}
         >
           <Image
             src={item.src}

@@ -91,7 +91,7 @@ export function SiteHeader({ currentPath, variant }: SiteHeaderProps) {
 
   return (
     <header className={headerShell}>
-      <div className="flex w-full items-center gap-4 px-0 py-1 md:px-2 md:py-1">
+      <div className="flex w-full items-center gap-4 px-0 py-1 md:mx-auto md:max-w-[2400px] md:px-2 md:py-1">
         <div className="flex min-w-0 items-center gap-6 md:gap-8 lg:gap-10">
           <Link href="/" className="flex shrink-0 items-center gap-2">
             <Image

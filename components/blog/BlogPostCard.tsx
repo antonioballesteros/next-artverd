@@ -2,6 +2,7 @@
 
 import { artverdImages } from "@/lib/artverdAssets";
 import type { BlogPostListItem } from "@/lib/blogPosts";
+import { Card, CardContent } from "@/components/ui/card";
 import { Link } from "@/i18n/navigation";
 import Image from "next/image";
 
@@ -18,7 +19,7 @@ export function BlogPostCard({ post, readMoreLabel }: BlogPostCardProps) {
   };
 
   return (
-    <article className="group flex h-full flex-col overflow-hidden rounded-2xl border border-emerald-200/80 bg-white/90 shadow-sm transition-[box-shadow,translate] duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-emerald-900/10">
+    <Card className="group h-full gap-0 overflow-hidden rounded-2xl border border-emerald-200/80 bg-white/90 py-0 shadow-sm transition-shadow duration-300 hover:shadow-md hover:shadow-emerald-900/10">
       <Link
         href={postHref}
         className="relative block aspect-16/10 overflow-hidden bg-emerald-50/60"
@@ -27,14 +28,14 @@ export function BlogPostCard({ post, readMoreLabel }: BlogPostCardProps) {
           src={post.imageSrc ?? artverdImages.logo}
           alt={post.imageAlt}
           fill
-          className={`transition duration-700 ease-out group-hover:scale-[1.04] motion-reduce:group-hover:scale-100 ${
+          className={`transition duration-700 ease-out group-hover:scale-[1.03] ${
             imageFit === "cover" ? "object-cover" : "object-contain p-4"
           }`}
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
         />
       </Link>
 
-      <div className="flex flex-1 flex-col gap-3 p-5 md:p-6">
+      <CardContent className="flex flex-1 flex-col gap-3 p-5 md:p-6">
         <h2 className="text-xl leading-snug font-semibold text-emerald-950 md:text-2xl">
           <Link
             href={postHref}
@@ -56,7 +57,7 @@ export function BlogPostCard({ post, readMoreLabel }: BlogPostCardProps) {
             {readMoreLabel}
           </Link>
         </div>
-      </div>
-    </article>
+      </CardContent>
+    </Card>
   );
 }

@@ -7,6 +7,7 @@ import { Link, usePathname } from "@/i18n/navigation";
 import type { AppLocale } from "@/i18n/routing";
 import { getSiteNavItems } from "@/lib/siteNav";
 import Image from "next/image";
+import NextLink from "next/link";
 import { useLocale } from "next-intl";
 import { useEffect, useState } from "react";
 import type { ComponentProps } from "react";
@@ -35,6 +36,8 @@ function pathnameMatchesOverlayHeader(pathname: string): boolean {
 interface SiteHeaderProps {
   /** When omitted, the active nav item follows the current URL. */
   currentPath?: string;
+  /** Controls visibility of admin shortcut in the header. */
+  isAuthenticated?: boolean;
   /**
    * When omitted, uses overlay on routes listed in OVERLAY_HEADER_PATHS, otherwise sticky default bar.
    * When set, forces that behavior regardless of path.
@@ -42,7 +45,11 @@ interface SiteHeaderProps {
   variant?: "default" | "overlay";
 }
 
-export function SiteHeader({ currentPath, variant }: SiteHeaderProps) {
+export function SiteHeader({
+  currentPath,
+  isAuthenticated = false,
+  variant,
+}: SiteHeaderProps) {
   const pathname = usePathname();
   const locale = useLocale() as AppLocale;
   const siteNavItems = getSiteNavItems(locale);
@@ -88,6 +95,9 @@ export function SiteHeader({ currentPath, variant }: SiteHeaderProps) {
   const menuButtonClass = showSolidBar
     ? "inline-flex min-h-11 min-w-11 items-center justify-center rounded-lg border border-emerald-200/90 bg-white/90 text-emerald-950 md:hidden"
     : "inline-flex min-h-11 min-w-11 items-center justify-center rounded-lg border border-white/40 bg-white/15 text-white backdrop-blur-sm md:hidden";
+  const adminLinkClass = showSolidBar
+    ? "inline-flex min-h-10 items-center rounded-lg border border-emerald-200/90 bg-white/90 px-3 text-sm font-medium text-emerald-950 transition-colors hover:bg-emerald-100/90"
+    : "inline-flex min-h-10 items-center rounded-lg border border-white/40 bg-white/15 px-3 text-sm font-medium text-white backdrop-blur-sm transition-colors hover:bg-white/25";
 
   return (
     <header className={headerShell}>
@@ -124,6 +134,11 @@ export function SiteHeader({ currentPath, variant }: SiteHeaderProps) {
         </div>
 
         <div className="ml-auto flex shrink-0 items-center gap-1 md:gap-2">
+          {isAuthenticated ? (
+            <NextLink href="/admin" className={adminLinkClass}>
+              Admin
+            </NextLink>
+          ) : null}
           <LanguageSwitcher overlay={isOverlay} showSolidBar={showSolidBar} />
           <CartHeaderLink overlay={isOverlay} showSolidBar={showSolidBar} />
           <button

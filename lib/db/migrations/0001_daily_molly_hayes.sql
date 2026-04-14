@@ -1,0 +1,1 @@
+ALTER TABLE "flowers" ADD COLUMN "sale_price" numeric(10, 2) DEFAULT 0 NOT NULL;

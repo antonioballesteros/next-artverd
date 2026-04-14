@@ -98,6 +98,23 @@ function getPatternRedirect(pathname: string): string | null {
 
 export default function proxy(request: NextRequest) {
   const normalizedPath = normalizeLegacyPath(request.nextUrl.pathname);
+
+  if (normalizedPath === "/admin" || normalizedPath.startsWith("/admin/")) {
+    return NextResponse.next();
+  }
+
+  if (normalizedPath === "/es/admin" || normalizedPath.startsWith("/es/admin/")) {
+    const redirectUrl = new URL(normalizedPath.replace("/es/admin", "/admin"), request.url);
+    redirectUrl.search = request.nextUrl.search;
+    return NextResponse.redirect(redirectUrl, 308);
+  }
+
+  if (normalizedPath === "/ca/admin" || normalizedPath.startsWith("/ca/admin/")) {
+    const redirectUrl = new URL(normalizedPath.replace("/ca/admin", "/admin"), request.url);
+    redirectUrl.search = request.nextUrl.search;
+    return NextResponse.redirect(redirectUrl, 308);
+  }
+
   const redirectTo =
     LEGACY_REDIRECTS[normalizedPath] ?? getPatternRedirect(normalizedPath);
 

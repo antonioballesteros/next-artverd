@@ -1,5 +1,5 @@
 ---
-description: Project style guide for Next.js (React, TypeScript, Tailwind)
+description: Project style guide for Next.js (React, TypeScript, Tailwind, shadcn)
 alwaysApply: true
 ---
 
@@ -11,10 +11,21 @@ alwaysApply: true
 - **React 19**: functional components and hooks only.
 - **TypeScript**: strict typing; avoid `any`. Define interfaces/types for props and data.
 - **Tailwind v4**: use Tailwind classes for styling; avoid CSS-in-JS or inline styles unless necessary.
-- **Icons**: use **lucide-react** (project dependency). Import named icons, e.g. `import { SquareCheck } from "lucide-react"`. Size and color with Tailwind (`className="h-5 w-5 text-emerald-600"`). For decorative icons beside visible text, set `aria-hidden` on the icon.
+- **shadcn/ui**: use shadcn components (from `components/ui/`) for buttons, forms, dialogs, etc.; customise via Tailwind when needed. Prefer adding components with `npx shadcn@latest add` rather than building from scratch.
+- **Supabase**: DB (PostgreSQL), Auth, Storage (e.g. images).
+- **Drizzle**: ORM for queries to Supabase/Postgres.
+- **Tanstack Query**: Client-side data fetching (cache, mutations); requests go to server actions or API routes, not directly to Supabase from the browser.
+- **Auth**: Supabase Auth; use `@supabase/ssr` for session in Next (server and middleware).
+- **Image creation**: Vercel AI + Replicate, model `black-forest-labs/flux-schnell`; run only on the server (server actions or API routes), never expose keys to the client.
 
 ### Stack usage and structure
 
+- **Drizzle**: Put schema and migrations in a dedicated folder (e.g. `lib/db/` or `db/`). Single DB client built from Supabase connection; use it in Server Components, server actions, and API route handlers.
+- **Tanstack Query**: Wrap the app with `QueryClientProvider`. Put query/mutation logic in custom hooks (e.g. `useImages()`, `useCreateImage()`). Hooks call server actions or `fetch` to app API routes; do not call Supabase or Replicate from the client.
+- **Supabase client**: Use a **server** Supabase client (e.g. `createServerClient` from `@supabase/ssr`) in server code and middleware; use a **browser** client only in `'use client'` components when you need real-time or client-side auth (e.g. sign in/out).
+- **AI / Replicate**: Keep all Replicate and Vercel AI calls in server-only code (server actions or `app/api/.../route.ts`). Never send API keys or call Replicate from the client.
+- **Storage (Supabase)**: Upload/signed URL logic on the server; client receives only URLs or signed URLs returned from the server.
+- **shadcn/ui**: Components live under `components/ui/`. Use existing shadcn primitives (Button, Card, Dialog, Input, etc.) for consistency and accessibility; extend or compose them rather than duplicating. Keep the props-interface rule for any wrapper or custom components you add.
 - **Middleware vs proxy**: Do **not** use `middleware.ts`. Whenever request interception, rewrites, or similar logic is needed, use `proxy.ts` instead.
 
 ## Structure and naming

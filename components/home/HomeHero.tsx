@@ -2,6 +2,7 @@
 
 import { artverdSignature, elsie } from "@/lib/fonts";
 import { artverdHeroSlides } from "@/lib/artverdAssets";
+import { cn } from "@/lib/utils";
 import Image from "next/image";
 import { useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
@@ -54,11 +55,13 @@ export function HomeHero() {
               alt=""
               fill
               priority={index === 0}
-              className={`object-cover motion-reduce:transition-none ${
+              className={cn(
+                "object-cover motion-reduce:transition-none",
                 isActive
-                  ? `z-10 ${activeZoomClass} opacity-100 motion-reduce:scale-100 motion-reduce:animate-none`
-                  : "z-0 scale-100 opacity-0 motion-reduce:animate-none"
-              }`}
+                  ? "z-10 opacity-100 motion-reduce:scale-100 motion-reduce:animate-none"
+                  : "z-0 scale-100 opacity-0 motion-reduce:animate-none",
+                isActive && activeZoomClass
+              )}
               style={
                 reduceMotion
                   ? undefined

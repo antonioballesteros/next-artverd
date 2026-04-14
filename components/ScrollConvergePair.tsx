@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState, type ReactNode } from "react";
+import { cn } from "@/lib/utils";
 
 type ScrollConvergeOffset = 4 | 6 | 8 | 10 | 12 | 16 | 20 | 24 | 32;
 
@@ -84,11 +85,13 @@ export function ScrollConvergePair({
 
   return (
     <div ref={rootRef} className={className}>
-      <div className={`${panelBase} ${visible ? "translate-x-0" : offsetLeft}`}>
+      <div
+        className={cn(panelBase, visible ? "translate-x-0" : offsetLeft)}
+      >
         {left}
       </div>
       <div
-        className={`${panelBase} ${visible ? "translate-x-0" : offsetRight}`}
+        className={cn(panelBase, visible ? "translate-x-0" : offsetRight)}
       >
         {right}
       </div>

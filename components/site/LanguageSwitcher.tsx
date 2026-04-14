@@ -9,6 +9,7 @@ import {
   getLocalizedBlogSlug,
 } from "@/lib/blog/blogPosts";
 import { getProductBySlug, getProductSlug } from "@/lib/shop/products";
+import { cn } from "@/lib/utils";
 import { Languages } from "lucide-react";
 import { useLocale } from "next-intl";
 import { useParams } from "next/navigation";
@@ -85,12 +86,18 @@ export function LanguageSwitcher({
 
   return (
     <div
-      className={`flex shrink-0 items-center gap-1 ${overlay ? "drop-shadow-sm" : ""}`}
+      className={cn(
+        "flex shrink-0 items-center gap-1",
+        overlay && "drop-shadow-sm"
+      )}
       role="group"
       aria-label="Language"
     >
       <Languages
-        className={`h-4 w-4 shrink-0 ${showSolidBar ? "text-emerald-800" : "text-white/90"}`}
+        className={cn(
+          "h-4 w-4 shrink-0",
+          showSolidBar ? "text-emerald-800" : "text-white/90"
+        )}
         aria-hidden
       />
       {routing.locales.map((code) => (
@@ -100,7 +107,10 @@ export function LanguageSwitcher({
           variant="outline"
           size="sm"
           onClick={() => onSelect(code)}
-          className={`${buttonBase} ${current === code ? buttonActive : buttonInactive}`}
+          className={cn(
+            buttonBase,
+            current === code ? buttonActive : buttonInactive
+          )}
           aria-pressed={current === code}
         >
           {LABELS[code]}

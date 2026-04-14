@@ -10,6 +10,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useRouter } from "@/i18n/navigation";
 import { elsie } from "@/lib/fonts";
+import { cn } from "@/lib/utils";
 import type { AppLocale } from "@/i18n/routing";
 import { serializeCartLines } from "@/lib/shop/cartStorage";
 import { useLocale, useTranslations } from "next-intl";
@@ -68,7 +69,7 @@ export function CartOrderForm({ formClassName }: CartOrderFormProps) {
   return (
     <form
       action={formAction}
-      className={formClassName ?? defaultFormClassName}
+      className={cn(defaultFormClassName, formClassName)}
     >
       <Input
         type="hidden"
@@ -92,9 +93,7 @@ export function CartOrderForm({ formClassName }: CartOrderFormProps) {
         />
       </div>
 
-      <h2
-        className={`${elsie.className} text-2xl font-normal text-emerald-950`}
-      >
+      <h2 className={cn(elsie.className, "text-2xl font-normal text-emerald-950")}>
         {t("contactTitle")}
       </h2>
       <p className="mt-2 text-sm text-emerald-800/85">{t("contactIntro")}</p>

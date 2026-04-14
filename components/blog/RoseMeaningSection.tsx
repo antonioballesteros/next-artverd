@@ -1,4 +1,5 @@
 import type { RoseAccent } from "@/lib/blog/elSignificatRosesContent";
+import { cn } from "@/lib/utils";
 
 interface RoseMeaningSectionProps {
   accent: RoseAccent;
@@ -55,13 +56,17 @@ export function RoseMeaningSection({
 
   return (
     <section
-      className={`rounded-r-xl border-l-4 py-1 pl-5 md:pl-6 ${styles.border} ${styles.softBg} motion-safe:opacity-0 motion-safe:animate-[blog-section-reveal_0.7s_cubic-bezier(0.22,1,0.36,1)_forwards] motion-reduce:opacity-100 motion-reduce:animate-none`}
+      className={cn(
+        "rounded-r-xl border-l-4 py-1 pl-5 md:pl-6 motion-safe:opacity-0 motion-safe:animate-[blog-section-reveal_0.7s_cubic-bezier(0.22,1,0.36,1)_forwards] motion-reduce:opacity-100 motion-reduce:animate-none",
+        styles.border,
+        styles.softBg
+      )}
       style={{ animationDelay: `${delayMs}ms` }}
       aria-labelledby={`rose-section-${accent}`}
     >
       <h2
         id={`rose-section-${accent}`}
-        className={`text-lg font-bold tracking-tight md:text-xl ${styles.title}`}
+        className={cn("text-lg font-bold tracking-tight md:text-xl", styles.title)}
       >
         {title}
       </h2>

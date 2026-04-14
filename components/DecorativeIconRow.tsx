@@ -1,6 +1,7 @@
 "use client";
 
 import { artverdDecorIcons } from "@/lib/artverdAssets";
+import { cn } from "@/lib/utils";
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 
@@ -59,13 +60,14 @@ export function DecorativeIconRow() {
       {ICONS.map((item, index) => (
         <div
           key={item.src}
-          className={`relative h-12 w-12 shrink-0 md:h-28 md:w-28 ${
+          className={cn(
+            "relative h-12 w-12 shrink-0 md:h-28 md:w-28",
             showAnimated
               ? reduceMotion
                 ? "opacity-100"
                 : "animate-[decorative-icon-zoom-in-up_0.75s_ease-out_both]"
               : "translate-y-8 scale-90 opacity-0"
-          }`}
+          )}
           style={
             showAnimated && !reduceMotion
               ? { animationDelay: `${index * 0.12}s` }

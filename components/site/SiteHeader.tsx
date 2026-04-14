@@ -7,6 +7,7 @@ import { artverdImages } from "@/lib/artverdAssets";
 import { Link, usePathname } from "@/i18n/navigation";
 import type { AppLocale } from "@/i18n/routing";
 import { getSiteNavItems } from "@/lib/siteNav";
+import { cn } from "@/lib/utils";
 import Image from "next/image";
 import NextLink from "next/link";
 import { useLocale } from "next-intl";
@@ -110,14 +111,20 @@ export function SiteHeader({
               alt="Art Verd"
               width={640}
               height={296}
-              className={`h-10 shrink-0 md:h-12 ${!showSolidBar ? "drop-shadow-[0_2px_12px_rgba(0,0,0,0.55)]" : ""}`}
+              className={cn(
+                "h-10 shrink-0 md:h-12",
+                !showSolidBar && "drop-shadow-[0_2px_12px_rgba(0,0,0,0.55)]"
+              )}
               style={{ width: "auto" }}
               priority
             />
           </Link>
 
           <nav
-            className={`hidden items-center gap-6 text-sm font-medium md:flex ${isOverlay ? "drop-shadow-sm" : ""}`}
+            className={cn(
+              "hidden items-center gap-6 text-sm font-medium md:flex",
+              isOverlay && "drop-shadow-sm"
+            )}
             aria-label="Principal"
           >
             {siteNavItems.map((item) => (
@@ -146,7 +153,7 @@ export function SiteHeader({
             type="button"
             variant="outline"
             size="icon-lg"
-            className={`${menuButtonClass} shrink-0`}
+            className={cn(menuButtonClass, "shrink-0")}
             aria-expanded={menuOpen}
             aria-controls="mobile-nav"
             onClick={() => setMenuOpen((open) => !open)}
@@ -180,11 +187,12 @@ export function SiteHeader({
               <Link
                 key={String(item.href)}
                 href={item.href as NavHref}
-                className={`rounded-lg px-2 py-2 tracking-wide uppercase transition-colors ${
+                className={cn(
+                  "rounded-lg px-2 py-2 tracking-wide uppercase transition-colors",
                   item.href === resolvedPath
                     ? "bg-emerald-100/90 font-semibold text-emerald-700"
                     : "hover:bg-emerald-100/70 hover:text-emerald-700"
-                }`}
+                )}
                 onClick={() => setMenuOpen(false)}
               >
                 {item.label}

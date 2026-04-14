@@ -6,6 +6,7 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { Button } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
 
 interface ProductImageGalleryProps {
   productName: string;
@@ -170,11 +171,12 @@ export function ProductImageGallery({
             aria-current={i === selectedIndex ? "true" : undefined}
             aria-label={t("goToSlide", { n: i + 1 })}
             onClick={() => emblaApi?.scrollTo(i)}
-            className={`rounded-full transition-all ${
+            className={cn(
+              "rounded-full transition-all",
               i === selectedIndex
                 ? "w-8 bg-emerald-700"
                 : "w-2.5 bg-emerald-300/80 hover:bg-emerald-500/90"
-            }`}
+            )}
           />
         ))}
       </div>

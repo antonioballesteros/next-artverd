@@ -3,6 +3,7 @@
 import { useCart } from "@/components/shop/CartProvider";
 import { Link } from "@/i18n/navigation";
 import { formatEur } from "@/lib/shop/formatEur";
+import { cn } from "@/lib/utils";
 import { ShoppingCart } from "lucide-react";
 
 interface CartHeaderLinkProps {
@@ -32,7 +33,11 @@ export function CartHeaderLink({
     <Link
       href="/botiga/cistella"
       aria-label={ariaLabel}
-      className={`inline-flex min-h-11 min-w-0 shrink-0 items-center gap-2.5 rounded-lg px-2 transition-colors focus-visible:ring-2 focus-visible:ring-emerald-500/40 focus-visible:outline-none ${textClass} ${className}`}
+      className={cn(
+        "inline-flex min-h-11 min-w-0 shrink-0 items-center gap-2.5 rounded-lg px-2 transition-colors focus-visible:ring-2 focus-visible:ring-emerald-500/40 focus-visible:outline-none",
+        textClass,
+        className
+      )}
     >
       <span className="relative inline-flex shrink-0">
         <ShoppingCart className="h-5 w-5" aria-hidden />

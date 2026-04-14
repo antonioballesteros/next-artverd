@@ -3,6 +3,7 @@
 import { floristeriaHeroSlides } from "@/lib/floristeriaAssets";
 import { Button } from "@/components/ui/button";
 import { elsie } from "@/lib/fonts";
+import { cn } from "@/lib/utils";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import Image from "next/image";
 import { useTranslations } from "next-intl";
@@ -28,11 +29,12 @@ function CoverflowSlideCard(props: CoverflowSlideCardProps) {
 
   return (
     <div
-      className={`relative aspect-3/4 w-full overflow-hidden rounded-2xl bg-white shadow-[0_20px_50px_-12px_rgba(15,80,50,0.18)] transition-[opacity,box-shadow] duration-300 ${
+      className={cn(
+        "relative aspect-3/4 w-full overflow-hidden rounded-2xl bg-white shadow-[0_20px_50px_-12px_rgba(15,80,50,0.18)] transition-[opacity,box-shadow] duration-300",
         isActive
           ? "border-0 opacity-100"
           : "border border-emerald-900/12 opacity-[0.48]"
-      }`}
+      )}
       style={{
         WebkitBoxReflect: isActive
           ? "below 2px linear-gradient(transparent, rgba(0,0,0,0.22))"
@@ -122,9 +124,11 @@ export function FloristeriaHero() {
     >
       <div className="relative mx-auto max-w-[1500px] px-3 pt-6 md:px-6 md:pt-10">
         <div
-          className={`relative overflow-x-clip py-4 transition-opacity duration-200 md:py-8 ${
-            coverflowReady ? "opacity-100" : "pointer-events-none opacity-0"
-          } ${reduceMotion ? "duration-0" : ""}`}
+          className={cn(
+            "relative overflow-x-clip py-4 transition-opacity duration-200 md:py-8",
+            coverflowReady ? "opacity-100" : "pointer-events-none opacity-0",
+            reduceMotion && "duration-0"
+          )}
         >
           <Swiper
             className="floristeria-coverflow overflow-visible!"

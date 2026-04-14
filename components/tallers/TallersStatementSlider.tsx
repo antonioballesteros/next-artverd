@@ -3,6 +3,7 @@
 import { elsie } from "@/lib/fonts";
 import { tallersImages } from "@/lib/tallersAssets";
 import { Button } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
 import Image from "next/image";
 import { useTranslations } from "next-intl";
 import { useCallback, useEffect, useMemo, useState } from "react";
@@ -70,9 +71,10 @@ export function TallersStatementSlider() {
           return (
             <div
               key={slide.image}
-              className={`absolute inset-0 transition-opacity ease-in-out ${
+              className={cn(
+                "absolute inset-0 transition-opacity ease-in-out",
                 active ? "z-1 opacity-100" : "z-0 opacity-0"
-              }`}
+              )}
               style={{ transitionDuration: `${CROSSFADE_MS}ms` }}
               aria-hidden={!active}
             >
@@ -80,13 +82,13 @@ export function TallersStatementSlider() {
                 src={slide.image}
                 alt=""
                 fill
-                className={`object-cover object-center motion-reduce:transition-none ${
+                className={cn(
+                  "object-cover object-center motion-reduce:transition-none",
                   active
-                    ? `motion-reduce:scale-100 motion-reduce:animate-none ${
-                        reduceMotion ? "" : activeZoomClass
-                      }`
-                    : "scale-100 motion-reduce:animate-none"
-                }`}
+                    ? "motion-reduce:scale-100 motion-reduce:animate-none"
+                    : "scale-100 motion-reduce:animate-none",
+                  active && !reduceMotion ? activeZoomClass : null
+                )}
                 sizes="100vw"
                 priority={i === 0}
               />
@@ -101,11 +103,11 @@ export function TallersStatementSlider() {
             className="flex max-w-4xl flex-col items-center justify-center md:px-6"
           >
             <p
-              className={`${elsie.className} text-center text-[clamp(1.35rem,4vw,2.75rem)] leading-tight font-black tracking-wide drop-shadow-md ${
-                reduceMotion
-                  ? ""
-                  : "animate-[tallers-title-pop_1.1s_ease-out_both]"
-              }`}
+              className={cn(
+                elsie.className,
+                "text-center text-[clamp(1.35rem,4vw,2.75rem)] leading-tight font-black tracking-wide drop-shadow-md",
+                !reduceMotion && "animate-[tallers-title-pop_1.1s_ease-out_both]"
+              )}
             >
               {slides[index].title}
             </p>

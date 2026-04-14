@@ -1,4 +1,5 @@
 import { getTranslations } from "next-intl/server";
+import { cn } from "@/lib/utils";
 
 /** In `pb=` embed URLs, `!5e0!` = roadmap, `!5e1!` = satellite (default from Share can be either). */
 const STORE_MAP_EMBED_SRC =
@@ -13,7 +14,7 @@ export async function StoreGoogleMapEmbed({ className }: StoreGoogleMapEmbedProp
   const t = await getTranslations("home.map");
 
   return (
-    <div className={className ?? "mt-10 h-120 w-full"}>
+    <div className={cn("mt-10 h-120 w-full", className)}>
       <iframe
         title={t("iframeTitle")}
         src={STORE_MAP_EMBED_SRC}

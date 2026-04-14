@@ -4,6 +4,7 @@ import { artverdImages } from "@/lib/artverdAssets";
 import type { BlogPostListItem } from "@/lib/blogPosts";
 import { Card, CardContent } from "@/components/ui/card";
 import { Link } from "@/i18n/navigation";
+import { cn } from "@/lib/utils";
 import Image from "next/image";
 
 interface BlogPostCardProps {
@@ -28,9 +29,10 @@ export function BlogPostCard({ post, readMoreLabel }: BlogPostCardProps) {
           src={post.imageSrc ?? artverdImages.logo}
           alt={post.imageAlt}
           fill
-          className={`transition duration-700 ease-out group-hover:scale-[1.03] ${
+          className={cn(
+            "transition duration-700 ease-out group-hover:scale-[1.03]",
             imageFit === "cover" ? "object-cover" : "object-contain p-4"
-          }`}
+          )}
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
         />
       </Link>

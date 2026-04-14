@@ -10,7 +10,13 @@ export default function CreateBouquetLayout({
       <header className="bg-card border-b">
         <nav className="container mx-auto flex h-14 items-center gap-6 px-4">
           <Link
-            href="/create-bouquet"
+            href="/admin"
+            className="text-muted-foreground hover:text-foreground text-sm font-medium"
+          >
+            Admin
+          </Link>
+          <Link
+            href="/admin/create-bouquet"
             className="text-muted-foreground hover:text-foreground text-sm font-medium"
           >
             Create new bouquet

@@ -16,22 +16,30 @@ export default async function Home({
   const { message } = await searchParams;
 
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center gap-4 bg-zinc-50 font-sans">
-      <p>Next Bouquet AI</p>
+    <div className="container mx-auto flex-1 px-4 py-6">
       {message === "admin_required" && (
         <p className="text-muted-foreground text-sm">
           You are signed in but do not have access to the dashboard.
         </p>
       )}
       {isAdmin && (
-        <>
-          <Button asChild>
-            <Link href="/admin/dashboard">Dashboard</Link>
-          </Button>
-          <Button asChild>
-            <Link href="/admin/create-bouquet">Create new bouquet</Link>
-          </Button>
-        </>
+        <div>
+          <h1 className="text-2xl font-semibold">Admin area</h1>
+          <p className="text-muted-foreground mt-2">
+            Florist admin area. Manage your flower catalogue and bouquets.
+          </p>
+          <div className="mt-1">
+            <Button asChild>
+              <Link href="/admin/dashboard">Dashboard</Link>
+            </Button>
+          </div>
+          <p className="text-muted-foreground mt-6">Create new bouquets.</p>
+          <div className="mt-1">
+            <Button asChild>
+              <Link href="/admin/create-bouquet">Create new bouquet</Link>
+            </Button>
+          </div>
+        </div>
       )}
     </div>
   );

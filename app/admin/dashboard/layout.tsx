@@ -10,6 +10,12 @@ export default function DashboardLayout({
       <header className="bg-card border-b">
         <nav className="container mx-auto flex h-14 items-center gap-6 px-4">
           <Link
+            href="/admin"
+            className="text-muted-foreground hover:text-foreground text-sm font-medium"
+          >
+            Admin
+          </Link>
+          <Link
             href="/admin/dashboard"
             className="text-muted-foreground hover:text-foreground text-sm font-medium"
           >

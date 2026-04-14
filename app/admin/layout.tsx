@@ -1,11 +1,13 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import { createClient } from "@/lib/supabase/server";
 import { signOut } from "@/app/admin/login/actions";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
+import { artverdImages } from "@/lib/artverdAssets";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -33,13 +35,29 @@ export default async function RootLayout({
   return (
     <>
       <header className="bg-card border-b">
-        <nav className="container mx-auto flex h-14 items-center justify-between gap-6 px-4">
-          <Link
-            href="/admin"
-            className="text-muted-foreground hover:text-foreground text-sm font-medium"
-          >
-            Next Bouquet AI
-          </Link>
+        <nav className="flex h-14 items-center justify-between gap-6 px-4">
+          <div className="flex items-center gap-6 py-1">
+            <Link
+              href="/"
+              className="flex shrink-0 items-center"
+              aria-label="Go to home"
+            >
+              <Image
+                src={artverdImages.logo}
+                alt="Art Verd"
+                width={640}
+                height={296}
+                className="h-12 w-auto"
+                priority
+              />
+            </Link>
+            <Link
+              href="/admin"
+              className="text-muted-foreground hover:text-foreground text-sm font-medium"
+            >
+              Next Bouquet AI
+            </Link>
+          </div>
           <div className="flex items-center gap-3">
             {user ? (
               <>

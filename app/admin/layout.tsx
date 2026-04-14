@@ -35,7 +35,7 @@ export default async function RootLayout({
   return (
     <>
       <header className="bg-card border-b">
-        <nav className="flex h-14 items-center justify-between gap-6 px-4">
+        <nav className="flex h-14 w-full items-center justify-between gap-6 px-4 md:mx-auto md:max-w-[2400px]">
           <div className="flex items-center gap-6 py-1">
             <Link
               href="/"
@@ -55,7 +55,7 @@ export default async function RootLayout({
               href="/admin"
               className="text-muted-foreground hover:text-foreground text-sm font-medium"
             >
-              Next Bouquet AI
+              Admin
             </Link>
           </div>
           <div className="flex items-center gap-3">

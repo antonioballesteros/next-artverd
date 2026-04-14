@@ -1,6 +1,7 @@
 "use client";
 
 import { useCart } from "@/components/shop/CartProvider";
+import { Button } from "@/components/ui/button";
 import { Link } from "@/i18n/navigation";
 import { formatEur } from "@/lib/shop/formatEur";
 import type { AppLocale } from "@/i18n/routing";
@@ -61,13 +62,14 @@ export function CartPageClient({ orderSent = false }: CartPageClientProps) {
         >
           {t("title")}
         </h1>
-        <button
+        <Button
           type="button"
+          variant="link"
           onClick={clearCart}
-          className="self-start text-sm font-medium text-emerald-800 underline-offset-4 hover:text-emerald-950 hover:underline"
+          className="self-start px-0 text-sm font-medium text-emerald-800 hover:text-emerald-950"
         >
           {t("clearCart")}
-        </button>
+        </Button>
       </div>
 
       <ul className="mt-10 divide-y divide-emerald-200/90 border-y border-emerald-200/90">
@@ -150,8 +152,10 @@ export function CartPageClient({ orderSent = false }: CartPageClientProps) {
                       className="w-16 rounded border border-emerald-300 bg-white px-2 py-1 text-center text-emerald-950"
                     />
                   </label>
-                  <button
+                  <Button
                     type="button"
+                    variant="ghost"
+                    size="sm"
                     onClick={() =>
                       removeItem(
                         line.slug,
@@ -159,11 +163,11 @@ export function CartPageClient({ orderSent = false }: CartPageClientProps) {
                         line.complementId,
                       )
                     }
-                    className="inline-flex items-center gap-1 rounded-lg px-2 py-1 text-sm font-medium text-red-700 transition hover:bg-red-50"
+                    className="text-red-700 hover:bg-red-50 hover:text-red-800"
                   >
                     <Trash2 className="h-4 w-4" aria-hidden />
                     {t("remove")}
-                  </button>
+                  </Button>
                 </div>
               </div>
               <div className="text-right sm:pl-4">

@@ -5,6 +5,7 @@ import useEmblaCarousel from "embla-carousel-react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { useCallback, useEffect, useMemo, useState } from "react";
+import { Button } from "@/components/ui/button";
 
 interface ProductImageGalleryProps {
   productName: string;
@@ -134,22 +135,26 @@ export function ProductImageGallery({
           </div>
         </div>
 
-        <button
+        <Button
           type="button"
+          variant="outline"
+          size="icon-lg"
           onClick={() => emblaApi?.scrollPrev()}
-          className="absolute top-1/2 left-2 z-10 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-emerald-200/90 bg-white/95 text-emerald-900 shadow-md backdrop-blur-sm transition hover:bg-white hover:shadow-lg focus-visible:ring-2 focus-visible:ring-emerald-600 focus-visible:outline-none"
+          className="absolute top-1/2 left-2 z-10 -translate-y-1/2 rounded-full border-emerald-200/90 bg-white/95 text-emerald-900 shadow-md backdrop-blur-sm hover:bg-white hover:shadow-lg"
           aria-label={t("previousImage")}
         >
           <ChevronLeft className="h-6 w-6" aria-hidden />
-        </button>
-        <button
+        </Button>
+        <Button
           type="button"
+          variant="outline"
+          size="icon-lg"
           onClick={() => emblaApi?.scrollNext()}
-          className="absolute top-1/2 right-2 z-10 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-emerald-200/90 bg-white/95 text-emerald-900 shadow-md backdrop-blur-sm transition hover:bg-white hover:shadow-lg focus-visible:ring-2 focus-visible:ring-emerald-600 focus-visible:outline-none"
+          className="absolute top-1/2 right-2 z-10 -translate-y-1/2 rounded-full border-emerald-200/90 bg-white/95 text-emerald-900 shadow-md backdrop-blur-sm hover:bg-white hover:shadow-lg"
           aria-label={t("nextImage")}
         >
           <ChevronRight className="h-6 w-6" aria-hidden />
-        </button>
+        </Button>
       </div>
 
       <div
@@ -157,13 +162,15 @@ export function ProductImageGallery({
         aria-label={t("slideIndicators")}
       >
         {imagePaths.map((src, i) => (
-          <button
+          <Button
             key={src}
             type="button"
+            variant="ghost"
+            size="icon-xs"
             aria-current={i === selectedIndex ? "true" : undefined}
             aria-label={t("goToSlide", { n: i + 1 })}
             onClick={() => emblaApi?.scrollTo(i)}
-            className={`h-2.5 rounded-full transition-all focus-visible:ring-2 focus-visible:ring-emerald-600 focus-visible:outline-none ${
+            className={`rounded-full transition-all ${
               i === selectedIndex
                 ? "w-8 bg-emerald-700"
                 : "w-2.5 bg-emerald-300/80 hover:bg-emerald-500/90"

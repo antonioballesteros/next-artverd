@@ -1,6 +1,7 @@
 "use client";
 
 import { floristeriaHeroSlides } from "@/lib/floristeriaAssets";
+import { Button } from "@/components/ui/button";
 import { elsie } from "@/lib/fonts";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import Image from "next/image";
@@ -185,13 +186,15 @@ export function FloristeriaHero() {
           </Swiper>
 
           <div className="pointer-events-none absolute inset-y-0 left-0 z-10 flex w-14 items-center md:left-1 md:w-16">
-            <button
+            <Button
               type="button"
+              variant="outline"
+              size="icon-lg"
               onClick={() => {
                 setAutoplayReverse(true);
                 swiperRef.current?.slidePrev();
               }}
-              className="pointer-events-auto flex h-11 w-11 items-center justify-center rounded-full border border-emerald-800/20 bg-white/90 text-emerald-950 shadow-md backdrop-blur-sm transition hover:bg-white md:h-12 md:w-12"
+              className="pointer-events-auto rounded-full border-emerald-800/20 bg-white/90 text-emerald-950 shadow-md backdrop-blur-sm hover:bg-white md:size-12"
               aria-label={t("previousImageAriaLabel")}
             >
               <ChevronLeft
@@ -199,16 +202,18 @@ export function FloristeriaHero() {
                 aria-hidden
                 strokeWidth={1.5}
               />
-            </button>
+            </Button>
           </div>
           <div className="pointer-events-none absolute inset-y-0 right-0 z-10 flex w-14 items-center justify-end md:right-1 md:w-16">
-            <button
+            <Button
               type="button"
+              variant="outline"
+              size="icon-lg"
               onClick={() => {
                 setAutoplayReverse(false);
                 swiperRef.current?.slideNext();
               }}
-              className="pointer-events-auto flex h-11 w-11 items-center justify-center rounded-full border border-emerald-800/20 bg-white/90 text-emerald-950 shadow-md backdrop-blur-sm transition hover:bg-white md:h-12 md:w-12"
+              className="pointer-events-auto rounded-full border-emerald-800/20 bg-white/90 text-emerald-950 shadow-md backdrop-blur-sm hover:bg-white md:size-12"
               aria-label={t("nextImageAriaLabel")}
             >
               <ChevronRight
@@ -216,7 +221,7 @@ export function FloristeriaHero() {
                 aria-hidden
                 strokeWidth={1.5}
               />
-            </button>
+            </Button>
           </div>
         </div>
 

@@ -1,6 +1,7 @@
 "use client";
 
 import { useCookieConsent } from "@/components/legal/CookieConsentProvider";
+import { Button } from "@/components/ui/button";
 import { useTranslations } from "next-intl";
 
 export function FooterCookiePreferences() {
@@ -8,12 +9,13 @@ export function FooterCookiePreferences() {
   const t = useTranslations("site.footer");
 
   return (
-    <button
+    <Button
       type="button"
+      variant="link"
       onClick={openCookieSettings}
-      className="text-left text-emerald-100/90 underline-offset-2 hover:text-white hover:underline"
+      className="h-auto p-0 text-left text-emerald-100/90 hover:text-white"
     >
       {t("cookieSettings")}
-    </button>
+    </Button>
   );
 }

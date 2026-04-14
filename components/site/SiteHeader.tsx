@@ -2,6 +2,7 @@
 
 import { LanguageSwitcher } from "@/components/site/LanguageSwitcher";
 import { CartHeaderLink } from "@/components/shop/CartHeaderLink";
+import { Button } from "@/components/ui/button";
 import { artverdImages } from "@/lib/artverdAssets";
 import { Link, usePathname } from "@/i18n/navigation";
 import type { AppLocale } from "@/i18n/routing";
@@ -141,8 +142,10 @@ export function SiteHeader({
           ) : null}
           <LanguageSwitcher overlay={isOverlay} showSolidBar={showSolidBar} />
           <CartHeaderLink overlay={isOverlay} showSolidBar={showSolidBar} />
-          <button
+          <Button
             type="button"
+            variant="outline"
+            size="icon-lg"
             className={`${menuButtonClass} shrink-0`}
             aria-expanded={menuOpen}
             aria-controls="mobile-nav"
@@ -160,7 +163,7 @@ export function SiteHeader({
                 ☰
               </span>
             )}
-          </button>
+          </Button>
         </div>
       </div>
 

@@ -73,9 +73,11 @@ function FlowerCatalogueSortHeader({
 
   return (
     <TableHead aria-sort={ariaSort} className={cn("p-0", className)}>
-      <button
+      <Button
         type="button"
-        className="hover:bg-muted/60 focus-visible:ring-ring flex h-10 w-full items-center gap-1 px-2 text-left font-medium focus-visible:ring-2 focus-visible:outline-none"
+        variant="ghost"
+        size="sm"
+        className="h-10 w-full justify-start gap-1 px-2 text-left font-medium"
         onClick={handleClick}
         aria-label={sortHint}
       >
@@ -92,7 +94,7 @@ function FlowerCatalogueSortHeader({
             )
           ) : null}
         </span>
-      </button>
+      </Button>
     </TableHead>
   );
 }
@@ -574,7 +576,7 @@ export function CreateBouquetClient({
                 <CardContent>
                   <div className="flex flex-col gap-3">
                     {generatedBouquetImages.map((src, index) => (
-                      <button
+                      <Button
                         key={`bouquet-thumb-${index}`}
                         type="button"
                         onClick={() => {
@@ -603,7 +605,7 @@ export function CreateBouquetClient({
                             Full size
                           </span>
                         </span>
-                      </button>
+                      </Button>
                     ))}
                   </div>
                 </CardContent>

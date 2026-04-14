@@ -4,6 +4,7 @@ import {
   submitContactForm,
   type ContactFormState,
 } from "@/app/actions/contactForm";
+import { Button } from "@/components/ui/button";
 import type { AppLocale } from "@/i18n/routing";
 import { useLocale, useTranslations } from "next-intl";
 import { useActionState } from "react";
@@ -15,13 +16,14 @@ function ContactSubmitButton() {
   const { pending } = useFormStatus();
   const t = useTranslations("contacte.form");
   return (
-    <button
+    <Button
       type="submit"
+      size="lg"
       disabled={pending}
-      className="inline-flex min-h-12 items-center justify-center rounded-full bg-[#67aa25] px-10 py-3 text-sm font-bold tracking-wide text-white shadow-sm transition hover:bg-[#5e9b21] disabled:cursor-not-allowed disabled:opacity-80"
+      className="min-h-12 rounded-full bg-[#67aa25] px-10 py-3 text-sm font-bold tracking-wide text-white shadow-sm hover:bg-[#5e9b21] disabled:cursor-not-allowed disabled:opacity-80"
     >
       {pending ? t("submitting") : t("submit")}
-    </button>
+    </Button>
   );
 }
 

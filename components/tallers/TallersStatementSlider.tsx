@@ -2,6 +2,7 @@
 
 import { elsie } from "@/lib/fonts";
 import { tallersImages } from "@/lib/tallersAssets";
+import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import { useTranslations } from "next-intl";
 import { useCallback, useEffect, useMemo, useState } from "react";
@@ -117,10 +118,12 @@ export function TallersStatementSlider() {
 
       <div className="pointer-events-auto absolute right-0 bottom-5 left-0 z-20 flex justify-center gap-2">
         {slides.map((_, i) => (
-          <button
+          <Button
             key={String(i)}
             type="button"
-            className="h-2.5 w-2.5 rounded-full border border-white/60 transition-[transform,background-color] duration-300 hover:scale-110"
+            variant="ghost"
+            size="icon-xs"
+            className="size-2.5 rounded-full border border-white/60 transition-[transform,background-color] duration-300 hover:scale-110"
             style={{
               backgroundColor:
                 i === index ? "rgb(52 211 153)" : "rgba(255,255,255,0.35)",

@@ -2,6 +2,7 @@
 
 import { Link } from "@/i18n/navigation";
 import { useCookieConsent } from "@/components/legal/CookieConsentProvider";
+import { Button } from "@/components/ui/button";
 import { useEffect } from "react";
 
 export function CookieConsentBanner() {
@@ -65,28 +66,32 @@ export function CookieConsentBanner() {
         </div>
         <div className="flex shrink-0 flex-col gap-2 sm:flex-row sm:flex-wrap sm:justify-end">
           {hasSavedPreferences ? (
-            <button
+            <Button
               type="button"
+              variant="link"
               onClick={closeSettingsWithoutChanges}
-              className="rounded-full px-4 py-2.5 text-sm font-medium text-emerald-800/80 underline-offset-2 hover:text-emerald-900 hover:underline"
+              className="h-auto rounded-full px-4 py-2.5 text-sm font-medium text-emerald-800/80 no-underline hover:text-emerald-900"
             >
               Tancar
-            </button>
+            </Button>
           ) : null}
-          <button
+          <Button
             type="button"
+            variant="outline"
+            size="lg"
             onClick={rejectNonEssential}
-            className="rounded-full border border-emerald-800/25 bg-white px-4 py-2.5 text-sm font-semibold text-emerald-900 shadow-sm transition hover:border-emerald-700/40 hover:bg-emerald-50"
+            className="rounded-full border-emerald-800/25 bg-white text-sm font-semibold text-emerald-900 hover:border-emerald-700/40 hover:bg-emerald-50"
           >
             Només necessàries
-          </button>
-          <button
+          </Button>
+          <Button
             type="button"
+            size="lg"
             onClick={acceptAll}
-            className="rounded-full bg-emerald-800 px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-emerald-900"
+            className="rounded-full bg-emerald-800 text-sm font-semibold text-white hover:bg-emerald-900"
           >
             Acceptar totes
-          </button>
+          </Button>
         </div>
       </div>
     </div>

@@ -1,6 +1,7 @@
 "use client";
 
 import { useCart } from "@/components/shop/CartProvider";
+import { Button } from "@/components/ui/button";
 import { formatEur } from "@/lib/shop/formatEur";
 import type { AppLocale } from "@/i18n/routing";
 import {
@@ -109,15 +110,16 @@ export function AddToCartButton({ product }: AddToCartButtonProps) {
             className="w-16 rounded border border-emerald-300 bg-white px-2 py-2 text-center text-emerald-950 disabled:opacity-60"
           />
         </label>
-        <button
+        <Button
           type="button"
+          size="lg"
           onClick={handleClick}
-          className="inline-flex min-h-12 w-full cursor-pointer items-center justify-center gap-2 rounded-sm bg-emerald-800 px-6 py-3 text-sm font-semibold tracking-widest text-white uppercase shadow-md transition hover:bg-emerald-900 disabled:cursor-not-allowed disabled:opacity-60 sm:w-auto"
+          className="min-h-12 w-full rounded-sm bg-emerald-800 px-6 py-3 text-sm font-semibold tracking-widest text-white uppercase shadow-md hover:bg-emerald-900 sm:w-auto"
           disabled={added || !canAdd}
         >
           <ShoppingCart className="h-5 w-5" aria-hidden />
           {added ? t("addedToCart") : t("addToCart")}
-        </button>
+        </Button>
       </div>
     </div>
   );

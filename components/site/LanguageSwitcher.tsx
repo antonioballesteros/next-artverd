@@ -1,6 +1,7 @@
 "use client";
 
 import { persistLocalePreference } from "@/lib/i18n/localePreference";
+import { Button } from "@/components/ui/button";
 import { usePathname, useRouter } from "@/i18n/navigation";
 import { routing, type AppLocale } from "@/i18n/routing";
 import {
@@ -93,15 +94,17 @@ export function LanguageSwitcher({
         aria-hidden
       />
       {routing.locales.map((code) => (
-        <button
+        <Button
           key={code}
           type="button"
+          variant="outline"
+          size="sm"
           onClick={() => onSelect(code)}
           className={`${buttonBase} ${current === code ? buttonActive : buttonInactive}`}
           aria-pressed={current === code}
         >
           {LABELS[code]}
-        </button>
+        </Button>
       ))}
     </div>
   );

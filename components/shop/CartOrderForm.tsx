@@ -5,6 +5,7 @@ import {
   type CartOrderFormState,
 } from "@/app/actions/cartOrder";
 import { useCart } from "@/components/shop/CartProvider";
+import { Button } from "@/components/ui/button";
 import { useRouter } from "@/i18n/navigation";
 import { elsie } from "@/lib/fonts";
 import type { AppLocale } from "@/i18n/routing";
@@ -19,13 +20,14 @@ function CartOrderSubmitButton() {
   const { pending } = useFormStatus();
   const t = useTranslations("botiga.cartOrderPage");
   return (
-    <button
+    <Button
       type="submit"
+      size="lg"
       disabled={pending}
-      className="inline-flex min-h-12 w-full items-center justify-center rounded-sm bg-emerald-800 px-8 py-3 text-sm font-semibold tracking-widest text-white uppercase shadow-md transition hover:bg-emerald-900 disabled:cursor-not-allowed disabled:opacity-80 sm:w-auto"
+      className="min-h-12 w-full rounded-sm bg-emerald-800 px-8 py-3 text-sm font-semibold tracking-widest text-white uppercase shadow-md hover:bg-emerald-900 disabled:opacity-80 sm:w-auto"
     >
       {pending ? t("submitSending") : t("submit")}
-    </button>
+    </Button>
   );
 }
 

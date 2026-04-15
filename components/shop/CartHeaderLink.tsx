@@ -6,23 +6,10 @@ import { formatEur } from "@/lib/shop/formatEur";
 import { cn } from "@/lib/utils";
 import { ShoppingCart } from "lucide-react";
 
-interface CartHeaderLinkProps {
-  overlay: boolean;
-  showSolidBar: boolean;
-  className?: string;
-}
-
-export function CartHeaderLink({
-  overlay,
-  showSolidBar,
-  className = "",
-}: CartHeaderLinkProps) {
+export function CartHeaderLink() {
   const { itemCount, totalEur } = useCart();
 
-  const isOverlayLight = overlay && !showSolidBar;
-  const textClass = isOverlayLight
-    ? "text-white/95 hover:text-emerald-300"
-    : "text-emerald-900/90 hover:text-emerald-700";
+  const textClass = "text-emerald-900/90 hover:text-emerald-700";
 
   const ariaLabel =
     itemCount === 0
@@ -35,8 +22,7 @@ export function CartHeaderLink({
       aria-label={ariaLabel}
       className={cn(
         "inline-flex min-h-11 min-w-0 shrink-0 items-center gap-2.5 rounded-lg px-2 transition-colors focus-visible:ring-2 focus-visible:ring-emerald-500/40 focus-visible:outline-none",
-        textClass,
-        className
+        textClass
       )}
     >
       <span className="relative inline-flex shrink-0">

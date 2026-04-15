@@ -11,29 +11,10 @@ import { cn } from "@/lib/utils";
 import Image from "next/image";
 import NextLink from "next/link";
 import { useLocale } from "next-intl";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import type { ComponentProps } from "react";
 
 type NavHref = ComponentProps<typeof Link>["href"];
-
-const OVERLAY_SCROLL_PX = 24;
-
-/** Pathnames without locale prefix (internal paths used by next-intl). */
-const OVERLAY_HEADER_PATHS = [
-  "/",
-  "/tallers",
-  "/casaments-i-events",
-  "/blog",
-  "/contacte",
-  "/legal",
-] as const;
-
-function pathnameMatchesOverlayHeader(pathname: string): boolean {
-  return OVERLAY_HEADER_PATHS.some((prefix) => {
-    if (prefix === "/") return pathname === "/";
-    return pathname === prefix || pathname.startsWith(`${prefix}/`);
-  });
-}
 
 interface SiteHeaderProps {
   /** Controls visibility of admin shortcut in the header. */
@@ -44,32 +25,10 @@ export function SiteHeader({ isAuthenticated = false }: SiteHeaderProps) {
   const pathname = usePathname();
   const locale = useLocale() as AppLocale;
   const siteNavItems = getSiteNavItems(locale);
-  const isOverlay = pathnameMatchesOverlayHeader(pathname);
   const [menuOpen, setMenuOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
-
-  useEffect(() => {
-    if (!isOverlay) return;
-    const onScroll = () => setScrolled(window.scrollY > OVERLAY_SCROLL_PX);
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, [isOverlay]);
-
-  const showSolidBar = !isOverlay || scrolled || menuOpen;
 
   return (
-    <header
-      className={cn(
-        "top-0 z-50 transition-[background-color,backdrop-filter,border-color] duration-300",
-        isOverlay
-          ? "fixed right-0 left-0"
-          : "sticky border-b border-emerald-200/80 bg-emerald-50/95",
-        showSolidBar
-          ? "bg-emerald-50/95 backdrop-blur-sm"
-          : "border-b border-transparent bg-transparent"
-      )}
-    >
+    <header className="fixed top-0 right-0 left-0 z-50 bg-emerald-50/50 backdrop-blur-lg transition-[background-color,backdrop-filter,border-color] duration-300">
       <div className="flex w-full items-center gap-4 px-0 py-1 md:mx-auto md:max-w-[2400px] md:px-2 md:py-1">
         <div className="flex min-w-0 items-center gap-6 md:gap-8 lg:gap-10">
           <Link href="/" className="flex shrink-0 items-center gap-2">
@@ -78,20 +37,14 @@ export function SiteHeader({ isAuthenticated = false }: SiteHeaderProps) {
               alt="Art Verd"
               width={640}
               height={296}
-              className={cn(
-                "h-10 shrink-0 md:h-12",
-                !showSolidBar && "drop-shadow-[0_2px_12px_rgba(0,0,0,0.55)]"
-              )}
+              className="h-10 shrink-0 md:h-12"
               style={{ width: "auto" }}
               priority
             />
           </Link>
 
           <nav
-            className={cn(
-              "hidden items-center gap-6 text-sm font-medium md:flex",
-              isOverlay && "drop-shadow-sm"
-            )}
+            className={"hidden items-center gap-6 text-sm font-medium md:flex"}
             aria-label="Principal"
           >
             {siteNavItems.map((item) => (
@@ -112,29 +65,20 @@ export function SiteHeader({ isAuthenticated = false }: SiteHeaderProps) {
 
         <div className="ml-auto flex shrink-0 items-center gap-1 md:gap-2">
           {isAuthenticated ? (
-            <NextLink
-              href="/admin"
-              className={cn(
-                showSolidBar
-                  ? "inline-flex min-h-10 items-center rounded-lg border border-emerald-200/90 bg-white/90 px-3 text-sm font-medium text-emerald-950 transition-colors hover:bg-emerald-100/90"
-                  : "inline-flex min-h-10 items-center rounded-lg border border-white/40 bg-white/15 px-3 text-sm font-medium text-white backdrop-blur-sm transition-colors hover:bg-white/25"
-              )}
+            <Button
+              type="button"
+              className="h-10 rounded-lg border border-white/40 bg-emerald-950/5 text-emerald-950 hover:bg-emerald-950/25"
             >
-              Admin
-            </NextLink>
+              <NextLink href="/admin">Admin</NextLink>
+            </Button>
           ) : null}
-          <LanguageSwitcher overlay={isOverlay} showSolidBar={showSolidBar} />
-          <CartHeaderLink overlay={isOverlay} showSolidBar={showSolidBar} />
+          <LanguageSwitcher />
+          <CartHeaderLink />
           <Button
             type="button"
             variant="outline"
             size="icon-lg"
-            className={cn(
-              showSolidBar
-                ? "inline-flex min-h-11 min-w-11 items-center justify-center rounded-lg border border-emerald-200/90 bg-white/90 text-emerald-950 md:hidden"
-                : "inline-flex min-h-11 min-w-11 items-center justify-center rounded-lg border border-white/40 bg-white/15 text-white backdrop-blur-sm md:hidden",
-              "shrink-0"
-            )}
+            className="inline-flex min-h-11 min-w-11 shrink-0 items-center justify-center rounded-lg border border-emerald-200/90 bg-white/90 text-emerald-950 md:hidden"
             aria-expanded={menuOpen}
             aria-controls="mobile-nav"
             onClick={() => setMenuOpen((open) => !open)}

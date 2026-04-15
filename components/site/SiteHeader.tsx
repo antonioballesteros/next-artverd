@@ -36,73 +36,40 @@ function pathnameMatchesOverlayHeader(pathname: string): boolean {
 }
 
 interface SiteHeaderProps {
-  /** When omitted, the active nav item follows the current URL. */
-  currentPath?: string;
   /** Controls visibility of admin shortcut in the header. */
   isAuthenticated?: boolean;
-  /**
-   * When omitted, uses overlay on routes listed in OVERLAY_HEADER_PATHS, otherwise sticky default bar.
-   * When set, forces that behavior regardless of path.
-   */
-  variant?: "default" | "overlay";
 }
 
-export function SiteHeader({
-  currentPath,
-  isAuthenticated = false,
-  variant,
-}: SiteHeaderProps) {
+export function SiteHeader({ isAuthenticated = false }: SiteHeaderProps) {
   const pathname = usePathname();
   const locale = useLocale() as AppLocale;
   const siteNavItems = getSiteNavItems(locale);
-  const resolvedPath = currentPath ?? pathname;
-  const resolvedVariant =
-    variant !== undefined
-      ? variant
-      : pathnameMatchesOverlayHeader(pathname)
-        ? "overlay"
-        : "default";
+  const isOverlay = pathnameMatchesOverlayHeader(pathname);
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
-    if (resolvedVariant !== "overlay") return;
+    if (!isOverlay) return;
     const onScroll = () => setScrolled(window.scrollY > OVERLAY_SCROLL_PX);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
-  }, [resolvedVariant]);
+  }, [isOverlay]);
 
-  const isOverlay = resolvedVariant === "overlay";
   const showSolidBar = !isOverlay || scrolled || menuOpen;
 
-  const headerShell = isOverlay
-    ? `fixed top-0 left-0 right-0 z-50 transition-[background-color,backdrop-filter,border-color] duration-300 ${
-        showSolidBar
-          ? "bg-emerald-950 backdrop-blur-sm"
-          : "border-b border-transparent bg-transparent"
-      }`
-    : "sticky top-0 z-50 border-b border-emerald-200/80 bg-emerald-50/95 backdrop-blur-sm";
-
-  const navLinkBase = isOverlay
-    ? `text-white/95 visited:text-white/95 uppercase tracking-wide transition-colors focus-visible:rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40 ${
-        showSolidBar ? "hover:text-emerald-300" : "hover:text-emerald-700"
-      }`
-    : "text-emerald-900/90 uppercase tracking-wide transition-colors hover:text-emerald-700";
-
-  const navLinkActive = showSolidBar
-    ? "text-emerald-300 uppercase tracking-wide"
-    : "text-emerald-700 uppercase tracking-wide";
-
-  const menuButtonClass = showSolidBar
-    ? "inline-flex min-h-11 min-w-11 items-center justify-center rounded-lg border border-emerald-200/90 bg-white/90 text-emerald-950 md:hidden"
-    : "inline-flex min-h-11 min-w-11 items-center justify-center rounded-lg border border-white/40 bg-white/15 text-white backdrop-blur-sm md:hidden";
-  const adminLinkClass = showSolidBar
-    ? "inline-flex min-h-10 items-center rounded-lg border border-emerald-200/90 bg-white/90 px-3 text-sm font-medium text-emerald-950 transition-colors hover:bg-emerald-100/90"
-    : "inline-flex min-h-10 items-center rounded-lg border border-white/40 bg-white/15 px-3 text-sm font-medium text-white backdrop-blur-sm transition-colors hover:bg-white/25";
-
   return (
-    <header className={headerShell}>
+    <header
+      className={cn(
+        "top-0 z-50 transition-[background-color,backdrop-filter,border-color] duration-300",
+        isOverlay
+          ? "fixed right-0 left-0"
+          : "sticky border-b border-emerald-200/80 bg-emerald-50/95",
+        showSolidBar
+          ? "bg-emerald-50/95 backdrop-blur-sm"
+          : "border-b border-transparent bg-transparent"
+      )}
+    >
       <div className="flex w-full items-center gap-4 px-0 py-1 md:mx-auto md:max-w-[2400px] md:px-2 md:py-1">
         <div className="flex min-w-0 items-center gap-6 md:gap-8 lg:gap-10">
           <Link href="/" className="flex shrink-0 items-center gap-2">
@@ -131,9 +98,11 @@ export function SiteHeader({
               <Link
                 key={String(item.href)}
                 href={item.href as NavHref}
-                className={
-                  item.href === resolvedPath ? navLinkActive : navLinkBase
-                }
+                className={cn(
+                  item.href === pathname
+                    ? "tracking-wide text-emerald-700 uppercase"
+                    : "tracking-wide text-emerald-900/90 uppercase transition-colors hover:text-emerald-700"
+                )}
               >
                 {item.label}
               </Link>
@@ -143,7 +112,14 @@ export function SiteHeader({
 
         <div className="ml-auto flex shrink-0 items-center gap-1 md:gap-2">
           {isAuthenticated ? (
-            <NextLink href="/admin" className={adminLinkClass}>
+            <NextLink
+              href="/admin"
+              className={cn(
+                showSolidBar
+                  ? "inline-flex min-h-10 items-center rounded-lg border border-emerald-200/90 bg-white/90 px-3 text-sm font-medium text-emerald-950 transition-colors hover:bg-emerald-100/90"
+                  : "inline-flex min-h-10 items-center rounded-lg border border-white/40 bg-white/15 px-3 text-sm font-medium text-white backdrop-blur-sm transition-colors hover:bg-white/25"
+              )}
+            >
               Admin
             </NextLink>
           ) : null}
@@ -153,7 +129,12 @@ export function SiteHeader({
             type="button"
             variant="outline"
             size="icon-lg"
-            className={cn(menuButtonClass, "shrink-0")}
+            className={cn(
+              showSolidBar
+                ? "inline-flex min-h-11 min-w-11 items-center justify-center rounded-lg border border-emerald-200/90 bg-white/90 text-emerald-950 md:hidden"
+                : "inline-flex min-h-11 min-w-11 items-center justify-center rounded-lg border border-white/40 bg-white/15 text-white backdrop-blur-sm md:hidden",
+              "shrink-0"
+            )}
             aria-expanded={menuOpen}
             aria-controls="mobile-nav"
             onClick={() => setMenuOpen((open) => !open)}
@@ -189,7 +170,7 @@ export function SiteHeader({
                 href={item.href as NavHref}
                 className={cn(
                   "rounded-lg px-2 py-2 tracking-wide uppercase transition-colors",
-                  item.href === resolvedPath
+                  item.href === pathname
                     ? "bg-emerald-100/90 font-semibold text-emerald-700"
                     : "hover:bg-emerald-100/70 hover:text-emerald-700"
                 )}

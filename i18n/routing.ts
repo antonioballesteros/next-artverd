@@ -63,6 +63,10 @@ export const routing = defineRouting({
       ca: "/botiga/[slug]",
       es: "/tienda/[slug]",
     },
+    "/admin": {
+      ca: "/admin",
+      es: "/admin",
+    },
   },
 });
 

@@ -31,7 +31,10 @@ export function SiteHeader({ isAuthenticated = false }: SiteHeaderProps) {
     <header className="fixed top-0 right-0 left-0 z-50 bg-emerald-50/50 backdrop-blur-lg transition-[background-color,backdrop-filter,border-color] duration-300">
       <div className="flex w-full items-center gap-4 px-0 py-1 md:mx-auto md:max-w-[2400px] md:px-2 md:py-1">
         <div className="flex min-w-0 items-center gap-6 md:gap-8 lg:gap-10">
-          <Link href="/" className="flex shrink-0 items-center gap-2">
+          <Link
+            href="/"
+            className="flex shrink-0 items-center gap-2 px-2 md:px-0"
+          >
             <Image
               src={artverdImages.logo}
               alt="Art Verd"
@@ -64,14 +67,14 @@ export function SiteHeader({ isAuthenticated = false }: SiteHeaderProps) {
         </div>
 
         <div className="ml-auto flex shrink-0 items-center gap-1 md:gap-2">
-          {isAuthenticated ? (
+          {isAuthenticated && (
             <Button
               type="button"
-              className="h-10 rounded-lg border border-white/40 bg-emerald-950/5 text-emerald-950 hover:bg-emerald-950/25"
+              className="hidden h-10 rounded-lg border border-white/40 bg-emerald-950/5 text-emerald-950 hover:bg-emerald-950/25 md:block"
             >
               <NextLink href="/admin">Admin</NextLink>
             </Button>
-          ) : null}
+          )}
           <LanguageSwitcher />
           <CartHeaderLink />
           <Button
@@ -108,6 +111,14 @@ export function SiteHeader({ isAuthenticated = false }: SiteHeaderProps) {
             className="flex flex-col gap-3 text-base font-medium text-emerald-950"
             aria-label="Principal mòbil"
           >
+            {isAuthenticated && (
+              <Button
+                type="button"
+                className="ml-auto h-10 rounded-lg border border-white/40 bg-emerald-950/5 text-emerald-950 hover:bg-emerald-950/25"
+              >
+                <NextLink href="/admin">Admin</NextLink>
+              </Button>
+            )}
             {siteNavItems.map((item) => (
               <Link
                 key={String(item.href)}
@@ -130,6 +141,14 @@ export function SiteHeader({ isAuthenticated = false }: SiteHeaderProps) {
             >
               Cistella
             </Link>
+            {isAuthenticated && (
+              <Link
+                href="/admin"
+                className="ml-auto rounded-lg px-2 py-2 tracking-wide text-emerald-800 uppercase transition-colors hover:bg-emerald-100/70 hover:text-emerald-700"
+              >
+                Admin
+              </Link>
+            )}
           </nav>
         </div>
       ) : null}

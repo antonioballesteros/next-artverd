@@ -11,7 +11,7 @@ import { cn } from "@/lib/utils";
 import Image from "next/image";
 import NextLink from "next/link";
 import { useLocale } from "next-intl";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import type { ComponentProps } from "react";
 
 type NavHref = ComponentProps<typeof Link>["href"];
@@ -26,9 +26,36 @@ export function SiteHeader({ isAuthenticated = false }: SiteHeaderProps) {
   const locale = useLocale() as AppLocale;
   const siteNavItems = getSiteNavItems(locale);
   const [menuOpen, setMenuOpen] = useState(false);
+  const headerRef = useRef<HTMLElement | null>(null);
+
+  useEffect(() => {
+    if (!menuOpen) {
+      return;
+    }
+
+    const handlePointerDown = (event: PointerEvent) => {
+      const target = event.target;
+      if (!(target instanceof Node)) {
+        return;
+      }
+
+      if (!headerRef.current?.contains(target)) {
+        setMenuOpen(false);
+      }
+    };
+
+    document.addEventListener("pointerdown", handlePointerDown);
+
+    return () => {
+      document.removeEventListener("pointerdown", handlePointerDown);
+    };
+  }, [menuOpen]);
 
   return (
-    <header className="fixed top-0 right-0 left-0 z-50 bg-emerald-50/50 backdrop-blur-lg transition-[background-color,backdrop-filter,border-color] duration-300">
+    <header
+      ref={headerRef}
+      className="fixed top-0 right-0 left-0 z-50 bg-emerald-50/50 backdrop-blur-lg transition-[background-color,backdrop-filter,border-color] duration-300"
+    >
       <div className="flex w-full items-center gap-4 px-0 py-1 md:mx-auto md:max-w-[2400px] md:px-2 md:py-1">
         <div className="flex min-w-0 items-center gap-6 md:gap-8 lg:gap-10">
           <Link

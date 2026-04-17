@@ -190,6 +190,15 @@ function isValidEmail(value: string): boolean {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
 }
 
+function escapeHtml(value: string): string {
+  return value
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#39;");
+}
+
 export async function submitCartOrder(
   _prevState: CartOrderFormState | undefined,
   formData: FormData
@@ -291,6 +300,78 @@ export async function submitCartOrder(
     `Total estimat: ${formatEur(totalEur)}`,
   ].join("\n");
 
+  const linesHtml = items
+    .map((line, i) => {
+      const variantPart = line.variantLabel
+        ? ` <span style="color:#475569;">· ${escapeHtml(line.variantLabel)}</span>`
+        : "";
+      const customAmountPart =
+        line.customAmountEur !== undefined
+          ? `<div style="margin-top:4px;color:#334155;">Import personalitzat: <strong>${escapeHtml(
+              formatEur(line.customAmountEur)
+            )}</strong></div>`
+          : "";
+      const customDescriptionPart =
+        line.customDescription && line.customAmountEur !== undefined
+          ? `<div style="margin-top:4px;color:#334155;">Descripció: ${escapeHtml(
+              line.customDescription
+            )}</div>`
+          : "";
+
+      return `
+        <li style="margin:0 0 12px 0;padding:12px;border:1px solid #e2e8f0;border-radius:8px;background:#ffffff;">
+          <div style="font-size:15px;font-weight:600;color:#0f172a;">
+            ${i + 1}. ${escapeHtml(line.productName)}${variantPart}
+          </div>
+          <div style="margin-top:6px;color:#334155;">Slug: ${escapeHtml(
+            line.slug
+          )}</div>
+          <div style="margin-top:4px;color:#334155;">Quantitat: <strong>${line.quantity}</strong></div>
+          <div style="margin-top:4px;color:#334155;">Preu unitari: <strong>${escapeHtml(
+            formatEur(line.unitEur)
+          )}</strong></div>
+          ${customAmountPart}
+          ${customDescriptionPart}
+          <div style="margin-top:6px;color:#0f172a;">Subtotal: <strong>${escapeHtml(
+            formatEur(line.lineTotalEur)
+          )}</strong></div>
+        </li>
+      `;
+    })
+    .join("");
+
+  const html = `
+    <div style="background:#f8fafc;padding:24px;font-family:Arial,sans-serif;line-height:1.5;color:#0f172a;">
+      <div style="max-width:680px;margin:0 auto;background:#ffffff;border:1px solid #e2e8f0;border-radius:12px;overflow:hidden;">
+        <div style="padding:18px 20px;background:#f1f5f9;border-bottom:1px solid #e2e8f0;">
+          <h1 style="margin:0;font-size:18px;">Nova comanda de cistella</h1>
+          <p style="margin:6px 0 0 0;color:#334155;">Preus del catàleg en el moment de l’enviament</p>
+        </div>
+
+        <div style="padding:20px;">
+          <h2 style="margin:0 0 10px 0;font-size:15px;">Dades de contacte</h2>
+          <p style="margin:4px 0;"><strong>Nom:</strong> ${escapeHtml(name)}</p>
+          <p style="margin:4px 0;"><strong>Telèfon:</strong> ${escapeHtml(phone)}</p>
+          <p style="margin:4px 0;"><strong>Correu:</strong> ${escapeHtml(email)}</p>
+
+          <h2 style="margin:18px 0 10px 0;font-size:15px;">Observacions</h2>
+          <p style="margin:0;padding:12px;background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;white-space:pre-wrap;">
+            ${escapeHtml(observations.trim() || "(cap)")}
+          </p>
+
+          <h2 style="margin:18px 0 10px 0;font-size:15px;">Línies de la comanda</h2>
+          <ul style="margin:0;padding:0;list-style:none;">
+            ${linesHtml}
+          </ul>
+
+          <div style="margin-top:18px;padding-top:14px;border-top:1px solid #e2e8f0;font-size:16px;">
+            <strong>Total estimat: ${escapeHtml(formatEur(totalEur))}</strong>
+          </div>
+        </div>
+      </div>
+    </div>
+  `;
+
   const resend = new Resend(apiKey);
 
   try {
@@ -301,6 +382,7 @@ export async function submitCartOrder(
         replyTo: email,
         subject: `Cistella — ${name}`,
         text: body,
+        html,
 
         tags: [{ name: "source", value: "cart-order" }],
       },

@@ -24,6 +24,15 @@ const SPAM_TRAP_FIELD = "__contact_reference_code";
 /** Small delay before responding to trap hits (mild cost for automated abuse). */
 const SPAM_TRAP_RESPONSE_DELAY_MS = 200;
 
+function escapeHtml(value: string): string {
+  return value
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#39;");
+}
+
 export async function submitContactForm(
   _prevState: ContactFormState | undefined,
   formData: FormData
@@ -68,6 +77,37 @@ export async function submitContactForm(
   }
   const { from, to } = addresses;
 
+  const textBody = [
+    "New message from the contact form.",
+    "",
+    `Name: ${name}`,
+    `Email: ${email}`,
+    "",
+    "Message:",
+    message,
+  ].join("\n");
+
+  const htmlBody = `
+    <div style="background:#f8fafc;padding:24px;font-family:Arial,sans-serif;line-height:1.5;color:#0f172a;">
+      <div style="max-width:680px;margin:0 auto;background:#ffffff;border:1px solid #e2e8f0;border-radius:12px;overflow:hidden;">
+        <div style="padding:18px 20px;background:#f1f5f9;border-bottom:1px solid #e2e8f0;">
+          <h1 style="margin:0;font-size:18px;">New contact message</h1>
+          <p style="margin:6px 0 0 0;color:#334155;">A user submitted the contact form.</p>
+        </div>
+        <div style="padding:20px;">
+          <h2 style="margin:0 0 10px 0;font-size:15px;">Contact details</h2>
+          <p style="margin:4px 0;"><strong>Name:</strong> ${escapeHtml(name)}</p>
+          <p style="margin:4px 0;"><strong>Email:</strong> ${escapeHtml(email)}</p>
+
+          <h2 style="margin:18px 0 10px 0;font-size:15px;">Message</h2>
+          <p style="margin:0;padding:12px;background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;white-space:pre-wrap;">
+            ${escapeHtml(message)}
+          </p>
+        </div>
+      </div>
+    </div>
+  `;
+
   const resend = new Resend(apiKey);
 
   try {
@@ -77,15 +117,8 @@ export async function submitContactForm(
         to: [to],
         replyTo: email,
         subject: `Contact form: ${name}`,
-        text: [
-          "New message from the contact form.",
-          "",
-          `Name: ${name}`,
-          `Email: ${email}`,
-          "",
-          "Message:",
-          message,
-        ].join("\n"),
+        text: textBody,
+        html: htmlBody,
         tags: [{ name: "source", value: "contact" }],
       },
       { idempotencyKey: `contact/${randomUUID()}` }

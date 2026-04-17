@@ -33,6 +33,7 @@ const fieldClass =
   "border border-[#ebebeb] bg-[rgba(244,249,240,1)] px-5 py-3 text-[#0f1f14] shadow-none outline-none transition placeholder:text-emerald-900/70 focus:border-[#d5e5ee] focus:text-[#63a71f]";
 const inputClass = `w-full rounded-full ${fieldClass}`;
 const textareaClass = `w-full min-h-36 resize-y rounded-3xl ${fieldClass}`;
+const CONTACT_SPAM_TRAP_FIELD = "__contact_reference_code";
 export function ContactMessageForm() {
   const t = useTranslations("contacte.form");
   const locale = useLocale() as AppLocale;
@@ -49,13 +50,15 @@ export function ContactMessageForm() {
         className="pointer-events-none absolute -left-[10000px] top-auto -m-px h-px w-px overflow-hidden border-0 p-0 opacity-0"
         aria-hidden="true"
       >
-        <label htmlFor="contact-website">{t("honeypotLabel")}</label>
+        <label htmlFor="contact-reference">{t("honeypotLabel")}</label>
         <Input
-          id="contact-website"
-          name="website"
+          id="contact-reference"
+          name={CONTACT_SPAM_TRAP_FIELD}
           type="text"
           tabIndex={-1}
-          autoComplete="off"
+          autoComplete="new-password"
+          defaultValue=""
+          inputMode="none"
         />
       </div>
       {state.error ? (

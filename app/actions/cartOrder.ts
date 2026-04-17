@@ -19,10 +19,11 @@ import { Resend } from "resend";
 
 type CartOrderErrorsTranslate = (
   key: string,
-  values?: Record<string, string | number>,
+  values?: Record<string, string | number>
 ) => string;
 
-const SPAM_TRAP_FIELD = "website";
+// Use a non-semantic name to avoid password managers/autofill filling it accidentally.
+const SPAM_TRAP_FIELD = "__order_reference_code";
 const SPAM_TRAP_RESPONSE_DELAY_MS = 200;
 
 const MAX_OBSERVATIONS_LENGTH = 4000;
@@ -54,7 +55,7 @@ function parseOrderLocale(formData: FormData): AppLocale {
 function resolveOrderLines(
   lines: CartLine[],
   locale: AppLocale,
-  te: CartOrderErrorsTranslate,
+  te: CartOrderErrorsTranslate
 ):
   | { ok: true; resolved: ResolvedLine[]; totalEur: number }
   | { ok: false; error: string } {
@@ -144,7 +145,10 @@ function resolveOrderLines(
             }),
           };
         }
-      } else if (line.customAmountEur !== undefined || line.customDescription?.trim()) {
+      } else if (
+        line.customAmountEur !== undefined ||
+        line.customDescription?.trim()
+      ) {
         return { ok: false, error: te("invalidCartData") };
       }
     } else if (line.variantId || line.complementId) {
@@ -169,7 +173,7 @@ function resolveOrderLines(
         locale,
         line.variantId,
         line.complementId,
-        line.customDescription
+        undefined
       ),
       customAmountEur: line.customAmountEur,
       customDescription: line.customDescription?.trim(),
@@ -256,25 +260,28 @@ export async function submitCartOrder(
         line.customAmountEur !== undefined
           ? `\n   Import personalitzat: ${formatEur(line.customAmountEur)}`
           : "";
+      const customDescriptionPart =
+        line.customDescription && line.customAmountEur !== undefined
+          ? `   Descripció: ${line.customDescription}`
+          : "";
       return [
         `${i + 1}. ${line.productName}${variantPart}`,
         `   Slug: ${line.slug}`,
         `   Quantitat: ${line.quantity}`,
         `   Preu unitari: ${formatEur(line.unitEur)}`,
         customAmountPart,
+        customDescriptionPart,
         `   Subtotal: ${formatEur(line.lineTotalEur)}`,
       ].join("\n");
     })
     .join("\n\n");
 
   const body = [
-    "Nova sol·licitud des de la cistella (sense pagament online).",
-    "",
     "Dades de contacte:",
     `Nom: ${name}`,
     `Telèfon: ${phone}`,
     `Correu: ${email}`,
-    observations ? `\nObservacions:\n${observations}` : "\nObservacions: (cap)",
+    `\nObservacions:\n${observations.trim() || "(cap)"}`,
     "",
     "—",
     "Línies de la comanda (preus del catàleg en el moment de l’enviament):",
@@ -286,19 +293,28 @@ export async function submitCartOrder(
 
   const resend = new Resend(apiKey);
 
-  const { error } = await resend.emails.send(
-    {
-      from,
-      to: [to],
-      replyTo: email,
-      subject: `Cistella — ${name}`,
-      text: body,
-      tags: [{ name: "source", value: "cart-order" }],
-    },
-    { idempotencyKey: `cart-order/${randomUUID()}` }
-  );
+  try {
+    const result = await resend.emails.send(
+      {
+        from,
+        to: [to],
+        replyTo: email,
+        subject: `Cistella — ${name}`,
+        text: body,
 
-  if (error) {
+        tags: [{ name: "source", value: "cart-order" }],
+      },
+      { idempotencyKey: `cart-order/${randomUUID()}` }
+    );
+
+    const { error } = result;
+    if (error) {
+      return {
+        success: false,
+        error: te("sendFailed"),
+      };
+    }
+  } catch {
     return {
       success: false,
       error: te("sendFailed"),

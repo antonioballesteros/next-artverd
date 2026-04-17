@@ -19,8 +19,8 @@ export type ContactFormState = {
   error?: string;
 };
 
-/** Name matches the hidden "website" field; if filled, treat as automated submission. */
-const SPAM_TRAP_FIELD = "website";
+/** Non-semantic trap name to reduce accidental autofill by browsers/password managers. */
+const SPAM_TRAP_FIELD = "__contact_reference_code";
 /** Small delay before responding to trap hits (mild cost for automated abuse). */
 const SPAM_TRAP_RESPONSE_DELAY_MS = 200;
 
@@ -70,27 +70,34 @@ export async function submitContactForm(
 
   const resend = new Resend(apiKey);
 
-  const { error } = await resend.emails.send(
-    {
-      from,
-      to: [to],
-      replyTo: email,
-      subject: `Contact form: ${name}`,
-      text: [
-        "New message from the contact form.",
-        "",
-        `Name: ${name}`,
-        `Email: ${email}`,
-        "",
-        "Message:",
-        message,
-      ].join("\n"),
-      tags: [{ name: "source", value: "contact" }],
-    },
-    { idempotencyKey: `contact/${randomUUID()}` }
-  );
+  try {
+    const { error } = await resend.emails.send(
+      {
+        from,
+        to: [to],
+        replyTo: email,
+        subject: `Contact form: ${name}`,
+        text: [
+          "New message from the contact form.",
+          "",
+          `Name: ${name}`,
+          `Email: ${email}`,
+          "",
+          "Message:",
+          message,
+        ].join("\n"),
+        tags: [{ name: "source", value: "contact" }],
+      },
+      { idempotencyKey: `contact/${randomUUID()}` }
+    );
 
-  if (error) {
+    if (error) {
+      return {
+        success: false,
+        error: tErrors("sendFailed"),
+      };
+    }
+  } catch {
     return {
       success: false,
       error: tErrors("sendFailed"),

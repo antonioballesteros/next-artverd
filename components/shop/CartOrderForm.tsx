@@ -38,6 +38,7 @@ const labelClass = "mb-2 block text-sm font-medium text-emerald-900";
 const fieldClass =
   "w-full rounded border border-emerald-300 bg-white px-3 py-2.5 text-emerald-950 shadow-sm outline-none transition placeholder:text-emerald-800/50 focus:border-emerald-600 focus:ring-1 focus:ring-emerald-600";
 const textareaClass = `${fieldClass} min-h-28 resize-y`;
+const CART_ORDER_SPAM_TRAP_FIELD = "__order_reference_code";
 
 const defaultFormClassName =
   "relative mt-8 border-t border-emerald-200/90 pt-8";
@@ -83,13 +84,15 @@ export function CartOrderForm({ formClassName }: CartOrderFormProps) {
         className="pointer-events-none absolute -left-[10000px] top-auto -m-px h-px w-px overflow-hidden border-0 p-0 opacity-0"
         aria-hidden="true"
       >
-        <label htmlFor="cart-order-website">Website</label>
+        <label htmlFor="cart-order-reference">Leave empty</label>
         <Input
-          id="cart-order-website"
-          name="website"
+          id="cart-order-reference"
+          name={CART_ORDER_SPAM_TRAP_FIELD}
           type="text"
           tabIndex={-1}
-          autoComplete="off"
+          autoComplete="new-password"
+          defaultValue=""
+          inputMode="none"
         />
       </div>
 

@@ -30,14 +30,24 @@ interface CartContextValue {
     slug: string,
     quantity?: number,
     variantId?: string,
-    complementId?: string
+    complementId?: string,
+    customAmountEur?: number,
+    customDescription?: string
   ) => void;
-  removeItem: (slug: string, variantId?: string, complementId?: string) => void;
+  removeItem: (
+    slug: string,
+    variantId?: string,
+    complementId?: string,
+    customAmountEur?: number,
+    customDescription?: string
+  ) => void;
   setQuantity: (
     slug: string,
     quantity: number,
     variantId?: string,
-    complementId?: string
+    complementId?: string,
+    customAmountEur?: number,
+    customDescription?: string
   ) => void;
   clearCart: () => void;
 }
@@ -71,12 +81,40 @@ export function CartProvider({ children }: { children: ReactNode }) {
   }, []);
 
   const addItem = useCallback(
-    (slug: string, quantity = 1, variantId?: string, complementId?: string) => {
+    (
+      slug: string,
+      quantity = 1,
+      variantId?: string,
+      complementId?: string,
+      customAmountEur?: number,
+      customDescription?: string
+    ) => {
       const product = getProductBySlug(slug);
       if (!product || quantity < 1) return;
       const storageSlug = getCartStorageSlug(product);
       if (product.price.kind === "variants") {
-        if (!variantId || !product.price.options.some((o) => o.id === variantId)) {
+        if (
+          !variantId ||
+          (!product.price.options.some((o) => o.id === variantId) &&
+            product.price.customOption?.id !== variantId)
+        ) {
+          return;
+        }
+        const customOption =
+          product.price.customOption &&
+          variantId === product.price.customOption.id
+            ? product.price.customOption
+            : undefined;
+        if (customOption) {
+          const validCustomAmount =
+            typeof customAmountEur === "number" &&
+            Number.isFinite(customAmountEur) &&
+            customAmountEur >= customOption.minAmountEur &&
+            customAmountEur <= customOption.maxAmountEur;
+          if (!validCustomAmount) return;
+          const normalizedDescription = customDescription?.trim();
+          if (!normalizedDescription) return;
+        } else if (customAmountEur !== undefined || customDescription?.trim()) {
           return;
         }
         if (
@@ -95,12 +133,27 @@ export function CartProvider({ children }: { children: ReactNode }) {
         complementId
           ? complementId
           : undefined;
+      const customOption =
+        product.price.kind === "variants" &&
+        product.price.customOption &&
+        variantId === product.price.customOption.id
+          ? product.price.customOption
+          : undefined;
+      const lineCustomAmount =
+        customOption &&
+        typeof customAmountEur === "number" &&
+        Number.isFinite(customAmountEur)
+          ? customAmountEur
+          : undefined;
+      const lineCustomDescription = customOption ? customDescription?.trim() : undefined;
       setLines((prev) => {
         const idx = prev.findIndex(
           (l) =>
             l.slug === storageSlug &&
             (l.variantId ?? "") === (lineVariant ?? "") &&
-            (l.complementId ?? "") === (lineComplement ?? "")
+            (l.complementId ?? "") === (lineComplement ?? "") &&
+            (l.customAmountEur ?? -1) === (lineCustomAmount ?? -1) &&
+            (l.customDescription ?? "") === (lineCustomDescription ?? "")
         );
         let next: CartLine[];
         if (idx === -1)
@@ -111,6 +164,8 @@ export function CartProvider({ children }: { children: ReactNode }) {
               quantity,
               variantId: lineVariant,
               complementId: lineComplement,
+              customAmountEur: lineCustomAmount,
+              customDescription: lineCustomDescription,
             },
           ];
         else {
@@ -119,6 +174,8 @@ export function CartProvider({ children }: { children: ReactNode }) {
             slug: storageSlug,
             variantId: lineVariant,
             complementId: lineComplement,
+            customAmountEur: lineCustomAmount,
+            customDescription: lineCustomDescription,
             quantity: next[idx].quantity + quantity,
           };
         }
@@ -130,14 +187,22 @@ export function CartProvider({ children }: { children: ReactNode }) {
   );
 
   const removeItem = useCallback(
-    (slug: string, variantId?: string, complementId?: string) => {
+    (
+      slug: string,
+      variantId?: string,
+      complementId?: string,
+      customAmountEur?: number,
+      customDescription?: string
+    ) => {
       setLines((prev) => {
         const next = prev.filter(
           (l) =>
             !(
               l.slug === slug &&
               (l.variantId ?? "") === (variantId ?? "") &&
-              (l.complementId ?? "") === (complementId ?? "")
+              (l.complementId ?? "") === (complementId ?? "") &&
+              (l.customAmountEur ?? -1) === (customAmountEur ?? -1) &&
+              (l.customDescription ?? "") === (customDescription ?? "")
             )
         );
         localStorage.setItem(CART_STORAGE_KEY, serializeCartLines(next));
@@ -152,7 +217,9 @@ export function CartProvider({ children }: { children: ReactNode }) {
       slug: string,
       quantity: number,
       variantId?: string,
-      complementId?: string
+      complementId?: string,
+      customAmountEur?: number,
+      customDescription?: string
     ) => {
       const product = getProductBySlug(slug);
       if (!product) return;
@@ -165,13 +232,45 @@ export function CartProvider({ children }: { children: ReactNode }) {
         complementId
           ? complementId
           : undefined;
+      const customOption =
+        product.price.kind === "variants" &&
+        product.price.customOption &&
+        variantId === product.price.customOption.id
+          ? product.price.customOption
+          : undefined;
+      const lineCustomAmount =
+        customOption &&
+        typeof customAmountEur === "number" &&
+        Number.isFinite(customAmountEur)
+          ? customAmountEur
+          : undefined;
+      const lineCustomDescription = customOption ? customDescription?.trim() : undefined;
       if (quantity < 1) {
-        removeItem(slug, lineVariant, lineComplement);
+        removeItem(
+          slug,
+          lineVariant,
+          lineComplement,
+          lineCustomAmount,
+          lineCustomDescription
+        );
         return;
       }
       if (product.price.kind === "variants") {
-        if (!variantId || !product.price.options.some((o) => o.id === variantId)) {
+        if (
+          !variantId ||
+          (!product.price.options.some((o) => o.id === variantId) &&
+            product.price.customOption?.id !== variantId)
+        ) {
           return;
+        }
+        if (customOption) {
+          const validCustomAmount =
+            typeof customAmountEur === "number" &&
+            Number.isFinite(customAmountEur) &&
+            customAmountEur >= customOption.minAmountEur &&
+            customAmountEur <= customOption.maxAmountEur;
+          if (!validCustomAmount) return;
+          if (!customDescription?.trim()) return;
         }
         if (
           complementId &&
@@ -185,7 +284,9 @@ export function CartProvider({ children }: { children: ReactNode }) {
           (l) =>
             l.slug === slug &&
             (l.variantId ?? "") === (lineVariant ?? "") &&
-            (l.complementId ?? "") === (lineComplement ?? "")
+            (l.complementId ?? "") === (lineComplement ?? "") &&
+            (l.customAmountEur ?? -1) === (lineCustomAmount ?? -1) &&
+            (l.customDescription ?? "") === (lineCustomDescription ?? "")
         );
         if (idx === -1) {
           const next = [
@@ -195,6 +296,8 @@ export function CartProvider({ children }: { children: ReactNode }) {
               quantity,
               variantId: lineVariant,
               complementId: lineComplement,
+              customAmountEur: lineCustomAmount,
+              customDescription: lineCustomDescription,
             },
           ];
           localStorage.setItem(CART_STORAGE_KEY, serializeCartLines(next));
@@ -206,6 +309,8 @@ export function CartProvider({ children }: { children: ReactNode }) {
           quantity,
           variantId: lineVariant,
           complementId: lineComplement,
+          customAmountEur: lineCustomAmount,
+          customDescription: lineCustomDescription,
         };
         localStorage.setItem(CART_STORAGE_KEY, serializeCartLines(next));
         return next;
@@ -227,7 +332,12 @@ export function CartProvider({ children }: { children: ReactNode }) {
       if (!product) continue;
       count += line.quantity;
       total +=
-        getLineUnitPriceEur(product.price, line.variantId, line.complementId) *
+        getLineUnitPriceEur(
+          product.price,
+          line.variantId,
+          line.complementId,
+          line.customAmountEur
+        ) *
         line.quantity;
     }
     return { itemCount: count, totalEur: total };

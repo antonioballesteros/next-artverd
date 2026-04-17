@@ -118,6 +118,10 @@
       "chooseOption": "Elige una opción",
       "complement": "Complemento",
       "chooseComplement": "Elige un complemento",
+      "customAmountLabel": "Importe personalizado ({min} - {max})",
+      "customDescriptionPlaceholder": "Ejemplo: tonos pastel, estilo silvestre, sin lirios...",
+      "customAmountInvalid": "Introduce un importe entre {min} y {max}.",
+      "customDescriptionRequired": "Añade una descripción para personalizar el ramo.",
       "quantity": "Cantidad",
       "addToCart": "Añadir a la cesta",
       "addedToCart": "Añadido a la cesta"
@@ -140,6 +144,7 @@
       "sizeFallback": "Tamaño",
       "pricePerUnitVariants": "{variant} · {price} / unidad",
       "pricePerUnitSimple": "{price} / unidad",
+      "customDetailPrefix": "Descripción:",
       "quantityLabel": "Cantidad",
       "remove": "Eliminar",
       "subtotal": "Subtotal",

@@ -118,6 +118,10 @@
       "chooseOption": "Trieu una opció",
       "complement": "Complement",
       "chooseComplement": "Trieu un complement",
+      "customAmountLabel": "Import personalitzat ({min} - {max})",
+      "customDescriptionPlaceholder": "Exemple: tons pastel, estil silvestre, sense lliris...",
+      "customAmountInvalid": "Introdueix un import entre {min} i {max}.",
+      "customDescriptionRequired": "Afegeix una descripció per personalitzar el ram.",
       "quantity": "Quantitat",
       "addToCart": "Afegir a la cistella",
       "addedToCart": "Afegit a la cistella"
@@ -140,6 +144,7 @@
       "sizeFallback": "Mida",
       "pricePerUnitVariants": "{variant} · {price} / unitat",
       "pricePerUnitSimple": "{price} / unitat",
+      "customDetailPrefix": "Descripció:",
       "quantityLabel": "Quantitat",
       "remove": "Eliminar",
       "subtotal": "Subtotal",

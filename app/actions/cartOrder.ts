@@ -39,6 +39,8 @@ interface ResolvedLine {
   slug: string;
   quantity: number;
   variantLabel?: string;
+  customAmountEur?: number;
+  customDescription?: string;
   unitEur: number;
   lineTotalEur: number;
 }
@@ -94,7 +96,8 @@ function resolveOrderLines(
     if (product.price.kind === "variants") {
       if (
         !line.variantId ||
-        !product.price.options.some((o) => o.id === line.variantId)
+        (!product.price.options.some((o) => o.id === line.variantId) &&
+          product.price.customOption?.id !== line.variantId)
       ) {
         return {
           ok: false,
@@ -114,6 +117,36 @@ function resolveOrderLines(
           }),
         };
       }
+      const customOption =
+        product.price.customOption &&
+        line.variantId === product.price.customOption.id
+          ? product.price.customOption
+          : undefined;
+      if (customOption) {
+        if (
+          typeof line.customAmountEur !== "number" ||
+          !Number.isFinite(line.customAmountEur) ||
+          line.customAmountEur < customOption.minAmountEur ||
+          line.customAmountEur > customOption.maxAmountEur
+        ) {
+          return {
+            ok: false,
+            error: te("invalidVariant", {
+              name: getProductName(product, locale),
+            }),
+          };
+        }
+        if (!line.customDescription?.trim()) {
+          return {
+            ok: false,
+            error: te("invalidVariant", {
+              name: getProductName(product, locale),
+            }),
+          };
+        }
+      } else if (line.customAmountEur !== undefined || line.customDescription?.trim()) {
+        return { ok: false, error: te("invalidCartData") };
+      }
     } else if (line.variantId || line.complementId) {
       return { ok: false, error: te("invalidCartData") };
     }
@@ -121,7 +154,8 @@ function resolveOrderLines(
     const unitEur = getLineUnitPriceEur(
       product.price,
       line.variantId,
-      line.complementId
+      line.complementId,
+      line.customAmountEur
     );
     const lineTotalEur = unitEur * line.quantity;
     totalEur += lineTotalEur;
@@ -134,8 +168,11 @@ function resolveOrderLines(
         product.price,
         locale,
         line.variantId,
-        line.complementId
+        line.complementId,
+        line.customDescription
       ),
+      customAmountEur: line.customAmountEur,
+      customDescription: line.customDescription?.trim(),
       unitEur,
       lineTotalEur,
     });
@@ -215,11 +252,16 @@ export async function submitCartOrder(
   const linesText = items
     .map((line, i) => {
       const variantPart = line.variantLabel ? ` · ${line.variantLabel}` : "";
+      const customAmountPart =
+        line.customAmountEur !== undefined
+          ? `\n   Import personalitzat: ${formatEur(line.customAmountEur)}`
+          : "";
       return [
         `${i + 1}. ${line.productName}${variantPart}`,
         `   Slug: ${line.slug}`,
         `   Quantitat: ${line.quantity}`,
         `   Preu unitari: ${formatEur(line.unitEur)}`,
+        customAmountPart,
         `   Subtotal: ${formatEur(line.lineTotalEur)}`,
       ].join("\n");
     })

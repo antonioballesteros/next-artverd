@@ -14,6 +14,10 @@ export interface CartLine {
   variantId?: string;
   /** Set when `ShopProduct.price.kind === "variants"` (same id as `ProductComplement.id`). */
   complementId?: string;
+  /** Set when `variantId` is the product custom option. */
+  customAmountEur?: number;
+  /** Set when `variantId` is the product custom option. */
+  customDescription?: string;
 }
 
 export function parseCartLines(raw: string | null): CartLine[] {
@@ -31,11 +35,21 @@ export function parseCartLines(raw: string | null): CartLine[] {
         ((x as CartLine).variantId === undefined ||
           typeof (x as CartLine).variantId === "string") &&
         ((x as CartLine).complementId === undefined ||
-          typeof (x as CartLine).complementId === "string")
+          typeof (x as CartLine).complementId === "string") &&
+        ((x as CartLine).customAmountEur === undefined ||
+          typeof (x as CartLine).customAmountEur === "number") &&
+        ((x as CartLine).customDescription === undefined ||
+          typeof (x as CartLine).customDescription === "string")
     );
     return rows.map((line) => ({
       ...line,
       complementId: line.complementId ? line.complementId : undefined,
+      customAmountEur:
+        typeof line.customAmountEur === "number" &&
+        Number.isFinite(line.customAmountEur)
+          ? line.customAmountEur
+          : undefined,
+      customDescription: line.customDescription?.trim() || undefined,
     }));
   } catch {
     return [];
@@ -53,7 +67,7 @@ export function normalizeCartLines(lines: CartLine[]): CartLine[] {
     const product = getProductBySlug(line.slug);
     if (!product) continue;
     const slug = getCartStorageSlug(product);
-    const key = `${slug}:${line.variantId ?? ""}:${line.complementId ?? ""}`;
+    const key = `${slug}:${line.variantId ?? ""}:${line.complementId ?? ""}:${line.customAmountEur ?? ""}:${line.customDescription ?? ""}`;
     const canon: CartLine = { ...line, slug };
     const prev = merged.get(key);
     if (prev) {

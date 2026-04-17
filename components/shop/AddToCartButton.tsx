@@ -3,6 +3,7 @@
 import { useCart } from "@/components/shop/CartProvider";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
 import { formatEur } from "@/lib/shop/formatEur";
 import type { AppLocale } from "@/i18n/routing";
 import {
@@ -25,6 +26,8 @@ export function AddToCartButton({ product }: AddToCartButtonProps) {
   const [quantity, setQuantity] = useState(1);
   const [variantId, setVariantId] = useState("");
   const [complementId, setComplementId] = useState("");
+  const [customAmount, setCustomAmount] = useState("");
+  const [customDescription, setCustomDescription] = useState("");
 
   const handleQuantityChange = (e: ChangeEvent<HTMLInputElement>) => {
     const n = Number.parseInt(e.target.value, 10);
@@ -40,10 +43,40 @@ export function AddToCartButton({ product }: AddToCartButtonProps) {
     setComplementId(e.target.value);
   };
 
+  const handleCustomAmountChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setCustomAmount(e.target.value);
+  };
+
+  const handleCustomDescriptionChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
+    setCustomDescription(e.target.value);
+  };
+
+  const customOption = product.price.kind === "variants" ? product.price.customOption : undefined;
+  const isCustomSelected = customOption ? variantId === customOption.id : false;
+  const parsedCustomAmount = Number.parseFloat(customAmount);
+  const hasValidCustomAmount =
+    customOption &&
+    Number.isFinite(parsedCustomAmount) &&
+    parsedCustomAmount >= customOption.minAmountEur &&
+    parsedCustomAmount <= customOption.maxAmountEur;
+  const hasCustomDescription = customDescription.trim().length > 0;
+
   const handleClick = () => {
     if (product.price.kind === "variants") {
       if (!variantId) return;
-      addItem(getCartStorageSlug(product), quantity, variantId, complementId);
+      if (isCustomSelected) {
+        if (!hasValidCustomAmount || !hasCustomDescription) return;
+        addItem(
+          getCartStorageSlug(product),
+          quantity,
+          variantId,
+          complementId,
+          parsedCustomAmount,
+          customDescription.trim()
+        );
+      } else {
+        addItem(getCartStorageSlug(product), quantity, variantId, complementId);
+      }
     } else {
       addItem(getCartStorageSlug(product), quantity);
     }
@@ -51,7 +84,20 @@ export function AddToCartButton({ product }: AddToCartButtonProps) {
     window.setTimeout(() => setAdded(false), 2000);
   };
 
-  const canAdd = product.price.kind !== "variants" || variantId !== "";
+  const canAdd =
+    product.price.kind !== "variants" ||
+    (variantId !== "" && (!isCustomSelected || (hasValidCustomAmount && hasCustomDescription)));
+  const customValidationMessage =
+    customOption && isCustomSelected
+      ? !hasValidCustomAmount
+        ? t("customAmountInvalid", {
+            min: formatEur(customOption.minAmountEur),
+            max: formatEur(customOption.maxAmountEur),
+          })
+        : !hasCustomDescription
+          ? t("customDescriptionRequired")
+          : null
+      : null;
 
   return (
     <div className="flex flex-col gap-4">
@@ -75,8 +121,57 @@ export function AddToCartButton({ product }: AddToCartButtonProps) {
                   {o.labels[locale]} ({formatEur(o.amountEur)})
                 </option>
               ))}
+              {customOption ? (
+                <option value={customOption.id}>
+                  {customOption.labels[locale]} (
+                  {formatEur(customOption.minAmountEur)} -{" "}
+                  {formatEur(customOption.maxAmountEur)})
+                </option>
+              ) : null}
             </select>
           </label>
+
+          {customOption && isCustomSelected ? (
+            <>
+              <label className="flex max-w-md flex-col gap-2 text-sm text-emerald-900">
+                <span className="font-medium">
+                  {t("customAmountLabel", {
+                    min: formatEur(customOption.minAmountEur),
+                    max: formatEur(customOption.maxAmountEur),
+                  })}
+                </span>
+                <Input
+                  type="number"
+                  min={customOption.minAmountEur}
+                  max={customOption.maxAmountEur}
+                  step="0.01"
+                  value={customAmount}
+                  onChange={handleCustomAmountChange}
+                  disabled={added}
+                  className="rounded border border-emerald-300 bg-white px-3 py-2.5 text-emerald-950 disabled:opacity-60"
+                />
+              </label>
+              <label className="flex max-w-md flex-col gap-2 text-sm text-emerald-900">
+                <span className="font-medium">
+                  {customOption.descriptionLabels[locale]}
+                </span>
+                <Textarea
+                  rows={4}
+                  maxLength={400}
+                  value={customDescription}
+                  onChange={handleCustomDescriptionChange}
+                  disabled={added}
+                  placeholder={t("customDescriptionPlaceholder")}
+                  className="rounded border border-emerald-300 bg-white px-3 py-2.5 text-emerald-950 disabled:opacity-60"
+                />
+              </label>
+            </>
+          ) : null}
+          {customValidationMessage ? (
+            <p className="max-w-md text-sm text-red-700" role="status">
+              {customValidationMessage}
+            </p>
+          ) : null}
 
           {product.price.complements && product.price.complements.length > 0 ? (
             <label className="flex max-w-md flex-col gap-2 text-sm text-emerald-900">

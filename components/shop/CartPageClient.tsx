@@ -82,6 +82,7 @@ export function CartPageClient({ orderSent = false }: CartPageClientProps) {
             product.price,
             line.variantId,
             line.complementId,
+            line.customAmountEur
           );
           const lineTotal = unit * line.quantity;
           const cover = product.imagePaths[0];
@@ -89,9 +90,9 @@ export function CartPageClient({ orderSent = false }: CartPageClientProps) {
             product.price,
             locale,
             line.variantId,
-            line.complementId,
+            line.complementId
           );
-          const lineKey = `${line.slug}:${line.variantId ?? ""}:${line.complementId ?? ""}`;
+          const lineKey = `${line.slug}:${line.variantId ?? ""}:${line.complementId ?? ""}:${line.customAmountEur ?? ""}:${line.customDescription ?? ""}`;
           const lineHref = {
             pathname: "/botiga/[slug]" as const,
             params: { slug: getProductSlug(product, locale) },
@@ -132,6 +133,11 @@ export function CartPageClient({ orderSent = false }: CartPageClientProps) {
                     <>{t("pricePerUnitSimple", { price: formatEur(unit) })}</>
                   )}
                 </p>
+                {line.customDescription ? (
+                  <p className="mt-1 text-sm text-emerald-900 italic">
+                    {t("customDetailPrefix")} {line.customDescription}
+                  </p>
+                ) : null}
                 <div className="mt-3 flex flex-wrap items-center gap-3">
                   <label className="flex items-center gap-2 text-sm text-emerald-900">
                     <span className="sr-only">{t("quantityLabel")}</span>
@@ -148,6 +154,8 @@ export function CartPageClient({ orderSent = false }: CartPageClientProps) {
                           n,
                           line.variantId,
                           line.complementId,
+                          line.customAmountEur,
+                          line.customDescription
                         );
                       }}
                       className="w-16 rounded border border-emerald-300 bg-white px-2 py-1 text-center text-emerald-950"
@@ -162,6 +170,8 @@ export function CartPageClient({ orderSent = false }: CartPageClientProps) {
                         line.slug,
                         line.variantId,
                         line.complementId,
+                        line.customAmountEur,
+                        line.customDescription
                       )
                     }
                     className="text-red-700 hover:bg-red-50 hover:text-red-800"

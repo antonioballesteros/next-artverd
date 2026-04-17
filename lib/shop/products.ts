@@ -12,6 +12,14 @@ export interface ProductComplement {
   labels: Record<AppLocale, string>;
   amountEur: number;
 }
+
+export interface ProductCustomOption {
+  id: string;
+  labels: Record<AppLocale, string>;
+  minAmountEur: number;
+  maxAmountEur: number;
+  descriptionLabels: Record<AppLocale, string>;
+}
 /** How the product is priced in the static catalog. */
 export type ProductPrice =
   | { kind: "fixed"; amountEur: number }
@@ -19,6 +27,7 @@ export type ProductPrice =
       kind: "variants";
       options: ProductVariant[];
       complements?: ProductComplement[];
+      customOption?: ProductCustomOption;
     };
 
 export interface ShopProduct {
@@ -37,7 +46,11 @@ export interface ShopProduct {
 
 const COMPLEMENTS: ProductComplement[] = [
   { id: "cap", labels: { ca: "Cap", es: "Ninguno" }, amountEur: 0 },
-  { id: "chocolate", labels: { ca: "Chocolate", es: "Chocolate" }, amountEur: 5 },
+  {
+    id: "chocolate",
+    labels: { ca: "Chocolate", es: "Chocolate" },
+    amountEur: 5,
+  },
   {
     id: "os-de-peluix-petit",
     labels: { ca: "Os de peluix petit", es: "Oso de peluche pequeño" },
@@ -121,6 +134,16 @@ export const SHOP_PRODUCTS: ShopProduct[] = [
         },
       ],
       complements: COMPLEMENTS,
+      customOption: {
+        id: "personalized",
+        labels: { ca: "Personalitzat", es: "Personalizar" },
+        minAmountEur: 25,
+        maxAmountEur: 80,
+        descriptionLabels: {
+          ca: "Descriu com vols el teu ram personalitzat",
+          es: "Describe como quieres tu ramo personalizado",
+        },
+      },
     },
     imagePaths: ["/images/products/ram-de-flors-seques-de-primavera.webp"],
   },
@@ -152,6 +175,16 @@ export const SHOP_PRODUCTS: ShopProduct[] = [
         },
       ],
       complements: COMPLEMENTS,
+      customOption: {
+        id: "personalized",
+        labels: { ca: "Personalitzat", es: "Personalizar" },
+        minAmountEur: 25,
+        maxAmountEur: 80,
+        descriptionLabels: {
+          ca: "Descriu com vols el teu ram personalitzat",
+          es: "Describe como quieres tu ramo personalizado",
+        },
+      },
     },
     imagePaths: ["/images/products/ram.webp"],
   },
@@ -263,7 +296,9 @@ export const SHOP_PRODUCTS: ShopProduct[] = [
   },
 ];
 
-function buildProductBySlugMap(products: ShopProduct[]): Map<string, ShopProduct> {
+function buildProductBySlugMap(
+  products: ShopProduct[]
+): Map<string, ShopProduct> {
   const map = new Map<string, ShopProduct>();
   for (const p of products) {
     for (const locale of routing.locales) {
@@ -331,7 +366,9 @@ export function getProductBySlug(slug: string): ShopProduct | undefined {
 }
 
 /** Slugs to prerender for one locale (used by `generateStaticParams` for `[slug]`). */
-export function getProductSlugsForLocale(locale: AppLocale): { slug: string }[] {
+export function getProductSlugsForLocale(
+  locale: AppLocale
+): { slug: string }[] {
   return SHOP_PRODUCTS.map((p) => ({ slug: p.slugs[locale] }));
 }
 
@@ -339,14 +376,26 @@ export function getProductSlugsForLocale(locale: AppLocale): { slug: string }[] 
 export function getLineUnitPriceEur(
   price: ProductPrice,
   variantId?: string,
-  complementId?: string
+  complementId?: string,
+  customAmountEur?: number
 ): number {
   if (price.kind === "fixed") return price.amountEur;
+  const custom =
+    price.customOption && variantId === price.customOption.id
+      ? price.customOption
+      : undefined;
   const match = variantId
     ? price.options.find((o) => o.id === variantId)
     : undefined;
-  const base =
-    match?.amountEur ?? Math.min(...price.options.map((o) => o.amountEur));
+  const minOptionAmount = Math.min(...price.options.map((o) => o.amountEur));
+  const base = custom
+    ? customAmountEur &&
+      Number.isFinite(customAmountEur) &&
+      customAmountEur >= custom.minAmountEur &&
+      customAmountEur <= custom.maxAmountEur
+      ? customAmountEur
+      : custom.minAmountEur
+    : (match?.amountEur ?? minOptionAmount);
   const complement = complementId
     ? price.complements?.find((c) => c.id === complementId)
     : undefined;
@@ -358,15 +407,28 @@ export function getVariantLabel(
   price: ProductPrice,
   locale: AppLocale,
   variantId?: string,
-  complementId?: string
+  complementId?: string,
+  customDescription?: string
 ): string | undefined {
   if (price.kind !== "variants") return undefined;
-  const variant = price.options.find((o) => o.id === variantId);
-  const vLabel = variant?.labels[locale];
   const complement = complementId
     ? price.complements?.find((c) => c.id === complementId)
     : undefined;
   const cLabel = complement?.labels[locale];
+  const custom =
+    price.customOption && variantId === price.customOption.id
+      ? price.customOption
+      : undefined;
+  if (custom) {
+    const baseLabel = custom.labels[locale];
+    if (customDescription && cLabel)
+      return `${baseLabel} · ${customDescription} · ${cLabel}`;
+    if (customDescription) return `${baseLabel} · ${customDescription}`;
+    if (cLabel) return `${baseLabel} · ${cLabel}`;
+    return baseLabel;
+  }
+  const variant = price.options.find((o) => o.id === variantId);
+  const vLabel = variant?.labels[locale];
   if (vLabel && cLabel) return `${vLabel} · ${cLabel}`;
   if (vLabel) return vLabel;
   if (cLabel) return cLabel;

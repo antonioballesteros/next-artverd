@@ -83,7 +83,7 @@ export default async function BotigaProductPage({
   const priceLabel = formatProductPrice(product.price);
 
   return (
-    <article className="bg-emerald-50/80 pt-6 pb-16 md:pt-10 md:pb-24">
+    <article className="mt-8 bg-emerald-50/80 pt-6 pb-16 md:pt-10 md:pb-24">
       <div className="mx-auto max-w-6xl px-4">
         <nav
           className="text-sm text-emerald-800/90"

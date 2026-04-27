@@ -1,7 +1,7 @@
 import { routing, type AppLocale } from "@/i18n/routing";
 import type { Metadata } from "next";
 
-const FALLBACK_SITE_URL = "https://artverd.com";
+const FALLBACK_SITE_URL = "https://www.artverd.com";
 const DEFAULT_OG_IMAGE = "/icon.png";
 
 const OPEN_GRAPH_LOCALE_BY_APP_LOCALE: Record<AppLocale, string> = {
@@ -11,6 +11,21 @@ const OPEN_GRAPH_LOCALE_BY_APP_LOCALE: Record<AppLocale, string> = {
 
 function normalizeBaseUrl(value: string): string {
   return value.endsWith("/") ? value.slice(0, -1) : value;
+}
+
+function normalizePreferredHost(value: string): string {
+  try {
+    const parsed = new URL(value);
+
+    // Keep a single canonical production host to avoid SEO mismatches.
+    if (parsed.hostname === "artverd.com") {
+      parsed.hostname = "www.artverd.com";
+    }
+
+    return parsed.toString();
+  } catch {
+    return value;
+  }
 }
 
 function toHttpsUrlIfDomain(value: string): string {
@@ -25,7 +40,7 @@ export function getSiteUrl(): string {
     process.env.VERCEL_PROJECT_PRODUCTION_URL ||
     process.env.VERCEL_URL ||
     FALLBACK_SITE_URL;
-  const normalized = toHttpsUrlIfDomain(raw);
+  const normalized = normalizePreferredHost(toHttpsUrlIfDomain(raw));
   const isVercelPreview =
     typeof process.env.VERCEL_ENV === "string" &&
     process.env.VERCEL_ENV !== "production";
@@ -49,6 +64,10 @@ function getLocalePath(path: string): string {
   return path.startsWith("/") ? path : `/${path}`;
 }
 
+function toAbsoluteUrl(path: string): string {
+  return new URL(path, getSiteMetadataBase()).toString();
+}
+
 export function getLocalePathByLocale(
   locale: AppLocale,
   localizedPath: Record<AppLocale, string>
@@ -69,9 +88,12 @@ export function buildPageMetadata({
   localizedPath: Record<AppLocale, string>;
   imagePath?: string;
 }): Metadata {
-  const canonical = getLocalePathByLocale(locale, localizedPath);
-  const caUrl = getLocalePathByLocale("ca", localizedPath);
-  const esUrl = getLocalePathByLocale("es", localizedPath);
+  const canonicalPath = getLocalePathByLocale(locale, localizedPath);
+  const caPath = getLocalePathByLocale("ca", localizedPath);
+  const esPath = getLocalePathByLocale("es", localizedPath);
+  const canonical = toAbsoluteUrl(canonicalPath);
+  const caUrl = toAbsoluteUrl(caPath);
+  const esUrl = toAbsoluteUrl(esPath);
   const alternateLocale = locale === "ca" ? "es_ES" : "ca_ES";
   const ogLocale = OPEN_GRAPH_LOCALE_BY_APP_LOCALE[locale];
 

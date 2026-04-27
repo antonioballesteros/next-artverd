@@ -72,7 +72,13 @@ export function getLocalePathByLocale(
   locale: AppLocale,
   localizedPath: Record<AppLocale, string>
 ): string {
-  return `/${locale}${getLocalePath(localizedPath[locale])}`;
+  const localizedSegment = localizedPath[locale];
+
+  if (localizedSegment === "/") {
+    return `/${locale}`;
+  }
+
+  return `/${locale}${getLocalePath(localizedSegment)}`;
 }
 
 export function buildPageMetadata({

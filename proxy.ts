@@ -17,11 +17,14 @@ const LEGACY_REDIRECTS: Record<string, string> = {
     "/ca/blog/perque-triar-art-verd-pels-teus-events-especials",
   "/tienda": "/es/tienda",
   "/botiga": "/ca/botiga",
+  "/producto/osito-de-peluche/": "/ca/botiga/os-de-peluix",
+  "/es/producto/taller-jardines/": "/es/tienda/taller-jardineria",
   "/contacto": "/es/contacto",
   "/contacte": "/ca/contacte",
   "/contact": "/ca/contacte",
   "/es/contact": "/es/contacto",
   "/floristeria": "/ca/floristeria",
+  "/escuela-de-flores": "/ca/floristeria",
   "/es/escuela-de-flores": "/es/floristeria",
   "/talleres": "/es/talleres",
   "/tallers": "/ca/tallers",
@@ -87,6 +90,7 @@ function getPatternRedirect(pathname: string): string | null {
   if (
     pathname.startsWith("/categoria-producto/") ||
     pathname.startsWith("/categoria-producte/") ||
+    pathname.startsWith("/ca/categoria-producto/") ||
     pathname.startsWith("/product-category/")
   ) {
     return "/ca/botiga";

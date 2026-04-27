@@ -1,6 +1,7 @@
 import { loadShopSettingsRow } from "@/lib/shop-settings-db";
 import { getFlowers } from "./actions";
 import { FlowersCatalogue } from "./FlowersCatalogue";
+import Link from "next/link";
 
 export const dynamic = "force-dynamic";
 
@@ -26,12 +27,12 @@ export default async function FlowersPage() {
       </p>
       <p className="text-muted-foreground mt-2 text-sm">
         Currency and suggested sale multiplier:{" "}
-        <a
-          href="/dashboard/settings"
+        <Link
+          href="/admin/dashboard/settings"
           className="text-foreground font-medium underline underline-offset-4 hover:no-underline"
         >
           Settings
-        </a>
+        </Link>
         .
       </p>
       <div className="mt-6">

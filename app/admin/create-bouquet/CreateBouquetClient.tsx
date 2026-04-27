@@ -583,7 +583,7 @@ export function CreateBouquetClient({
                           setBouquetImagePreviewIndex(index);
                           setIsBouquetImagePreviewOpen(true);
                         }}
-                        className="group ring-offset-background focus-visible:ring-ring relative w-full cursor-zoom-in rounded-md text-left outline-none focus-visible:ring-2"
+                        className="group ring-offset-background focus-visible:ring-ring relative h-auto w-full cursor-zoom-in rounded-md p-4 text-left outline-none focus-visible:ring-2"
                         title="View full size"
                         aria-haspopup="dialog"
                         aria-label={`Open full-size preview of generated bouquet variant ${index + 1}`}

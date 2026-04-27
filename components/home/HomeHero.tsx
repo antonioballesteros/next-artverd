@@ -46,6 +46,8 @@ export function HomeHero() {
               alt=""
               fill
               priority={index === 0}
+              fetchPriority={index === 0 ? "high" : "auto"}
+              loading={index === 0 ? "eager" : "lazy"}
               className={cn(
                 "object-cover",
                 isActive ? "z-10 opacity-100" : "z-0 scale-100 opacity-0",

@@ -4,7 +4,6 @@ import { LocalePreferenceSync } from "@/components/site/LocalePreferenceSync";
 import { SiteFooter } from "@/components/site/SiteFooter";
 import { SiteHeader } from "@/components/site/SiteHeader";
 import { routing } from "@/i18n/routing";
-import { createClient } from "@/lib/supabase/server";
 import { hasLocale, NextIntlClientProvider } from "next-intl";
 import { getMessages, getTranslations, setRequestLocale } from "next-intl/server";
 import type { Metadata } from "next";
@@ -52,16 +51,12 @@ export default async function LocaleLayout({
 
   setRequestLocale(locale);
   const messages = await getMessages();
-  const supabase = await createClient();
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
 
   return (
     <NextIntlClientProvider messages={messages}>
       <LocaleHtmlLang locale={locale} />
       <LocalePreferenceSync urlLocale={locale} />
-      <SiteHeader isAuthenticated={Boolean(user)} />
+      <SiteHeader />
       <main className="min-w-0 flex-1">{children}</main>
       <SiteFooter />
       <CookieConsentBanner />

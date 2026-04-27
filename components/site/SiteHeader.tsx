@@ -4,6 +4,7 @@ import { LanguageSwitcher } from "@/components/site/LanguageSwitcher";
 import { CartHeaderLink } from "@/components/shop/CartHeaderLink";
 import { Button } from "@/components/ui/button";
 import { artverdImages } from "@/lib/artverdAssets";
+import { createClient } from "@/lib/supabase/client";
 import { Link, usePathname } from "@/i18n/navigation";
 import type { AppLocale } from "@/i18n/routing";
 import { getSiteNavItems } from "@/lib/siteNav";
@@ -16,17 +17,26 @@ import type { ComponentProps } from "react";
 
 type NavHref = ComponentProps<typeof Link>["href"];
 
-interface SiteHeaderProps {
-  /** Controls visibility of admin shortcut in the header. */
-  isAuthenticated?: boolean;
-}
-
-export function SiteHeader({ isAuthenticated = false }: SiteHeaderProps) {
+export function SiteHeader() {
   const pathname = usePathname();
   const locale = useLocale() as AppLocale;
   const siteNavItems = getSiteNavItems(locale);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
   const headerRef = useRef<HTMLElement | null>(null);
+
+  useEffect(() => {
+    const supabase = createClient();
+
+    const loadAuthState = async () => {
+      const {
+        data: { user },
+      } = await supabase.auth.getUser();
+      setIsAuthenticated(Boolean(user));
+    };
+
+    void loadAuthState();
+  }, []);
 
   useEffect(() => {
     if (!menuOpen) {

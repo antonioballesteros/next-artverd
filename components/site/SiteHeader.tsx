@@ -69,6 +69,7 @@ export function SiteHeader({ isAuthenticated = false }: SiteHeaderProps) {
               height={296}
               className="h-10 shrink-0 md:h-12"
               style={{ width: "auto" }}
+              loading="eager"
               priority
             />
           </Link>

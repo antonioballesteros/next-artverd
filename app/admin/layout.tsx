@@ -48,6 +48,7 @@ export default async function RootLayout({
                 width={640}
                 height={296}
                 className="h-12 w-auto"
+                loading="eager"
                 priority
               />
             </Link>

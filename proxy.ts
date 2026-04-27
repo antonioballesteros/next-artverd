@@ -10,10 +10,17 @@ const LEGACY_REDIRECTS: Record<string, string> = {
   "/inici": "/ca",
   "/home": "/ca",
   "/blog": "/ca/blog",
+  "/es/blog": "/es/blog",
+  "/2023/04/22/el-significat-del-color-de-les-roses":
+    "/ca/blog/el-significat-del-color-de-les-roses",
+  "/2023/04/17/abril-el-mes-de-les-flors": "/ca/blog/abril-el-mes-de-les-flors",
+  "/2023/04/17/por-que-elegir-flores-de-art-verd-para-tus-eventos-especiales/":
+    "/ca/blog/perque-triar-art-verd-pels-teus-events-especials",
   "/tienda": "/es/tienda",
   "/botiga": "/ca/botiga",
   "/contacto": "/es/contacto",
   "/contacte": "/ca/contacte",
+  "/contact": "/ca/contacte",
   "/es/contact": "/es/contacto",
   "/floristeria": "/ca/floristeria",
   "/es/escuela-de-flores": "/es/floristeria",
@@ -103,14 +110,26 @@ export default function proxy(request: NextRequest) {
     return NextResponse.next();
   }
 
-  if (normalizedPath === "/es/admin" || normalizedPath.startsWith("/es/admin/")) {
-    const redirectUrl = new URL(normalizedPath.replace("/es/admin", "/admin"), request.url);
+  if (
+    normalizedPath === "/es/admin" ||
+    normalizedPath.startsWith("/es/admin/")
+  ) {
+    const redirectUrl = new URL(
+      normalizedPath.replace("/es/admin", "/admin"),
+      request.url
+    );
     redirectUrl.search = request.nextUrl.search;
     return NextResponse.redirect(redirectUrl, 308);
   }
 
-  if (normalizedPath === "/ca/admin" || normalizedPath.startsWith("/ca/admin/")) {
-    const redirectUrl = new URL(normalizedPath.replace("/ca/admin", "/admin"), request.url);
+  if (
+    normalizedPath === "/ca/admin" ||
+    normalizedPath.startsWith("/ca/admin/")
+  ) {
+    const redirectUrl = new URL(
+      normalizedPath.replace("/ca/admin", "/admin"),
+      request.url
+    );
     redirectUrl.search = request.nextUrl.search;
     return NextResponse.redirect(redirectUrl, 308);
   }

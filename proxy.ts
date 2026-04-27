@@ -47,6 +47,7 @@ const LEGACY_REDIRECTS: Record<string, string> = {
   "/ca/termes-i-condicions": "/ca/legal/termes-i-condicions",
   "/es/politica-de-accesibilidad": "/es/legal/politica-de-accesibilidad",
   "/ca/politica-d-accessibilitat": "/ca/legal/politica-d-accessibilitat",
+  "/about-us/": "/ca/floristeria",
 };
 
 function normalizeLegacyPath(pathname: string): string {

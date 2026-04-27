@@ -5,7 +5,6 @@ import { routing } from "./i18n/routing";
 const intlMiddleware = createMiddleware(routing);
 
 const LEGACY_REDIRECTS: Record<string, string> = {
-  "/en": "/",
   "/inicio": "/es",
   "/inici": "/ca",
   "/home": "/ca",
@@ -63,6 +62,11 @@ function normalizeLegacyPath(pathname: string): string {
 }
 
 function getPatternRedirect(pathname: string): string | null {
+  if (pathname.startsWith("/en")) {
+    const pathWithoutLocale = pathname.slice("/en".length);
+    return `/ca${pathWithoutLocale}`;
+  }
+
   if (pathname.startsWith("/es/producto/")) {
     const slug = pathname.slice("/es/producto/".length);
     return slug ? `/es/tienda/${slug}` : "/es/tienda";

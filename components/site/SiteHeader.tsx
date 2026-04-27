@@ -96,10 +96,7 @@ export function SiteHeader({ isAuthenticated = false }: SiteHeaderProps) {
 
         <div className="ml-auto flex shrink-0 items-center gap-1 md:gap-2">
           {isAuthenticated && (
-            <Button
-              type="button"
-              className="hidden h-10 rounded-lg border border-white/40 bg-emerald-950/5 text-emerald-950 hover:bg-emerald-950/25 md:block"
-            >
+            <Button asChild className="hidden h-10 md:flex">
               <NextLink href="/admin">Admin</NextLink>
             </Button>
           )}

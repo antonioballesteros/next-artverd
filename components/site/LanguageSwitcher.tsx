@@ -28,8 +28,7 @@ export function LanguageSwitcher() {
   const buttonBase =
     "inline-flex min-h-10 min-w-[2.25rem] items-center justify-center rounded-lg px-2.5 py-1.5 text-xs font-bold tracking-wide transition-[background-color,color,box-shadow,border-color] duration-200";
 
-  const buttonInactive =
-    "border border-white/35 bg-white/12 text-emerald-900 cursor-pointer";
+  const buttonInactive = "border border-white/35 bg-white/12 text-emerald-900";
 
   const buttonActive =
     "border border-white bg-white text-emerald-900 shadow-md shadow-emerald-950/25";

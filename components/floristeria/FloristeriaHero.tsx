@@ -49,7 +49,7 @@ function CoverflowSlideCard(props: CoverflowSlideCardProps) {
         sizes="(max-width: 768px) 78vw, 340px"
         priority={index === 0}
         draggable={false}
-        onLoadingComplete={onImagePainted}
+        onLoad={() => onImagePainted?.()}
       />
       {isActive ? (
         <div

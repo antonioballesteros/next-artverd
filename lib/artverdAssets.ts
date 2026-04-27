@@ -8,6 +8,7 @@ export const artverdImages = {
   tenda: "/images/hero-sliders/tenda.webp",
 
   logo: "/images/legacy/logo.webp",
+  artverd: "/images/legacy/artverd.webp",
   categoryRams: "/images/legacy/category-rams.webp",
   categoryPlantes: "/images/legacy/category-plantes.webp",
   categoryAccesoris: "/images/legacy/category-accesoris.webp",

@@ -65,12 +65,11 @@ export function SiteHeader({ isAuthenticated = false }: SiteHeaderProps) {
             <Image
               src={artverdImages.logo}
               alt="Art Verd"
-              width={640}
-              height={296}
+              width={208}
+              height={96}
               className="h-10 shrink-0 md:h-12"
               style={{ width: "auto" }}
               loading="eager"
-              priority
             />
           </Link>
 

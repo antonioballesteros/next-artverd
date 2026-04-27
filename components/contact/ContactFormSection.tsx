@@ -32,11 +32,11 @@ export async function ContactFormSection() {
               </div>
             </div>
             <div
-              className="relative flex justify-center animate-[decorative-icon-zoom-in-up_0.95s_ease-out_both] opacity-0 md:justify-end"
+              className="relative flex animate-[decorative-icon-zoom-in-up_0.95s_ease-out_both] justify-center opacity-0 md:justify-end"
               style={{ animationDelay: "120ms", animationFillMode: "forwards" }}
             >
               <Image
-                src={artverdImages.logo}
+                src={artverdImages.artverd}
                 alt=""
                 width={734}
                 height={340}

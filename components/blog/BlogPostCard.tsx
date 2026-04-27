@@ -26,7 +26,7 @@ export function BlogPostCard({ post, readMoreLabel }: BlogPostCardProps) {
         className="relative block aspect-16/10 overflow-hidden bg-emerald-50/60"
       >
         <Image
-          src={post.imageSrc ?? artverdImages.logo}
+          src={post.imageSrc ?? artverdImages.artverd}
           alt={post.imageAlt}
           fill
           className={cn(

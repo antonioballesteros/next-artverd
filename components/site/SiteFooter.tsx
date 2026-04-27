@@ -29,7 +29,7 @@ export async function SiteFooter() {
   return (
     <footer className="relative mt-8 flex w-full flex-col items-center justify-center md:mt-20">
       <Image
-        src={artverdImages.logo}
+        src={artverdImages.artverd}
         alt="Flower footer background"
         width={640}
         height={296}

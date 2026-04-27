@@ -17,8 +17,6 @@ const LEGACY_REDIRECTS: Record<string, string> = {
     "/ca/blog/perque-triar-art-verd-pels-teus-events-especials",
   "/tienda": "/es/tienda",
   "/botiga": "/ca/botiga",
-  "/producto/osito-de-peluche/": "/ca/botiga/os-de-peluix",
-  "/es/producto/taller-jardines/": "/es/tienda/taller-jardineria",
   "/contacto": "/es/contacto",
   "/contacte": "/ca/contacte",
   "/contact": "/ca/contacte",

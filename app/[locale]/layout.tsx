@@ -1,6 +1,5 @@
 import { CookieConsentBanner } from "@/components/legal/CookieConsentBanner";
 import { LocaleHtmlLang } from "@/components/site/LocaleHtmlLang";
-import { LocalePreferenceSync } from "@/components/site/LocalePreferenceSync";
 import { SiteFooter } from "@/components/site/SiteFooter";
 import { SiteHeader } from "@/components/site/SiteHeader";
 import { routing } from "@/i18n/routing";
@@ -55,7 +54,6 @@ export default async function LocaleLayout({
   return (
     <NextIntlClientProvider messages={messages}>
       <LocaleHtmlLang locale={locale} />
-      <LocalePreferenceSync urlLocale={locale} />
       <SiteHeader />
       <main className="min-w-0 flex-1">{children}</main>
       <SiteFooter />

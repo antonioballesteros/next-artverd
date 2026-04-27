@@ -1,6 +1,6 @@
 import createMiddleware from "next-intl/middleware";
 import { NextResponse, type NextRequest } from "next/server";
-import { routing } from "./i18n/routing";
+import { LOCALE_COOKIE_NAME, routing } from "./i18n/routing";
 
 const intlMiddleware = createMiddleware(routing);
 
@@ -110,8 +110,28 @@ function getPatternRedirect(pathname: string): string | null {
   return null;
 }
 
+function getLocaleFromCookie(request: NextRequest): string | null {
+  const cookieLocale = request.cookies.get(LOCALE_COOKIE_NAME)?.value;
+  if (!cookieLocale) {
+    return null;
+  }
+
+  return routing.locales.includes(cookieLocale as (typeof routing.locales)[number])
+    ? cookieLocale
+    : null;
+}
+
 export default function proxy(request: NextRequest) {
   const normalizedPath = normalizeLegacyPath(request.nextUrl.pathname);
+
+  if (normalizedPath === "/") {
+    const preferredLocale = getLocaleFromCookie(request);
+    if (preferredLocale) {
+      const redirectUrl = new URL(`/${preferredLocale}`, request.url);
+      redirectUrl.search = request.nextUrl.search;
+      return NextResponse.redirect(redirectUrl, 307);
+    }
+  }
 
   if (normalizedPath === "/admin" || normalizedPath.startsWith("/admin/")) {
     return NextResponse.next();

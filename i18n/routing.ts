@@ -8,11 +8,7 @@ export const LOCALE_STORAGE_KEY = "artverd-locale";
 export const routing = defineRouting({
   locales: ["ca", "es"],
   defaultLocale: "ca",
-  localeCookie: {
-    name: LOCALE_COOKIE_NAME,
-    sameSite: "lax",
-    path: "/",
-  },
+  localeCookie: false,
   pathnames: {
     "/": "/",
     "/floristeria": "/floristeria",

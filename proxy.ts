@@ -13,8 +13,11 @@ const LEGACY_REDIRECTS: Record<string, string> = {
   "/2023/04/22/el-significat-del-color-de-les-roses":
     "/ca/blog/el-significat-del-color-de-les-roses",
   "/2023/04/17/abril-el-mes-de-les-flors": "/ca/blog/abril-el-mes-de-les-flors",
-  "/2023/04/17/por-que-elegir-flores-de-art-verd-para-tus-eventos-especiales/":
+  "/2023/04/17/por-que-elegir-flores-de-art-verd-para-tus-eventos-especiales":
     "/ca/blog/perque-triar-art-verd-pels-teus-events-especials",
+  "/es/producto/osito-de-peluche": "/es/tienda/oso-de-peluche",
+  "/producto/osito-de-peluche": "/es/tienda/oso-de-peluche",
+  "/es/tienda/taller-jardines": "/es/tienda/taller-jardineria",
   "/tienda": "/es/tienda",
   "/botiga": "/ca/botiga",
   "/contacto": "/es/contacto",
@@ -47,7 +50,7 @@ const LEGACY_REDIRECTS: Record<string, string> = {
   "/ca/termes-i-condicions": "/ca/legal/termes-i-condicions",
   "/es/politica-de-accesibilidad": "/es/legal/politica-de-accesibilidad",
   "/ca/politica-d-accessibilitat": "/ca/legal/politica-d-accessibilitat",
-  "/about-us/": "/ca/floristeria",
+  "/about-us": "/ca/floristeria",
 };
 
 function normalizeLegacyPath(pathname: string): string {
@@ -116,7 +119,9 @@ function getLocaleFromCookie(request: NextRequest): string | null {
     return null;
   }
 
-  return routing.locales.includes(cookieLocale as (typeof routing.locales)[number])
+  return routing.locales.includes(
+    cookieLocale as (typeof routing.locales)[number]
+  )
     ? cookieLocale
     : null;
 }
